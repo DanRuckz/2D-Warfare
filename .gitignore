@@ -32,14 +32,14 @@
 *.app
 
 # etc
-#*.vcxproj
-#*.filters
-#*.user
+*.vcxproj
+*.filters
+*.user
 
 #folders
 
 .vs
-#*.sln
+*.sln
 
 
 
