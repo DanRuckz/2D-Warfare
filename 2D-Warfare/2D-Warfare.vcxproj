@@ -164,9 +164,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\2D-Warfare\2D-Warfare\2D-Warfare.cpp" />
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Window_Manager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\2D-Warfare\2D-Warfare\inits.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="Window_Manager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
