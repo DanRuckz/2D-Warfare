@@ -1,21 +1,18 @@
 #include "Window_Manager.h"
 
 
-
-Window_Manager::Window_Manager()
+Window_Manager::Window_Manager(Map& map) : map (map)
 {
 	resolution = VideoMode::getDesktopMode();
 	makeWindow();
 }
 
 
-Window_Manager::~Window_Manager()
-{
-}
+
 
 void Window_Manager::makeWindow()
 {
-	window.create(VideoMode(resolution),"2D-Warfare", FULLSCREEN);
+	window.create(VideoMode(resolution),"2D-Warfare", WINDOW_MODE);
 
 	while (window.isOpen())
 	{
@@ -25,9 +22,6 @@ void Window_Manager::makeWindow()
 		Event event;
 		while (window.pollEvent(event))
 		{
-				if( Event::Closed)
-				window.close();
-				break;
 				
 				if (event.key.code == Mouse::Right)
 				{
@@ -36,7 +30,15 @@ void Window_Manager::makeWindow()
 				break;
 			}
 
+		for (int i = 0; i < map.getMapVec().size(); i++)
+			window.draw(*map.getMapVec()[i]);
 		window.display();
+
 	}
 
+}
+
+
+Window_Manager::~Window_Manager()
+{
 }

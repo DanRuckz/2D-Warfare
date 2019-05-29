@@ -4,13 +4,13 @@ class Map
 {
 public:
 	Map();
-
+	std::vector<Sprite*> getMapVec();
 	~Map();
 private:
 	void CreateMap();
 	Texture texture;
-	Sprite map;
+	Sprite mapobj;
 	std::vector <Sprite*> mapvec;
-
+	Sprite* map;
 };
 
