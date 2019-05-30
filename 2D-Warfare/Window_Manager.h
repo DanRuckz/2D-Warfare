@@ -4,14 +4,15 @@
 class Window_Manager
 {
 public:
-	Window_Manager(Map & map);
-	//Window_Manager();
+	Window_Manager();
 	~Window_Manager();
 private:
-	void makeWindow();
+	void Window_action();
+	void setView();
 	RenderWindow window;
 	VideoMode resolution;
 	Vector2f coords;
 	Map map;
+	View view;
 };
 

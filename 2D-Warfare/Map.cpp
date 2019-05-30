@@ -19,22 +19,23 @@ Map::~Map()
 
 void Map::CreateMap()
 {
-	std::string mymap("assets/MapRect.png");
+	mymap = "assets/MapRect.png";
 	texture.loadFromFile(mymap);
 	if (!texture.loadFromFile(mymap))
 	std::cout << "failed to load texture\n";
-	Vector2f obj_size(144.f, 289.f);
-	mapobj.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(144, 289)));
-	for (int i = 0; i < 256; i++)
+	obj_size.x = 125; 
+	obj_size.y = 122;
+	mapobj.setTexture(texture);
+	mapobj.setTextureRect(IntRect(Vector2i(0,0), Vector2i(125, 122)));
+	for (int i = 0; i < 100; i++)
 	{
-		for (int j = 0; j < 256; j++)
+		for (int j = 0; j < 100; j++)
 		{
 			map = new Sprite;
+			map->setTexture(*mapobj.getTexture());
 			map->setTextureRect(mapobj.getTextureRect());
 			map->setPosition(Vector2f(obj_size.x*j, obj_size.y*i));
 			mapvec.push_back(map);
 		}
 	}
-	
-	
 }

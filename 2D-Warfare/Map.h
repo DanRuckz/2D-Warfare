@@ -12,5 +12,7 @@ private:
 	Sprite mapobj;
 	std::vector <Sprite*> mapvec;
 	Sprite* map;
+	std::string mymap;
+	Vector2i obj_size;
 };
 
