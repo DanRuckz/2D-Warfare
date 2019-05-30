@@ -27,9 +27,9 @@ void Map::CreateMap()
 	obj_size.y = 122;
 	mapobj.setTexture(texture);
 	mapobj.setTextureRect(IntRect(Vector2i(0,0), Vector2i(125, 122)));
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < 50; i++)
 	{
-		for (int j = 0; j < 100; j++)
+		for (int j = 0; j < 50; j++)
 		{
 			map = new Sprite;
 			map->setTexture(*mapobj.getTexture());

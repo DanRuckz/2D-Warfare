@@ -25,7 +25,7 @@ void Window_Manager::Window_action()
 		while (window.pollEvent(event))
 		{
 			if (event.type == Event::MouseMoved)
-				std::cout << "X coords: " << coords.x << std::endl << "Y coords: " << std::endl;
+				std::cout << "X coords: " << coords.x << " " << "Y coords: " << coords.y <<std::endl;
 
 			if (event.type == Event::Closed)
 				window.close();
@@ -39,14 +39,27 @@ void Window_Manager::Window_action()
 				break;
 				
 			}
-	
+		if (Keyboard::isKeyPressed(Keyboard::W))
+		{
+			view.move(0.f, -15.f);
+		}
+		if (Keyboard::isKeyPressed(Keyboard::A))
+		{
+			view.move(-15.f, 0.f);
+		}
+		if (Keyboard::isKeyPressed(Keyboard::S))
+		{
+			view.move(0.f, 15.f);
+		}
 		if (Keyboard::isKeyPressed(Keyboard::D))
 		{
-
+			view.move(15.f, 0.f);
 		}
+		
+		for (int i = 0; i < map.getMapVec().size(); i++)
+			window.draw(*map.getMapVec()[i]);
+
 		window.setView(view);
-		//for (int i = 0; i < map.getMapVec().size(); i++)
-			//window.draw(*map.getMapVec()[i]);
 		window.display();
 
 	}
