@@ -1,6 +1,7 @@
 #pragma once
 #include "inits.h"
 #include "Map.h"
+#include "Tank.h"
 class Window_Manager
 {
 public:
@@ -14,5 +15,6 @@ private:
 	Vector2f coords;
 	Map map;
 	View view;
+	Tank tank;
 };
 

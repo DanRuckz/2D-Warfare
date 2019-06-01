@@ -34,7 +34,7 @@ void MenuScreen::loadAndPlayMenuSound() {
 
 void MenuScreen::createWindow(){
 
-	window.create(VideoMode(resolution), "2D-Warfare", FULLSCREEN);
+	window.create(VideoMode(resolution), "2D-Warfare", WINDOW_MODE);
 	Vector2i mousePos = Mouse::getPosition();
 	coords = window.mapPixelToCoords(mousePos);
 	Event event;

@@ -42,25 +42,27 @@ void Window_Manager::Window_action()
 
 		if (Keyboard::isKeyPressed(Keyboard::W))
 		{
-			view.move(0.f, -15.f);
+			tank.moveTank("up");
 		}
 		if (Keyboard::isKeyPressed(Keyboard::A))
 		{
-			view.move(-15.f, 0.f);
+			tank.rotateTank("left");
 		}
 		if (Keyboard::isKeyPressed(Keyboard::S))
 		{
-			view.move(0.f, 15.f);
+			tank.moveTank("down");
 		}
 		if (Keyboard::isKeyPressed(Keyboard::D))
 		{
-			view.move(15.f, 0.f);
+			tank.rotateTank("right");
 		}
+		view.setCenter(tank.getTank().getPosition());
 		
 		for (int i = 0; i < map.getMapVec().size(); i++)
 			window.draw(*map.getMapVec()[i]);
 
 		window.setView(view);
+		window.draw(tank.getTank());
 		window.display();
 
 	}
