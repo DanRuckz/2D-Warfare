@@ -15,13 +15,13 @@ Window_Manager::Window_Manager()
 void Window_Manager::Window_action()
 {
 	window.create(VideoMode(resolution),"2D-Warfare", WINDOW_MODE);
+	Vector2i mousePos = Mouse::getPosition();
+	coords = window.mapPixelToCoords(mousePos);
+	Event event;
 
 	while (window.isOpen())
 	{
-		Vector2i mousePos = Mouse::getPosition();
-		coords = window.mapPixelToCoords(mousePos);
-
-		Event event;
+		
 		while (window.pollEvent(event))
 		{
 			if (event.type == Event::MouseMoved)
@@ -38,7 +38,8 @@ void Window_Manager::Window_action()
 				}
 				break;
 				
-			}
+			} //END EVENT
+
 		if (Keyboard::isKeyPressed(Keyboard::W))
 		{
 			view.move(0.f, -15.f);
