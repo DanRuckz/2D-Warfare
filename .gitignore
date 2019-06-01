@@ -39,7 +39,6 @@
 #folders
 
 .vs
-#*.sln
 x64
 Debug
 Release
@@ -49,7 +48,3 @@ Release
 x64
 
 
-
-
-2D-Warfare/2D-Warfare.vcxproj
-2D-Warfare/2D-Warfare.vcxproj.filters
