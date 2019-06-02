@@ -39,28 +39,12 @@ void Tank::moveTank(std::string direction)
 
 	float rotation = tank.getRotation();
 	Vector2f whereto;
-	
-	if (rotation >= 0 && rotation <= 90)
-	{
-		whereto.x = rotation /6;
-		whereto.y = 15.f - rotation/6;
-	}
-	//if (rotation == 90)
-	//{
-	//	whereto.x = 15.f;
-	//	whereto.y = 0.f;
-	//}
-	if (rotation == 180)
-	{
-		whereto.x = 0.f;
-		whereto.y = -15.f;
-	}
-	if (rotation == 270)
-	{
-		whereto.x = -15.f;
-		whereto.y = 0.f;
-	}
+	rotation = rotation * M_PI / 180;
 
+	
+		whereto.x = 15.f*std::sin(rotation);
+		whereto.y = 15.f*std::cos(rotation);
+	
 
 	if (direction == "up")
 	{
