@@ -42,8 +42,8 @@ void Tank::moveTank(std::string direction)
 	rotation = rotation * M_PI / 180;
 
 	
-		whereto.x = 15.f*std::sin(rotation);
-		whereto.y = 15.f*std::cos(rotation);
+		whereto.x = speed*std::sin(rotation);
+		whereto.y = speed*std::cos(rotation);
 	
 
 	if (direction == "up")

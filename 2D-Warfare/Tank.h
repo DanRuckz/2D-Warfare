@@ -15,6 +15,7 @@ private:
 	Texture texture;
 	Sprite tank;
 	void setEntity();
+	float speed = 15.f;
 
 };
 
