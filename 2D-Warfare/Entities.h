@@ -8,6 +8,7 @@ public:
 	Entities();
 	virtual void makeEntity() = 0;
 	virtual void setEntity() = 0;
+	virtual void rotateTurret();
 	~Entities();
 };
 

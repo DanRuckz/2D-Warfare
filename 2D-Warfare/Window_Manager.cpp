@@ -15,17 +15,19 @@ Window_Manager::Window_Manager()
 void Window_Manager::Window_action()
 {
 	window.create(VideoMode(resolution),"2D-Warfare", WINDOW_MODE);
-	Vector2i mousePos = Mouse::getPosition();
-	coords = window.mapPixelToCoords(mousePos);
 	Event event;
 
 	while (window.isOpen())
 	{
-		
+		mousePos = Mouse::getPosition();
+		coords = window.mapPixelToCoords(mousePos);
 		while (window.pollEvent(event))
 		{
 			if (event.type == Event::MouseMoved)
-				std::cout << "X coords: " << coords.x << " " << "Y coords: " << coords.y <<std::endl;
+			{
+				std::cout << "X coords: " << coords.x << " " << "Y coords: " << coords.y << std::endl;
+				tank.getTurret().rotateTurret(coords,tank.getTank().getPosition());
+			}
 
 			if (event.type == Event::Closed)
 				window.close();
@@ -63,6 +65,7 @@ void Window_Manager::Window_action()
 
 		window.setView(view);
 		window.draw(tank.getTank());
+		window.draw(tank.getTurretSprite());
 		window.display();
 
 	}

@@ -2,12 +2,15 @@
 #include "inits.h"
 #include "Map.h"
 #include "Tank.h"
+#include "Turret.h"
+
 class Window_Manager
 {
 public:
 	Window_Manager();
 	~Window_Manager();
 private:
+	Vector2i mousePos;
 	void Window_action();
 	void setView();
 	RenderWindow window;

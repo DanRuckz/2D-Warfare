@@ -7,6 +7,10 @@ Entities::Entities()
 }
 
 
+void Entities::rotateTurret()
+{
+}
+
 Entities::~Entities()
 {
 }
