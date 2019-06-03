@@ -6,9 +6,19 @@ class Entities
 {
 public:
 	Entities();
-	virtual void makeEntity() = 0;
-	virtual void setEntity() = 0;
-	virtual void rotateTurret();
+	virtual void makeEntity();
+	void setEntity(Sprite & entity, Vector2f position, IntRect animation);
+	Vector2f getEntitiyPosition(Sprite&);
+	void moveEntity(Sprite&, std::string, float, float, Sprite&,float,float);
+	void rotateEntity(Sprite & entity, std::string direction, float rotateSpeed);
+	//virtual void moveEntity(Sprite&, std::string, float, float);
+	void rotateTurret(Sprite& turret, Vector2f mousepos, Vector2f tankpos);
+
+
 	~Entities();
+private:
+
+protected:
+	Texture texture;
 };
 

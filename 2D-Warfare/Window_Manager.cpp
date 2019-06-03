@@ -44,19 +44,19 @@ void Window_Manager::Window_action()
 
 		if (Keyboard::isKeyPressed(Keyboard::W))
 		{
-			tank.moveTank("up");
+			tank.moveEntity("up");
 		}
 		if (Keyboard::isKeyPressed(Keyboard::A))
 		{
-			tank.rotateTank("left");
+			tank.rotateEntity("left");
 		}
 		if (Keyboard::isKeyPressed(Keyboard::S))
 		{
-			tank.moveTank("down");
+			tank.moveEntity("down");
 		}
 		if (Keyboard::isKeyPressed(Keyboard::D))
 		{
-			tank.rotateTank("right");
+			tank.rotateEntity("right");
 		}
 		view.setCenter(tank.getTank().getPosition());
 		
@@ -74,8 +74,8 @@ void Window_Manager::Window_action()
 
 void Window_Manager::setView()
 {
-	view.setCenter(resolution.width / 2, resolution.height / 2);
-	view.setSize(resolution.width, resolution.height);
+	view.setCenter((float)resolution.width / 2, (float)resolution.height / 2);
+	view.setSize((float)resolution.width, (float)resolution.height);
 }
 
 

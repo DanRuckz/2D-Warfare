@@ -12,28 +12,25 @@ public:
 	~Tank();
 	Sprite& getTank();
 	Sprite& getTurretSprite();
-	void moveTank(std::string);
-	void rotateTank(std::string);
-	Texture & getCurrentTexture();
+	void rotateEntity(std::string);
 	Turret& getTurret();
+	void moveEntity(std::string);
 
 
 private:
-	void makeEntity();
 	Turret turret;
-	void saveTextures();
-	void setEntity();
-	float speed;
+	//void saveTextures();
 	float offset_x = -1;
 	float offset_y = -3;
 	Texture texture;
-	void changeAnimation(float angle);
 	Sprite tank;
-	std::vector<IntRect> animation;
-	float rotation_p = 0;
+	IntRect animation;
 	float global_rotation = 0;
-	float rotateSpeed = 1;
-	void checkRotation();
-
+	float rotateSpeed = 5;
+	//void checkRotation();
+	//int determineType(float);
+	Entities* baseptr;
+protected:
+	float speed;
 };
 

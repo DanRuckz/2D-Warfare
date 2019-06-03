@@ -1,24 +1,62 @@
 #include "Tank.h"
 
-Tank::Tank()
+Tank::Tank() : animation(Vector2i(28,96),Vector2i(36,60))
 {
-	makeEntity();
-	setEntity();
+	baseptr = this;
+	baseptr->setEntity(tank,Vector2f(1000,1000),animation);
+	speed = 15.f;
+	turret.setTankPos(tank.getPosition());
+	turret.getTurretSprite().setPosition(tank.getPosition().x + offset_x, tank.getPosition().y - 3);
 }
 
-void Tank::makeEntity()
+
+
+Sprite& Tank::getTank()
 {
-	if (!texture.loadFromFile("assets/Playables/Tank/0.png"))
-		std::cout << "failed to load texture " << std::endl;
-	saveTextures();
+	return tank;
 }
+
+Sprite& Tank::getTurretSprite()
+{
+	return turret.getTurretSprite();
+}
+
+void Tank::moveEntity(std::string direction)
+{
+	baseptr->moveEntity(tank, direction, tank.getRotation(), speed, turret.getTurretSprite(),offset_x,offset_y);
+}
+
+void Tank::rotateEntity(std::string direction)
+{
+	baseptr->rotateEntity(tank, direction, rotateSpeed);
+}
+
+
+Turret& Tank::getTurret()
+{
+	return turret;
+}
+
+
+Tank::~Tank()
+{
+}
+
+
+
+
+
+
+
+/*
+ANIMATIONS I MIGHT USE.
 
 void Tank::saveTextures()
 {
 	IntRect temp;
-	temp.left = 27; 
-	temp.top = 96; 
-	temp.width = 41; 
+	temp.left = 27;
+	temp.top = 96;
+	temp.width = 41;
 	temp.height = 62;
 	animation.push_back(temp);
 
@@ -35,7 +73,7 @@ void Tank::saveTextures()
 	temp.width = 64;
 	temp.height = 41;
 	animation.push_back(temp);
-	
+
 	temp.left = 592;
 	temp.top = 97;
 	temp.width = 60;
@@ -66,26 +104,21 @@ void Tank::saveTextures()
 	temp.height = 63;
 	animation.push_back(temp);
 }
-void Tank::setEntity()
-{
-	tank.setPosition(1000.f, 1000.f);
-	tank.setTexture(texture);
-	tank.setTextureRect(animation[0]);
-	turret.getTurret().setPosition(tank.getPosition().x + offset_x,tank.getPosition().y -3);
-	speed = 15.f;
-	tank.setOrigin(tank.getTextureRect().width / 2, tank.getTextureRect().height / 2);
-	rotation_p = tank.getRotation();
-}
+*/
 
-void Tank::changeAnimation(float angle)
+
+
+/*
+functions related to the animation
+int Tank::determineType(float angle)
 {
 	int index;
 	if (angle == 0)
 		index = 0;
 	if (angle == 45)
 		index = 1;
-	if(angle == 90)
-		index =2;
+	if (angle == 90)
+		index = 2;
 	if (angle == 135)
 		index = 3;
 	if (angle == 180)
@@ -96,96 +129,22 @@ void Tank::changeAnimation(float angle)
 		index = 6;
 	if (angle == 315)
 		index = 7;
-	tank.setTextureRect(animation[index]);
-	tank.setRotation(0);
-	tank.setOrigin(Vector2f(tank.getTextureRect().width/2, tank.getTextureRect().height/2));
-	//	currentTextureIndex = index + 1;
-	//if (currentTextureIndex == 0 && direction == "left")
-	//	currentTextureIndex = 15;
-
-	//if (currentTextureIndex == 15 && direction == "right")
-		//currentTextureIndex = 0;
+	return index;
 }
 
-Tank::~Tank()
-{
-}
-
-Sprite& Tank::getTank()
-{
-	return tank;
-}
-
-Sprite& Tank::getTurretSprite()
-{
-	return turret.getTurret();
-}
-
-void Tank::moveTank(std::string direction)
-{
-	Vector2f whereto;
-	float rotation_radians;
-	rotation_radians = rotation_p * M_PI / 180;
-
-	
-		whereto.x = speed*std::sin(rotation_radians);
-		whereto.y = speed*std::cos(rotation_radians);
-	
-
-	if (direction == "up")
-	{
-		tank.move(whereto.x,-whereto.y);
-	}
-
-
-
-	if (direction == "down")
-	{
-		tank.move(-whereto.x, whereto.y);
-	}
-
-	turret.turretMove(Vector2f(tank.getPosition().x+offset_x,tank.getPosition().y + offset_y));
-}
-
-void Tank::rotateTank(std::string direction)
-{
-	if (direction == "left")
-	{
-		rotation_p -= rotateSpeed;
-		tank.rotate(-rotateSpeed);
-		global_rotation -= rotateSpeed;
-
-	}
-	if (direction == "right")
-	{
-		rotation_p += rotateSpeed;
-		tank.rotate(rotateSpeed);
-		global_rotation += rotateSpeed;
-	}
+if (ROTATION_ANGLES)
+	//{
+	//	int index = determineType(global_rotation);
+		//IntRect animation_t = animation[index];
+	//	baseptr->changeAnimation(tank,animation_t);
+	//}
 	checkRotation();
 
-	if (ROTATION_ANGLES)
-	{
-		changeAnimation(global_rotation);
-	}
-	
-
-}
-Texture& Tank::getCurrentTexture()
-{
-	//return textures[currentTextureIndex];
-	return texture;
-}
-
-Turret& Tank::getTurret()
-{
-	return turret;
-}
-
-void Tank::checkRotation()
+	void Tank::checkRotation()
 {
 	if (global_rotation > 359)
 		global_rotation = 0;
 	if (global_rotation < 0)
 		global_rotation = 359;
 }
+*/
