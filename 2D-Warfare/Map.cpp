@@ -34,7 +34,7 @@ void Map::CreateMap()
 			map = new Sprite;
 			map->setTexture(*mapobj.getTexture());
 			map->setTextureRect(mapobj.getTextureRect());
-			map->setPosition(Vector2f(obj_size.x*j, obj_size.y*i));
+			map->setPosition(Vector2f((float)obj_size.x*j, (float)obj_size.y*i));
 			mapvec.push_back(map);
 		}
 	}

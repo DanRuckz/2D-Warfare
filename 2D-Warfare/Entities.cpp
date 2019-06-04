@@ -4,9 +4,31 @@
 
 Entities::Entities()
 {
-	makeEntity();
+	if (!loaded)
+	{
+		loadTextures();
+		loaded = true;
+	}
 }
 
+void Entities::loadTextures()
+{
+	loadFile = "assets/Playables/Tank/0.png";
+	setTexture();
+	loadFile = "assets/Playables/AA/1.png";
+	setTexture();
+	loadFile = "assets/Playables/Hind/2.png";
+	setTexture();
+}
+
+//some kung fu for loading texture only one time
+void Entities::setTexture()
+{
+	texture = new Texture;
+	if (!texture->loadFromFile(loadFile))
+		std::cout << "failed to load texture " << std::endl;
+	textures.push_back(texture);
+}
 
 
 Vector2f Entities::getEntitiyPosition(Sprite& entity)
@@ -18,8 +40,8 @@ void Entities::moveEntity(Sprite& entity, std::string direction, float angle, fl
 {
 	Vector2f whereto;
 	angle = entity.getRotation();
-	double rotation_radians;
-	rotation_radians = (double)angle * M_PI / 180;
+	float rotation_radians;
+	rotation_radians = angle * M_PI / 180;
 
 
 	whereto.x = speed * std::sin(rotation_radians);
@@ -59,9 +81,9 @@ void Entities::rotateTurret(Sprite & turret, Vector2f mousepos, Vector2f tankpos
 	Vector2f P1;
 	Vector2f P2;
 	float rotation;
-	double dot;
-	double norm;
-	double result;
+	float dot;
+	float norm;
+	float result;
 	P1.x = 0;
 	P1.y = 1;
 	if (mousepos.y >= tankpos.y)
@@ -87,21 +109,27 @@ void Entities::rotateTurret(Sprite & turret, Vector2f mousepos, Vector2f tankpos
 }
 
 
-void Entities::makeEntity()
+void Entities::setEntity(Sprite& entity, Vector2f position, IntRect animation, std::string type)
 {
-	if (!texture.loadFromFile("assets/Playables/Tank/0.png"))
-		std::cout << "failed to load texture " << std::endl;
-}
-
-void Entities::setEntity(Sprite& entity, Vector2f position, IntRect animation)
-{
+	int index = checkType(type);
 	entity.setPosition(position);
-	entity.setTexture(texture);
+	entity.setTexture(*textures[index]);
 	entity.setTextureRect(animation);
 	entity.setOrigin((float)entity.getTextureRect().width / 2, (float)entity.getTextureRect().height / 2);
 
 }
 
+int Entities::checkType(std::string type)
+{
+	int index;
+	if (type == "tank" || type == "tank_turret")
+		index = 0;
+	if (type == "AA" || type == "AA_turret")
+		index = 1;
+	if (type == "hind" || type == "hind_blades")
+		index = 2;
+	return index;
+}
 Entities::~Entities()
 {
 }

@@ -10,7 +10,6 @@ public:
 	~Turret();
 
 private:
-	Texture texture;
 	Sprite turretSprite;
 	float offset_x = 1;
 	float offset_y = 13;

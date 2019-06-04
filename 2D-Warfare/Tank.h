@@ -22,7 +22,6 @@ private:
 	//void saveTextures();
 	float offset_x = -1;
 	float offset_y = -3;
-	Texture texture;
 	Sprite tank;
 	IntRect animation;
 	float global_rotation = 0;
@@ -30,7 +29,6 @@ private:
 	//void checkRotation();
 	//int determineType(float);
 	Entities* baseptr;
-protected:
 	float speed;
 };
 

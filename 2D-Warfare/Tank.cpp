@@ -3,7 +3,7 @@
 Tank::Tank() : animation(Vector2i(28,96),Vector2i(36,60))
 {
 	baseptr = this;
-	baseptr->setEntity(tank,Vector2f(1000,1000),animation);
+	baseptr->setEntity(tank,Vector2f(1000,1000),animation,"tank");
 	speed = 15.f;
 	turret.setTankPos(tank.getPosition());
 	turret.getTurretSprite().setPosition(tank.getPosition().x + offset_x, tank.getPosition().y - 3);

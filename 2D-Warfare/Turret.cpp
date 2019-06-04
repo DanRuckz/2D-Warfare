@@ -3,7 +3,7 @@
 Turret::Turret() : animation(Vector2i(30,276),Vector2i(31,60))
 {
 	baseptr = this;
-	baseptr->setEntity(turretSprite,tankpos, animation);
+	baseptr->setEntity(turretSprite,tankpos, animation,"tank_turret");
 	turretSprite.setOrigin(Vector2f(turretSprite.getTextureRect().width / 2 + offset_x, turretSprite.getTextureRect().height / 2 + offset_y));
 }
 

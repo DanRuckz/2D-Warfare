@@ -5,20 +5,24 @@
 class Entities
 {
 public:
+	std::string loadFile;
+	static bool loaded;
+	static Texture* texture;
 	Entities();
-	virtual void makeEntity();
-	void setEntity(Sprite & entity, Vector2f position, IntRect animation);
+	void setEntity(Sprite & entity, Vector2f position, IntRect animation,std::string type);
 	Vector2f getEntitiyPosition(Sprite&);
-	void moveEntity(Sprite&, std::string, float, float, Sprite&,float,float);
+	void moveEntity(Sprite&, std::string, float, float, Sprite&, float, float);
 	void rotateEntity(Sprite & entity, std::string direction, float rotateSpeed);
 	//virtual void moveEntity(Sprite&, std::string, float, float);
 	void rotateTurret(Sprite& turret, Vector2f mousepos, Vector2f tankpos);
-
-
 	~Entities();
-private:
 
-protected:
-	Texture texture;
+private:
+	static std::vector<Texture*> textures;
+	int checkType(std::string);
+	void loadTextures();
+	void setTexture();
+
+
 };
 

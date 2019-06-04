@@ -14,7 +14,7 @@ Window_Manager::Window_Manager()
 
 void Window_Manager::Window_action()
 {
-	window.create(VideoMode(resolution),"2D-Warfare", WINDOW_MODE);
+	window.create(VideoMode(resolution),"2D-Warfare", FULLSCREEN);
 	Event event;
 
 	while (window.isOpen())

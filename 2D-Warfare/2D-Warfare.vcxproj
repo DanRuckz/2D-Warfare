@@ -173,6 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\2D-Warfare\2D-Warfare\inits.h" />
+    <ClInclude Include="Declarations.h" />
     <ClInclude Include="Entities.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MenuScreen.h" />
