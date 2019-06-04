@@ -3,6 +3,8 @@
 #include "Map.h"
 #include "Tank.h"
 #include "Turret.h"
+#include "AA.h"
+#include "Entities.h"
 
 class Window_Manager
 {
@@ -18,6 +20,6 @@ private:
 	Vector2f coords;
 	Map map;
 	View view;
-	Tank tank;
+	Entities * entity;
 };
 

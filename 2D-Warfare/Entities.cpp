@@ -31,12 +31,21 @@ void Entities::setTexture()
 }
 
 
-Vector2f Entities::getEntitiyPosition(Sprite& entity)
+void Entities::rotateEntity(Sprite & entity, std::string direction, float rotateSpeed)
 {
-	return entity.getPosition();
+	if (direction == "left")
+	{
+		entity.rotate(-rotateSpeed);
+	}
+	if (direction == "right")
+	{
+		entity.rotate(rotateSpeed);
+	}
 }
 
-void Entities::moveEntity(Sprite& entity, std::string direction, float angle, float speed, Sprite& turret,float offset_x,float offset_y)
+
+
+void Entities::moveEntity(Sprite& entity, std::string direction, float angle, float speed)
 {
 	Vector2f whereto;
 	angle = entity.getRotation();
@@ -59,53 +68,6 @@ void Entities::moveEntity(Sprite& entity, std::string direction, float angle, fl
 	{
 		entity.move(-whereto.x, whereto.y);
 	}
-	//move turret with tank
-	turret.setPosition(Vector2f(entity.getPosition().x + offset_x, entity.getPosition().y + offset_y));
-}
-
-void Entities::rotateEntity(Sprite & entity, std::string direction, float rotateSpeed)
-{
-	if (direction == "left")
-	{
-		entity.rotate(-rotateSpeed);
-
-	}
-	if (direction == "right")
-	{
-		entity.rotate(rotateSpeed);
-	}
-}
-
-void Entities::rotateTurret(Sprite & turret, Vector2f mousepos, Vector2f tankpos)
-{
-	Vector2f P1;
-	Vector2f P2;
-	float rotation;
-	float dot;
-	float norm;
-	float result;
-	P1.x = 0;
-	P1.y = 1;
-	if (mousepos.y >= tankpos.y)
-	{
-		P2.x = abs(mousepos.x - tankpos.x);
-		P2.y = -abs(mousepos.y - tankpos.y);
-	}
-	if (mousepos.y < tankpos.y)
-	{
-
-		P2.x = abs(mousepos.x - tankpos.x);
-		P2.y = abs(mousepos.y - tankpos.y);
-	}
-
-	dot = (P1.x*P2.x + P1.y * P2.y);
-	norm = (sqrt(P1.x)*(P1.x) + (P1.y)*(P1.y)) * sqrt((P2.x)*(P2.x) + (P2.y)*(P2.y));
-	result = dot / norm;
-	if (mousepos.x >= tankpos.x)
-		rotation = std::acos(result);
-	else rotation = -std::acos(result);
-	rotation = rotation * 180 / M_PI;
-	turret.setRotation(rotation);
 }
 
 
@@ -130,14 +92,33 @@ int Entities::checkType(std::string type)
 		index = 2;
 	return index;
 }
+Sprite & Entities::getEntity()
+{
+	//for access
+	return placeholder;
+}
+Sprite & Entities::getTopPart()
+{
+	// for access
+	return placeholder;
+}
 Entities::~Entities()
 {
 }
 
 
+void Entities::moveEntity(std::string)
+{
+}
+
+void Entities::rotateEntity(std::string)
+{
+}
 
 
-
+void Entities::rotateTurret(Vector2f mousepos, Vector2f tankpos)
+{
+}
 
 
 

@@ -10,25 +10,24 @@ class Tank :
 public:
 	Tank();
 	~Tank();
-	Sprite& getTank();
-	Sprite& getTurretSprite();
+	Sprite& getTopPart();
 	void rotateEntity(std::string);
 	Turret& getTurret();
 	void moveEntity(std::string);
+	Sprite& getEntity();
+	void rotateTurret(Vector2f,Vector2f);
 
 
 private:
 	Turret turret;
-	//void saveTextures();
 	float offset_x = -1;
 	float offset_y = -3;
 	Sprite tank;
 	IntRect animation;
 	float global_rotation = 0;
 	float rotateSpeed = 5;
-	//void checkRotation();
-	//int determineType(float);
 	Entities* baseptr;
 	float speed;
+	float radius = 1;
 };
 

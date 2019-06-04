@@ -10,11 +10,22 @@ public:
 	static Texture* texture;
 	Entities();
 	void setEntity(Sprite & entity, Vector2f position, IntRect animation,std::string type);
-	Vector2f getEntitiyPosition(Sprite&);
-	void moveEntity(Sprite&, std::string, float, float, Sprite&, float, float);
+	
+
+	//movement and rotation based on direction
+	virtual void moveEntity(std::string);
+	virtual void rotateEntity(std::string);
+
+	//taking receiving information from the class and sending this information to the actual function
 	void rotateEntity(Sprite & entity, std::string direction, float rotateSpeed);
-	//virtual void moveEntity(Sprite&, std::string, float, float);
-	void rotateTurret(Sprite& turret, Vector2f mousepos, Vector2f tankpos);
+
+	//for testing
+	void moveEntity(Sprite&, std::string, float, float);
+
+
+	virtual void rotateTurret(Vector2f mousepos, Vector2f tankpos);
+	virtual Sprite& getEntity();
+	virtual Sprite& getTopPart();
 	~Entities();
 
 private:
@@ -22,6 +33,7 @@ private:
 	int checkType(std::string);
 	void loadTextures();
 	void setTexture();
+	Sprite placeholder;
 
 
 };

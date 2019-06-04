@@ -36,6 +36,15 @@
     <ClCompile Include="Turret.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Turrets.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AATurret.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\2D-Warfare\2D-Warfare\inits.h">
@@ -60,6 +69,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Declarations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AA.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Turrets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AATurret.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

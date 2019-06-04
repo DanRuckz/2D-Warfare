@@ -1,21 +1,22 @@
 #pragma once
-#include "Entities.h"
-class Turret : public Entities
+#include "Turrets.h"
+class Turret : public Turrets
 {
 public:
 	Turret();
 	Sprite& getTurretSprite();
 	void rotateTurret(Vector2f,Vector2f);
-	void setTankPos(Vector2f);
+	//void setTurretPos(Vector2f);
 	~Turret();
 
 private:
 	Sprite turretSprite;
 	float offset_x = 1;
 	float offset_y = 13;
-	Entities* baseptr;
+	Turrets* baseptr;
 	float speed;
-	Vector2f tankpos;
+	Vector2f turretpos;
 	IntRect animation;
+
 };
 

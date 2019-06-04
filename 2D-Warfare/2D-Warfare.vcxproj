@@ -164,21 +164,27 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\2D-Warfare\2D-Warfare\2D-Warfare.cpp" />
+    <ClCompile Include="AA.cpp" />
+    <ClCompile Include="AATurret.cpp" />
     <ClCompile Include="Entities.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MenuScreen.cpp" />
     <ClCompile Include="Tank.cpp" />
     <ClCompile Include="Turret.cpp" />
+    <ClCompile Include="Turrets.cpp" />
     <ClCompile Include="Window_Manager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\2D-Warfare\2D-Warfare\inits.h" />
+    <ClInclude Include="AA.h" />
+    <ClInclude Include="AATurret.h" />
     <ClInclude Include="Declarations.h" />
     <ClInclude Include="Entities.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MenuScreen.h" />
     <ClInclude Include="Tank.h" />
     <ClInclude Include="Turret.h" />
+    <ClInclude Include="Turrets.h" />
     <ClInclude Include="Window_Manager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

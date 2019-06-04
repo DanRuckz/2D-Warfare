@@ -5,26 +5,31 @@ Tank::Tank() : animation(Vector2i(28,96),Vector2i(36,60))
 	baseptr = this;
 	baseptr->setEntity(tank,Vector2f(1000,1000),animation,"tank");
 	speed = 15.f;
-	turret.setTankPos(tank.getPosition());
-	turret.getTurretSprite().setPosition(tank.getPosition().x + offset_x, tank.getPosition().y - 3);
+	turret.getTurretSprite().setPosition(tank.getPosition().x + offset_x, tank.getPosition().y +offset_y);
 }
 
-
-
-Sprite& Tank::getTank()
-{
-	return tank;
-}
-
-Sprite& Tank::getTurretSprite()
+Sprite& Tank::getTopPart()
 {
 	return turret.getTurretSprite();
 }
 
 void Tank::moveEntity(std::string direction)
 {
-	baseptr->moveEntity(tank, direction, tank.getRotation(), speed, turret.getTurretSprite(),offset_x,offset_y);
+	baseptr->moveEntity(tank, direction, tank.getRotation(), speed);
+	turret.moveTurret(tank, turret.getTurretSprite(), radius);
 }
+
+Sprite& Tank::getEntity()
+{
+	return tank;
+}
+
+void Tank::rotateTurret(Vector2f mousepos, Vector2f tankpos)
+{
+	turret.rotateTurret(mousepos, tankpos);
+	turret.moveTurret(tank, turret.getTurretSprite(), radius);
+}
+
 
 void Tank::rotateEntity(std::string direction)
 {

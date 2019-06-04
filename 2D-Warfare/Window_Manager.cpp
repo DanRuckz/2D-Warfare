@@ -14,9 +14,9 @@ Window_Manager::Window_Manager()
 
 void Window_Manager::Window_action()
 {
-	window.create(VideoMode(resolution),"2D-Warfare", FULLSCREEN);
+	window.create(VideoMode(resolution),"2D-Warfare", WINDOW_MODE);
 	Event event;
-
+	entity = new AA;
 	while (window.isOpen())
 	{
 		mousePos = Mouse::getPosition();
@@ -26,7 +26,7 @@ void Window_Manager::Window_action()
 			if (event.type == Event::MouseMoved)
 			{
 				std::cout << "X coords: " << coords.x << " " << "Y coords: " << coords.y << std::endl;
-				tank.getTurret().rotateTurret(coords,tank.getTank().getPosition());
+				entity->rotateTurret(coords, entity->getEntity().getPosition());
 			}
 
 			if (event.type == Event::Closed)
@@ -44,30 +44,29 @@ void Window_Manager::Window_action()
 
 		if (Keyboard::isKeyPressed(Keyboard::W))
 		{
-			tank.moveEntity("up");
+			entity->moveEntity("up");
 		}
 		if (Keyboard::isKeyPressed(Keyboard::A))
 		{
-			tank.rotateEntity("left");
+			entity->rotateEntity("left");
 		}
 		if (Keyboard::isKeyPressed(Keyboard::S))
 		{
-			tank.moveEntity("down");
+			entity->moveEntity("down");
 		}
 		if (Keyboard::isKeyPressed(Keyboard::D))
 		{
-			tank.rotateEntity("right");
+			entity->rotateEntity("right");
 		}
-		view.setCenter(tank.getTank().getPosition());
+		view.setCenter(entity->getEntity().getPosition());
 		
 		for (int i = 0; i < map.getMapVec().size(); i++)
 			window.draw(*map.getMapVec()[i]);
 
 		window.setView(view);
-		window.draw(tank.getTank());
-		window.draw(tank.getTurretSprite());
+		window.draw(entity->getEntity());
+		window.draw(entity->getTopPart());
 		window.display();
-
 	}
 
 }
