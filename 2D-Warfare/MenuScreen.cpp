@@ -28,6 +28,7 @@ void MenuScreen::loadAndPlayMenuSound() {
 	}
 
 	menuMusic.setBuffer(sb);
+	menuMusic.setVolume(30);
 	menuMusic.play();
 
 }
