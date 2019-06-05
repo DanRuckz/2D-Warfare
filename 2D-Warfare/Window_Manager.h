@@ -4,6 +4,7 @@
 #include "Tank.h"
 #include "Turret.h"
 #include "AA.h"
+#include "Hind.h"
 #include "Entities.h"
 
 class Window_Manager

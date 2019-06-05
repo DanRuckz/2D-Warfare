@@ -16,7 +16,7 @@ void Window_Manager::Window_action()
 {
 	window.create(VideoMode(resolution),"2D-Warfare", WINDOW_MODE);
 	Event event;
-	entity = new AA;
+	entity = new Hind;
 	while (window.isOpen())
 	{
 		mousePos = Mouse::getPosition();

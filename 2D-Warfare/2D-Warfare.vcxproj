@@ -166,7 +166,10 @@
     <ClCompile Include="..\..\2D-Warfare\2D-Warfare\2D-Warfare.cpp" />
     <ClCompile Include="AA.cpp" />
     <ClCompile Include="AATurret.cpp" />
+    <ClCompile Include="Blades.cpp" />
     <ClCompile Include="Entities.cpp" />
+    <ClCompile Include="Hind.cpp" />
+    <ClCompile Include="HindBlade.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MenuScreen.cpp" />
     <ClCompile Include="Tank.cpp" />
@@ -178,8 +181,11 @@
     <ClInclude Include="..\..\2D-Warfare\2D-Warfare\inits.h" />
     <ClInclude Include="AA.h" />
     <ClInclude Include="AATurret.h" />
+    <ClInclude Include="Blades.h" />
     <ClInclude Include="Declarations.h" />
     <ClInclude Include="Entities.h" />
+    <ClInclude Include="Hind.h" />
+    <ClInclude Include="HindBlade.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MenuScreen.h" />
     <ClInclude Include="Tank.h" />

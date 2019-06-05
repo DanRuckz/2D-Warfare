@@ -1,5 +1,4 @@
 #pragma once
-#include "inits.h"
 #include "Entities.h"
 #include "AATurret.h"
 
@@ -14,7 +13,7 @@ public:
 	void rotateTurret(Vector2f mousepos, Vector2f tankpos);
 	~AA();
 private:
-	Entities* aa;
+	Entities* baseptr;
 	IntRect animation;
 	Sprite anti_air;
 	float speed;

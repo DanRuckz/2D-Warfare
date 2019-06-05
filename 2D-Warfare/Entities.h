@@ -20,7 +20,7 @@ public:
 	void rotateEntity(Sprite & entity, std::string direction, float rotateSpeed);
 
 	//for testing
-	void moveEntity(Sprite&, std::string, float, float);
+	void moveEntity(Sprite& entity, std::string direction, float angle, float speed);
 
 
 	virtual void rotateTurret(Vector2f mousepos, Vector2f tankpos);
@@ -35,6 +35,7 @@ private:
 	void setTexture();
 	Sprite placeholder;
 
-
+protected:
+	
 };
 
