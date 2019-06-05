@@ -15,7 +15,7 @@ Sprite& Turret::getTurretSprite()
 
 
 
-void Turret::rotateTurret(Vector2f mousepos, Vector2f tankpos)
+void Turret::rotateTurret(Vector2f& mousepos, Vector2f& tankpos)
 {
 	baseptr->rotateTurret(turretSprite, mousepos, tankpos);
 }

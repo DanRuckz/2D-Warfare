@@ -54,6 +54,15 @@
     <ClCompile Include="HindBlade.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Projectiles.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TankShell.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Playables.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\2D-Warfare\2D-Warfare\inits.h">
@@ -96,6 +105,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HindBlade.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectiles.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TankShell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Playables.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -11,21 +11,6 @@ public:
 	Entities();
 	void setEntity(Sprite & entity, Vector2f position, IntRect animation,std::string type);
 	
-
-	//movement and rotation based on direction
-	virtual void moveEntity(std::string);
-	virtual void rotateEntity(std::string);
-
-	//taking receiving information from the class and sending this information to the actual function
-	void rotateEntity(Sprite & entity, std::string direction, float rotateSpeed);
-
-	//for testing
-	void moveEntity(Sprite& entity, std::string direction, float angle, float speed);
-
-
-	virtual void rotateTurret(Vector2f mousepos, Vector2f tankpos);
-	virtual Sprite& getEntity();
-	virtual Sprite& getTopPart();
 	~Entities();
 
 private:
@@ -33,9 +18,5 @@ private:
 	int checkType(std::string);
 	void loadTextures();
 	void setTexture();
-	Sprite placeholder;
-
-protected:
-	
 };
 

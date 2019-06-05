@@ -6,7 +6,7 @@ class AATurret :
 public:
 	AATurret();
 	Sprite& getTurretSprite();
-	void rotateTurret(Vector2f mousepos, Vector2f tankpos);
+	void rotateTurret(Vector2f& mousepos, Vector2f& tankpos);
 	//void setTurretPos(Vector2f turretpos);
 	~AATurret();
 

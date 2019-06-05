@@ -1,8 +1,8 @@
 #pragma once
-#include "Entities.h"
+#include "Playables.h"
 #include "AATurret.h"
 
-class AA : public Entities
+class AA : public Playables
 {
 public:
 	AA();
@@ -13,7 +13,7 @@ public:
 	void rotateTurret(Vector2f mousepos, Vector2f tankpos);
 	~AA();
 private:
-	Entities* baseptr;
+	Playables* baseptr;
 	IntRect animation;
 	Sprite anti_air;
 	float speed;

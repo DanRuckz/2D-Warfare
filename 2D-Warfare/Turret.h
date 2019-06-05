@@ -5,7 +5,7 @@ class Turret : public Turrets
 public:
 	Turret();
 	Sprite& getTurretSprite();
-	void rotateTurret(Vector2f,Vector2f);
+	void rotateTurret(Vector2f& mousepos,Vector2f& tankpos);
 	//void setTurretPos(Vector2f);
 	~Turret();
 

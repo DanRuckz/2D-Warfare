@@ -8,6 +8,15 @@ Tank::Tank() : animation(Vector2i(28,96),Vector2i(36,60))
 	turret.getTurretSprite().setPosition(tank.getPosition().x + offset_x, tank.getPosition().y +offset_y);
 }
 
+void Tank::Fire()
+{
+	Vector2f vector;
+	shell = new TankShell;
+	shell->setRotationOfShot(turret.getTurretSprite().getRotation() -90);
+	//vector = shell->calculateDirection(shell->getSprite(),barrelLength);
+	shell->setPositionOfShot(turret.getTurretSprite().getPosition());
+}
+
 Sprite& Tank::getTopPart()
 {
 	return turret.getTurretSprite();
@@ -42,6 +51,10 @@ Turret& Tank::getTurret()
 	return turret;
 }
 
+Sprite& Tank::getShell()
+{
+	return shell->getSprite();
+}
 
 Tank::~Tank()
 {

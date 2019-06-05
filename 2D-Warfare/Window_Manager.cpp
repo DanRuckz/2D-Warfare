@@ -16,7 +16,8 @@ void Window_Manager::Window_action()
 {
 	window.create(VideoMode(resolution),"2D-Warfare", WINDOW_MODE);
 	Event event;
-	entity = new Hind;
+	entity = new Tank;
+	bool fired = false;
 	while (window.isOpen())
 	{
 		mousePos = Mouse::getPosition();
@@ -34,9 +35,10 @@ void Window_Manager::Window_action()
 			if (event.key.code == Keyboard::Escape)
 				window.close();
 
-				if (event.key.code == Mouse::Right)
-				{
-
+				if (event.key.code == Mouse::Left)
+				{	
+					entity->Fire();
+					fired = true;
 				}
 				break;
 				
@@ -66,6 +68,10 @@ void Window_Manager::Window_action()
 		window.setView(view);
 		window.draw(entity->getEntity());
 		window.draw(entity->getTopPart());
+
+		if(fired)
+		window.draw(entity->getShell());
+
 		window.display();
 	}
 
@@ -75,6 +81,13 @@ void Window_Manager::setView()
 {
 	view.setCenter((float)resolution.width / 2, (float)resolution.height / 2);
 	view.setSize((float)resolution.width, (float)resolution.height);
+}
+
+void Window_Manager::checkFlight()
+{
+	//if (entity->getProjectilePtr()->getProjectile() != NULL)
+	//	entity->getProjectilePtr()->Fly();
+
 }
 
 

@@ -2,9 +2,9 @@
 #include "inits.h"
 #include "Map.h"
 #include "Tank.h"
-#include "Turret.h"
 #include "AA.h"
 #include "Hind.h"
+#include "TankShell.h"
 #include "Entities.h"
 
 class Window_Manager
@@ -21,6 +21,8 @@ private:
 	Vector2f coords;
 	Map map;
 	View view;
-	Entities * entity;
+	Playables * entity;
+	Projectiles* shot;
+	void checkFlight();
 };
 

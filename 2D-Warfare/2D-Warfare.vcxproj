@@ -172,7 +172,10 @@
     <ClCompile Include="HindBlade.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MenuScreen.cpp" />
+    <ClCompile Include="Playables.cpp" />
+    <ClCompile Include="Projectiles.cpp" />
     <ClCompile Include="Tank.cpp" />
+    <ClCompile Include="TankShell.cpp" />
     <ClCompile Include="Turret.cpp" />
     <ClCompile Include="Turrets.cpp" />
     <ClCompile Include="Window_Manager.cpp" />
@@ -188,7 +191,10 @@
     <ClInclude Include="HindBlade.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MenuScreen.h" />
+    <ClInclude Include="Playables.h" />
+    <ClInclude Include="Projectiles.h" />
     <ClInclude Include="Tank.h" />
+    <ClInclude Include="TankShell.h" />
     <ClInclude Include="Turret.h" />
     <ClInclude Include="Turrets.h" />
     <ClInclude Include="Window_Manager.h" />

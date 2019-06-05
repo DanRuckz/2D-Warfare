@@ -19,6 +19,9 @@ void Entities::loadTextures()
 	setTexture();
 	loadFile = "assets/Playables/Hind/2.png";
 	setTexture();
+	loadFile = "assets/Projectiles/3.png";
+	setTexture();
+
 }
 
 //some kung fu for loading texture only one time
@@ -31,44 +34,6 @@ void Entities::setTexture()
 }
 
 
-void Entities::rotateEntity(Sprite & entity, std::string direction, float rotateSpeed)
-{
-	if (direction == "left")
-	{
-		entity.rotate(-rotateSpeed);
-	}
-	if (direction == "right")
-	{
-		entity.rotate(rotateSpeed);
-	}
-}
-
-
-
-void Entities::moveEntity(Sprite& entity, std::string direction, float angle, float speed)
-{
-	Vector2f whereto;
-	angle = entity.getRotation();
-	float rotation_radians;
-	rotation_radians = angle * M_PI / 180;
-
-
-	whereto.x = speed * std::sin(rotation_radians);
-	whereto.y = speed * std::cos(rotation_radians);
-
-
-	if (direction == "up")
-	{
-		entity.move(whereto.x, -whereto.y);
-	}
-
-
-
-	if (direction == "down")
-	{
-		entity.move(-whereto.x, whereto.y);
-	}
-}
 
 
 void Entities::setEntity(Sprite& entity, Vector2f position, IntRect animation, std::string type)
@@ -90,36 +55,10 @@ int Entities::checkType(std::string type)
 		index = 1;
 	if (type == "hind" || type == "hind_blades")
 		index = 2;
+	if (type == "projectile")
+		index = 3;
 	return index;
 }
-Sprite & Entities::getEntity()
-{
-	//for access
-	return placeholder;
-}
-Sprite & Entities::getTopPart()
-{
-	// for access
-	return placeholder;
-}
-Entities::~Entities()
-{
-}
-
-
-void Entities::moveEntity(std::string)
-{
-}
-
-void Entities::rotateEntity(std::string)
-{
-}
-
-
-void Entities::rotateTurret(Vector2f mousepos, Vector2f tankpos)
-{
-}
-
 
 
 

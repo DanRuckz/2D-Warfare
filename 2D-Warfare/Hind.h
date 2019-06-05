@@ -1,8 +1,8 @@
 #pragma once
-#include "Entities.h"
+#include "Playables.h"
 #include "HindBlade.h"
 class Hind :
-	public Entities
+	public Playables
 {
 public:
 	Hind();
@@ -15,7 +15,7 @@ public:
 private:
 	float speed;
 	float rotateSpeed;
-	Entities* baseptr;
+	Playables* baseptr;
 	IntRect animation;
 	Sprite hind;
 	HindBlade hindblade;
