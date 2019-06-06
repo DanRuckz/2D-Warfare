@@ -3,9 +3,11 @@
 Tank::Tank() : animation(Vector2i(28,96),Vector2i(36,60))
 {
 	baseptr = this;
-	baseptr->setEntity(tank,Vector2f(1000,1000),animation,"tank");
+	baseptr->setEntity(tank,Vector2f(1500,1500),animation,"tank");
 	speed = 15.f;
 	turret.getTurretSprite().setPosition(tank.getPosition().x + offset_x, tank.getPosition().y +offset_y);
+	tank.setScale(2.5f, 2.5f);
+	shell = NULL;
 }
 
 void Tank::Fire()
@@ -13,8 +15,11 @@ void Tank::Fire()
 	Vector2f vector;
 	shell = new TankShell;
 	shell->setRotationOfShot(turret.getTurretSprite().getRotation() -90);
-	//vector = shell->calculateDirection(shell->getSprite(),barrelLength);
-	shell->setPositionOfShot(turret.getTurretSprite().getPosition());
+	vector = shell->calculateDirection(shell->getSprite(),barrelLength);
+	shell->setPositionOfShot(turret.getTurretSprite().getPosition() + vector);
+	vector.x /= barrelLength;
+	vector.y /= barrelLength;
+	shell->setFlightDirection(vector);
 }
 
 Sprite& Tank::getTopPart()
@@ -39,17 +44,26 @@ void Tank::rotateTurret(Vector2f mousepos, Vector2f tankpos)
 	turret.moveTurret(tank, turret.getTurretSprite(), radius);
 }
 
+void Tank::projectileFly()
+{
+	shell->Fly();
+	if (shell->getDistanceTraveled() > 3000)
+	{
+		delete shell;
+		shell = NULL;
+	}
+}
 
 void Tank::rotateEntity(std::string direction)
 {
 	baseptr->rotateEntity(tank, direction, rotateSpeed);
 }
 
-
-Turret& Tank::getTurret()
+Projectiles * Tank::getPointerToProjectile()
 {
-	return turret;
+	return shell;
 }
+
 
 Sprite& Tank::getShell()
 {

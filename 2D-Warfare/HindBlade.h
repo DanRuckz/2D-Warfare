@@ -5,7 +5,7 @@ class HindBlade :
 {
 public:
 	HindBlade();
-	Sprite & getHindSprite();
+	Sprite & getBladeSprite();
 	void rotateBlade();
 	~HindBlade();
 

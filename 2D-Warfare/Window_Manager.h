@@ -22,7 +22,10 @@ private:
 	Map map;
 	View view;
 	Playables * entity;
+	Playables * enemy;
 	Projectiles* shot;
 	void checkFlight();
+	float releaseModeTime = 25;
+	float debugModeTime = 1;
 };
 

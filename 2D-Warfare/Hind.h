@@ -10,6 +10,11 @@ public:
 	void moveEntity(std::string);
 	void rotateEntity(std::string direction);
 	Sprite& getTopPart();
+	void Fire();
+	Sprite& getShell();
+	void projectileFly();
+	Projectiles* getPointerToProjectile();
+	void rotateTurret();
 	~Hind();
 
 private:

@@ -10,6 +10,7 @@ public:
 	bool exploded = false;
 	Sprite & getSprite();
 	void Fly();
+	void setFlightDirection(Vector2f vector);
 	~TankShell();
 
 private:
@@ -17,6 +18,7 @@ private:
 	IntRect animation;
 	Projectiles* baseptr;
 	Vector2f direction;
-	float turretLength =5;
+	unsigned int turretLength =5;
+	float speed = 100;
 };
 

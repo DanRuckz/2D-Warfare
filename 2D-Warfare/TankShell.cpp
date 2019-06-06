@@ -18,7 +18,8 @@ void TankShell::setPositionOfShot(Vector2f position)
 void TankShell::setRotationOfShot(float angle)
 {
 	shell.setRotation(angle);
-}
+
+}	
 
 Sprite& TankShell::getSprite()
 {
@@ -27,10 +28,16 @@ Sprite& TankShell::getSprite()
 
 void TankShell::Fly()
 {
-	baseptr->Fly(shell, direction);
+	baseptr->Fly(shell,speed, direction);
+}
+
+void TankShell::setFlightDirection(Vector2f vector)
+{
+	direction = vector;
 }
 
 
 TankShell::~TankShell()
 {
+
 }

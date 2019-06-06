@@ -9,11 +9,15 @@ public:
 	virtual void setPositionOfShot(Vector2f position) = 0;
 	virtual void setRotationOfShot(float angle) = 0;
 	virtual Sprite & getSprite() =0;
-	virtual void Fly(Sprite& projectile, Vector2f direction);
-	~Projectiles();
+	virtual void Fly(Sprite& projectile, float speed, Vector2f direction);
+	float getDistanceTraveled();
+	virtual ~Projectiles();
 
 private:
-	float speed;
+
+	float m_distanceTraveled = 0;
+	Vector2f distanceVector;
+	void distanceTraveled(float speed, Vector2f direction);
 
 protected:
 };

@@ -43,8 +43,16 @@ void Playables::moveEntity(Sprite& entity, std::string direction, float angle, f
 
 	if (direction == "down")
 	{
-		entity.move(-whereto.x, whereto.y);
+		entity.move(-whereto.x /1.5, whereto.y/1.5);
 	}
+}
+
+void Playables::rotateTurret(Vector2f mousepos, Vector2f tankpos)
+{
+}
+
+void Playables::rotateTurret()
+{
 }
 
 Sprite & Playables::getEntity()
@@ -61,7 +69,7 @@ Entities::~Entities()
 {
 }
 
-
+/*
 void Playables::moveEntity(std::string)
 {
 }
@@ -75,7 +83,7 @@ void Playables::rotateTurret(Vector2f mousepos, Vector2f tankpos)
 {
 
 }
-
+*/
 
 
 Playables::~Playables()

@@ -11,6 +11,11 @@ public:
 	Sprite & getTopPart();
 	Sprite& getEntity();
 	void rotateTurret(Vector2f mousepos, Vector2f tankpos);
+	void Fire();
+	Sprite& getShell();
+	void projectileFly();
+	Projectiles* getPointerToProjectile();
+
 	~AA();
 private:
 	Playables* baseptr;

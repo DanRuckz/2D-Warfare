@@ -5,7 +5,7 @@ class Blades : public Entities
 public:
 	Blades();
 	void Spin(Sprite& blade);
-	virtual Sprite& getHindSprite() = 0;
+	virtual Sprite& getBladeSprite() = 0;
 	~Blades();
 
 private:
