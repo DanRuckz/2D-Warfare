@@ -40,7 +40,6 @@ void Turrets::rotateTurret(Sprite & turret, Vector2f mousepos, Vector2f tankpos)
 
 void Turrets::moveTurret(Sprite& entity, Sprite& turret,float radius)
 {
-	
 	Vector2f whereto;
 	float angle = 180 - entity.getRotation();
 	float radians = -angle * M_PI / 180;

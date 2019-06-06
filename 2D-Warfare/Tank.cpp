@@ -47,7 +47,7 @@ void Tank::rotateTurret(Vector2f mousepos, Vector2f tankpos)
 void Tank::projectileFly()
 {
 	shell->Fly();
-	if (shell->getDistanceTraveled() > 3000)
+	if (shell->getDistanceTraveled() > 3000 || shell->intersectWithMap(shell->getSprite()))
 	{
 		delete shell;
 		shell = NULL;

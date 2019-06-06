@@ -9,16 +9,12 @@ TankShell::TankShell() : animation(Vector2i(40,54),Vector2i(25,9))
 
 void TankShell::setPositionOfShot(Vector2f position)
 {
-	//position.x += turretLength * std::sin(shell.getRotation());
-	//position.y += turretLength * std::cos(shell.getRotation());
 	shell.setPosition(position);
-
 }
 
 void TankShell::setRotationOfShot(float angle)
 {
 	shell.setRotation(angle);
-
 }	
 
 Sprite& TankShell::getSprite()

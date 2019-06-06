@@ -4,6 +4,7 @@
 
 Projectiles::Projectiles()
 {
+
 }
 
 
@@ -16,6 +17,15 @@ void Projectiles::Fly(Sprite & projectile,float speed, Vector2f direction)
 float Projectiles::getDistanceTraveled()
 {
 	return m_distanceTraveled;
+}
+
+bool Projectiles::intersectWithMap(Sprite & shell)
+{
+	if (shell.getPosition().y <= 0 || shell.getPosition().y >= Static_Pipe::getMapSize().y)
+		return true;
+	if (shell.getPosition().x <= 0 || shell.getPosition().x >= Static_Pipe::getMapSize().x)
+		return true;
+	return false;
 }
 
 Vector2f Projectiles::calculateDirection(Sprite& shell, float BarrelLength)
@@ -34,6 +44,8 @@ void Projectiles::distanceTraveled(float speed, Vector2f direction)
 	distanceVector += speed * direction;
 	m_distanceTraveled = sqrt(pow(distanceVector.x, 2) + pow(distanceVector.y, 2));
 }
+
+
 Projectiles::~Projectiles()
 {
 }

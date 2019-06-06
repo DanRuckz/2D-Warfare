@@ -1,5 +1,6 @@
 #pragma once
 #include "inits.h"
+#include "Static_Pipe.h"
 #include "Map.h"
 #include "Tank.h"
 #include "AA.h"
@@ -23,9 +24,14 @@ private:
 	View view;
 	Playables * entity;
 	Playables * enemy;
+	vector<Playables*> enemies;
 	Projectiles* shot;
 	void checkFlight();
-	float releaseModeTime = 25;
+	void limitEntity(std::string direction);
+	void checkLimits();
+	float releaseModeTime = 32;
 	float debugModeTime = 1;
+	float factor = 1.5;
+	Static_Pipe pipe;
 };
 
