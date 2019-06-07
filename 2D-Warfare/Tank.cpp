@@ -47,11 +47,14 @@ void Tank::rotateTurret(Vector2f mousepos, Vector2f tankpos)
 void Tank::projectileFly()
 {
 	shell->Fly();
-	if (shell->getDistanceTraveled() > 3000 || shell->intersectWithMap(shell->getSprite()))
+	/*if (shell->getDistanceTraveled() > 3000 || baseptr->checkIntersectionWithObjects(shell) || shell->intersectWithMap(shell->getSprite()))
+	*/
+	if(shell->getDistanceTraveled() > 3000 || shell->intersectWithMap(shell->getSprite()) || baseptr->checkIntersectionWithObjects(shell))
 	{
 		delete shell;
 		shell = NULL;
 	}
+	
 }
 
 void Tank::rotateEntity(std::string direction)

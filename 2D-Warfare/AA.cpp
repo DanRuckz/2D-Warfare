@@ -49,6 +49,7 @@ Projectiles * AA::getPointerToProjectile()
 	return nullptr;
 }
 
+
 Sprite& AA::getTopPart()
 {
 	return aaturret.getTurretSprite();

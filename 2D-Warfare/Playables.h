@@ -11,21 +11,23 @@ public:
 	virtual void rotateEntity(std::string)=0;
 	virtual void rotateTurret(Vector2f mousepos, Vector2f tankpos);
 	virtual void rotateTurret();
-	virtual Sprite& getEntity();
-	virtual Sprite& getTopPart();
+	virtual Sprite& getEntity() =0;
+	virtual Sprite& getTopPart() =0;
 	virtual void Fire() = 0;
 	virtual Sprite& getShell() = 0;
 	virtual void projectileFly() = 0;
 	virtual Projectiles* getPointerToProjectile()=0;
+	//void setRandomPosition(Sprite& entity);
+	void setObjectsVector(std::vector<Playables*>& other);
 	//taking receiving information from the class and sending this information to the actual function
 	void rotateEntity(Sprite & entity, std::string direction, float rotateSpeed);
-
-	//for testing
 	void moveEntity(Sprite& entity, std::string direction, float angle, float speed);
-
+	bool checkIntersectionWithObjects(Projectiles * pointer);
+	static std::vector<Playables*>& setObjectsVector();
 	virtual ~Playables();
 
-private: 
+private:
+	static std::vector<Playables*> objects;
 	Sprite placeholder;
 };
 

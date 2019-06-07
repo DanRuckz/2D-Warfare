@@ -28,6 +28,13 @@ bool Projectiles::intersectWithMap(Sprite & shell)
 	return false;
 }
 
+bool Projectiles::intersectWithObjects(Sprite & shell, Sprite & object)
+{
+	if(Collision::PixelPerfectTest(shell,object))
+	return true;
+	return false;
+}
+
 Vector2f Projectiles::calculateDirection(Sprite& shell, float BarrelLength)
 {
 	Vector2f vector;

@@ -10,8 +10,7 @@ public:
 	static Texture* texture;
 	Entities();
 	void setEntity(Sprite & entity, Vector2f position, IntRect animation,std::string type);
-	
-	~Entities();
+	virtual ~Entities();
 
 private:
 	static std::vector<Texture*> textures;

@@ -24,7 +24,6 @@ private:
 	View view;
 	Playables * entity;
 	Playables * enemy;
-	vector<Playables*> enemies;
 	Projectiles* shot;
 	void checkFlight();
 	void limitEntity(std::string direction);

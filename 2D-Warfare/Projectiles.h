@@ -1,6 +1,7 @@
 #pragma once
 #include "Entities.h"
 #include "Static_Pipe.h"
+#include "Collision.h"
 class Projectiles : public Entities
 {
 public:
@@ -13,6 +14,7 @@ public:
 	virtual void Fly(Sprite& projectile, float speed, Vector2f direction);
 	float getDistanceTraveled();
 	bool intersectWithMap(Sprite& shell);
+	bool intersectWithObjects(Sprite& shell, Sprite& object);
 	virtual ~Projectiles();
 
 private:

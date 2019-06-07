@@ -15,12 +15,12 @@ Window_Manager::Window_Manager()
 
 void Window_Manager::Window_action()
 {
-
-	window.create(VideoMode(resolution),"2D-Warfare", WINDOW_MODE);
+	window.create(VideoMode(resolution),"2D-Warfare", FULLSCREEN);
 	Event event;
 	entity = new Tank;
-	enemy = new Tank;
-	enemies.push_back(enemy);
+	Playables::setObjectsVector().push_back(entity);
+	enemy = new AA;
+	Playables::setObjectsVector().push_back(enemy);
 	Clock clock_global;
 	Time global;
 	Clock timerofShot;
@@ -112,6 +112,7 @@ void Window_Manager::checkFlight()
 {
 	if (entity->getPointerToProjectile() != NULL)
 		entity->projectileFly();
+	
 }
 
 void Window_Manager::limitEntity(std::string direction)
@@ -156,33 +157,26 @@ void Window_Manager::limitEntity(std::string direction)
 
 void Window_Manager::checkLimits()
 {
-	bool entered = false;
 	Vector2f logics(Vector2f(entity->getEntity().getPosition()));
-	if (!entered)
-	{
+	
 		if (entity->getEntity().getPosition().y - window.getSize().y / 2 * factor < map.getBoundingRect().getPosition().y)
 		{
 			logics.y = map.getBoundingRect().getPosition().y + window.getSize().y / 2 * factor;
-			entered = true;
 		}
 		if (entity->getEntity().getPosition().y + window.getSize().y / 2 * factor > map.getBoundingRect().getSize().y)
 		{
 			logics.y = map.getBoundingRect().getSize().y - window.getSize().y / 2 * factor;
-			entered = true;
 		}
 		if (entity->getEntity().getPosition().x - window.getSize().x / 2 * factor < map.getBoundingRect().getPosition().x)
 		{
 			logics.x = map.getBoundingRect().getPosition().x + window.getSize().x / 2 * factor;
-			entered = true;
 		}
 		if (entity->getEntity().getPosition().x + window.getSize().x / 2 * factor > map.getBoundingRect().getSize().x)
 		{
 			logics.x = map.getBoundingRect().getSize().x - window.getSize().x / 2 * factor;
-			entered = true;
 		}
-	}
+	
 	view.setCenter(logics);
-	entered = false;
 }
 
 Window_Manager::~Window_Manager()

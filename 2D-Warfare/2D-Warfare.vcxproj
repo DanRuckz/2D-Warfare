@@ -167,6 +167,7 @@
     <ClCompile Include="AA.cpp" />
     <ClCompile Include="AATurret.cpp" />
     <ClCompile Include="Blades.cpp" />
+    <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Entities.cpp" />
     <ClCompile Include="Hind.cpp" />
     <ClCompile Include="HindBlade.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="AA.h" />
     <ClInclude Include="AATurret.h" />
     <ClInclude Include="Blades.h" />
+    <ClInclude Include="Collision.h" />
     <ClInclude Include="Declarations.h" />
     <ClInclude Include="Entities.h" />
     <ClInclude Include="Hind.h" />

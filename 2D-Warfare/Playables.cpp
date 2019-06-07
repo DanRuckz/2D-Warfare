@@ -8,6 +8,12 @@ Playables::Playables()
 }
 
 
+
+void Playables::setObjectsVector(std::vector<Playables*>& other)
+{
+	objects = other;
+}
+
 void Playables::rotateEntity(Sprite & entity, std::string direction, float rotateSpeed)
 {
 	if (direction == "left")
@@ -85,6 +91,26 @@ void Playables::rotateTurret(Vector2f mousepos, Vector2f tankpos)
 }
 */
 
+
+
+bool Playables::checkIntersectionWithObjects(Projectiles* pointer)
+{
+	bool intersection = false;
+	for (int i = 0; i < objects.size(); i++)
+	{
+		if (pointer->intersectWithObjects(pointer->getSprite(), objects[i]->getEntity()))
+		{
+			intersection = true;
+			return intersection;
+		}
+	}
+	return intersection;
+}
+
+std::vector<Playables*>& Playables::setObjectsVector()
+{
+	return objects;
+}
 
 Playables::~Playables()
 {

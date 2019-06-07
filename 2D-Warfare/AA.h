@@ -15,7 +15,6 @@ public:
 	Sprite& getShell();
 	void projectileFly();
 	Projectiles* getPointerToProjectile();
-
 	~AA();
 private:
 	Playables* baseptr;
