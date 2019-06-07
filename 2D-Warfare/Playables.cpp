@@ -49,7 +49,7 @@ void Playables::moveEntity(Sprite& entity, std::string direction, float angle, f
 
 	if (direction == "down")
 	{
-		entity.move(-whereto.x /1.5, whereto.y/1.5);
+		entity.move(Vector2f(-whereto.x /1.5, whereto.y/1.5));
 	}
 }
 
@@ -71,29 +71,24 @@ Sprite & Playables::getTopPart()
 	// for access
 	return placeholder;
 }
+void Playables::projectileFly(std::shared_ptr<Projectiles> projectile, int index)
+{
+	projectile->Fly(projectile->getSprite());
+
+	if (projectile->getDistanceTraveled() > 3000 || projectile->intersectWithMap(projectile->getSprite()) || checkIntersectionWithObjects(projectile))
+	{
+		projectile.reset();
+		Projectiles::getProjectileVector().erase(Projectiles::getProjectileVector().begin() + index);
+		Projectiles::getProjectileVector().shrink_to_fit();
+	}
+
+}
 Entities::~Entities()
 {
 }
 
-/*
-void Playables::moveEntity(std::string)
-{
-}
 
-void Playables::rotateEntity(std::string)
-{
-}
-
-
-void Playables::rotateTurret(Vector2f mousepos, Vector2f tankpos)
-{
-
-}
-*/
-
-
-
-bool Playables::checkIntersectionWithObjects(Projectiles* pointer)
+bool Playables::checkIntersectionWithObjects(std::shared_ptr<Projectiles> pointer)
 {
 	bool intersection = false;
 	for (int i = 0; i < objects.size(); i++)
@@ -107,9 +102,23 @@ bool Playables::checkIntersectionWithObjects(Projectiles* pointer)
 	return intersection;
 }
 
-std::vector<Playables*>& Playables::setObjectsVector()
+std::vector<Playables*>& Playables::getObjectsVector()
 {
 	return objects;
+}
+
+void Playables::setHitRadius(float other_radius)
+{
+	radius = other_radius;
+}
+
+int Playables::getShotsFired()
+{
+	return 0;
+}
+
+void Playables::nullifyShotsFired()
+{
 }
 
 Playables::~Playables()

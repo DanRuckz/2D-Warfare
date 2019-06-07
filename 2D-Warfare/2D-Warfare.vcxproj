@@ -171,11 +171,11 @@
     <ClCompile Include="Entities.cpp" />
     <ClCompile Include="Hind.cpp" />
     <ClCompile Include="HindBlade.cpp" />
+    <ClCompile Include="HindShell.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MenuScreen.cpp" />
     <ClCompile Include="Playables.cpp" />
     <ClCompile Include="Projectiles.cpp" />
-    <ClCompile Include="Static_Pipe.cpp" />
     <ClCompile Include="Tank.cpp" />
     <ClCompile Include="TankShell.cpp" />
     <ClCompile Include="Turret.cpp" />
@@ -192,11 +192,11 @@
     <ClInclude Include="Entities.h" />
     <ClInclude Include="Hind.h" />
     <ClInclude Include="HindBlade.h" />
+    <ClInclude Include="HindShell.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MenuScreen.h" />
     <ClInclude Include="Playables.h" />
     <ClInclude Include="Projectiles.h" />
-    <ClInclude Include="Static_Pipe.h" />
     <ClInclude Include="Tank.h" />
     <ClInclude Include="TankShell.h" />
     <ClInclude Include="Turret.h" />

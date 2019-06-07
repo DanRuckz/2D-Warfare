@@ -21,18 +21,23 @@ float Projectiles::getDistanceTraveled()
 
 bool Projectiles::intersectWithMap(Sprite & shell)
 {
-	if (shell.getPosition().y <= 0 || shell.getPosition().y >= Static_Pipe::getMapSize().y)
+	if (shell.getPosition().y <= 0 || shell.getPosition().y >= Map::getMapSize().y)
 		return true;
-	if (shell.getPosition().x <= 0 || shell.getPosition().x >= Static_Pipe::getMapSize().x)
+	if (shell.getPosition().x <= 0 || shell.getPosition().x >= Map::getMapSize().x)
 		return true;
 	return false;
 }
 
 bool Projectiles::intersectWithObjects(Sprite & shell, Sprite & object)
 {
-	if(Collision::PixelPerfectTest(shell,object))
-	return true;
+	//if(Collision::PixelPerfectTest(shell,object))
+	//return true;
 	return false;
+}
+
+std::vector<std::shared_ptr<Projectiles>>& Projectiles::getProjectileVector()
+{
+	return projectilesVector;
 }
 
 Vector2f Projectiles::calculateDirection(Sprite& shell, float BarrelLength)

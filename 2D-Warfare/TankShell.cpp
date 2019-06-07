@@ -1,7 +1,7 @@
 #include "TankShell.h"
 
 
-TankShell::TankShell() : animation(Vector2i(40,54),Vector2i(25,9))
+TankShell::TankShell() : animation(Vector2i(40,54),Vector2i(25,9)),speed(100)
 {
 	baseptr = this;
 	baseptr->setEntity(shell, Vector2f(0, 0), animation, "projectile");
@@ -22,7 +22,7 @@ Sprite& TankShell::getSprite()
 	return shell;
 }
 
-void TankShell::Fly()
+void TankShell::Fly(Sprite& projectile)
 {
 	baseptr->Fly(shell,speed, direction);
 }

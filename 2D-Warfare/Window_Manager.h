@@ -1,6 +1,5 @@
 #pragma once
 #include "inits.h"
-#include "Static_Pipe.h"
 #include "Map.h"
 #include "Tank.h"
 #include "AA.h"
@@ -31,6 +30,7 @@ private:
 	float releaseModeTime = 32;
 	float debugModeTime = 1;
 	float factor = 1.5;
-	Static_Pipe pipe;
+	void makeEntity();
+	void makeEnemies(int howmany);
 };
 

@@ -13,8 +13,9 @@ public:
 	void rotateTurret(Vector2f mousepos, Vector2f tankpos);
 	void Fire();
 	Sprite& getShell();
-	void projectileFly();
-	Projectiles* getPointerToProjectile();
+	std::shared_ptr<Projectiles> getPointerToProjectile();
+	float getSpeed();
+	std::string getType();
 	~AA();
 private:
 	Playables* baseptr;
@@ -26,5 +27,7 @@ private:
 	float offset_x = 0;
 	float offset_y = 23;
 	float radiusofMountPoint = 23;
+	std::string type;
+	float projectileMax = 1000;
 };
 

@@ -6,7 +6,6 @@ Window_Manager::Window_Manager()
 {
 	resolution = VideoMode::getDesktopMode();
 	setView();
-	pipe.setMapSize(map.getBoundingRect().getSize());
 	Window_action();
 }
 
@@ -15,12 +14,10 @@ Window_Manager::Window_Manager()
 
 void Window_Manager::Window_action()
 {
-	window.create(VideoMode(resolution),"2D-Warfare", FULLSCREEN);
+	window.create(VideoMode(resolution),"2D-Warfare", WINDOW_MODE);
 	Event event;
-	entity = new Tank;
-	Playables::setObjectsVector().push_back(entity);
-	enemy = new AA;
-	Playables::setObjectsVector().push_back(enemy);
+	makeEntity();
+	makeEnemies(1);
 	Clock clock_global;
 	Time global;
 	Clock timerofShot;
@@ -29,7 +26,7 @@ void Window_Manager::Window_action()
 	{
 		global = clock_global.getElapsedTime();
 		//change to debugModeTime or releaseModeTime depends on which mode you are
-		if (global.asMilliseconds() > debugModeTime)
+		if (global.asMilliseconds() > releaseModeTime)
 		{
 			clock_global.restart();
 			mousePos = Mouse::getPosition();
@@ -52,11 +49,30 @@ void Window_Manager::Window_action()
 				{
 					if (event.mouseButton.button == Mouse::Left)
 					{	
-						timeofShot = timerofShot.getElapsedTime();
-						if (timeofShot.asSeconds() > 2)
+						if (entity->getType() == "Tank")
 						{
-							entity->Fire();
-							timerofShot.restart();
+							timeofShot = timerofShot.getElapsedTime();
+							if (timeofShot.asSeconds() > 2)
+							{
+								entity->Fire();
+								timerofShot.restart();
+							}
+						}
+						if (entity->getType() == "Hind")
+						{
+							if (entity->getShotsFired() < 5)
+							{
+								entity->Fire();
+							}
+							if (entity->getShotsFired() == 4)
+							{
+								timerofShot.restart();
+							}
+							timeofShot = timerofShot.getElapsedTime();
+							if (entity->getShotsFired() >= 5 && timeofShot.asSeconds() > 4)
+							{	
+								entity->nullifyShotsFired();
+							}
 						}
 					}
 				}
@@ -95,8 +111,8 @@ void Window_Manager::Window_action()
 			window.draw(enemy->getTopPart());
 			window.draw(entity->getEntity());
 			window.draw(entity->getTopPart());
-			if (entity->getPointerToProjectile() != 0)
-				window.draw(entity->getShell());
+			for (int i = 0; i < Projectiles::getProjectileVector().size(); i++)
+				window.draw(Projectiles::getProjectileVector()[i]->getSprite());
 			window.display();
 		}
 	}
@@ -110,9 +126,10 @@ void Window_Manager::setView()
 
 void Window_Manager::checkFlight()
 {
-	if (entity->getPointerToProjectile() != NULL)
-		entity->projectileFly();
+	for(int i=0;i<Projectiles::getProjectileVector().size();i++)
 	
+		entity->projectileFly(Projectiles::getProjectileVector()[i],i);
+
 }
 
 void Window_Manager::limitEntity(std::string direction)
@@ -121,19 +138,19 @@ void Window_Manager::limitEntity(std::string direction)
 	{
 		//UPPER BOUND
 		if (map.getBoundingRect().getGlobalBounds().top >= entity->getEntity().getPosition().y - entity->getEntity().getTextureRect().height / 2 * entity->getEntity().getScale().y)
-			entity->getEntity().setPosition(entity->getEntity().getPosition().x, entity->getEntity().getPosition().y + 15);
+			entity->getEntity().setPosition(entity->getEntity().getPosition().x, entity->getEntity().getPosition().y + entity->getSpeed());
 		//LEFT BOUND
 		if (map.getBoundingRect().getGlobalBounds().left >= entity->getEntity().getPosition().x - entity->getEntity().getTextureRect().width / 2 * entity->getEntity().getScale().x - 23)
-			entity->getEntity().setPosition(entity->getEntity().getPosition().x + 15, entity->getEntity().getPosition().y);
+			entity->getEntity().setPosition(entity->getEntity().getPosition().x + entity->getSpeed(), entity->getEntity().getPosition().y);
 
 		//BOTTOM BOUND
 		if (map.getBoundingRect().getGlobalBounds().height <= entity->getEntity().getPosition().y + entity->getEntity().getTextureRect().height / 2 * entity->getEntity().getScale().y - 10)
-			entity->getEntity().setPosition(entity->getEntity().getPosition().x, entity->getEntity().getPosition().y - 15);
+			entity->getEntity().setPosition(entity->getEntity().getPosition().x, entity->getEntity().getPosition().y - entity->getSpeed());
 
 		//RIGHT BOUND
 		if (map.getBoundingRect().getGlobalBounds().width <= entity->getEntity().getPosition().x + entity->getEntity().getTextureRect().width / 2 * entity->getEntity().getScale().x + 23)
 
-			entity->getEntity().setPosition(entity->getEntity().getPosition().x - 15, entity->getEntity().getPosition().y);
+			entity->getEntity().setPosition(entity->getEntity().getPosition().x - entity->getSpeed(), entity->getEntity().getPosition().y);
 	}
 		if (direction == "down")
 	{
@@ -177,6 +194,19 @@ void Window_Manager::checkLimits()
 		}
 	
 	view.setCenter(logics);
+}
+
+void Window_Manager::makeEntity()
+{
+	entity = new Hind;
+	Playables::getObjectsVector().push_back(entity);
+}
+
+void Window_Manager::makeEnemies(int howmany)
+{
+	howmany = 0;
+	enemy = new Hind;
+	Playables::getObjectsVector().push_back(enemy);
 }
 
 Window_Manager::~Window_Manager()

@@ -63,10 +63,10 @@
     <ClCompile Include="Playables.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Static_Pipe.cpp">
+    <ClCompile Include="Collision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Collision.cpp">
+    <ClCompile Include="HindShell.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -122,10 +122,10 @@
     <ClInclude Include="Playables.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Static_Pipe.h">
+    <ClInclude Include="Collision.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Collision.h">
+    <ClInclude Include="HindShell.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -35,6 +35,7 @@
 #include <fstream>
 #include <cstdlib>
 #include <algorithm>
+#include <utility>
 using namespace sf;
 using std::vector;
 const int VEC_SIZE = 25;

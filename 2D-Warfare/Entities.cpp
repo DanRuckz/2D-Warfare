@@ -34,18 +34,6 @@ void Entities::setTexture()
 }
 
 
-
-
-void Entities::setEntity(Sprite& entity, Vector2f position, IntRect animation, std::string type)
-{
-	int index = checkType(type);
-	entity.setPosition(position);
-	entity.setTexture(*textures[index]);
-	entity.setTextureRect(animation);
-	entity.setOrigin((float)entity.getTextureRect().width / 2, (float)entity.getTextureRect().height / 2);
-
-}
-
 int Entities::checkType(std::string type)
 {
 	int index;
@@ -59,6 +47,18 @@ int Entities::checkType(std::string type)
 		index = 3;
 	return index;
 }
+
+
+void Entities::setEntity(Sprite& entity, Vector2f position, IntRect animation, std::string type)
+{
+	int index = checkType(type);
+	entity.setPosition(position);
+	entity.setTexture(*textures[index]);
+	entity.setTextureRect(animation);
+	entity.setOrigin((float)entity.getTextureRect().width / 2, (float)entity.getTextureRect().height / 2);
+
+}
+
 
 
 

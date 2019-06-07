@@ -1,25 +1,26 @@
 #include "Tank.h"
 
-Tank::Tank() : animation(Vector2i(28,96),Vector2i(36,60))
+Tank::Tank() : animation(Vector2i(28,96),Vector2i(36,60)), type("Tank")
 {
 	baseptr = this;
 	baseptr->setEntity(tank,Vector2f(1500,1500),animation,"tank");
 	speed = 15.f;
 	turret.getTurretSprite().setPosition(tank.getPosition().x + offset_x, tank.getPosition().y +offset_y);
 	tank.setScale(2.5f, 2.5f);
-	shell = NULL;
+	baseptr->setHitRadius(projectileMax);
 }
 
 void Tank::Fire()
 {
-	Vector2f vector;
-	shell = new TankShell;
-	shell->setRotationOfShot(turret.getTurretSprite().getRotation() -90);
-	vector = shell->calculateDirection(shell->getSprite(),barrelLength);
-	shell->setPositionOfShot(turret.getTurretSprite().getPosition() + vector);
-	vector.x /= barrelLength;
-	vector.y /= barrelLength;
-	shell->setFlightDirection(vector);
+		Vector2f vector;
+		shell = std::make_shared <TankShell>();
+		shell->setRotationOfShot(turret.getTurretSprite().getRotation() - 90);
+		vector = shell->calculateDirection(shell->getSprite(), barrelLength);
+		shell->setPositionOfShot(turret.getTurretSprite().getPosition() + vector);
+		vector.x /= barrelLength;
+		vector.y /= barrelLength;
+		shell->setFlightDirection(vector);
+		Projectiles::getProjectileVector().push_back(shell);
 }
 
 Sprite& Tank::getTopPart()
@@ -44,17 +45,14 @@ void Tank::rotateTurret(Vector2f mousepos, Vector2f tankpos)
 	turret.moveTurret(tank, turret.getTurretSprite(), radius);
 }
 
-void Tank::projectileFly()
+std::string Tank::getType()
 {
-	shell->Fly();
-	/*if (shell->getDistanceTraveled() > 3000 || baseptr->checkIntersectionWithObjects(shell) || shell->intersectWithMap(shell->getSprite()))
-	*/
-	if(shell->getDistanceTraveled() > 3000 || shell->intersectWithMap(shell->getSprite()) || baseptr->checkIntersectionWithObjects(shell))
-	{
-		delete shell;
-		shell = NULL;
-	}
-	
+	return type;
+}
+
+float Tank::getSpeed()
+{
+	return speed;
 }
 
 void Tank::rotateEntity(std::string direction)
@@ -62,9 +60,10 @@ void Tank::rotateEntity(std::string direction)
 	baseptr->rotateEntity(tank, direction, rotateSpeed);
 }
 
-Projectiles * Tank::getPointerToProjectile()
+std::shared_ptr<Projectiles> Tank::getPointerToProjectile()
 {
 	return shell;
+
 }
 
 

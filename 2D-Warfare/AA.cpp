@@ -2,13 +2,14 @@
 
 
 
-AA::AA() :animation(IntRect(Vector2i(6,2),Vector2i(38,82))) ,speed(15),rotateSpeed(5)
+AA::AA() :animation(IntRect(Vector2i(6,2),Vector2i(38,82))) ,speed(15),rotateSpeed(5), type("AA")
 {
 	baseptr = this;
 	baseptr->setEntity(anti_air, Vector2f(1500.f, 1500.f), animation, "AA");
 	speed = 25;
 	aaturret.getTurretSprite().setPosition(anti_air.getPosition().x +offset_x, anti_air.getPosition().y+ offset_y);
 	anti_air.setScale(1.5f, 1.5f);
+	baseptr->setHitRadius(projectileMax);
 }
 
 void AA::moveEntity(std::string direction)
@@ -32,6 +33,7 @@ void AA::rotateTurret(Vector2f mousepos, Vector2f tankpos)
 
 void AA::Fire()
 {
+	
 }
 
 Sprite & AA::getShell()
@@ -40,13 +42,20 @@ Sprite & AA::getShell()
 	return anti_air;
 }
 
-void AA::projectileFly()
+
+std::shared_ptr<Projectiles> AA::getPointerToProjectile()
 {
+	return std::shared_ptr<Projectiles>();
 }
 
-Projectiles * AA::getPointerToProjectile()
+float AA::getSpeed()
 {
-	return nullptr;
+	return speed;
+}
+
+std::string AA::getType()
+{
+	return type;
 }
 
 

@@ -1,24 +1,22 @@
 #pragma once
 #include "Projectiles.h"
-class TankShell :
+class HindShell :
 	public Projectiles
 {
 public:
-	TankShell();
+	HindShell();
 	void setPositionOfShot(Vector2f position);
 	void setRotationOfShot(float angle);
-	bool exploded = false;
 	Sprite & getSprite();
 	void Fly(Sprite& projectile);
 	void setFlightDirection(Vector2f vector);
-	~TankShell();
+	~HindShell();
 
 private:
+	Projectiles* baseptr;
 	Sprite shell;
 	IntRect animation;
-	Projectiles* baseptr;
 	Vector2f direction;
-	unsigned int turretLength =5;
 	float speed;
 };
 

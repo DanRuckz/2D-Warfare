@@ -15,19 +15,25 @@ public:
 	virtual Sprite& getTopPart() =0;
 	virtual void Fire() = 0;
 	virtual Sprite& getShell() = 0;
-	virtual void projectileFly() = 0;
-	virtual Projectiles* getPointerToProjectile()=0;
+	void projectileFly(std::shared_ptr<Projectiles> projectile,int index);
+	virtual std::shared_ptr<Projectiles> getPointerToProjectile()=0;
 	//void setRandomPosition(Sprite& entity);
 	void setObjectsVector(std::vector<Playables*>& other);
 	//taking receiving information from the class and sending this information to the actual function
 	void rotateEntity(Sprite & entity, std::string direction, float rotateSpeed);
 	void moveEntity(Sprite& entity, std::string direction, float angle, float speed);
-	bool checkIntersectionWithObjects(Projectiles * pointer);
-	static std::vector<Playables*>& setObjectsVector();
+	bool checkIntersectionWithObjects(std::shared_ptr<Projectiles> pointer);
+	static std::vector<Playables*>& getObjectsVector();
+	void setHitRadius(float other_radius);
+	virtual float getSpeed() = 0;
+	virtual std::string getType() = 0;
+	virtual int getShotsFired();
+	virtual void nullifyShotsFired();
 	virtual ~Playables();
 
 private:
 	static std::vector<Playables*> objects;
 	Sprite placeholder;
+	float radius;
 };
 

@@ -12,12 +12,13 @@ public:
 	~Tank();
 	Sprite& getTopPart();
 	void rotateEntity(std::string);
-	Projectiles* getPointerToProjectile();
+	std::shared_ptr<Projectiles> getPointerToProjectile();
 	Sprite & getShell();
 	void moveEntity(std::string);
 	Sprite& getEntity();
 	void rotateTurret(Vector2f mousepos,Vector2f tankpos);
-	void projectileFly();
+	std::string getType();
+	float getSpeed();
 
 private:
 	Turret turret;
@@ -29,8 +30,10 @@ private:
 	Playables* baseptr;
 	float speed;
 	float radius = 1;
-	TankShell* shell;
+	float projectileMax = 3000;
+	std::shared_ptr<TankShell> shell;
 	unsigned int barrelLength = 55;
+	std::string type;
 
 	//not used now
 	//float global_rotation = 0;

@@ -1,6 +1,7 @@
 #pragma once
 #include "Playables.h"
 #include "HindBlade.h"
+#include "HindShell.h"
 class Hind :
 	public Playables
 {
@@ -12,9 +13,12 @@ public:
 	Sprite& getTopPart();
 	void Fire();
 	Sprite& getShell();
-	void projectileFly();
-	Projectiles* getPointerToProjectile();
+	std::shared_ptr<Projectiles> getPointerToProjectile();
 	void rotateTurret();
+	float getSpeed();
+	std::string getType();
+	int getShotsFired();
+	void nullifyShotsFired();
 	~Hind();
 
 private:
@@ -24,7 +28,10 @@ private:
 	IntRect animation;
 	Sprite hind;
 	HindBlade hindblade;
-	float offset_x = 2;
-	float offset_y = -6;
+	float barrelLength = 23;
+	std::shared_ptr<HindShell> shell;
+	std::string type;
+	float projectileMax = 1000;
+	int shotsFired = 0;
 };
 

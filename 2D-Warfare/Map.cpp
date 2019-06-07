@@ -17,6 +17,11 @@ RectangleShape & Map::getBoundingRect()
 	return mapBoundingRectangle;
 }
 
+Vector2f Map::getMapSize()
+{
+	return mapSize;
+}
+
 
 Map::~Map()
 {
@@ -47,4 +52,5 @@ void Map::CreateMap()
 			mapvec.push_back(map);
 		}
 	}
+	mapSize = Vector2f(obj_size.x * numberofTiles, obj_size.y * numberofTiles);
 }
