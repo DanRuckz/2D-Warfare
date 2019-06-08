@@ -18,7 +18,10 @@ public:
 	Sprite& getEntity();
 	void rotateTurret(Vector2f mousepos,Vector2f tankpos);
 	std::string getType();
+	void setSelfIndex(int index);
 	float getSpeed();
+	int getSelfIndex();
+	bool checkIntersectionWithObjects(std::shared_ptr<Projectiles> pointer, int selfObjectIndex);
 
 private:
 	Turret turret;
@@ -34,6 +37,7 @@ private:
 	std::shared_ptr<TankShell> shell;
 	unsigned int barrelLength = 55;
 	std::string type;
+	int selfIndex;
 
 	//not used now
 	//float global_rotation = 0;

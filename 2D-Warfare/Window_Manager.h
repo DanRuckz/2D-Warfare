@@ -32,5 +32,6 @@ private:
 	float factor = 1.5;
 	void makeEntity();
 	void makeEnemies(int howmany);
+	bool mouseRelease = true;
 };
 

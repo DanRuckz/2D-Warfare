@@ -165,6 +165,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\2D-Warfare\2D-Warfare\2D-Warfare.cpp" />
     <ClCompile Include="AA.cpp" />
+    <ClCompile Include="AAShell.cpp" />
     <ClCompile Include="AATurret.cpp" />
     <ClCompile Include="Blades.cpp" />
     <ClCompile Include="Collision.cpp" />
@@ -185,6 +186,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\2D-Warfare\2D-Warfare\inits.h" />
     <ClInclude Include="AA.h" />
+    <ClInclude Include="AAShell.h" />
     <ClInclude Include="AATurret.h" />
     <ClInclude Include="Blades.h" />
     <ClInclude Include="Collision.h" />
