@@ -88,6 +88,16 @@ float Tank::getHP() const
 	return HP;
 }
 
+void Tank::setPlayer(bool other)
+{
+	Player = other;
+}
+
+bool Tank::getPlayer() const
+{
+	return Player;
+}
+
 void Tank::rotateEntity(std::string direction)
 {
 	baseptr->rotateEntity(tank, direction, rotateSpeed);

@@ -52,14 +52,14 @@ void Window_Manager::Window_action()
 					if (event.mouseButton.button == Mouse::Left)
 					{
 						mouseRelease = false;
-						enemy->Fire();
+						
 
 						if (entity->getType() == "Tank")
 						{
 							timeofShot = timerofShot.getElapsedTime();
 							if (timeofShot.asSeconds() > 2)
 							{
-							//	entity->Fire();
+								entity->Fire();
 								timerofShot.restart();
 							}
 						}
@@ -136,12 +136,8 @@ void Window_Manager::Window_action()
 				window.setView(view);
 				for (int i = 0; i < Projectiles::getProjectileVector().size(); i++)
 					window.draw(Projectiles::getProjectileVector()[i]->getSprite());
-				for (int i = 0; i < Playables::getObjectsVector().size(); i++)
-				{
-					Playables::getObjectsVector()[i]->rotateTurret();
-					window.draw(Playables::getObjectsVector()[i]->getEntity());
-					window.draw(Playables::getObjectsVector()[i]->getTopPart());
-				}
+				correctDraw(entity->getType());
+				
 				if (respawnScreen != nullptr)
 					drawRespawn();
 				
@@ -171,9 +167,8 @@ void Window_Manager::checkHP()
 	{
 		if (Playables::getObjectsVector()[i]->getHP() <= 0)
 		{
-			Playables::getObjectsVector()[i].reset();
 			Playables::getObjectsVector().erase(Playables::getObjectsVector().begin() + i);
-			Playables::getObjectsVector().shrink_to_fit();
+			//Playables::getObjectsVector().shrink_to_fit();
 		}
 	}
 }
@@ -244,14 +239,17 @@ void Window_Manager::checkLimits()
 
 void Window_Manager::makeEntity()
 {
-	entity = std::make_shared<Tank>();
+	entity = new Hind;
 	Playables::getObjectsVector().push_back(entity);
+	//if getPlayer == true then its my own entity
+	//for(int i=0;i<Playables::getObjectsVector().size();i++)
+
 }
 
 void Window_Manager::makeEnemies(int howmany)
 {
 	howmany = 0;
-	enemy = std::make_shared<AA>();
+	enemy = new Tank;
 	Playables::getObjectsVector().push_back(enemy);
 }
 
@@ -266,6 +264,16 @@ void Window_Manager::drawRespawn()
 	window.draw(respawnScreen->getAATurretSprite());
 	window.draw(respawnScreen->getHindBladesSprite());
 	window.draw(respawnScreen->getTitleSprite());
+}
+
+void Window_Manager::correctDraw(std::string type)
+{
+	for (int i = 0; i < Playables::getObjectsVector().size(); i++)
+	{
+		Playables::getObjectsVector()[i]->rotateTurret();
+		window.draw(Playables::getObjectsVector()[i]->getEntity());
+		window.draw(Playables::getObjectsVector()[i]->getTopPart());
+	}
 }
 
 Window_Manager::~Window_Manager()

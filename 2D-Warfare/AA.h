@@ -21,6 +21,8 @@ public:
 	int getSelfIndex();
 	void setHP(float damage);
 	float getHP() const;
+	void setPlayer(bool other);
+	bool getPlayer() const;
 	~AA();
 private:
 	Playables* baseptr;
@@ -39,5 +41,6 @@ private:
 	bool left = false;
 	int selfIndex;
 	float HP = 3000;
+	bool Player;
 };
 

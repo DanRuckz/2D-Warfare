@@ -116,6 +116,16 @@ float AA::getHP() const
 	return HP;
 }
 
+void AA::setPlayer(bool other)
+{
+	Player = other;
+}
+
+bool AA::getPlayer() const
+{
+	return Player;
+}
+
 
 Sprite& AA::getTopPart()
 {

@@ -9,7 +9,7 @@ Playables::Playables()
 
 
 
-void Playables::setObjectsVector(std::vector<std::shared_ptr<Playables>>& other)
+void Playables::setObjectsVector(std::vector<Playables*>& other)
 {
 	objects = other;
 }
@@ -75,7 +75,6 @@ void Playables::projectileFly(std::shared_ptr<Projectiles> projectile, int index
 {
 	projectile->Fly(projectile->getSprite());
 	bool objects = true;
-
 	if (projectile->getDistanceTraveled() > radius || projectile->intersectWithMap(projectile->getSprite()))
 	{
 		objects = false;
@@ -114,7 +113,7 @@ float Playables::checkIntersectionWithObjects(std::shared_ptr<Projectiles> point
 	return -1;
 }
 
-std::vector<std::shared_ptr<Playables>>& Playables::getObjectsVector()
+std::vector<Playables*>& Playables::getObjectsVector()
 {
 	return objects;
 }
@@ -135,7 +134,7 @@ void Playables::nullifyShotsFired()
 
 void Playables::sortbyType()
 {
-	static std::vector<std::shared_ptr<Playables>> temp;
+	static std::vector<Playables*> temp;
 	
 	for (int i = 0; i < objects.size(); i++)
 	{

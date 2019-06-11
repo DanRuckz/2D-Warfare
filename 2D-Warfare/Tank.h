@@ -24,6 +24,8 @@ public:
 	float checkIntersectionWithObjects(std::shared_ptr<Projectiles> pointer, int selfObjectIndex);
 	void setHP(float damage);
 	float getHP() const; 
+	void setPlayer(bool other);
+	bool getPlayer() const;
 
 private:
 	Turret turret;
@@ -41,6 +43,7 @@ private:
 	std::string type;
 	int selfIndex;
 	float HP = 5000;
+	bool Player;
 
 	//not used now
 	//float global_rotation = 0;

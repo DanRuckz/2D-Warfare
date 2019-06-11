@@ -121,6 +121,16 @@ float Hind::getHP() const
 	return HP;
 }
 
+void Hind::setPlayer(bool other)
+{
+	Player = other;
+}
+
+bool Hind::getPlayer() const
+{
+	return Player;
+}
+
 Hind::~Hind()
 {
 }

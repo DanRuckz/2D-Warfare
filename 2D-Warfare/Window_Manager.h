@@ -22,8 +22,8 @@ private:
 	Vector2f coords;
 	Map map;
 	View view;
-	std::shared_ptr<Playables> entity;
-	std::shared_ptr<Playables> enemy;
+	Playables* entity;
+	Playables* enemy;
 	Projectiles* shot;
 	void checkFlight();
 	void checkHP();
@@ -35,6 +35,7 @@ private:
 	void makeEntity();
 	void makeEnemies(int howmany);
 	void drawRespawn();
+	void correctDraw(std::string type);
 	bool mouseRelease = true;
 	std::unique_ptr<RespawnScreen> respawnScreen;
 };

@@ -23,6 +23,8 @@ public:
 	int getSelfIndex();
 	void setHP(float damage);
 	float getHP() const;
+	void setPlayer(bool other);
+	bool getPlayer() const;
 	~Hind();
 
 private:
@@ -39,5 +41,6 @@ private:
 	int shotsFired = 0;
 	int selfIndex;
 	float HP = 3000;
+	bool Player;
 };
 
