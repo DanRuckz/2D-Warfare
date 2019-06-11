@@ -1,6 +1,7 @@
 #pragma once
 #include "Playables.h"
 #include "AATurret.h"
+#include "AAShell.h"
 
 class AA : public Playables
 {
@@ -16,6 +17,10 @@ public:
 	std::shared_ptr<Projectiles> getPointerToProjectile();
 	float getSpeed();
 	std::string getType();
+	void setSelfIndex(int index);
+	int getSelfIndex();
+	void setHP(float damage);
+	float getHP() const;
 	~AA();
 private:
 	Playables* baseptr;
@@ -29,5 +34,10 @@ private:
 	float radiusofMountPoint = 23;
 	std::string type;
 	float projectileMax = 1000;
+	std::shared_ptr<AAShell> shell;
+	float barrelLength = 23;
+	bool left = false;
+	int selfIndex;
+	float HP = 3000;
 };
 

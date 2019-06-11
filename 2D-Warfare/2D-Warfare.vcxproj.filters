@@ -69,6 +69,12 @@
     <ClCompile Include="HindShell.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AAShell.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RespawnScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\2D-Warfare\2D-Warfare\inits.h">
@@ -126,6 +132,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HindShell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AAShell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RespawnScreen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

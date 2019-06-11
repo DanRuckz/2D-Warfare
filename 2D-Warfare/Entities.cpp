@@ -21,7 +21,10 @@ void Entities::loadTextures()
 	setTexture();
 	loadFile = "assets/Projectiles/3.png";
 	setTexture();
-
+	loadFile = "assets/tank.jpg";
+	setTexture();
+	loadFile = "assets/pickText.png";
+	setTexture();
 }
 
 //some kung fu for loading texture only one time
@@ -45,6 +48,10 @@ int Entities::checkType(std::string type)
 		index = 2;
 	if (type == "projectile")
 		index = 3;
+	if (type == "respawn")
+		index = 4;
+	if (type == "texts")
+		index = 5;
 	return index;
 }
 

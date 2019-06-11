@@ -10,6 +10,7 @@ public:
 	Sprite & getSprite();
 	void Fly(Sprite& projectile);
 	void setFlightDirection(Vector2f vector);
+	float getDamage() const;
 	~HindShell();
 
 private:
@@ -18,5 +19,6 @@ private:
 	IntRect animation;
 	Vector2f direction;
 	float speed;
+	float damage = 1000;
 };
 

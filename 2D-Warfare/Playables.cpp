@@ -9,7 +9,7 @@ Playables::Playables()
 
 
 
-void Playables::setObjectsVector(std::vector<Playables*>& other)
+void Playables::setObjectsVector(std::vector<std::shared_ptr<Playables>>& other)
 {
 	objects = other;
 }
@@ -71,38 +71,50 @@ Sprite & Playables::getTopPart()
 	// for access
 	return placeholder;
 }
-void Playables::projectileFly(std::shared_ptr<Projectiles> projectile, int index)
+void Playables::projectileFly(std::shared_ptr<Projectiles> projectile, int index, int selfObjectIndex)
 {
 	projectile->Fly(projectile->getSprite());
+	bool objects = true;
 
-	if (projectile->getDistanceTraveled() > 3000 || projectile->intersectWithMap(projectile->getSprite()) || checkIntersectionWithObjects(projectile))
+	if (projectile->getDistanceTraveled() > radius || projectile->intersectWithMap(projectile->getSprite()))
 	{
+		objects = false;
 		projectile.reset();
 		Projectiles::getProjectileVector().erase(Projectiles::getProjectileVector().begin() + index);
 		Projectiles::getProjectileVector().shrink_to_fit();
 	}
 
+	if (objects)
+	{
+		float objindex;
+		if (checkIntersectionWithObjects(projectile, selfObjectIndex) != -1)
+		{
+			objindex = checkIntersectionWithObjects(projectile, selfObjectIndex);
+			Playables::getObjectsVector()[objindex]->setHP(Projectiles::getProjectileVector()[index]->getDamage());
+			projectile.reset();
+			Projectiles::getProjectileVector().erase(Projectiles::getProjectileVector().begin() + index);
+			Projectiles::getProjectileVector().shrink_to_fit();
+		}
+	}
 }
 Entities::~Entities()
 {
 }
 
 
-bool Playables::checkIntersectionWithObjects(std::shared_ptr<Projectiles> pointer)
+float Playables::checkIntersectionWithObjects(std::shared_ptr<Projectiles> pointer, int selfObjectIndex)
 {
-	bool intersection = false;
 	for (int i = 0; i < objects.size(); i++)
 	{
-		if (pointer->intersectWithObjects(pointer->getSprite(), objects[i]->getEntity()))
+		if (pointer->intersectWithObjects(pointer->getSprite(), objects[i]->getEntity()) && objects[i]!= objects[selfObjectIndex])
 		{
-			intersection = true;
-			return intersection;
+			return i;
 		}
 	}
-	return intersection;
+	return -1;
 }
 
-std::vector<Playables*>& Playables::getObjectsVector()
+std::vector<std::shared_ptr<Playables>>& Playables::getObjectsVector()
 {
 	return objects;
 }
@@ -119,6 +131,23 @@ int Playables::getShotsFired()
 
 void Playables::nullifyShotsFired()
 {
+}
+
+void Playables::sortbyType()
+{
+	static std::vector<std::shared_ptr<Playables>> temp;
+	
+	for (int i = 0; i < objects.size(); i++)
+	{
+		if (objects[i]->getType() != "Hind")
+			temp.push_back(objects[i]);
+	}
+	for (int i = 0; i < objects.size(); i++)
+	{
+		if (objects[i]->getType() == "Hind")
+			temp.push_back(objects[i]);
+	}
+	objects = temp;
 }
 
 Playables::~Playables()

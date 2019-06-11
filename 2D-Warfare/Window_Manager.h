@@ -6,6 +6,7 @@
 #include "Hind.h"
 #include "TankShell.h"
 #include "Entities.h"
+#include "RespawnScreen.h"
 
 class Window_Manager
 {
@@ -21,10 +22,11 @@ private:
 	Vector2f coords;
 	Map map;
 	View view;
-	Playables * entity;
-	Playables * enemy;
+	std::shared_ptr<Playables> entity;
+	std::shared_ptr<Playables> enemy;
 	Projectiles* shot;
 	void checkFlight();
+	void checkHP();
 	void limitEntity(std::string direction);
 	void checkLimits();
 	float releaseModeTime = 32;
@@ -32,5 +34,8 @@ private:
 	float factor = 1.5;
 	void makeEntity();
 	void makeEnemies(int howmany);
+	void drawRespawn();
+	bool mouseRelease = true;
+	std::unique_ptr<RespawnScreen> respawnScreen;
 };
 

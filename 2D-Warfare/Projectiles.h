@@ -6,16 +6,18 @@ class Projectiles : public Entities
 {
 public:
 	Projectiles();
-	virtual void Fly(Sprite& projectile) = 0;
 	virtual Vector2f calculateDirection(Sprite& shell,float barrelLength);
+	virtual void Fly(Sprite& projectile) = 0;
 	virtual void setPositionOfShot(Vector2f position) = 0;
 	virtual void setRotationOfShot(float angle) = 0;
 	virtual Sprite& getSprite() =0;
+	virtual void setFlightDirection(Vector2f vector) = 0;
 	virtual void Fly(Sprite& projectile, float speed, Vector2f direction);
 	float getDistanceTraveled();
 	bool intersectWithMap(Sprite& shell);
 	bool intersectWithObjects(Sprite& shell, Sprite& object);
 	static std::vector<std::shared_ptr<Projectiles>>& getProjectileVector();
+	virtual float getDamage() const = 0;
 	virtual ~Projectiles();
 
 private:

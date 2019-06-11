@@ -1,11 +1,11 @@
 #include "Tank.h"
 
-Tank::Tank() : animation(Vector2i(28,96),Vector2i(36,60)), type("Tank")
+Tank::Tank() : animation(Vector2i(28,97),Vector2i(34,59)), type("Tank")
 {
 	baseptr = this;
 	baseptr->setEntity(tank,Vector2f(1500,1500),animation,"tank");
 	speed = 15.f;
-	turret.getTurretSprite().setPosition(tank.getPosition().x + offset_x, tank.getPosition().y +offset_y);
+	turret.getTurretSprite().setPosition(tank.getPosition().x, tank.getPosition().y);
 	tank.setScale(2.5f, 2.5f);
 	baseptr->setHitRadius(projectileMax);
 }
@@ -50,9 +50,42 @@ std::string Tank::getType()
 	return type;
 }
 
+void Tank::setSelfIndex(int index)
+{
+	selfIndex = index;
+}
+
 float Tank::getSpeed()
 {
 	return speed;
+}
+
+int Tank::getSelfIndex()
+{
+	return selfIndex;
+}
+
+float Tank::checkIntersectionWithObjects(std::shared_ptr<Projectiles> pointer, int selfObjectIndex)
+{
+	
+		for (int i = 0; i <Playables::getObjectsVector().size(); i++)
+		{
+			if (pointer->intersectWithObjects(pointer->getSprite(), Playables::getObjectsVector()[i]->getEntity()) && Playables::getObjectsVector()[i]->getType() != "Hind")
+			{
+				return i;
+			}
+		}
+		return -1;
+}
+
+void Tank::setHP(float damage)
+{
+	HP -= damage;
+}
+
+float Tank::getHP() const
+{
+	return HP;
 }
 
 void Tank::rotateEntity(std::string direction)

@@ -2,7 +2,7 @@
 
 
 
-HindShell::HindShell() : animation(Vector2i(206,513),Vector2i(33,9)), speed(50)
+HindShell::HindShell() : animation(Vector2i(206,513),Vector2i(33,9)), speed(75)
 {
 	baseptr = this;
 	baseptr->setEntity(shell, Vector2f(0, 0), animation, "projectile");
@@ -12,6 +12,11 @@ HindShell::HindShell() : animation(Vector2i(206,513),Vector2i(33,9)), speed(50)
 void HindShell::setFlightDirection(Vector2f vector)
 {
 	direction = vector;
+}
+
+float HindShell::getDamage() const
+{
+	return damage;
 }
 
 void HindShell::setPositionOfShot(Vector2f position)
