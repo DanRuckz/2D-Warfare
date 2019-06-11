@@ -19,10 +19,6 @@ public:
 	std::string getType();
 	int getShotsFired();
 	void nullifyShotsFired();
-	void setSelfIndex(int index);
-	int getSelfIndex();
-	void setHP(float damage);
-	float getHP() const;
 	~Hind();
 
 private:
@@ -32,12 +28,10 @@ private:
 	IntRect animation;
 	Sprite hind;
 	HindBlade hindblade;
-	float barrelLength = 40;
+	float barrelLength = 23;
 	std::shared_ptr<HindShell> shell;
 	std::string type;
-	float projectileMax;
+	float projectileMax = 1000;
 	int shotsFired = 0;
-	int selfIndex;
-	float HP = 3000;
 };
 

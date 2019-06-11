@@ -2,7 +2,7 @@
 
 
 
-Hind::Hind() : animation(Vector2i(524, 0), Vector2i(28, 62)), speed(27),rotateSpeed(10),type("Hind"), projectileMax(1700)
+Hind::Hind() : animation(Vector2i(524, 0), Vector2i(28, 62)), speed(20),rotateSpeed(8),type("Hind")
 {
 	baseptr = this;
 	baseptr->setEntity(hind, Vector2f(1500.f, 1500.f), animation, "hind");
@@ -36,31 +36,18 @@ Sprite & Hind::getTopPart()
 
 void Hind::Fire()
 {
-	
 		Vector2f vector;
-		float tempRadius = 30;
-		float to_radians = hind.getRotation()  * M_PI / 180;;
+		float offset_x = 25;
+		float offset_y = -25;
 		shell = std::make_shared <HindShell>();
 		shell->setRotationOfShot(hind.getRotation() - 90);
 		vector = shell->calculateDirection(shell->getSprite(), barrelLength);
-		shell->setPositionOfShot(Vector2f(hind.getPosition().x + tempRadius * std::cos(to_radians),hind.getPosition().y  + tempRadius * std::sin(to_radians)) + vector);
-		vector.x /= barrelLength;
-		vector.y /= barrelLength;
-		shell->setFlightDirection(vector);
-		Projectiles::getProjectileVector().push_back(shell);
-		
-
-		to_radians = hind.getRotation()  * M_PI / 180;;
-		shell = std::make_shared <HindShell>();
-		shell->setRotationOfShot(hind.getRotation() - 90);
-		vector = shell->calculateDirection(shell->getSprite(), barrelLength);
-		shell->setPositionOfShot(Vector2f(hind.getPosition().x - tempRadius * std::cos(-to_radians), hind.getPosition().y + tempRadius * std::sin(-to_radians)) + vector);
+		shell->setPositionOfShot(hind.getPosition());
 		vector.x /= barrelLength;
 		vector.y /= barrelLength;
 		shell->setFlightDirection(vector);
 		Projectiles::getProjectileVector().push_back(shell);
 		shotsFired += 1;
-		
 }
 
 Sprite & Hind::getShell()
@@ -99,26 +86,6 @@ int Hind::getShotsFired()
 void Hind::nullifyShotsFired()
 {
 	shotsFired = 0;
-}
-
-void Hind::setSelfIndex(int index)
-{
-	selfIndex = index;
-}
-
-int Hind::getSelfIndex()
-{
-	return selfIndex;
-}
-
-void Hind::setHP(float damage) 
-{
-	HP -= damage;
-}
-
-float Hind::getHP() const
-{
-	return HP;
 }
 
 Hind::~Hind()
