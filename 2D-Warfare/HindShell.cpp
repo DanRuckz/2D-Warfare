@@ -14,6 +14,11 @@ void HindShell::setFlightDirection(Vector2f vector)
 	direction = vector;
 }
 
+float HindShell::getDamage() const
+{
+	return damage;
+}
+
 void HindShell::setPositionOfShot(Vector2f position)
 {
 	shell.setPosition(position);

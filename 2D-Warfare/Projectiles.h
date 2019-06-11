@@ -17,6 +17,7 @@ public:
 	bool intersectWithMap(Sprite& shell);
 	bool intersectWithObjects(Sprite& shell, Sprite& object);
 	static std::vector<std::shared_ptr<Projectiles>>& getProjectileVector();
+	virtual float getDamage() const = 0;
 	virtual ~Projectiles();
 
 private:

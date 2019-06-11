@@ -10,6 +10,7 @@ public:
 	void setRotationOfShot(float angle);
 	Sprite& getSprite();
 	void setFlightDirection(Vector2f vector);
+	float getDamage() const;
 	~AAShell();
 private:
 	Projectiles* baseptr;
@@ -17,6 +18,6 @@ private:
 	float speed;
 	Vector2f direction;
 	IntRect animation;
-	
+	float damage = 1000;
 };
 

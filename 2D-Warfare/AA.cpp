@@ -106,6 +106,16 @@ int AA::getSelfIndex()
 	return selfIndex;
 }
 
+void AA::setHP(float damage)
+{
+	HP-=damage;
+}
+
+float AA::getHP() const
+{
+	return HP;
+}
+
 
 Sprite& AA::getTopPart()
 {

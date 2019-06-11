@@ -19,6 +19,8 @@ public:
 	std::string getType();
 	void setSelfIndex(int index);
 	int getSelfIndex();
+	void setHP(float damage);
+	float getHP() const;
 	~AA();
 private:
 	Playables* baseptr;
@@ -36,5 +38,6 @@ private:
 	float barrelLength = 23;
 	bool left = false;
 	int selfIndex;
+	float HP = 3000;
 };
 

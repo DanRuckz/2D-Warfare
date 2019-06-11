@@ -111,6 +111,16 @@ int Hind::getSelfIndex()
 	return selfIndex;
 }
 
+void Hind::setHP(float damage) 
+{
+	HP -= damage;
+}
+
+float Hind::getHP() const
+{
+	return HP;
+}
+
 Hind::~Hind()
 {
 }

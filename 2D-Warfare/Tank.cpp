@@ -65,19 +65,27 @@ int Tank::getSelfIndex()
 	return selfIndex;
 }
 
-bool Tank::checkIntersectionWithObjects(std::shared_ptr<Projectiles> pointer, int selfObjectIndex)
+float Tank::checkIntersectionWithObjects(std::shared_ptr<Projectiles> pointer, int selfObjectIndex)
 {
 	
-		bool intersection = false;
 		for (int i = 0; i <Playables::getObjectsVector().size(); i++)
 		{
 			if (pointer->intersectWithObjects(pointer->getSprite(), Playables::getObjectsVector()[i]->getEntity()) && Playables::getObjectsVector()[i]->getType() != "Hind")
 			{
-				intersection = true;
-				return intersection;
+				return i;
 			}
 		}
-		return intersection;
+		return -1;
+}
+
+void Tank::setHP(float damage)
+{
+	HP -= damage;
+}
+
+float Tank::getHP() const
+{
+	return HP;
 }
 
 void Tank::rotateEntity(std::string direction)

@@ -21,6 +21,8 @@ public:
 	void nullifyShotsFired();
 	void setSelfIndex(int index);
 	int getSelfIndex();
+	void setHP(float damage);
+	float getHP() const;
 	~Hind();
 
 private:
@@ -36,5 +38,6 @@ private:
 	float projectileMax;
 	int shotsFired = 0;
 	int selfIndex;
+	float HP = 3000;
 };
 

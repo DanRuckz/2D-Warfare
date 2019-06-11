@@ -32,6 +32,11 @@ void TankShell::setFlightDirection(Vector2f vector)
 	direction = vector;
 }
 
+float TankShell::getDamage() const
+{
+	return damage;
+}
+
 
 TankShell::~TankShell()
 {

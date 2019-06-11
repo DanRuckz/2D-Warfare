@@ -1,0 +1,14 @@
+diff a/2D-Warfare/2D-Warfare.vcxproj b/2D-Warfare/2D-Warfare.vcxproj	(rejected hunks)
+@@ -171,11 +171,11 @@
+     <ClCompile Include="Entities.cpp" />
+     <ClCompile Include="Hind.cpp" />
+     <ClCompile Include="HindBlade.cpp" />
++    <ClCompile Include="HindShell.cpp" />
+     <ClCompile Include="Map.cpp" />
+     <ClCompile Include="MenuScreen.cpp" />
+     <ClCompile Include="Playables.cpp" />
+     <ClCompile Include="Projectiles.cpp" />
+-    <ClCompile Include="Static_Pipe.cpp" />
+     <ClCompile Include="Tank.cpp" />
+     <ClCompile Include="TankShell.cpp" />
+     <ClCompile Include="Turret.cpp" />

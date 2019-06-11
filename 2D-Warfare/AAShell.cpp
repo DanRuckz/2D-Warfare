@@ -34,6 +34,11 @@ void AAShell::setFlightDirection(Vector2f vector)
 	direction = vector;
 }
 
+float AAShell::getDamage() const
+{
+	return damage;
+}
+
 
 AAShell::~AAShell()
 {

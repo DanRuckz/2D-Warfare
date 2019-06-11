@@ -11,6 +11,7 @@ public:
 	Sprite & getSprite();
 	void Fly(Sprite& projectile);
 	void setFlightDirection(Vector2f vector);
+	float getDamage() const;
 	~TankShell();
 
 private:
@@ -20,5 +21,6 @@ private:
 	Vector2f direction;
 	unsigned int turretLength =5;
 	float speed;
+	float damage = 1000;
 };
 

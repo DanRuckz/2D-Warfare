@@ -109,7 +109,7 @@
       <PreprocessorDefinitions>SFML_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>D:\SFML-2.5.0-windows-vc15-64-bit\SFML-2.5.0\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\SFML-2.5.0-windows-vc15-64-bit\SFML-2.5.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -177,6 +177,7 @@
     <ClCompile Include="MenuScreen.cpp" />
     <ClCompile Include="Playables.cpp" />
     <ClCompile Include="Projectiles.cpp" />
+    <ClCompile Include="RespawnScreen.cpp" />
     <ClCompile Include="Tank.cpp" />
     <ClCompile Include="TankShell.cpp" />
     <ClCompile Include="Turret.cpp" />
@@ -199,6 +200,7 @@
     <ClInclude Include="MenuScreen.h" />
     <ClInclude Include="Playables.h" />
     <ClInclude Include="Projectiles.h" />
+    <ClInclude Include="RespawnScreen.h" />
     <ClInclude Include="Tank.h" />
     <ClInclude Include="TankShell.h" />
     <ClInclude Include="Turret.h" />
