@@ -14,10 +14,13 @@ Window_Manager::Window_Manager()
 
 void Window_Manager::Window_action()
 {
-	window.create(VideoMode(resolution),"2D-Warfare", WINDOW_MODE);
+	window.create(VideoMode(resolution), "2D-Warfare", WINDOW_MODE);
 	Event event;
 	makeEntity();
 	makeEnemies(1);
+	Playables::sortbyType();
+	entity->setSelfIndex(Playables::getObjectsVector().size()-1);
+	enemy->setSelfIndex(Playables::getObjectsVector().size()-1);
 	Clock clock_global;
 	Time global;
 	Clock timerofShot;
@@ -26,12 +29,11 @@ void Window_Manager::Window_action()
 	{
 		global = clock_global.getElapsedTime();
 		//change to debugModeTime or releaseModeTime depends on which mode you are
-		if (global.asMilliseconds() > releaseModeTime)
+		if (global.asMilliseconds() > debugModeTime)
 		{
 			clock_global.restart();
 			mousePos = Mouse::getPosition();
 			coords = window.mapPixelToCoords(mousePos);
-			entity->rotateTurret();
 			while (window.pollEvent(event))
 			{
 				if (event.type == Event::MouseMoved)
@@ -48,7 +50,8 @@ void Window_Manager::Window_action()
 				if (event.type == Event::MouseButtonPressed)
 				{
 					if (event.mouseButton.button == Mouse::Left)
-					{	
+					{
+						mouseRelease = false;
 						if (entity->getType() == "Tank")
 						{
 							timeofShot = timerofShot.getElapsedTime();
@@ -70,50 +73,73 @@ void Window_Manager::Window_action()
 							}
 							timeofShot = timerofShot.getElapsedTime();
 							if (entity->getShotsFired() >= 5 && timeofShot.asSeconds() > 4)
-							{	
+							{
 								entity->nullifyShotsFired();
 							}
 						}
+
 					}
 				}
-				break;
-			} //END EVENT
+					if (event.type == Event::MouseButtonReleased)
+					{
+						if (event.mouseButton.button == Mouse::Left)
+							mouseRelease = true;
+					}
+			}
+			//END EVENT
+				if (!mouseRelease)
+				{
+					if (entity->getType() == "AA")
+					{
+						timeofShot = timerofShot.getElapsedTime();
+						if (timeofShot.asSeconds() > 0.25)
+						{
+							entity->Fire();
+							timerofShot.restart();
+						}
+					}
+				}
+
 				checkFlight();
 
-			if (Keyboard::isKeyPressed(Keyboard::W))
-			{
-				entity->moveEntity("up");
-				limitEntity("up");
-			}
-			if (Keyboard::isKeyPressed(Keyboard::A))
-			{
-				entity->rotateEntity("left");
+				if (Keyboard::isKeyPressed(Keyboard::W))
+				{
+					entity->moveEntity("up");
+					limitEntity("up");
+				}
+				if (Keyboard::isKeyPressed(Keyboard::A))
+				{
+					entity->rotateEntity("left");
 
-			}
-			if (Keyboard::isKeyPressed(Keyboard::S))
-			{
-				entity->moveEntity("down");
-				limitEntity("down");
+				}
+				if (Keyboard::isKeyPressed(Keyboard::S))
+				{
+					entity->moveEntity("down");
+					limitEntity("down");
 
-			}
-			if (Keyboard::isKeyPressed(Keyboard::D))
-			{
-				entity->rotateEntity("right");
-			}
-			checkLimits();
-			
-			window.draw(map.getBoundingRect());
-			for (int i = 0; i < map.getMapVec().size(); i++)
-				window.draw(*map.getMapVec()[i]);
+				}
+				if (Keyboard::isKeyPressed(Keyboard::D))
+				{
+					entity->rotateEntity("right");
+				}
+				checkLimits();
 
-			window.setView(view);
-			window.draw(enemy->getEntity());
-			window.draw(enemy->getTopPart());
-			window.draw(entity->getEntity());
-			window.draw(entity->getTopPart());
-			for (int i = 0; i < Projectiles::getProjectileVector().size(); i++)
-				window.draw(Projectiles::getProjectileVector()[i]->getSprite());
-			window.display();
+				window.draw(map.getBoundingRect());
+				for (int i = 0; i < map.getMapVec().size(); i++)
+					window.draw(*map.getMapVec()[i]);
+
+				window.setView(view);
+				for (int i = 0; i < Projectiles::getProjectileVector().size(); i++)
+					window.draw(Projectiles::getProjectileVector()[i]->getSprite());
+				for (int i = 0; i < Playables::getObjectsVector().size(); i++)
+				{
+					Playables::getObjectsVector()[i]->rotateTurret();
+					window.draw(Playables::getObjectsVector()[i]->getEntity());
+					window.draw(Playables::getObjectsVector()[i]->getTopPart());
+				}
+				
+
+				window.display();
 		}
 	}
 }
@@ -128,7 +154,7 @@ void Window_Manager::checkFlight()
 {
 	for(int i=0;i<Projectiles::getProjectileVector().size();i++)
 	
-		entity->projectileFly(Projectiles::getProjectileVector()[i],i);
+		entity->projectileFly(Projectiles::getProjectileVector()[i],i,entity->getSelfIndex());
 
 }
 
@@ -205,7 +231,7 @@ void Window_Manager::makeEntity()
 void Window_Manager::makeEnemies(int howmany)
 {
 	howmany = 0;
-	enemy = new Hind;
+	enemy = new AA;
 	Playables::getObjectsVector().push_back(enemy);
 }
 

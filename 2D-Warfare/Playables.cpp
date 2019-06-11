@@ -71,11 +71,11 @@ Sprite & Playables::getTopPart()
 	// for access
 	return placeholder;
 }
-void Playables::projectileFly(std::shared_ptr<Projectiles> projectile, int index)
+void Playables::projectileFly(std::shared_ptr<Projectiles> projectile, int index, int selfObjectIndex)
 {
 	projectile->Fly(projectile->getSprite());
 
-	if (projectile->getDistanceTraveled() > 3000 || projectile->intersectWithMap(projectile->getSprite()) || checkIntersectionWithObjects(projectile))
+	if (projectile->getDistanceTraveled() > radius || projectile->intersectWithMap(projectile->getSprite()) || checkIntersectionWithObjects(projectile, selfObjectIndex))
 	{
 		projectile.reset();
 		Projectiles::getProjectileVector().erase(Projectiles::getProjectileVector().begin() + index);
@@ -88,12 +88,12 @@ Entities::~Entities()
 }
 
 
-bool Playables::checkIntersectionWithObjects(std::shared_ptr<Projectiles> pointer)
+bool Playables::checkIntersectionWithObjects(std::shared_ptr<Projectiles> pointer, int selfObjectIndex)
 {
 	bool intersection = false;
 	for (int i = 0; i < objects.size(); i++)
 	{
-		if (pointer->intersectWithObjects(pointer->getSprite(), objects[i]->getEntity()))
+		if (pointer->intersectWithObjects(pointer->getSprite(), objects[i]->getEntity()) && objects[i]!= objects[selfObjectIndex])
 		{
 			intersection = true;
 			return intersection;
@@ -119,6 +119,23 @@ int Playables::getShotsFired()
 
 void Playables::nullifyShotsFired()
 {
+}
+
+void Playables::sortbyType()
+{
+	static std::vector<Playables*> temp;
+	
+	for (int i = 0; i < objects.size(); i++)
+	{
+		if (objects[i]->getType() != "Hind")
+			temp.push_back(objects[i]);
+	}
+	for (int i = 0; i < objects.size(); i++)
+	{
+		if (objects[i]->getType() == "Hind")
+			temp.push_back(objects[i]);
+	}
+	objects = temp;
 }
 
 Playables::~Playables()

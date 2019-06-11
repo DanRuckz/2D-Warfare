@@ -30,8 +30,8 @@ bool Projectiles::intersectWithMap(Sprite & shell)
 
 bool Projectiles::intersectWithObjects(Sprite & shell, Sprite & object)
 {
-	//if(Collision::PixelPerfectTest(shell,object))
-	//return true;
+	if(Collision::PixelPerfectTest(shell,object))
+	return true;
 	return false;
 }
 

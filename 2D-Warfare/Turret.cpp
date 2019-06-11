@@ -1,6 +1,6 @@
 #include "Turret.h"
 
-Turret::Turret() : animation(Vector2i(30,276),Vector2i(31,60))
+Turret::Turret() : animation(Vector2i(31,276),Vector2i(28,59))
 {
 	baseptr = this;
 	baseptr->setEntity(turretSprite,turretpos, animation,"tank_turret");
