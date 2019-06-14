@@ -2,7 +2,7 @@
 
 
 
-HindShell::HindShell() : animation(Vector2i(206,513),Vector2i(33,9)), speed(75)
+HindShell::HindShell() : animation(Vector2i(206,513),Vector2i(33,9)), speed(50)
 {
 	baseptr = this;
 	baseptr->setEntity(shell, Vector2f(0, 0), animation, "projectile");

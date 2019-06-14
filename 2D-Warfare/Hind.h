@@ -21,13 +21,16 @@ public:
 	void nullifyShotsFired();
 	void setSelfIndex(int index);
 	int getSelfIndex();
-	void setHP(float damage);
+	void reduceDamage(float damage);
 	float getHP() const;
 	void setPlayer(bool other);
 	bool getPlayer() const;
 	std::vector<std::shared_ptr<Projectiles>>& getProjectileVector();
 	void projectileFly(int index);
 	void setRandomPosition();
+	void setHP(float Hp);
+	int getID();
+	
 	~Hind();
 
 private:
@@ -43,9 +46,10 @@ private:
 	float projectileMax;
 	int shotsFired = 0;
 	int selfIndex;
-	float HP = 3000;
+	float HP = 1000;
 	bool Player;
 	std::vector < std::shared_ptr<Projectiles>> projectiles;
-	Vector2f startPosition;
+	int ID;
+	void setID();
 };
 

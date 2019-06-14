@@ -32,13 +32,17 @@ public:
 	virtual void setSelfIndex(int index) = 0;
 	virtual int getSelfIndex()=0;
 	static void sortbyType();
-	virtual void setHP(float damage) = 0;
+	virtual void reduceDamage(float damage) = 0;
 	virtual float getHP() const = 0;
 	virtual void setPlayer(bool other) = 0;
 	virtual bool getPlayer() const = 0;
 	virtual std::vector<std::shared_ptr<Projectiles>>& getProjectileVector() = 0;
 	virtual void projectileFly(int index) = 0;
 	virtual void setRandomPosition() = 0;
+	virtual void setHP(float Hp) = 0;
+	virtual int getID() = 0;
+	virtual void setID() = 0;
+	
 	virtual ~Playables();
 
 private:
@@ -46,6 +50,7 @@ private:
 	Sprite placeholder;
 	float radius;
 	bool Player;
-	
+protected:
+	int ID;
 };
 

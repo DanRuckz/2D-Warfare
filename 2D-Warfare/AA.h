@@ -19,13 +19,17 @@ public:
 	std::string getType();
 	void setSelfIndex(int index);
 	int getSelfIndex();
-	void setHP(float damage);
+	void reduceDamage(float damage);
+	void setHP(float Hp);
 	float getHP() const;
 	void setPlayer(bool other);
 	bool getPlayer() const;
 	std::vector<std::shared_ptr<Projectiles>>& getProjectileVector();
 	void projectileFly(int index);
 	void setRandomPosition();
+	int getID();
+
+	
 
 	~AA();
 private:
@@ -39,14 +43,15 @@ private:
 	float offset_y = 23;
 	float radiusofMountPoint = 23;
 	std::string type;
-	float projectileMax = 1000;
+	float projectileMax;
 	std::shared_ptr<AAShell> shell;
 	float barrelLength = 23;
 	bool left = false;
 	int selfIndex;
-	float HP = 3000;
+	float HP = 1500;
 	bool Player;
 	std::vector < std::shared_ptr<Projectiles>> projectiles;
-	Vector2f startPosition;
+	int ID;
+	void setID();
 };
 

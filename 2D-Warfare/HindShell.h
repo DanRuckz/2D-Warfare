@@ -19,6 +19,6 @@ private:
 	IntRect animation;
 	Vector2f direction;
 	float speed;
-	float damage = 1000;
+	float damage = 200;
 };
 

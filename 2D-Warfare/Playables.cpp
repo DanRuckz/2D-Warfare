@@ -89,7 +89,7 @@ void Playables::projectileFly(std::vector<std::shared_ptr<Projectiles>>& project
 		if (checkIntersectionWithObjects(projectile, selfObjectIndex) != -1)
 		{
 			objindex = checkIntersectionWithObjects(projectile, selfObjectIndex);
-			Playables::getObjectsVector()[objindex]->setHP(projectilevec[index]->getDamage());
+			Playables::getObjectsVector()[objindex]->reduceDamage(projectilevec[index]->getDamage());
 			projectile.reset();
 			projectilevec.erase(projectilevec.begin() + index);
 			projectilevec.shrink_to_fit();
@@ -147,7 +147,10 @@ void Playables::sortbyType()
 			temp.push_back(objects[i]);
 	}
 	objects = temp;
+	temp.clear();
 }
+
+
 
 Playables::~Playables()
 {

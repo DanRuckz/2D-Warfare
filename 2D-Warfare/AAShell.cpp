@@ -2,10 +2,11 @@
 
 
 
-AAShell::AAShell() : animation(Vector2i(6,280),Vector2i(21,4)), speed(60)
+AAShell::AAShell() : animation(Vector2i(6,280),Vector2i(21,4)), speed(75)
 {
 	baseptr = this;
 	baseptr->setEntity(shell, Vector2f(0, 0), animation, "projectile");
+	shell.setScale(1.5, 1.5);
 
 }
 

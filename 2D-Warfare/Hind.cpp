@@ -9,6 +9,7 @@ Hind::Hind() : animation(Vector2i(524, 0), Vector2i(28, 62)), speed(27),rotateSp
 	hindblade.getBladeSprite().setPosition(hind.getPosition().x,hind.getPosition().y);
 	hind.setScale(2.5f,2.5f);
 	baseptr->setHitRadius(projectileMax);
+	setID();
 }
 
 Sprite & Hind::getEntity()
@@ -111,7 +112,7 @@ int Hind::getSelfIndex()
 	return selfIndex;
 }
 
-void Hind::setHP(float damage) 
+void Hind::reduceDamage(float damage) 
 {
 	HP -= damage;
 }
@@ -158,7 +159,24 @@ void Hind::setRandomPosition()
 				temp.y = dist(gen) % (int)mapSize.y;
 				hind.setPosition(temp);
 				hindblade.getBladeSprite().setPosition(hind.getPosition());
-	
-				startPosition.x = dist(gen) % (int)mapSize.x;
-				startPosition.y = dist(gen) % (int)mapSize.y;
+}
+
+void Hind::setHP(float Hp)
+{
+	HP = Hp;
+}
+
+
+int Hind::getID()
+{
+	return ID;
+}
+
+void Hind::setID()
+{
+	std::mt19937 gen;
+	gen.seed(std::random_device()());
+	std::uniform_int_distribution<std::mt19937::result_type> dist;
+
+	ID = dist(gen) % INT_MAX;
 }

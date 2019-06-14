@@ -9,6 +9,7 @@ class Tank :
 public:
 	Tank();
 	void Fire();
+	
 	~Tank();
 	Sprite& getTopPart();
 	void rotateEntity(std::string);
@@ -22,14 +23,15 @@ public:
 	float getSpeed();
 	int getSelfIndex();
 	float checkIntersectionWithObjects(std::shared_ptr<Projectiles> pointer, int selfObjectIndex);
-	void setHP(float damage);
+	void reduceDamage(float damage);
 	float getHP() const; 
 	void setPlayer(bool other);
 	bool getPlayer() const;
 	std::vector<std::shared_ptr<Projectiles>>& getProjectileVector();
 	void projectileFly(int index);
 	void setRandomPosition();
-
+	void setHP(float Hp);
+	int getID();
 
 private:
 	Turret turret;
@@ -46,15 +48,10 @@ private:
 	unsigned int barrelLength = 55;
 	std::string type;
 	int selfIndex;
-	float HP = 5000;
+	float HP = 3000;
 	bool Player;
 	std::vector < std::shared_ptr<Projectiles>> projectiles;
-	Vector2f startPosition;
-	//not used now
-	//float global_rotation = 0;
-	/*#define ROTATION_ANGLES  global_rotation == 45 || global_rotation == 90 || global_rotation == 135 || global_rotation == 180 ||global_rotation == 225|| global_rotation == 270 || global_rotation == 315 ||global_rotation == 0
-
-global_rotation == 0 || global_rotation == 18 || global_rotation == 45 || global_rotation == 72
-*/
+	int ID;
+	void setID();
 };
 

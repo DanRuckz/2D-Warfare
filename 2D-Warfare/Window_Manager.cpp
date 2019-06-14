@@ -2,7 +2,7 @@
 
 
 
-Window_Manager::Window_Manager()
+Window_Manager::Window_Manager() : RespawnScreenStartPos(Vector2f(1500,1500))
 {
 	resolution = VideoMode::getDesktopMode();
 	setView();
@@ -15,11 +15,11 @@ Window_Manager::Window_Manager()
 void Window_Manager::Window_action()
 {
 	window.create(VideoMode(resolution), "2D-Warfare", WINDOW_MODE);
-	Playables::sortbyType();
 	Clock clock_global;
 	Time global;
 	Clock timerofShot;
 	Time timeofShot;
+	makeEnemies(20);
 	while (window.isOpen())
 	{
 		global = clock_global.getElapsedTime();
@@ -44,6 +44,7 @@ void Window_Manager::Window_action()
 					if (event.mouseButton.button == Mouse::Left)
 					{
 						mouseRelease = false;
+				
 						if (entity != nullptr)
 						{
 							if (entity->getType() == "Tank")
@@ -97,37 +98,15 @@ void Window_Manager::Window_action()
 				if (entity != nullptr)
 				{
 					movement();
+					checkCollisionWithObjects();
 					checkFlight();
 					checkHP();
 				}
 				
-				if(entity != nullptr)
+				
 				checkLimits();
-
-				if (entity == nullptr && respawnScreen == nullptr)
-				{
-						respawnScreen = std::make_unique<RespawnScreen>(playerLastPosition);
-						view.setCenter(respawnScreen->getSprite().getPosition());
-						if (respawnScreen->getTankSprite().getGlobalBounds().contains(coords))
-						{
-							type == "tank";
-							respawnScreen.reset();
-							return;
-						}
-						if (respawnScreen->getAASprite().getGlobalBounds().contains(coords))
-						{
-							type == "AA";
-							respawnScreen.reset();
-							return;
-						}
-						if (respawnScreen->getHindSprite().getGlobalBounds().contains(coords))
-						{
-							type == "hind";
-							respawnScreen.reset();
-							return;
-						}
-				}
-				makeEnemies(20);
+				respawn();
+				
 				window.draw(map.getBoundingRect());
 				for (int i = 0; i < map.getMapVec().size(); i++)
 					window.draw(*map.getMapVec()[i]);
@@ -171,7 +150,6 @@ void Window_Manager::checkHP()
 			player = Playables::getObjectsVector()[i]->getPlayer();
 			if (player)
 			{
-				playerLastPosition = entity->getEntity().getPosition();
 				entity = nullptr;
 			}
 			delete Playables::getObjectsVector()[i];
@@ -188,42 +166,64 @@ void Window_Manager::limitEntity(std::string direction)
 	{
 		//UPPER BOUND
 		if (map.getBoundingRect().getGlobalBounds().top >= entity->getEntity().getPosition().y - entity->getEntity().getTextureRect().height / 2 * entity->getEntity().getScale().y)
-			entity->getEntity().setPosition(entity->getEntity().getPosition().x, entity->getEntity().getPosition().y + entity->getSpeed());
+		{
+			entity->getEntity().move(entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180), entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180));
+			entity->getTopPart().move(entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180), entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180));
+		}
 		//LEFT BOUND
 		if (map.getBoundingRect().getGlobalBounds().left >= entity->getEntity().getPosition().x - entity->getEntity().getTextureRect().width / 2 * entity->getEntity().getScale().x - 23)
-			entity->getEntity().setPosition(entity->getEntity().getPosition().x + entity->getSpeed(), entity->getEntity().getPosition().y);
+		{
+			entity->getEntity().move(-entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180), entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180));
+			entity->getTopPart().move(-entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180), entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180));
 
+		}
 		//BOTTOM BOUND
 		if (map.getBoundingRect().getGlobalBounds().height <= entity->getEntity().getPosition().y + entity->getEntity().getTextureRect().height / 2 * entity->getEntity().getScale().y - 10)
-			entity->getEntity().setPosition(entity->getEntity().getPosition().x, entity->getEntity().getPosition().y - entity->getSpeed());
-
+		{
+			entity->getEntity().move(entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180), entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180));
+			entity->getTopPart().move(entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180), entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180));
+		}
 		//RIGHT BOUND
 		if (map.getBoundingRect().getGlobalBounds().width <= entity->getEntity().getPosition().x + entity->getEntity().getTextureRect().width / 2 * entity->getEntity().getScale().x + 23)
-
-			entity->getEntity().setPosition(entity->getEntity().getPosition().x - entity->getSpeed(), entity->getEntity().getPosition().y);
+		{
+			entity->getEntity().move(-entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180), entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180));
+			entity->getTopPart().move(-entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180), entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180));
+		}
 	}
-		if (direction == "down")
+	if (direction == "down")
 	{
-			//UPPER BOUND
-			if (map.getBoundingRect().getGlobalBounds().top >= entity->getEntity().getPosition().y - entity->getEntity().getTextureRect().height)
-				entity->getEntity().setPosition(entity->getEntity().getPosition().x, entity->getEntity().getPosition().y + 15);
-			//LEFT BOUND
-			if (map.getBoundingRect().getGlobalBounds().left >= entity->getEntity().getPosition().x - entity->getEntity().getTextureRect().width - 23)
-				entity->getEntity().setPosition(entity->getEntity().getPosition().x + 15, entity->getEntity().getPosition().y);
+		//UPPER BOUND
+		if (map.getBoundingRect().getGlobalBounds().top >= entity->getEntity().getPosition().y - entity->getEntity().getTextureRect().height)
+		{
+			entity->getEntity().move(-entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180) / 1.5, -entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180) / 1.5);
+			entity->getTopPart().move(-entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180) / 1.5, -entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180) / 1.5);
+		}
+		//LEFT BOUND
+		if (map.getBoundingRect().getGlobalBounds().left >= entity->getEntity().getPosition().x - entity->getEntity().getTextureRect().width - 23)
+		{		
+			entity->getEntity().move(entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180)/1.5, -entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180)/1.5);
+			entity->getTopPart().move(entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180)/1.5, -entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180)/1.5);
+		}
 
 			//BOTTOM BOUND
-			if (map.getBoundingRect().getGlobalBounds().height <= entity->getEntity().getPosition().y + entity->getEntity().getTextureRect().height + 7)
-				entity->getEntity().setPosition(entity->getEntity().getPosition().x, entity->getEntity().getPosition().y - 15);
-
+		if (map.getBoundingRect().getGlobalBounds().height <= entity->getEntity().getPosition().y + entity->getEntity().getTextureRect().height + 7)
+		{
+			entity->getEntity().move(-entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180)/1.5, -entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180)/1.5);
+			entity->getTopPart().move(-entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180)/1.5, -entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180)/1.5);
+		}
 			//RIGHT BOUND
-			if (map.getBoundingRect().getGlobalBounds().width <= entity->getEntity().getPosition().x + entity->getEntity().getTextureRect().width + 23)
-
-				entity->getEntity().setPosition(entity->getEntity().getPosition().x - 15, entity->getEntity().getPosition().y);
+		if (map.getBoundingRect().getGlobalBounds().width <= entity->getEntity().getPosition().x + entity->getEntity().getTextureRect().width + 23)
+		{
+			entity->getEntity().move(entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180)/1.5, -entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180)/1.5);
+			entity->getTopPart().move(entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180)/1.5, -entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180)/1.5);
+		}
 	}
 }
 
 void Window_Manager::checkLimits()
 {
+	if (entity != nullptr)
+	{
 		Vector2f logics(Vector2f(entity->getEntity().getPosition()));
 
 		if (entity->getEntity().getPosition().y - window.getSize().y / 2 * factor < map.getBoundingRect().getPosition().y)
@@ -244,12 +244,18 @@ void Window_Manager::checkLimits()
 		}
 
 		view.setCenter(logics);
+	}
 }
 
 void Window_Manager::makeEntity(std::string type)
 {
 	if(type == "tank")
 	entity = new Tank;
+	if (type == "AA")
+	entity = new AA;
+	if (type == "hind")
+	entity = new Hind;
+
 
 	entity->setPlayer(true);
 	entity->setSelfIndex(Playables::getObjectsVector().size());
@@ -259,9 +265,21 @@ void Window_Manager::makeEntity(std::string type)
 
 void Window_Manager::makeEnemies(int howmany)
 {
+	std::mt19937 gen;
+	gen.seed(std::random_device()());
+	std::uniform_int_distribution<std::mt19937::result_type> dist;
+	int random;
 	for (int i = 0; i < howmany; i++)
 	{
-		enemy = new AA;
+		random = dist(gen) % 3;
+
+		if (random == 0)
+			enemy = new Tank;
+		else if (random == 1)
+			enemy = new AA;
+		else if (random == 2)
+			enemy = new Hind;
+
 		enemy->setSelfIndex(Playables::getObjectsVector().size());
 		enemy->setRandomPosition();
 		Playables::getObjectsVector().push_back(enemy);
@@ -328,6 +346,68 @@ void Window_Manager::drawProjectiles()
 	for (int i = 0; i <Playables::getObjectsVector().size(); i++)
 		for(int j =0;j< Playables::getObjectsVector()[i]->getProjectileVector().size();j++)
 		window.draw(Playables::getObjectsVector()[i]->getProjectileVector()[j]->getSprite());
+}
+
+void Window_Manager::respawn()
+{
+	if (entity == nullptr)
+	{
+		if (respawnScreen == nullptr)
+			respawnScreen = std::make_unique<RespawnScreen>(RespawnScreenStartPos);
+		view.setCenter(respawnScreen->getSprite().getPosition());
+		if (event.type == Event::MouseButtonPressed)
+		{
+			if (event.mouseButton.button == Mouse::Left)
+			{
+				if (respawnScreen->getTankSprite().getGlobalBounds().contains(coords))
+				{
+					type == "tank";
+					respawnScreen.reset();
+					makeEntity("tank");
+					Playables::sortbyType();
+				}
+				else if (respawnScreen->getAASprite().getGlobalBounds().contains(coords))
+				{
+					type == "AA";
+					respawnScreen.reset();
+					makeEntity("AA");
+					Playables::sortbyType();
+				}
+				else if (respawnScreen->getHindSprite().getGlobalBounds().contains(coords))
+				{
+					type == "hind";
+					respawnScreen.reset();
+					makeEntity("hind");
+					Playables::sortbyType();
+				}
+			}
+		}
+	}
+}
+
+void Window_Manager::checkCollisionWithObjects()
+{
+	Vector2f movementVector;
+	float to_radians = entity->getEntity().getRotation() * M_PI/180;
+	for (int i = 0; i < Playables::getObjectsVector().size(); i++)
+	{
+		if (entity->getID() != Playables::getObjectsVector()[i]->getID() && Collision::PixelPerfectTest(entity->getEntity(), Playables::getObjectsVector()[i]->getEntity()))
+		{
+			if (entity->getType() != "Hind" && Playables::getObjectsVector()[i]->getType() != "Hind")
+			{
+				entity->getEntity().move(-entity->getSpeed() * std::sin(to_radians), entity->getSpeed() * std::cos(to_radians));
+				entity->getTopPart().move(-entity->getSpeed() * std::sin(to_radians), entity->getSpeed() * std::cos(to_radians));
+			}
+		}
+		if (entity->getID() != Playables::getObjectsVector()[i]->getID() && Collision::PixelPerfectTest(entity->getEntity(), Playables::getObjectsVector()[i]->getEntity()))
+		{
+			if (entity->getType() == "Hind" && Playables::getObjectsVector()[i]->getType() == "Hind")
+			{
+				entity->setHP(0);
+				Playables::getObjectsVector()[i]->setHP(0);
+			}
+		}
+	}
 }
 
 Window_Manager::~Window_Manager()

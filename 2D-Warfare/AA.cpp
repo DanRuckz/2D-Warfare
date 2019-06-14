@@ -2,7 +2,7 @@
 
 
 
-AA::AA() :animation(IntRect(Vector2i(7,3),Vector2i(36,79))) ,speed(15),rotateSpeed(5), type("AA")
+AA::AA() :animation(IntRect(Vector2i(7,3),Vector2i(36,79))) ,speed(15),rotateSpeed(10), type("AA"),projectileMax(1700)
 {
 	baseptr = this;
 	baseptr->setEntity(anti_air, Vector2f(1500.f, 1500.f), animation, "AA");
@@ -10,6 +10,7 @@ AA::AA() :animation(IntRect(Vector2i(7,3),Vector2i(36,79))) ,speed(15),rotateSpe
 	aaturret.getTurretSprite().setPosition(anti_air.getPosition().x, anti_air.getPosition().y);
 	anti_air.setScale(1.5f, 1.5f);
 	baseptr->setHitRadius(projectileMax);
+	setID();
 }
 
 void AA::moveEntity(std::string direction)
@@ -106,9 +107,14 @@ int AA::getSelfIndex()
 	return selfIndex;
 }
 
-void AA::setHP(float damage)
+void AA::reduceDamage(float damage)
 {
 	HP-=damage;
+}
+
+void AA::setHP(float Hp)
+{
+	HP = Hp;
 }
 
 float AA::getHP() const
@@ -161,8 +167,20 @@ void AA::setRandomPosition()
 				anti_air.setPosition(temp);
 				aaturret.getTurretSprite().setPosition(anti_air.getPosition().x,anti_air.getPosition().y + 15);
 			
-				startPosition.x = dist(gen) % (int)mapSize.x;
-				startPosition.y = dist(gen) % (int)mapSize.y;
+}
+
+int AA::getID()
+{
+	return ID;
+}
+
+void AA::setID()
+{
+	std::mt19937 gen;
+	gen.seed(std::random_device()());
+	std::uniform_int_distribution<std::mt19937::result_type> dist;
+
+	ID = dist(gen) % INT_MAX;
 }
 
 

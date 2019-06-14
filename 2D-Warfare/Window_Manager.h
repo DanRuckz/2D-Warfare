@@ -30,7 +30,7 @@ private:
 	void checkHP();
 	void limitEntity(std::string direction);
 	void checkLimits();
-	float releaseModeTime = 32;
+	float releaseModeTime = 40;
 	float debugModeTime = 1;
 	float factor = 1.5;
 	void makeEntity(std::string type);
@@ -39,9 +39,11 @@ private:
 	void correctDraw();
 	void movement();
 	void drawProjectiles();
+	void respawn();
+	void checkCollisionWithObjects();
 	bool mouseRelease = true;
 	std::unique_ptr<RespawnScreen> respawnScreen;
-	Vector2f playerLastPosition;
+	Vector2f RespawnScreenStartPos;
 	std::string type;
 };
 
