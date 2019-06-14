@@ -71,7 +71,7 @@ Sprite & Playables::getTopPart()
 	// for access
 	return placeholder;
 }
-void Playables::projectileFly(std::shared_ptr<Projectiles> projectile, int index, int selfObjectIndex)
+void Playables::projectileFly(std::vector<std::shared_ptr<Projectiles>>& projectilevec, std::shared_ptr<Projectiles> projectile, int index, int selfObjectIndex)
 {
 	projectile->Fly(projectile->getSprite());
 	bool objects = true;
@@ -79,8 +79,8 @@ void Playables::projectileFly(std::shared_ptr<Projectiles> projectile, int index
 	{
 		objects = false;
 		projectile.reset();
-		Projectiles::getProjectileVector().erase(Projectiles::getProjectileVector().begin() + index);
-		Projectiles::getProjectileVector().shrink_to_fit();
+		projectilevec.erase(projectilevec.begin() + index);
+		projectilevec.shrink_to_fit();
 	}
 
 	if (objects)
@@ -89,10 +89,10 @@ void Playables::projectileFly(std::shared_ptr<Projectiles> projectile, int index
 		if (checkIntersectionWithObjects(projectile, selfObjectIndex) != -1)
 		{
 			objindex = checkIntersectionWithObjects(projectile, selfObjectIndex);
-			Playables::getObjectsVector()[objindex]->setHP(Projectiles::getProjectileVector()[index]->getDamage());
+			Playables::getObjectsVector()[objindex]->setHP(projectilevec[index]->getDamage());
 			projectile.reset();
-			Projectiles::getProjectileVector().erase(Projectiles::getProjectileVector().begin() + index);
-			Projectiles::getProjectileVector().shrink_to_fit();
+			projectilevec.erase(projectilevec.begin() + index);
+			projectilevec.shrink_to_fit();
 		}
 	}
 }

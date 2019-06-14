@@ -14,6 +14,7 @@ public:
 	Window_Manager();
 	~Window_Manager();
 private:
+	Event event;
 	Vector2i mousePos;
 	void Window_action();
 	void setView();
@@ -32,11 +33,15 @@ private:
 	float releaseModeTime = 32;
 	float debugModeTime = 1;
 	float factor = 1.5;
-	void makeEntity();
+	void makeEntity(std::string type);
 	void makeEnemies(int howmany);
 	void drawRespawn();
-	void correctDraw(std::string type);
+	void correctDraw();
+	void movement();
+	void drawProjectiles();
 	bool mouseRelease = true;
 	std::unique_ptr<RespawnScreen> respawnScreen;
+	Vector2f playerLastPosition;
+	std::string type;
 };
 

@@ -15,12 +15,7 @@ Window_Manager::Window_Manager()
 void Window_Manager::Window_action()
 {
 	window.create(VideoMode(resolution), "2D-Warfare", WINDOW_MODE);
-	Event event;
-	makeEntity();
-	makeEnemies(1);
 	Playables::sortbyType();
-	entity->setSelfIndex(Playables::getObjectsVector().size()-1);
-	enemy->setSelfIndex(Playables::getObjectsVector().size()-1);
 	Clock clock_global;
 	Time global;
 	Clock timerofShot;
@@ -34,13 +29,10 @@ void Window_Manager::Window_action()
 			clock_global.restart();
 			mousePos = Mouse::getPosition();
 			coords = window.mapPixelToCoords(mousePos);
+
 			while (window.pollEvent(event))
 			{
-				if (event.type == Event::MouseMoved)
-				{
-					std::cout << "X coords: " << coords.x << " " << "Y coords: " << coords.y << std::endl;
-					entity->rotateTurret(coords, entity->getEntity().getPosition());
-				}
+				
 
 				if (event.type == Event::Closed)
 					window.close();
@@ -52,34 +44,35 @@ void Window_Manager::Window_action()
 					if (event.mouseButton.button == Mouse::Left)
 					{
 						mouseRelease = false;
-						
-
-						if (entity->getType() == "Tank")
+						if (entity != nullptr)
 						{
-							timeofShot = timerofShot.getElapsedTime();
-							if (timeofShot.asSeconds() > 2)
+							if (entity->getType() == "Tank")
 							{
-								entity->Fire();
-								timerofShot.restart();
+								timeofShot = timerofShot.getElapsedTime();
+								if (timeofShot.asSeconds() > 2)
+								{
+									entity->Fire();
+									timerofShot.restart();
+								}
 							}
-						}
-						if (entity->getType() == "Hind")
-						{
-							if (entity->getShotsFired() < 5)
+							if (entity->getType() == "Hind")
 							{
-								entity->Fire();
+								if (entity->getShotsFired() < 5)
+								{
+									entity->Fire();
+								}
+								if (entity->getShotsFired() == 4)
+								{
+									timerofShot.restart();
+								}
+								timeofShot = timerofShot.getElapsedTime();
+								if (entity->getShotsFired() >= 5 && timeofShot.asSeconds() > 4)
+								{
+									entity->nullifyShotsFired();
+								}
 							}
-							if (entity->getShotsFired() == 4)
-							{
-								timerofShot.restart();
-							}
-							timeofShot = timerofShot.getElapsedTime();
-							if (entity->getShotsFired() >= 5 && timeofShot.asSeconds() > 4)
-							{
-								entity->nullifyShotsFired();
-							}
-						}
 
+						}
 					}
 				}
 					if (event.type == Event::MouseButtonReleased)
@@ -91,7 +84,7 @@ void Window_Manager::Window_action()
 			//END EVENT
 				if (!mouseRelease)
 				{
-					if (entity->getType() == "AA")
+					if (entity != nullptr && entity->getType() == "AA")
 					{
 						timeofShot = timerofShot.getElapsedTime();
 						if (timeofShot.asSeconds() > 0.25)
@@ -101,46 +94,50 @@ void Window_Manager::Window_action()
 						}
 					}
 				}
-
-				checkFlight();
-				checkHP();
-				if (Keyboard::isKeyPressed(Keyboard::W))
+				if (entity != nullptr)
 				{
-					entity->moveEntity("up");
-					limitEntity("up");
+					movement();
+					checkFlight();
+					checkHP();
 				}
-				if (Keyboard::isKeyPressed(Keyboard::A))
-				{
-					entity->rotateEntity("left");
-
-				}
-				if (Keyboard::isKeyPressed(Keyboard::S))
-				{
-					entity->moveEntity("down");
-					limitEntity("down");
-
-				}
-				if (Keyboard::isKeyPressed(Keyboard::D))
-				{
-					entity->rotateEntity("right");
-				}
+				
+				if(entity != nullptr)
 				checkLimits();
 
-				if (entity == nullptr)
-					respawnScreen = std::make_unique<RespawnScreen>(view);
-
+				if (entity == nullptr && respawnScreen == nullptr)
+				{
+						respawnScreen = std::make_unique<RespawnScreen>(playerLastPosition);
+						view.setCenter(respawnScreen->getSprite().getPosition());
+						if (respawnScreen->getTankSprite().getGlobalBounds().contains(coords))
+						{
+							type == "tank";
+							respawnScreen.reset();
+							return;
+						}
+						if (respawnScreen->getAASprite().getGlobalBounds().contains(coords))
+						{
+							type == "AA";
+							respawnScreen.reset();
+							return;
+						}
+						if (respawnScreen->getHindSprite().getGlobalBounds().contains(coords))
+						{
+							type == "hind";
+							respawnScreen.reset();
+							return;
+						}
+				}
+				makeEnemies(20);
 				window.draw(map.getBoundingRect());
 				for (int i = 0; i < map.getMapVec().size(); i++)
 					window.draw(*map.getMapVec()[i]);
 
 				window.setView(view);
-				for (int i = 0; i < Projectiles::getProjectileVector().size(); i++)
-					window.draw(Projectiles::getProjectileVector()[i]->getSprite());
-				correctDraw(entity->getType());
+				drawProjectiles();
+				correctDraw();
 				
 				if (respawnScreen != nullptr)
 					drawRespawn();
-				
 				window.display();
 		}
 	}
@@ -154,23 +151,35 @@ void Window_Manager::setView()
 
 void Window_Manager::checkFlight()
 {
-	for (int i = 0; i < Projectiles::getProjectileVector().size(); i++)
+	for (int i = 0; i < Playables::getObjectsVector().size(); i++)
 	{
-		entity->projectileFly(Projectiles::getProjectileVector()[i], i, entity->getSelfIndex());
+		for (int j = 0; j < Playables::getObjectsVector()[i]->getProjectileVector().size(); j++)
+		{
+			Playables::getObjectsVector()[i]->projectileFly(i);
+		}
 	}
 
 }
 
 void Window_Manager::checkHP()
 {
+	bool player;
 	for (int i = 0; i < Playables::getObjectsVector().size(); i++)
 	{
 		if (Playables::getObjectsVector()[i]->getHP() <= 0)
 		{
+			player = Playables::getObjectsVector()[i]->getPlayer();
+			if (player)
+			{
+				playerLastPosition = entity->getEntity().getPosition();
+				entity = nullptr;
+			}
+			delete Playables::getObjectsVector()[i];
+			Playables::getObjectsVector()[i] = nullptr;
 			Playables::getObjectsVector().erase(Playables::getObjectsVector().begin() + i);
-			//Playables::getObjectsVector().shrink_to_fit();
-		}
+			}
 	}
+	Playables::getObjectsVector().shrink_to_fit();
 }
 
 void Window_Manager::limitEntity(std::string direction)
@@ -237,20 +246,27 @@ void Window_Manager::checkLimits()
 		view.setCenter(logics);
 }
 
-void Window_Manager::makeEntity()
+void Window_Manager::makeEntity(std::string type)
 {
-	entity = new Hind;
-	Playables::getObjectsVector().push_back(entity);
-	//if getPlayer == true then its my own entity
-	//for(int i=0;i<Playables::getObjectsVector().size();i++)
+	if(type == "tank")
+	entity = new Tank;
 
+	entity->setPlayer(true);
+	entity->setSelfIndex(Playables::getObjectsVector().size());
+	entity->setRandomPosition();
+	Playables::getObjectsVector().push_back(entity);
 }
 
 void Window_Manager::makeEnemies(int howmany)
 {
-	howmany = 0;
-	enemy = new Tank;
-	Playables::getObjectsVector().push_back(enemy);
+	for (int i = 0; i < howmany; i++)
+	{
+		enemy = new AA;
+		enemy->setSelfIndex(Playables::getObjectsVector().size());
+		enemy->setRandomPosition();
+		Playables::getObjectsVector().push_back(enemy);
+		enemy = nullptr;
+	}
 }
 
 void Window_Manager::drawRespawn()
@@ -266,7 +282,7 @@ void Window_Manager::drawRespawn()
 	window.draw(respawnScreen->getTitleSprite());
 }
 
-void Window_Manager::correctDraw(std::string type)
+void Window_Manager::correctDraw()
 {
 	for (int i = 0; i < Playables::getObjectsVector().size(); i++)
 	{
@@ -274,6 +290,44 @@ void Window_Manager::correctDraw(std::string type)
 		window.draw(Playables::getObjectsVector()[i]->getEntity());
 		window.draw(Playables::getObjectsVector()[i]->getTopPart());
 	}
+}
+
+void Window_Manager::movement()
+{
+
+	if (event.type == Event::MouseMoved)
+	{
+		std::cout << "X coords: " << coords.x << " " << "Y coords: " << coords.y << std::endl;
+		entity->rotateTurret(coords, entity->getEntity().getPosition());
+	}
+
+	if (Keyboard::isKeyPressed(Keyboard::W))
+	{
+		entity->moveEntity("up");
+		limitEntity("up");
+	}
+	if (Keyboard::isKeyPressed(Keyboard::A))
+	{
+		entity->rotateEntity("left");
+
+	}
+	if (Keyboard::isKeyPressed(Keyboard::S))
+	{
+		entity->moveEntity("down");
+		limitEntity("down");
+
+	}
+	if (Keyboard::isKeyPressed(Keyboard::D))
+	{
+		entity->rotateEntity("right");
+	}
+}
+
+void Window_Manager::drawProjectiles()
+{
+	for (int i = 0; i <Playables::getObjectsVector().size(); i++)
+		for(int j =0;j< Playables::getObjectsVector()[i]->getProjectileVector().size();j++)
+		window.draw(Playables::getObjectsVector()[i]->getProjectileVector()[j]->getSprite());
 }
 
 Window_Manager::~Window_Manager()

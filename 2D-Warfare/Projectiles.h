@@ -16,7 +16,6 @@ public:
 	float getDistanceTraveled();
 	bool intersectWithMap(Sprite& shell);
 	bool intersectWithObjects(Sprite& shell, Sprite& object);
-	static std::vector<std::shared_ptr<Projectiles>>& getProjectileVector();
 	virtual float getDamage() const = 0;
 	virtual ~Projectiles();
 
@@ -24,6 +23,5 @@ private:
 	float m_distanceTraveled = 0;
 	Vector2f distanceVector;
 	void distanceTraveled(float speed, Vector2f direction);
-	static std::vector<std::shared_ptr<Projectiles>> projectilesVector;
 };
 

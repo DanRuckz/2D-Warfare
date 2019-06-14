@@ -5,7 +5,7 @@ class RespawnScreen : public Entities
 {
 public:
 	RespawnScreen();
-	RespawnScreen(View myView);
+	RespawnScreen(Vector2f& position);
 	Sprite& getSprite();
 	Sprite& getTankSprite();
 	Sprite& getAASprite();
@@ -24,7 +24,7 @@ private:
 	Texture texture;
 	Vector2f screenSize;
 	IntRect animation;
-	View view;
+	Vector2f position;
 	Sprite sprite;
 	Sprite hind, tank, aa;
 	Sprite hindBlades, tankTurret, aaTurret;

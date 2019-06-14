@@ -35,10 +35,6 @@ bool Projectiles::intersectWithObjects(Sprite & shell, Sprite & object)
 	return false;
 }
 
-std::vector<std::shared_ptr<Projectiles>>& Projectiles::getProjectileVector()
-{
-	return projectilesVector;
-}
 
 Vector2f Projectiles::calculateDirection(Sprite& shell, float BarrelLength)
 {

@@ -1,14 +1,17 @@
 #include "RespawnScreen.h"
 
 
-RespawnScreen::RespawnScreen(View myView) : animation(Vector2i(0, 0), Vector2i(1280, 720))
+RespawnScreen::RespawnScreen(Vector2f& position) : animation(Vector2i(0, 0), Vector2i(1280, 720))
 {
 	int x = 400;
 	int y = 20;
 	float offset_x = 1;
 	float offset_y = -70;
+	if (position == Vector2f(0, 0))
+		position = Vector2f(2000, 2000);
+
 	sprite.setColor(Color(255, 255, 255, 200));
-	setEntity(sprite, view.getCenter(), animation, "respawn");
+	setEntity(sprite, position, animation, "respawn");
 
 	setEntity(tank, Vector2f((sprite.getPosition().x - x), (sprite.getPosition().y - y)), IntRect(Vector2i(28, 97), Vector2i(34, 59)), "tank");
 	setEntity(aa, Vector2f((sprite.getPosition().x ), (sprite.getPosition().y - y)), IntRect(Vector2i(7, 3), Vector2i(36, 79)), "AA");

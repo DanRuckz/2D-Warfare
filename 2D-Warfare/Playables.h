@@ -1,6 +1,7 @@
 #pragma once
 #include "Entities.h"
 #include "Projectiles.h"
+#include <random>
 class Playables :
 	public Entities
 {
@@ -15,9 +16,8 @@ public:
 	virtual Sprite& getTopPart() =0;
 	virtual void Fire() = 0;
 	virtual Sprite& getShell() = 0;
-	void projectileFly(std::shared_ptr<Projectiles> projectile,int index, int selfObjectIndex);
+	void projectileFly(std::vector<std::shared_ptr<Projectiles>>& projectilevec, std::shared_ptr<Projectiles> projectile,int index, int selfObjectIndex);
 	virtual std::shared_ptr<Projectiles> getPointerToProjectile()=0;
-	//void setRandomPosition(Sprite& entity);
 	void setObjectsVector(std::vector<Playables*>& other);
 	//taking receiving information from the class and sending this information to the actual function
 	void rotateEntity(Sprite & entity, std::string direction, float rotateSpeed);
@@ -36,6 +36,9 @@ public:
 	virtual float getHP() const = 0;
 	virtual void setPlayer(bool other) = 0;
 	virtual bool getPlayer() const = 0;
+	virtual std::vector<std::shared_ptr<Projectiles>>& getProjectileVector() = 0;
+	virtual void projectileFly(int index) = 0;
+	virtual void setRandomPosition() = 0;
 	virtual ~Playables();
 
 private:
@@ -43,5 +46,6 @@ private:
 	Sprite placeholder;
 	float radius;
 	bool Player;
+	
 };
 

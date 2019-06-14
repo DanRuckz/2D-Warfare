@@ -48,7 +48,7 @@ void AA::Fire()
 		vector.x /= barrelLength;
 		vector.y /= barrelLength;
 		shell->setFlightDirection(vector);
-		Projectiles::getProjectileVector().push_back(shell);
+		projectiles.push_back(shell);
 	}
 
 	if (left)
@@ -60,7 +60,7 @@ void AA::Fire()
 		vector.x /= barrelLength;
 		vector.y /= barrelLength;
 		shell->setFlightDirection(vector);
-		Projectiles::getProjectileVector().push_back(shell);
+		projectiles.push_back(shell);
 	}
 	if (left)
 	{
@@ -126,6 +126,17 @@ bool AA::getPlayer() const
 	return Player;
 }
 
+std::vector<std::shared_ptr<Projectiles>>& AA::getProjectileVector()
+{
+	return projectiles;
+}
+
+void AA::projectileFly(int index)
+{
+	for (int i = 0; i < projectiles.size(); i++)
+	baseptr->projectileFly(projectiles, projectiles[i], i, index);
+}
+
 
 Sprite& AA::getTopPart()
 {
@@ -136,6 +147,26 @@ Sprite& AA::getEntity()
 	return anti_air;
 }
 
+
+void AA::setRandomPosition()
+{
+	std::mt19937 gen;
+	gen.seed(std::random_device()());
+	std::uniform_int_distribution<std::mt19937::result_type> dist;
+	Vector2f mapSize = Map::getMapSize();
+	
+				Vector2f temp;
+				temp.x = dist(gen) % (int)mapSize.x;
+				temp.y = dist(gen) % (int)mapSize.y;
+				anti_air.setPosition(temp);
+				aaturret.getTurretSprite().setPosition(anti_air.getPosition().x,anti_air.getPosition().y + 15);
+			
+				startPosition.x = dist(gen) % (int)mapSize.x;
+				startPosition.y = dist(gen) % (int)mapSize.y;
+}
+
+
 AA::~AA()
 {
 }
+

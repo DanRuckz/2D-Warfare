@@ -25,6 +25,9 @@ public:
 	float getHP() const;
 	void setPlayer(bool other);
 	bool getPlayer() const;
+	std::vector<std::shared_ptr<Projectiles>>& getProjectileVector();
+	void projectileFly(int index);
+	void setRandomPosition();
 	~Hind();
 
 private:
@@ -42,5 +45,7 @@ private:
 	int selfIndex;
 	float HP = 3000;
 	bool Player;
+	std::vector < std::shared_ptr<Projectiles>> projectiles;
+	Vector2f startPosition;
 };
 
