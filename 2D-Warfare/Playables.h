@@ -20,8 +20,8 @@ public:
 	virtual std::shared_ptr<Projectiles> getPointerToProjectile()=0;
 	void setObjectsVector(std::vector<Playables*>& other);
 	//taking receiving information from the class and sending this information to the actual function
-	void rotateEntity(Sprite & entity, std::string direction, float rotateSpeed);
-	void moveEntity(Sprite& entity, std::string direction, float angle, float speed);
+	static void rotateEntity(Sprite & entity, std::string direction, float rotateSpeed);
+	static void moveEntity(Sprite& entity, std::string direction, float angle, float speed);
 	virtual float checkIntersectionWithObjects(std::shared_ptr<Projectiles> pointer, int selfObjectIndex);
 	static std::vector<Playables*>& getObjectsVector();
 	void setHitRadius(float other_radius);
@@ -42,7 +42,10 @@ public:
 	virtual void setHP(float Hp) = 0;
 	virtual int getID() = 0;
 	virtual void setID() = 0;
-	
+	virtual void AImove();
+	virtual void setTarget(Sprite& other) = 0;
+	virtual Sprite& getTarget() =0;
+	virtual float getRadiusofMountPoint() = 0;
 	virtual ~Playables();
 
 private:

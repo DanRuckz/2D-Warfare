@@ -172,6 +172,21 @@ int Hind::getID()
 	return ID;
 }
 
+void Hind::setTarget(Sprite & other)
+{
+	target = other;
+}
+
+Sprite & Hind::getTarget()
+{
+	return target;
+}
+
+float Hind::getRadiusofMountPoint()
+{
+	return radiusofMountPoint;
+}
+
 void Hind::setID()
 {
 	std::mt19937 gen;

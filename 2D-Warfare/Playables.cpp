@@ -152,6 +152,10 @@ void Playables::sortbyType()
 
 
 
+void Playables::AImove()
+{
+}
+
 Playables::~Playables()
 {
 }

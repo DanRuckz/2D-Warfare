@@ -7,6 +7,7 @@
 #include "TankShell.h"
 #include "Entities.h"
 #include "RespawnScreen.h"
+#include "AI.h"
 
 class Window_Manager
 {
@@ -45,5 +46,6 @@ private:
 	std::unique_ptr<RespawnScreen> respawnScreen;
 	Vector2f RespawnScreenStartPos;
 	std::string type;
+	AI ai;
 };
 

@@ -48,6 +48,8 @@ void Turrets::moveTurret(Sprite& entity, Sprite& turret,float radius)
 	turret.setPosition(entity.getPosition().x + whereto.x,entity.getPosition().y+  whereto.y);
 }
 
+
+
 Turrets::~Turrets()
 {
 }

@@ -30,7 +30,9 @@ public:
 	void setRandomPosition();
 	void setHP(float Hp);
 	int getID();
-	
+	void setTarget(Sprite& other);
+	Sprite& getTarget();
+	float getRadiusofMountPoint();
 	~Hind();
 
 private:
@@ -51,5 +53,7 @@ private:
 	std::vector < std::shared_ptr<Projectiles>> projectiles;
 	int ID;
 	void setID();
+	Sprite target;
+	float radiusofMountPoint = 1;
 };
 

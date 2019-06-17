@@ -138,6 +138,21 @@ int Tank::getID()
 	return ID;
 }
 
+void Tank::setTarget(Sprite & other)
+{
+	target = other;
+}
+
+float Tank::getRadiusofMountPoint()
+{
+	return radiusofMountPoint;
+}
+
+Sprite & Tank::getTarget()
+{
+	return target;
+}
+
 void Tank::rotateEntity(std::string direction)
 {
 	baseptr->rotateEntity(tank, direction, rotateSpeed);

@@ -27,7 +27,10 @@ public:
 	std::vector<std::shared_ptr<Projectiles>>& getProjectileVector();
 	void projectileFly(int index);
 	void setRandomPosition();
+	void setTarget(Sprite& other);
 	int getID();
+	Sprite& getTarget();
+	float getRadiusofMountPoint();
 
 	
 
@@ -53,5 +56,7 @@ private:
 	std::vector < std::shared_ptr<Projectiles>> projectiles;
 	int ID;
 	void setID();
+	Sprite target;
+	
 };
 

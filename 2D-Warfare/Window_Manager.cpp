@@ -29,7 +29,7 @@ void Window_Manager::Window_action()
 			clock_global.restart();
 			mousePos = Mouse::getPosition();
 			coords = window.mapPixelToCoords(mousePos);
-
+			
 			while (window.pollEvent(event))
 			{
 				
@@ -106,6 +106,9 @@ void Window_Manager::Window_action()
 				
 				checkLimits();
 				respawn();
+				ai.AImove();
+				limitEntity("up");
+				limitEntity("down");
 				
 				window.draw(map.getBoundingRect());
 				for (int i = 0; i < map.getMapVec().size(); i++)
@@ -162,60 +165,64 @@ void Window_Manager::checkHP()
 
 void Window_Manager::limitEntity(std::string direction)
 {
-	if (direction == "up")
+	for (int i = 0; i < Playables::getObjectsVector().size(); i++)
 	{
-		//UPPER BOUND
-		if (map.getBoundingRect().getGlobalBounds().top >= entity->getEntity().getPosition().y - entity->getEntity().getTextureRect().height / 2 * entity->getEntity().getScale().y)
-		{
-			entity->getEntity().move(entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180), entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180));
-			entity->getTopPart().move(entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180), entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180));
-		}
-		//LEFT BOUND
-		if (map.getBoundingRect().getGlobalBounds().left >= entity->getEntity().getPosition().x - entity->getEntity().getTextureRect().width / 2 * entity->getEntity().getScale().x - 23)
-		{
-			entity->getEntity().move(-entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180), entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180));
-			entity->getTopPart().move(-entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180), entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180));
 
-		}
-		//BOTTOM BOUND
-		if (map.getBoundingRect().getGlobalBounds().height <= entity->getEntity().getPosition().y + entity->getEntity().getTextureRect().height / 2 * entity->getEntity().getScale().y - 10)
+		if (direction == "up")
 		{
-			entity->getEntity().move(entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180), entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180));
-			entity->getTopPart().move(entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180), entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180));
+			//UPPER BOUND
+			if (map.getBoundingRect().getGlobalBounds().top >= Playables::getObjectsVector()[i]->getEntity().getPosition().y - Playables::getObjectsVector()[i]->getEntity().getTextureRect().height / 2 * Playables::getObjectsVector()[i]->getEntity().getScale().y)
+			{
+				Playables::getObjectsVector()[i]->getEntity().move(Playables::getObjectsVector()[i]->getSpeed() * std::sin(Playables::getObjectsVector()[i]->getEntity().getRotation() * M_PI / 180), Playables::getObjectsVector()[i]->getSpeed() * std::cos(Playables::getObjectsVector()[i]->getEntity().getRotation()* M_PI / 180));
+				Playables::getObjectsVector()[i]->getTopPart().move(Playables::getObjectsVector()[i]->getSpeed() * std::sin(Playables::getObjectsVector()[i]->getEntity().getRotation() * M_PI / 180), Playables::getObjectsVector()[i]->getSpeed() * std::cos(Playables::getObjectsVector()[i]->getEntity().getRotation()* M_PI / 180));
+			}
+			//LEFT BOUND
+			if (map.getBoundingRect().getGlobalBounds().left >= Playables::getObjectsVector()[i]->getEntity().getPosition().x - Playables::getObjectsVector()[i]->getEntity().getTextureRect().width / 2 * Playables::getObjectsVector()[i]->getEntity().getScale().x - 23)
+			{
+				Playables::getObjectsVector()[i]->getEntity().move(-Playables::getObjectsVector()[i]->getSpeed() * std::sin(Playables::getObjectsVector()[i]->getEntity().getRotation() * M_PI / 180), Playables::getObjectsVector()[i]->getSpeed() * std::cos(Playables::getObjectsVector()[i]->getEntity().getRotation()* M_PI / 180));
+				Playables::getObjectsVector()[i]->getTopPart().move(-Playables::getObjectsVector()[i]->getSpeed() * std::sin(Playables::getObjectsVector()[i]->getEntity().getRotation() * M_PI / 180), Playables::getObjectsVector()[i]->getSpeed() * std::cos(Playables::getObjectsVector()[i]->getEntity().getRotation()* M_PI / 180));
+
+			}
+			//BOTTOM BOUND
+			if (map.getBoundingRect().getGlobalBounds().height <= Playables::getObjectsVector()[i]->getEntity().getPosition().y + Playables::getObjectsVector()[i]->getEntity().getTextureRect().height / 2 * Playables::getObjectsVector()[i]->getEntity().getScale().y - 10)
+			{
+				Playables::getObjectsVector()[i]->getEntity().move(Playables::getObjectsVector()[i]->getSpeed() * std::sin(Playables::getObjectsVector()[i]->getEntity().getRotation() * M_PI / 180), Playables::getObjectsVector()[i]->getSpeed() * std::cos(Playables::getObjectsVector()[i]->getEntity().getRotation()* M_PI / 180));
+				Playables::getObjectsVector()[i]->getTopPart().move(Playables::getObjectsVector()[i]->getSpeed() * std::sin(Playables::getObjectsVector()[i]->getEntity().getRotation() * M_PI / 180), Playables::getObjectsVector()[i]->getSpeed() * std::cos(Playables::getObjectsVector()[i]->getEntity().getRotation()* M_PI / 180));
+			}
+			//RIGHT BOUND
+			if (map.getBoundingRect().getGlobalBounds().width <= Playables::getObjectsVector()[i]->getEntity().getPosition().x + Playables::getObjectsVector()[i]->getEntity().getTextureRect().width / 2 * Playables::getObjectsVector()[i]->getEntity().getScale().x + 23)
+			{
+				Playables::getObjectsVector()[i]->getEntity().move(-Playables::getObjectsVector()[i]->getSpeed() * std::sin(Playables::getObjectsVector()[i]->getEntity().getRotation() * M_PI / 180), Playables::getObjectsVector()[i]->getSpeed() * std::cos(Playables::getObjectsVector()[i]->getEntity().getRotation()* M_PI / 180));
+				Playables::getObjectsVector()[i]->getTopPart().move(-Playables::getObjectsVector()[i]->getSpeed() * std::sin(Playables::getObjectsVector()[i]->getEntity().getRotation() * M_PI / 180), Playables::getObjectsVector()[i]->getSpeed() * std::cos(Playables::getObjectsVector()[i]->getEntity().getRotation()* M_PI / 180));
+			}
 		}
-		//RIGHT BOUND
-		if (map.getBoundingRect().getGlobalBounds().width <= entity->getEntity().getPosition().x + entity->getEntity().getTextureRect().width / 2 * entity->getEntity().getScale().x + 23)
+		if (direction == "down")
 		{
-			entity->getEntity().move(-entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180), entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180));
-			entity->getTopPart().move(-entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180), entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180));
-		}
-	}
-	if (direction == "down")
-	{
-		//UPPER BOUND
-		if (map.getBoundingRect().getGlobalBounds().top >= entity->getEntity().getPosition().y - entity->getEntity().getTextureRect().height)
-		{
-			entity->getEntity().move(-entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180) / 1.5, -entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180) / 1.5);
-			entity->getTopPart().move(-entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180) / 1.5, -entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180) / 1.5);
-		}
-		//LEFT BOUND
-		if (map.getBoundingRect().getGlobalBounds().left >= entity->getEntity().getPosition().x - entity->getEntity().getTextureRect().width - 23)
-		{		
-			entity->getEntity().move(entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180)/1.5, -entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180)/1.5);
-			entity->getTopPart().move(entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180)/1.5, -entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180)/1.5);
-		}
+			//UPPER BOUND
+			if (map.getBoundingRect().getGlobalBounds().top >= Playables::getObjectsVector()[i]->getEntity().getPosition().y - Playables::getObjectsVector()[i]->getEntity().getTextureRect().height)
+			{
+				Playables::getObjectsVector()[i]->getEntity().move(-Playables::getObjectsVector()[i]->getSpeed() * std::sin(Playables::getObjectsVector()[i]->getEntity().getRotation() * M_PI / 180) / 1.5, -Playables::getObjectsVector()[i]->getSpeed() * std::cos(Playables::getObjectsVector()[i]->getEntity().getRotation()* M_PI / 180) / 1.5);
+				Playables::getObjectsVector()[i]->getTopPart().move(-Playables::getObjectsVector()[i]->getSpeed() * std::sin(Playables::getObjectsVector()[i]->getEntity().getRotation() * M_PI / 180) / 1.5, -Playables::getObjectsVector()[i]->getSpeed() * std::cos(Playables::getObjectsVector()[i]->getEntity().getRotation()* M_PI / 180) / 1.5);
+			}
+			//LEFT BOUND
+			if (map.getBoundingRect().getGlobalBounds().left >= Playables::getObjectsVector()[i]->getEntity().getPosition().x - Playables::getObjectsVector()[i]->getEntity().getTextureRect().width - 23)
+			{
+				Playables::getObjectsVector()[i]->getEntity().move(Playables::getObjectsVector()[i]->getSpeed() * std::sin(Playables::getObjectsVector()[i]->getEntity().getRotation() * M_PI / 180) / 1.5, -Playables::getObjectsVector()[i]->getSpeed() * std::cos(Playables::getObjectsVector()[i]->getEntity().getRotation()* M_PI / 180) / 1.5);
+				Playables::getObjectsVector()[i]->getTopPart().move(Playables::getObjectsVector()[i]->getSpeed() * std::sin(Playables::getObjectsVector()[i]->getEntity().getRotation() * M_PI / 180) / 1.5, -Playables::getObjectsVector()[i]->getSpeed() * std::cos(Playables::getObjectsVector()[i]->getEntity().getRotation()* M_PI / 180) / 1.5);
+			}
 
 			//BOTTOM BOUND
-		if (map.getBoundingRect().getGlobalBounds().height <= entity->getEntity().getPosition().y + entity->getEntity().getTextureRect().height + 7)
-		{
-			entity->getEntity().move(-entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180)/1.5, -entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180)/1.5);
-			entity->getTopPart().move(-entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180)/1.5, -entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180)/1.5);
-		}
+			if (map.getBoundingRect().getGlobalBounds().height <= Playables::getObjectsVector()[i]->getEntity().getPosition().y + Playables::getObjectsVector()[i]->getEntity().getTextureRect().height + 7)
+			{
+				Playables::getObjectsVector()[i]->getEntity().move(-Playables::getObjectsVector()[i]->getSpeed() * std::sin(Playables::getObjectsVector()[i]->getEntity().getRotation() * M_PI / 180) / 1.5, -Playables::getObjectsVector()[i]->getSpeed() * std::cos(Playables::getObjectsVector()[i]->getEntity().getRotation()* M_PI / 180) / 1.5);
+				Playables::getObjectsVector()[i]->getTopPart().move(-Playables::getObjectsVector()[i]->getSpeed() * std::sin(Playables::getObjectsVector()[i]->getEntity().getRotation() * M_PI / 180) / 1.5, -Playables::getObjectsVector()[i]->getSpeed() * std::cos(Playables::getObjectsVector()[i]->getEntity().getRotation()* M_PI / 180) / 1.5);
+			}
 			//RIGHT BOUND
-		if (map.getBoundingRect().getGlobalBounds().width <= entity->getEntity().getPosition().x + entity->getEntity().getTextureRect().width + 23)
-		{
-			entity->getEntity().move(entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180)/1.5, -entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180)/1.5);
-			entity->getTopPart().move(entity->getSpeed() * std::sin(entity->getEntity().getRotation() * M_PI / 180)/1.5, -entity->getSpeed() * std::cos(entity->getEntity().getRotation()* M_PI / 180)/1.5);
+			if (map.getBoundingRect().getGlobalBounds().width <= Playables::getObjectsVector()[i]->getEntity().getPosition().x + Playables::getObjectsVector()[i]->getEntity().getTextureRect().width + 23)
+			{
+				Playables::getObjectsVector()[i]->getEntity().move(Playables::getObjectsVector()[i]->getSpeed() * std::sin(Playables::getObjectsVector()[i]->getEntity().getRotation() * M_PI / 180) / 1.5, -Playables::getObjectsVector()[i]->getSpeed() * std::cos(Playables::getObjectsVector()[i]->getEntity().getRotation()* M_PI / 180) / 1.5);
+				Playables::getObjectsVector()[i]->getTopPart().move(Playables::getObjectsVector()[i]->getSpeed() * std::sin(Playables::getObjectsVector()[i]->getEntity().getRotation() * M_PI / 180) / 1.5, -Playables::getObjectsVector()[i]->getSpeed() * std::cos(Playables::getObjectsVector()[i]->getEntity().getRotation()* M_PI / 180) / 1.5);
+			}
 		}
 	}
 }
@@ -323,6 +330,7 @@ void Window_Manager::movement()
 	{
 		entity->moveEntity("up");
 		limitEntity("up");
+		
 	}
 	if (Keyboard::isKeyPressed(Keyboard::A))
 	{
@@ -333,7 +341,6 @@ void Window_Manager::movement()
 	{
 		entity->moveEntity("down");
 		limitEntity("down");
-
 	}
 	if (Keyboard::isKeyPressed(Keyboard::D))
 	{
@@ -391,20 +398,23 @@ void Window_Manager::checkCollisionWithObjects()
 	float to_radians = entity->getEntity().getRotation() * M_PI/180;
 	for (int i = 0; i < Playables::getObjectsVector().size(); i++)
 	{
-		if (entity->getID() != Playables::getObjectsVector()[i]->getID() && Collision::PixelPerfectTest(entity->getEntity(), Playables::getObjectsVector()[i]->getEntity()))
+		for (int j = 0; j < Playables::getObjectsVector().size(); j++)
 		{
-			if (entity->getType() != "Hind" && Playables::getObjectsVector()[i]->getType() != "Hind")
+			if (Playables::getObjectsVector()[j]->getID() != Playables::getObjectsVector()[i]->getID() && Collision::PixelPerfectTest(Playables::getObjectsVector()[j]->getEntity(), Playables::getObjectsVector()[i]->getEntity()))
 			{
-				entity->getEntity().move(-entity->getSpeed() * std::sin(to_radians), entity->getSpeed() * std::cos(to_radians));
-				entity->getTopPart().move(-entity->getSpeed() * std::sin(to_radians), entity->getSpeed() * std::cos(to_radians));
+				if (Playables::getObjectsVector()[j]->getType() != "Hind" && Playables::getObjectsVector()[i]->getType() != "Hind")
+				{
+					Playables::getObjectsVector()[j]->getEntity().move(-entity->getSpeed() * std::sin(to_radians), entity->getSpeed() * std::cos(to_radians));
+					Playables::getObjectsVector()[j]->getTopPart().move(-entity->getSpeed() * std::sin(to_radians), entity->getSpeed() * std::cos(to_radians));
+				}
 			}
-		}
-		if (entity->getID() != Playables::getObjectsVector()[i]->getID() && Collision::PixelPerfectTest(entity->getEntity(), Playables::getObjectsVector()[i]->getEntity()))
-		{
-			if (entity->getType() == "Hind" && Playables::getObjectsVector()[i]->getType() == "Hind")
+			if (Playables::getObjectsVector()[j]->getID() != Playables::getObjectsVector()[i]->getID() && Collision::PixelPerfectTest(Playables::getObjectsVector()[j]->getEntity(), Playables::getObjectsVector()[i]->getEntity()))
 			{
-				entity->setHP(0);
-				Playables::getObjectsVector()[i]->setHP(0);
+				if (Playables::getObjectsVector()[j]->getType() == "Hind" && Playables::getObjectsVector()[i]->getType() == "Hind")
+				{
+					entity->setHP(0);
+					Playables::getObjectsVector()[j]->setHP(0);
+				}
 			}
 		}
 	}
