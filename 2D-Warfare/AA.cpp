@@ -7,7 +7,7 @@ AA::AA() :animation(IntRect(Vector2i(7,3),Vector2i(36,79))) ,speed(15),rotateSpe
 	baseptr = this;
 	baseptr->setEntity(anti_air, Vector2f(1500.f, 1500.f), animation, "AA");
 	speed = 25;
-	aaturret.getTurretSprite().setPosition(anti_air.getPosition().x, anti_air.getPosition().y+15);
+	aaturret.getTurretSprite().setPosition(anti_air.getPosition().x, anti_air.getPosition().y);
 	anti_air.setScale(1.5f, 1.5f);
 	baseptr->setHitRadius(projectileMax);
 	setID();
@@ -187,6 +187,31 @@ Sprite & AA::getTarget()
 float AA::getRadiusofMountPoint()
 {
 	return radiusofMountPoint;
+}
+
+float AA::getRotateSpeed()
+{
+	return rotateSpeed;
+}
+
+int AA::getRandomMode()
+{
+	return randomMode;
+}
+
+void AA::setRandomMode(int other)
+{
+	randomMode = other;
+}
+
+void AA::switchRandomMode(bool other)
+{
+	switchMode = other;
+}
+
+bool AA::getModeSwitcher()
+{
+	return switchMode;
 }
 
 void AA::setID()

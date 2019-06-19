@@ -46,6 +46,15 @@ public:
 	virtual void setTarget(Sprite& other) = 0;
 	virtual Sprite& getTarget() =0;
 	virtual float getRadiusofMountPoint() = 0;
+	virtual float getRotateSpeed() = 0;
+	//FOR AI
+
+	virtual int getRandomMode() = 0;
+	virtual void setRandomMode(int other) = 0;
+	virtual bool getModeSwitcher() = 0;
+	virtual void switchRandomMode(bool other) = 0;
+
+
 	virtual ~Playables();
 
 private:

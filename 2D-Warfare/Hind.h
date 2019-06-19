@@ -32,7 +32,12 @@ public:
 	int getID();
 	void setTarget(Sprite& other);
 	Sprite& getTarget();
+	float getRotateSpeed();
 	float getRadiusofMountPoint();
+	int getRandomMode();
+	void setRandomMode(int other);
+	void switchRandomMode(bool other);
+	bool getModeSwitcher();
 	~Hind();
 
 private:
@@ -55,5 +60,7 @@ private:
 	void setID();
 	Sprite target;
 	float radiusofMountPoint = 1;
+	int randomMode;
+	bool switchMode = true;
 };
 

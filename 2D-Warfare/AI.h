@@ -1,5 +1,6 @@
 #pragma once
 #include "Playables.h"
+#include "Map.h"
 #define OBJ Playables::getObjectsVector()
 
 
@@ -8,6 +9,12 @@ class AI
 public:
 	AI();
 	void AImove();
+
+	void searchMode();
+
+	void attackMode(int i);
+
+	void rotateTurretToEnemy();
 
 	~AI();
 private:
@@ -20,5 +27,13 @@ private:
 	float rotateSpeed;
 	std::mt19937 gen;
 	std::uniform_int_distribution<std::mt19937::result_type> dist;
+
+
+	//FOR AISEARCH
+
+
+	bool modeChange = true;
+	int random = 0;
+	bool timePassed = false;
 };
 

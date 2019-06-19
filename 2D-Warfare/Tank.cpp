@@ -148,9 +148,34 @@ float Tank::getRadiusofMountPoint()
 	return radiusofMountPoint;
 }
 
+float Tank::getRotateSpeed()
+{
+	return rotateSpeed;
+}
+
 Sprite & Tank::getTarget()
 {
 	return target;
+}
+
+int Tank::getRandomMode()
+{
+	return randomMode;
+}
+
+void Tank::setRandomMode(int other)
+{
+	randomMode = other;
+}
+
+void Tank::switchRandomMode(bool other)
+{
+	switchMode = other;
+}
+
+bool Tank::getModeSwitcher()
+{
+	return switchMode;
 }
 
 void Tank::rotateEntity(std::string direction)

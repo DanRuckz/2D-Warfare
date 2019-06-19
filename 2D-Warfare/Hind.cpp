@@ -182,9 +182,34 @@ Sprite & Hind::getTarget()
 	return target;
 }
 
+float Hind::getRotateSpeed()
+{
+	return rotateSpeed;
+}
+
 float Hind::getRadiusofMountPoint()
 {
 	return radiusofMountPoint;
+}
+
+int Hind::getRandomMode()
+{
+	return randomMode;
+}
+
+void Hind::setRandomMode(int other)
+{
+	randomMode = other;
+}
+
+void Hind::switchRandomMode(bool other)
+{
+	switchMode = other;
+}
+
+bool Hind::getModeSwitcher()
+{
+	return switchMode;
 }
 
 void Hind::setID()

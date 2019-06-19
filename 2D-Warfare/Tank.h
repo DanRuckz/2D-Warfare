@@ -34,7 +34,12 @@ public:
 	int getID();
 	void setTarget(Sprite& other);
 	float getRadiusofMountPoint();
+	float getRotateSpeed();
 	Sprite& getTarget();
+	int getRandomMode();
+	void setRandomMode(int other);
+	void switchRandomMode(bool other);
+	bool getModeSwitcher();
 
 private:
 	Turret turret;
@@ -58,5 +63,7 @@ private:
 	void setID();
 	Sprite target;
 	float radiusofMountPoint = 1;
+	int randomMode;
+	bool switchMode = true;
 };
 

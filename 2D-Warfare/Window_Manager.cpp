@@ -18,6 +18,7 @@ void Window_Manager::Window_action()
 	Clock clock_global;
 	Time global;
 	Clock timerofShot;
+	clock_global.restart();
 	Time timeofShot;
 	makeEnemies(20);
 	while (window.isOpen())
@@ -32,8 +33,6 @@ void Window_Manager::Window_action()
 			
 			while (window.pollEvent(event))
 			{
-				
-
 				if (event.type == Event::Closed)
 					window.close();
 				if (event.key.code == Keyboard::Escape)
@@ -101,6 +100,7 @@ void Window_Manager::Window_action()
 					checkCollisionWithObjects();
 					checkFlight();
 					checkHP();
+					//std::cout << OBJ[1]->getEntity().getPosition().x << std::endl;
 				}
 				
 				
@@ -412,7 +412,7 @@ void Window_Manager::checkCollisionWithObjects()
 			{
 				if (Playables::getObjectsVector()[j]->getType() == "Hind" && Playables::getObjectsVector()[i]->getType() == "Hind")
 				{
-					entity->setHP(0);
+					Playables::getObjectsVector()[i]->setHP(0);
 					Playables::getObjectsVector()[j]->setHP(0);
 				}
 			}

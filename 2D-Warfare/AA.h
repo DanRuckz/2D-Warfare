@@ -31,10 +31,13 @@ public:
 	int getID();
 	Sprite& getTarget();
 	float getRadiusofMountPoint();
-
-	
-
+	float getRotateSpeed();
+	int getRandomMode();
+	void setRandomMode(int other);
+	void switchRandomMode(bool other);
+	bool getModeSwitcher();
 	~AA();
+
 private:
 	Playables* baseptr;
 	IntRect animation;
@@ -57,6 +60,7 @@ private:
 	int ID;
 	void setID();
 	Sprite target;
-	
+	int randomMode;
+	bool switchMode = true;
 };
 
