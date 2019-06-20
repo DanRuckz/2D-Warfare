@@ -47,5 +47,8 @@ private:
 	Vector2f RespawnScreenStartPos;
 	std::string type;
 	AI ai;
+	int numOfEnemies = 20;
+	void vecCheck();
+
 };
 

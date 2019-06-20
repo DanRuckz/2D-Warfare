@@ -2,7 +2,7 @@
 
 
 
-AA::AA() :animation(IntRect(Vector2i(7,3),Vector2i(36,79))) ,speed(15),rotateSpeed(10), type("AA"),projectileMax(1700)
+AA::AA() :animation(IntRect(Vector2i(7,3),Vector2i(36,79))) ,speed(13), type("AA"),projectileMax(1700), rotateSpeed(7)
 {
 	baseptr = this;
 	baseptr->setEntity(anti_air, Vector2f(1500.f, 1500.f), animation, "AA");
@@ -34,46 +34,52 @@ void AA::rotateTurret(Vector2f mousepos, Vector2f tankpos)
 
 void AA::Fire()
 {
-	Vector2f vector;
-	float tempRadius = 14;
-	float to_radians = aaturret.getTurretSprite().getRotation() * M_PI / 180;
+	timeofShot = timerofShot.getElapsedTime();
+	if (timeofShot.asSeconds() > 0.25)
+	{
+		Vector2f vector;
+		float tempRadius = 14;
+		float to_radians = aaturret.getTurretSprite().getRotation() * M_PI / 180;
 
-	if (!left)
-	{
-		
-		shell = std::make_shared <AAShell>();
-		
-		shell->setRotationOfShot(aaturret.getTurretSprite().getRotation() - 90);
-		vector = shell->calculateDirection(shell->getSprite(), barrelLength);
-		shell->setPositionOfShot(Vector2f(aaturret.getTurretSprite().getPosition().x + tempRadius * std::cos(to_radians), aaturret.getTurretSprite().getPosition().y + tempRadius * std::sin(to_radians)) + vector);
-		vector.x /= barrelLength;
-		vector.y /= barrelLength;
-		shell->setFlightDirection(vector);
-		projectiles.push_back(shell);
-	}
+		if (!left)
+		{
 
-	if (left)
-	{
-		shell = std::make_shared <AAShell>();
-		shell->setRotationOfShot(aaturret.getTurretSprite().getRotation() - 90);
-		vector = shell->calculateDirection(shell->getSprite(), barrelLength);
-		shell->setPositionOfShot(Vector2f(aaturret.getTurretSprite().getPosition().x - tempRadius * std::cos(-to_radians), aaturret.getTurretSprite().getPosition().y + tempRadius * std::sin(-to_radians)) + vector);
-		vector.x /= barrelLength;
-		vector.y /= barrelLength;
-		shell->setFlightDirection(vector);
-		projectiles.push_back(shell);
+			shell = std::make_shared <AAShell>();
+
+			shell->setRotationOfShot(aaturret.getTurretSprite().getRotation() - 90);
+			vector = shell->calculateDirection(shell->getSprite(), barrelLength);
+			shell->setPositionOfShot(Vector2f(aaturret.getTurretSprite().getPosition().x + tempRadius * std::cos(to_radians), aaturret.getTurretSprite().getPosition().y + tempRadius * std::sin(to_radians)) + vector);
+			vector.x /= barrelLength;
+			vector.y /= barrelLength;
+			shell->setFlightDirection(vector);
+			projectiles.push_back(shell);
+		}
+
+		if (left)
+		{
+			shell = std::make_shared <AAShell>();
+			shell->setRotationOfShot(aaturret.getTurretSprite().getRotation() - 90);
+			vector = shell->calculateDirection(shell->getSprite(), barrelLength);
+			shell->setPositionOfShot(Vector2f(aaturret.getTurretSprite().getPosition().x - tempRadius * std::cos(-to_radians), aaturret.getTurretSprite().getPosition().y + tempRadius * std::sin(-to_radians)) + vector);
+			vector.x /= barrelLength;
+			vector.y /= barrelLength;
+			shell->setFlightDirection(vector);
+			projectiles.push_back(shell);
+		}
+		if (left)
+		{
+			left = false;
+			timerofShot.restart();
+			return;
+		}
+		if (!left)
+		{
+			left = true;
+			timerofShot.restart();
+			return;
+		}
+		
 	}
-	if (left)
-	{
-		left = false;
-		goto end;
-	}
-	if (!left)
-	{
-		left = true;
-		goto end;
-	}
-end: return;
 }
 
 Sprite & AA::getShell()
@@ -162,10 +168,12 @@ void AA::setRandomPosition()
 	Vector2f mapSize = Map::getMapSize();
 	
 				Vector2f temp;
-				temp.x = dist(gen) % (int)mapSize.x;
-				temp.y = dist(gen) % (int)mapSize.y;
-				anti_air.setPosition(temp);
-				aaturret.getTurretSprite().setPosition(anti_air.getPosition().x,anti_air.getPosition().y + 15);
+				do {
+					temp.x = dist(gen) % (int)mapSize.x;
+					temp.y = dist(gen) % (int)mapSize.y;
+					anti_air.setPosition(temp);
+					aaturret.getTurretSprite().setPosition(anti_air.getPosition().x, anti_air.getPosition().y + 23);
+				} while ((temp.x < 30 || temp.x > mapSize.x - 30) && ((temp.y < 30 || temp.y > mapSize.x - 30)));
 			
 }
 
@@ -213,6 +221,48 @@ bool AA::getModeSwitcher()
 {
 	return switchMode;
 }
+
+Turrets * AA::getTurretPointer()
+{
+	return &aaturret;
+}
+
+float AA::getVisibleArea()
+{
+	return visibleArea;
+}
+
+Clock & AA::getAttackClock()
+{
+	return attackTimer;
+
+}
+
+Time & AA::getAttackTime()
+{
+	return attackTime;
+}
+
+int AA::getKillCount()
+{
+	return killCount;
+}
+
+void AA::increaseKillCount()
+{
+	killCount += 1;
+}
+
+void AA::setLastDamaged(int ID)
+{
+	lastDamaged = ID;
+}
+
+int AA::getLastDamaged()
+{
+	return lastDamaged;
+}
+
 
 void AA::setID()
 {

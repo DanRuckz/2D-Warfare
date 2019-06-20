@@ -38,6 +38,14 @@ public:
 	void setRandomMode(int other);
 	void switchRandomMode(bool other);
 	bool getModeSwitcher();
+	float getVisibleArea();
+	Clock& getAttackClock();
+	Time& getAttackTime();
+	int getKillCount();
+	void increaseKillCount();
+	void setLastDamaged(int ID);
+	int getLastDamaged();
+
 	~Hind();
 
 private:
@@ -62,5 +70,14 @@ private:
 	float radiusofMountPoint = 1;
 	int randomMode;
 	bool switchMode = true;
+	Clock timerofShot;
+	Time timeofShot;
+	Clock timerBetweenShots;
+	Time timeBetweenShots;
+	float visibleArea = 1000;
+	Clock attackTimer;
+	Time attackTime;
+	int killCount = 0;
+	int lastDamaged;
 };
 

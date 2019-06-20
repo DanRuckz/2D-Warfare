@@ -1,6 +1,6 @@
 #include "Tank.h"
 
-Tank::Tank() : animation(Vector2i(28,97),Vector2i(34,59)), type("Tank")
+Tank::Tank() : animation(Vector2i(28,97),Vector2i(34,59)), type("Tank"), rotateSpeed(5)
 {
 	baseptr = this;
 	baseptr->setEntity(tank,Vector2f(1500,1500),animation,"tank");
@@ -13,6 +13,10 @@ Tank::Tank() : animation(Vector2i(28,97),Vector2i(34,59)), type("Tank")
 
 void Tank::Fire()
 {
+	timeofShot = timerofShot.getElapsedTime();
+	if (timeofShot.asSeconds() > 1)
+	{
+
 		Vector2f vector;
 		shell = std::make_shared <TankShell>();
 		shell->setRotationOfShot(turret.getTurretSprite().getRotation() - 90);
@@ -22,6 +26,9 @@ void Tank::Fire()
 		vector.y /= barrelLength;
 		shell->setFlightDirection(vector);
 		projectiles.push_back(shell);
+		timerofShot.restart();
+	}
+
 }
 
 Sprite& Tank::getTopPart()
@@ -121,10 +128,12 @@ void Tank::setRandomPosition()
 
 
 		Vector2f temp;
-		temp.x = dist(gen) % (int)mapSize.x;
-		temp.y = dist(gen) % (int)mapSize.y;
-		tank.setPosition(temp);
-		turret.getTurretSprite().setPosition(tank.getPosition());
+		do {
+			temp.x = dist(gen) % (int)mapSize.x;
+			temp.y = dist(gen) % (int)mapSize.y;
+			tank.setPosition(temp);
+			turret.getTurretSprite().setPosition(tank.getPosition());
+		} while ((temp.x < 30 || temp.x > mapSize.x - 30) && ((temp.y < 30 || temp.y > mapSize.x - 30)));
 	}
 }
 
@@ -178,6 +187,46 @@ bool Tank::getModeSwitcher()
 	return switchMode;
 }
 
+Turrets * Tank::getTurretPointer()
+{
+	return &turret;
+}
+
+float Tank::getVisibleArea()
+{
+	return visibleArea;
+}
+
+Clock & Tank::getAttackClock()
+{
+	return attackTimer;
+}
+
+Time & Tank::getAttackTime()
+{
+	return attackTime;
+}
+
+int Tank::getKillCount()
+{
+	return killCount;
+}
+
+void Tank::increaseKillCount()
+{
+	killCount += 1;
+}
+
+void Tank::setLastDamaged(int ID)
+{
+	lastDamaged = ID;
+}
+
+int Tank::getLastDamaged()
+{
+	return lastDamaged;
+}
+
 void Tank::rotateEntity(std::string direction)
 {
 	baseptr->rotateEntity(tank, direction, rotateSpeed);
@@ -204,6 +253,7 @@ void Tank::setID()
 
 	ID = dist(gen) % INT_MAX;
 }
+
 
 Tank::~Tank()
 {

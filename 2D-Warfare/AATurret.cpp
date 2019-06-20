@@ -2,7 +2,7 @@
 
 
 
-AATurret::AATurret() : animation(Vector2i(12, 163), Vector2i(27, 54))
+AATurret::AATurret() : animation(Vector2i(12, 163), Vector2i(27, 54)), rotateSpeed(5)
 {
 	baseptr = this;
 	baseptr->setEntity(turretSprite, turretpos, animation, "AA");
@@ -20,6 +20,12 @@ void AATurret::rotateTurret(Vector2f& mousepos, Vector2f& tankpos)
 	baseptr->rotateTurret(turretSprite, mousepos, tankpos);
 }
 
+
+
+float AATurret::getRotateSpeed()
+{
+	return rotateSpeed;
+}
 
 
 AATurret::~AATurret()

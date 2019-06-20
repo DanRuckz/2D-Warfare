@@ -8,6 +8,7 @@ public:
 	Sprite& getTurretSprite();
 	void rotateTurret(Vector2f& mousepos, Vector2f& tankpos);
 	//void setTurretPos(Vector2f turretpos);
+	float getRotateSpeed();
 	~AATurret();
 
 private:
@@ -18,6 +19,6 @@ private:
 	float speed;
 	Vector2f turretpos;
 	IntRect animation;
-
+	float rotateSpeed;
 };
 

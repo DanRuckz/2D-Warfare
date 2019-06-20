@@ -90,6 +90,7 @@ void Playables::projectileFly(std::vector<std::shared_ptr<Projectiles>>& project
 		{
 			objindex = checkIntersectionWithObjects(projectile, selfObjectIndex);
 			Playables::getObjectsVector()[objindex]->reduceDamage(projectilevec[index]->getDamage());
+			Playables::getObjectsVector()[objindex]->setLastDamaged(Playables::getObjectsVector()[selfObjectIndex]->getID());
 			projectile.reset();
 			projectilevec.erase(projectilevec.begin() + index);
 			projectilevec.shrink_to_fit();
@@ -158,4 +159,14 @@ void Playables::AImove()
 
 Playables::~Playables()
 {
+}
+
+Turrets * Playables::getTurretPointer()
+{
+	return nullptr;
+}
+
+void Playables::setLastDamaged(int ID)
+{
+	lastDamaged= ID;
 }

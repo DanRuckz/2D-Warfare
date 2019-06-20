@@ -40,6 +40,15 @@ public:
 	void setRandomMode(int other);
 	void switchRandomMode(bool other);
 	bool getModeSwitcher();
+	Turrets* getTurretPointer();
+	float getVisibleArea();
+	Clock& getAttackClock();
+	Time& getAttackTime();
+	int getKillCount();
+	void increaseKillCount();
+	void setLastDamaged(int ID);
+	int getLastDamaged();
+
 
 private:
 	Turret turret;
@@ -47,7 +56,7 @@ private:
 	float offset_y = -3;
 	Sprite tank;
 	IntRect animation;
-	float rotateSpeed = 5;
+	float rotateSpeed;
 	Playables* baseptr;
 	float speed;
 	float radius = 1;
@@ -65,5 +74,12 @@ private:
 	float radiusofMountPoint = 1;
 	int randomMode;
 	bool switchMode = true;
+	Clock timerofShot;
+	Time timeofShot;
+	float visibleArea = 900;
+	Clock attackTimer;
+	Time attackTime;
+	int killCount = 0;
+	int lastDamaged;
 };
 

@@ -2,7 +2,7 @@
 
 
 
-Hind::Hind() : animation(Vector2i(524, 0), Vector2i(28, 62)), speed(27),rotateSpeed(10),type("Hind"), projectileMax(1700)
+Hind::Hind() : animation(Vector2i(524, 0), Vector2i(28, 62)), speed(30),rotateSpeed(10),type("Hind"), projectileMax(1700)
 {
 	baseptr = this;
 	baseptr->setEntity(hind, Vector2f(1500.f, 1500.f), animation, "hind");
@@ -37,19 +37,23 @@ Sprite & Hind::getTopPart()
 
 void Hind::Fire()
 {
-	
+	timeBetweenShots = timerBetweenShots.getElapsedTime();
+	timeofShot = timerofShot.getElapsedTime();
+	if (shotsFired < 5 && timeBetweenShots.asSeconds() > 0.15)
+	{
 		Vector2f vector;
 		float tempRadius = 30;
 		float to_radians = hind.getRotation()  * M_PI / 180;;
 		shell = std::make_shared <HindShell>();
 		shell->setRotationOfShot(hind.getRotation() - 90);
 		vector = shell->calculateDirection(shell->getSprite(), barrelLength);
-		shell->setPositionOfShot(Vector2f(hind.getPosition().x + tempRadius * std::cos(to_radians),hind.getPosition().y  + tempRadius * std::sin(to_radians)) + vector);
+		shell->setPositionOfShot(Vector2f(hind.getPosition().x + tempRadius * std::cos(to_radians), hind.getPosition().y + tempRadius * std::sin(to_radians)) + vector);
 		vector.x /= barrelLength;
 		vector.y /= barrelLength;
 		shell->setFlightDirection(vector);
 		projectiles.push_back(shell);
-		
+
+
 
 		to_radians = hind.getRotation()  * M_PI / 180;;
 		shell = std::make_shared <HindShell>();
@@ -61,7 +65,17 @@ void Hind::Fire()
 		shell->setFlightDirection(vector);
 		projectiles.push_back(shell);
 		shotsFired += 1;
-		
+		timerBetweenShots.restart();
+	}
+	if (shotsFired == 4)
+	{
+		timerofShot.restart();
+	}
+	timeofShot = timerofShot.getElapsedTime();
+	if (shotsFired >= 5 && timeofShot.asSeconds() > 4)
+	{
+		nullifyShotsFired();
+	}
 }
 
 Sprite & Hind::getShell()
@@ -154,13 +168,15 @@ void Hind::setRandomPosition()
 	std::uniform_int_distribution<std::mt19937::result_type> dist;
 	Vector2f mapSize = Map::getMapSize();
 	
-				Vector2f temp;
-				temp.x = dist(gen) % (int)mapSize.x;
-				temp.y = dist(gen) % (int)mapSize.y;
-				hind.setPosition(temp);
-				hindblade.getBladeSprite().setPosition(hind.getPosition());
+		Vector2f temp;
+		do{
+		temp.x = dist(gen) % (int)mapSize.x;
+		temp.y = dist(gen) % (int)mapSize.y;
+		hind.setPosition(temp);
+		hindblade.getBladeSprite().setPosition(hind.getPosition());
+	}
+		while ((temp.x < 30 || temp.x > mapSize.x - 30) && ((temp.y < 30 || temp.y > mapSize.x - 30)));
 }
-
 void Hind::setHP(float Hp)
 {
 	HP = Hp;
@@ -210,6 +226,43 @@ void Hind::switchRandomMode(bool other)
 bool Hind::getModeSwitcher()
 {
 	return switchMode;
+}
+
+float Hind::getVisibleArea()
+{
+	return visibleArea;
+}
+
+Clock & Hind::getAttackClock()
+{
+	return attackTimer;
+
+}
+
+Time & Hind::getAttackTime()
+{
+	return attackTime;
+
+}
+
+int Hind::getKillCount()
+{
+	return killCount;
+}
+
+void Hind::increaseKillCount()
+{
+	killCount += 1;
+}
+
+void Hind::setLastDamaged(int ID)
+{
+	lastDamaged = ID;
+}
+
+int Hind::getLastDamaged()
+{
+	return lastDamaged;
 }
 
 void Hind::setID()

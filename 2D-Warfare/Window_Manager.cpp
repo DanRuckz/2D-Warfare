@@ -17,12 +17,13 @@ void Window_Manager::Window_action()
 	window.create(VideoMode(resolution), "2D-Warfare", WINDOW_MODE);
 	Clock clock_global;
 	Time global;
-	Clock timerofShot;
+	Clock respawnTimer;
 	clock_global.restart();
-	Time timeofShot;
-	makeEnemies(20);
+	Time respawnTime;
+	makeEnemies(numOfEnemies);
 	while (window.isOpen())
 	{
+		respawnTime = respawnTimer.getElapsedTime();
 		global = clock_global.getElapsedTime();
 		//change to debugModeTime or releaseModeTime depends on which mode you are
 		if (global.asMilliseconds() > debugModeTime)
@@ -30,6 +31,7 @@ void Window_Manager::Window_action()
 			clock_global.restart();
 			mousePos = Mouse::getPosition();
 			coords = window.mapPixelToCoords(mousePos);
+			
 			
 			while (window.pollEvent(event))
 			{
@@ -47,29 +49,12 @@ void Window_Manager::Window_action()
 						if (entity != nullptr)
 						{
 							if (entity->getType() == "Tank")
-							{
-								timeofShot = timerofShot.getElapsedTime();
-								if (timeofShot.asSeconds() > 2)
-								{
+							{	
 									entity->Fire();
-									timerofShot.restart();
-								}
 							}
 							if (entity->getType() == "Hind")
 							{
-								if (entity->getShotsFired() < 5)
-								{
 									entity->Fire();
-								}
-								if (entity->getShotsFired() == 4)
-								{
-									timerofShot.restart();
-								}
-								timeofShot = timerofShot.getElapsedTime();
-								if (entity->getShotsFired() >= 5 && timeofShot.asSeconds() > 4)
-								{
-									entity->nullifyShotsFired();
-								}
 							}
 
 						}
@@ -86,12 +71,7 @@ void Window_Manager::Window_action()
 				{
 					if (entity != nullptr && entity->getType() == "AA")
 					{
-						timeofShot = timerofShot.getElapsedTime();
-						if (timeofShot.asSeconds() > 0.25)
-						{
 							entity->Fire();
-							timerofShot.restart();
-						}
 					}
 				}
 				if (entity != nullptr)
@@ -100,9 +80,7 @@ void Window_Manager::Window_action()
 					checkCollisionWithObjects();
 					checkFlight();
 					checkHP();
-					//std::cout << OBJ[1]->getEntity().getPosition().x << std::endl;
 				}
-				
 				
 				checkLimits();
 				respawn();
@@ -110,6 +88,17 @@ void Window_Manager::Window_action()
 				limitEntity("up");
 				limitEntity("down");
 				
+
+
+				if (respawnTime.asSeconds() > 5)
+				{
+					vecCheck();
+					respawnTimer.restart();
+				}
+
+
+
+
 				window.draw(map.getBoundingRect());
 				for (int i = 0; i < map.getMapVec().size(); i++)
 					window.draw(*map.getMapVec()[i]);
@@ -150,6 +139,12 @@ void Window_Manager::checkHP()
 	{
 		if (Playables::getObjectsVector()[i]->getHP() <= 0)
 		{
+			for (int j = 0; j < Playables::getObjectsVector().size(); j++)
+			{
+				if (Playables::getObjectsVector()[i]->getLastDamaged() == Playables::getObjectsVector()[j]->getID())
+					Playables::getObjectsVector()[j]->increaseKillCount();
+			}
+
 			player = Playables::getObjectsVector()[i]->getPlayer();
 			if (player)
 			{
@@ -420,6 +415,16 @@ void Window_Manager::checkCollisionWithObjects()
 	}
 }
 
+void Window_Manager::vecCheck()
+{
+	bool respawn = false;
+	for (int i = 0; i < Playables::getObjectsVector().size(); i++)
+		if (Playables::getObjectsVector()[i]->getPlayer())
+			respawn = true;
+
+	if (respawn && Playables::getObjectsVector().size() < numOfEnemies)
+		makeEnemies(1);
+}
 Window_Manager::~Window_Manager()
 {
 }

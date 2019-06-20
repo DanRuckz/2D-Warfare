@@ -1,6 +1,8 @@
 #pragma once
 #include "Entities.h"
 #include "Projectiles.h"
+#include "Turret.h"
+#include "AATurret.h"
 #include <random>
 class Playables :
 	public Entities
@@ -47,14 +49,20 @@ public:
 	virtual Sprite& getTarget() =0;
 	virtual float getRadiusofMountPoint() = 0;
 	virtual float getRotateSpeed() = 0;
+	virtual Turrets* getTurretPointer();
+	virtual void setLastDamaged(int ID) =0;
+	virtual int getLastDamaged() = 0;
+	virtual int getKillCount() = 0;
+	virtual void increaseKillCount() = 0;
 	//FOR AI
 
 	virtual int getRandomMode() = 0;
 	virtual void setRandomMode(int other) = 0;
 	virtual bool getModeSwitcher() = 0;
 	virtual void switchRandomMode(bool other) = 0;
-
-
+	virtual float getVisibleArea() = 0;
+	virtual Clock& getAttackClock() = 0;
+	virtual Time& getAttackTime() = 0;
 	virtual ~Playables();
 
 private:
@@ -62,6 +70,7 @@ private:
 	Sprite placeholder;
 	float radius;
 	bool Player;
+	int lastDamaged;
 protected:
 	int ID;
 };

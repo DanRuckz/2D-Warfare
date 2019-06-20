@@ -36,6 +36,14 @@ public:
 	void setRandomMode(int other);
 	void switchRandomMode(bool other);
 	bool getModeSwitcher();
+	Turrets* getTurretPointer();
+	float getVisibleArea();
+	Clock& getAttackClock();
+	Time& getAttackTime();
+	int getKillCount();
+	void increaseKillCount();
+	void setLastDamaged(int ID);
+	int getLastDamaged();
 	~AA();
 
 private:
@@ -43,7 +51,7 @@ private:
 	IntRect animation;
 	Sprite anti_air;
 	float speed;
-	float rotateSpeed = 5;
+	float rotateSpeed;
 	AATurret aaturret;
 	float offset_x = 0;
 	float offset_y = 23;
@@ -62,5 +70,12 @@ private:
 	Sprite target;
 	int randomMode;
 	bool switchMode = true;
+	Clock timerofShot;
+	Time timeofShot;
+	float visibleArea = 800;
+	Clock attackTimer;
+	Time attackTime;
+	int killCount = 0;
+	int lastDamaged;
 };
 
