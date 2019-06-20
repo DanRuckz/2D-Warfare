@@ -5,11 +5,14 @@
 Hind::Hind() : animation(Vector2i(524, 0), Vector2i(28, 62)), speed(30),rotateSpeed(10),type("Hind"), projectileMax(1700)
 {
 	baseptr = this;
+	baseptr->setEntity(HPText, 50);
 	baseptr->setEntity(hind, Vector2f(1500.f, 1500.f), animation, "hind");
 	hindblade.getBladeSprite().setPosition(hind.getPosition().x,hind.getPosition().y);
 	hind.setScale(2.5f,2.5f);
 	baseptr->setHitRadius(projectileMax);
 	setID();
+	HPText.setFillColor(Color::Black);
+	HPText.setStyle(Text::Bold);
 }
 
 Sprite & Hind::getEntity()
@@ -265,6 +268,11 @@ int Hind::getLastDamaged()
 	return lastDamaged;
 }
 
+Text & Hind::getHPText()
+{
+	return HPText;
+}
+
 void Hind::setID()
 {
 	std::mt19937 gen;
@@ -272,4 +280,10 @@ void Hind::setID()
 	std::uniform_int_distribution<std::mt19937::result_type> dist;
 
 	ID = dist(gen) % INT_MAX;
+}
+
+void Hind::updateHPText()
+{
+	HPText.setString(std::to_string((int)HP));
+	HPText.setPosition(hind.getPosition().x + HPoffset_x, hind.getPosition().y + HPoffset_y);
 }

@@ -8,11 +8,13 @@
 #include "Entities.h"
 #include "RespawnScreen.h"
 #include "AI.h"
+#include "HighScore.h"
 
 class Window_Manager
 {
 public:
 	Window_Manager();
+	void updateHP();
 	~Window_Manager();
 private:
 	Event event;
@@ -49,6 +51,8 @@ private:
 	AI ai;
 	int numOfEnemies = 20;
 	void vecCheck();
-
+	Clock respawnTimer;
+	Time respawnTime;
+	HighScore highscore;
 };
 

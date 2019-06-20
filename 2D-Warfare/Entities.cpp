@@ -25,6 +25,8 @@ void Entities::loadTextures()
 	setTexture();
 	loadFile = "assets/pickText.png";
 	setTexture();
+	loadFile = "assets/Fonts/TravelingTypewriter.ttf";
+	setFont();
 }
 
 //some kung fu for loading texture only one time
@@ -34,6 +36,15 @@ void Entities::setTexture()
 	if (!texture->loadFromFile(loadFile))
 		std::cout << "failed to load texture " << std::endl;
 	textures.push_back(texture);
+}
+
+void Entities::setFont()
+{
+	font = new Font;
+	if (!font->loadFromFile(loadFile))
+	{
+		std::cout << "failed to load font " << std::endl;
+	}
 }
 
 
@@ -67,7 +78,11 @@ void Entities::setEntity(Sprite& entity, Vector2f position, IntRect animation, s
 }
 
 
-
+void Entities::setEntity(Text& text, float size)
+{
+	text.setFont(*font);
+	text.setCharacterSize(size);
+}
 
 /*void Entities::changeAnimation(Sprite & entity,IntRect animation)
 {

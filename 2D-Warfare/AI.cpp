@@ -268,7 +268,7 @@ void AI::attackMode()
 			{
 			//	AIrotateToTarget(OBJ[i]->getEntity(), OBJ[i]->getTarget(), OBJ[i], OBJ[i]->getRotateSpeed());
 				//AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
-					
+			
 				OBJ[i]->Fire();
 			}
 			if (OBJ[i]->getType() == "Hind")
@@ -286,7 +286,7 @@ void AI::attackMode()
 void AI::rotateTurretToEnemy()
 {
 	float distance = 1000000;
-	for (int i = 0; i < Playables::getObjectsVector().size(); i++)
+	for (int i = 0; i < OBJ.size(); i++)
 	{
 		for (int j = 0; j < OBJ.size(); j++)
 		{

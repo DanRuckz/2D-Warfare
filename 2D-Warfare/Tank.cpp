@@ -3,12 +3,15 @@
 Tank::Tank() : animation(Vector2i(28,97),Vector2i(34,59)), type("Tank"), rotateSpeed(5)
 {
 	baseptr = this;
+	baseptr->setEntity(HPText, 50);
 	baseptr->setEntity(tank,Vector2f(1500,1500),animation,"tank");
 	speed = 15.f;
 	turret.getTurretSprite().setPosition(tank.getPosition().x, tank.getPosition().y);
 	tank.setScale(2.5f, 2.5f);
 	baseptr->setHitRadius(projectileMax);
 	setID();
+	HPText.setFillColor(Color::Black);
+	HPText.setStyle(Text::Bold);
 }
 
 void Tank::Fire()
@@ -76,9 +79,9 @@ int Tank::getSelfIndex()
 float Tank::checkIntersectionWithObjects(std::shared_ptr<Projectiles> pointer, int selfObjectIndex)
 {
 	
-		for (int i = 0; i <Playables::getObjectsVector().size(); i++)
+		for (int i = 0; i <OBJ.size(); i++)
 		{
-			if (pointer->intersectWithObjects(pointer->getSprite(), Playables::getObjectsVector()[i]->getEntity()) && Playables::getObjectsVector()[i]->getType() != "Hind")
+			if (pointer->intersectWithObjects(pointer->getSprite(), OBJ[i]->getEntity()) && OBJ[i]->getType() != "Hind")
 			{
 				return i;
 			}
@@ -227,6 +230,17 @@ int Tank::getLastDamaged()
 	return lastDamaged;
 }
 
+Text & Tank::getHPText()
+{
+	return HPText;
+}
+
+void Tank::updateHPText()
+{
+	HPText.setString(std::to_string((int)HP));
+	HPText.setPosition(tank.getPosition().x + HPoffset_x, tank.getPosition().y + HPoffset_y);
+}
+
 void Tank::rotateEntity(std::string direction)
 {
 	baseptr->rotateEntity(tank, direction, rotateSpeed);
@@ -253,6 +267,8 @@ void Tank::setID()
 
 	ID = dist(gen) % INT_MAX;
 }
+
+
 
 
 Tank::~Tank()

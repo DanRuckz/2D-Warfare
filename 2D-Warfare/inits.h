@@ -42,3 +42,4 @@ const int VEC_SIZE = 25;
 #define FULLSCREEN  Style::Fullscreen
 #define WINDOW_MODE  Style::Resize | Style::Close
 #define Fullscreen_Switch (Keyboard::isKeyPressed(Keyboard::LAlt) || Keyboard::isKeyPressed(Keyboard::RAlt)) && (Keyboard::isKeyPressed(Keyboard::Enter))
+#define OBJ Playables::getObjectsVector()

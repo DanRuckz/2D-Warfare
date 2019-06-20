@@ -48,6 +48,8 @@ public:
 	void increaseKillCount();
 	void setLastDamaged(int ID);
 	int getLastDamaged();
+	Text& getHPText();
+	void updateHPText();
 
 
 private:
@@ -81,5 +83,8 @@ private:
 	Time attackTime;
 	int killCount = 0;
 	int lastDamaged;
+	Text HPText;
+	int HPoffset_x = -45;
+	int HPoffset_y = -150;
 };
 

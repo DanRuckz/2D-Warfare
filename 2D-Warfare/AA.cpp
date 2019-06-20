@@ -5,12 +5,15 @@
 AA::AA() :animation(IntRect(Vector2i(7,3),Vector2i(36,79))) ,speed(13), type("AA"),projectileMax(1700), rotateSpeed(7)
 {
 	baseptr = this;
+	baseptr->setEntity(HPText, 50);
 	baseptr->setEntity(anti_air, Vector2f(1500.f, 1500.f), animation, "AA");
 	speed = 25;
 	aaturret.getTurretSprite().setPosition(anti_air.getPosition().x, anti_air.getPosition().y);
 	anti_air.setScale(1.5f, 1.5f);
 	baseptr->setHitRadius(projectileMax);
 	setID();
+	HPText.setFillColor(Color::Black);
+	HPText.setStyle(Text::Bold);
 }
 
 void AA::moveEntity(std::string direction)
@@ -263,6 +266,17 @@ int AA::getLastDamaged()
 	return lastDamaged;
 }
 
+Text & AA::getHPText()
+{
+	return HPText;
+}
+
+void AA::updateHPText()
+{
+	HPText.setString(std::to_string((int)HP));
+	HPText.setPosition(anti_air.getPosition().x + HPoffset_x, anti_air.getPosition().y + HPoffset_y);
+}
+
 
 void AA::setID()
 {
@@ -272,6 +286,7 @@ void AA::setID()
 
 	ID = dist(gen) % INT_MAX;
 }
+
 
 
 AA::~AA()

@@ -54,8 +54,9 @@ public:
 	virtual int getLastDamaged() = 0;
 	virtual int getKillCount() = 0;
 	virtual void increaseKillCount() = 0;
+	void setHPText(Text& first,Text& other);
+	virtual Text& getHPText() = 0;
 	//FOR AI
-
 	virtual int getRandomMode() = 0;
 	virtual void setRandomMode(int other) = 0;
 	virtual bool getModeSwitcher() = 0;
@@ -63,6 +64,7 @@ public:
 	virtual float getVisibleArea() = 0;
 	virtual Clock& getAttackClock() = 0;
 	virtual Time& getAttackTime() = 0;
+	virtual void updateHPText() =0;
 	virtual ~Playables();
 
 private:

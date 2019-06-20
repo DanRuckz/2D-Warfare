@@ -171,6 +171,7 @@
     <ClCompile Include="Blades.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Entities.cpp" />
+    <ClCompile Include="HighScore.cpp" />
     <ClCompile Include="Hind.cpp" />
     <ClCompile Include="HindBlade.cpp" />
     <ClCompile Include="HindShell.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Declarations.h" />
     <ClInclude Include="Entities.h" />
+    <ClInclude Include="HighScore.h" />
     <ClInclude Include="Hind.h" />
     <ClInclude Include="HindBlade.h" />
     <ClInclude Include="HindShell.h" />

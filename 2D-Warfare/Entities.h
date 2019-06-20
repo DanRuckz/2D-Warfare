@@ -10,6 +10,7 @@ public:
 	static Texture* texture;
 	Entities();
 	void setEntity(Sprite & entity, Vector2f position, IntRect animation,std::string type);
+	void setEntity(Text & text,float size);
 	virtual ~Entities();
 
 private:
@@ -17,5 +18,7 @@ private:
 	int checkType(std::string);
 	void loadTextures();
 	void setTexture();
+	void setFont();
+	static Font* font;
 };
 

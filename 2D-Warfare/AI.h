@@ -1,7 +1,7 @@
 #pragma once
 #include "Playables.h"
 #include "Map.h"
-#define OBJ Playables::getObjectsVector()
+
 
 
 class AI
