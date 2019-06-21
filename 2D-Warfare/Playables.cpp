@@ -28,10 +28,10 @@ void Playables::rotateEntity(Sprite & entity, std::string direction, float rotat
 
 
 
-void Playables::moveEntity(Sprite& entity, std::string direction, float angle, float speed)
+void Playables::moveEntity(Sprite& entity, std::string direction, float speed)
 {
 	Vector2f whereto;
-	angle = entity.getRotation();
+	float angle = entity.getRotation();
 	float rotation_radians;
 	rotation_radians = angle * M_PI / 180;
 
@@ -157,6 +157,11 @@ void Playables::AImove()
 {
 }
 
+
+bool Playables::getReloading()
+{
+	return false;
+}
 
 Playables::~Playables()
 {

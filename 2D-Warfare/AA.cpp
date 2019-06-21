@@ -2,7 +2,7 @@
 
 
 
-AA::AA() :animation(IntRect(Vector2i(7,3),Vector2i(36,79))) ,speed(13), type("AA"),projectileMax(1700), rotateSpeed(7)
+AA::AA() :animation(IntRect(Vector2i(7,3),Vector2i(36,79))) ,speed(10), type("AA"),projectileMax(1700), rotateSpeed(7)
 {
 	baseptr = this;
 	baseptr->setEntity(HPText, 50);
@@ -18,7 +18,7 @@ AA::AA() :animation(IntRect(Vector2i(7,3),Vector2i(36,79))) ,speed(13), type("AA
 
 void AA::moveEntity(std::string direction)
 {
-	baseptr->moveEntity(anti_air, direction, anti_air.getRotation(), speed);
+	baseptr->moveEntity(anti_air, direction, speed);
 	aaturret.moveTurret(anti_air, aaturret.getTurretSprite(), radiusofMountPoint);
 }
 
@@ -176,11 +176,11 @@ void AA::setRandomPosition()
 					temp.y = dist(gen) % (int)mapSize.y;
 					anti_air.setPosition(temp);
 					aaturret.getTurretSprite().setPosition(anti_air.getPosition().x, anti_air.getPosition().y + 23);
-				} while ((temp.x < 30 || temp.x > mapSize.x - 30) && ((temp.y < 30 || temp.y > mapSize.x - 30)));
+				} while ((temp.x < 60 || temp.x > mapSize.x - 60) && ((temp.y < 60 || temp.y > mapSize.x - 60)));
 			
 }
 
-void AA::setTarget(Sprite & other)
+void AA::setTarget(Sprite * other)
 {
 	target = other;
 }
@@ -190,7 +190,7 @@ int AA::getID()
 	return ID;
 }
 
-Sprite & AA::getTarget()
+Sprite * AA::getTarget()
 {
 	return target;
 }
@@ -275,6 +275,16 @@ void AA::updateHPText()
 {
 	HPText.setString(std::to_string((int)HP));
 	HPText.setPosition(anti_air.getPosition().x + HPoffset_x, anti_air.getPosition().y + HPoffset_y);
+}
+
+void AA::setTargetType(std::string type)
+{
+	targetType = type;
+}
+
+std::string AA::getTargetType()
+{
+	return targetType;
 }
 
 

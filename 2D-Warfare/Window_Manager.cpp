@@ -82,7 +82,7 @@ void Window_Manager::Window_action()
 					movement();
 					checkCollisionWithObjects();
 					checkFlight();
-					highscore.scorePosition();
+					highscore.updateTimePlayed();
 					checkHP();
 				}
 				
@@ -110,6 +110,8 @@ void Window_Manager::Window_action()
 				if (respawnScreen != nullptr)
 					drawRespawn();
 				window.draw(highscore.getHighScore());
+				window.draw(highscore.gettopHighScore());
+				window.draw(highscore.getTimePlayedText());
 				window.display();
 		}
 	}
@@ -144,6 +146,7 @@ void Window_Manager::checkHP()
 			{
 				if (OBJ[i]->getLastDamaged() == OBJ[j]->getID())
 				{
+					OBJ[j]->setTarget(nullptr);
 					OBJ[j]->increaseKillCount();
 					if (OBJ[j]->getPlayer())
 						highscore.updateScore();
@@ -153,8 +156,11 @@ void Window_Manager::checkHP()
 			player = OBJ[i]->getPlayer();
 			if (player)
 			{
+				highscore.updateScore();
+				highscore.nullifyScore();
 				entity = nullptr;
 			}
+
 			delete OBJ[i];
 			OBJ[i] = nullptr;
 			OBJ.erase(OBJ.begin() + i);
@@ -177,20 +183,20 @@ void Window_Manager::limitEntity(std::string direction)
 				OBJ[i]->getTopPart().move(OBJ[i]->getSpeed() * std::sin(OBJ[i]->getEntity().getRotation() * M_PI / 180), OBJ[i]->getSpeed() * std::cos(OBJ[i]->getEntity().getRotation()* M_PI / 180));
 			}
 			//LEFT BOUND
-			if (map.getBoundingRect().getGlobalBounds().left >= OBJ[i]->getEntity().getPosition().x - OBJ[i]->getEntity().getTextureRect().width / 2 * OBJ[i]->getEntity().getScale().x - 23)
+			if (map.getBoundingRect().getGlobalBounds().left >= OBJ[i]->getEntity().getPosition().x - OBJ[i]->getEntity().getTextureRect().width / 2 * OBJ[i]->getEntity().getScale().x - 30)
 			{
 				OBJ[i]->getEntity().move(-OBJ[i]->getSpeed() * std::sin(OBJ[i]->getEntity().getRotation() * M_PI / 180), OBJ[i]->getSpeed() * std::cos(OBJ[i]->getEntity().getRotation()* M_PI / 180));
 				OBJ[i]->getTopPart().move(-OBJ[i]->getSpeed() * std::sin(OBJ[i]->getEntity().getRotation() * M_PI / 180), OBJ[i]->getSpeed() * std::cos(OBJ[i]->getEntity().getRotation()* M_PI / 180));
 
 			}
 			//BOTTOM BOUND
-			if (map.getBoundingRect().getGlobalBounds().height <= OBJ[i]->getEntity().getPosition().y + OBJ[i]->getEntity().getTextureRect().height / 2 * OBJ[i]->getEntity().getScale().y - 10)
+			if (map.getBoundingRect().getGlobalBounds().height <= OBJ[i]->getEntity().getPosition().y + OBJ[i]->getEntity().getTextureRect().height / 2 * OBJ[i]->getEntity().getScale().y - 30)
 			{
 				OBJ[i]->getEntity().move(OBJ[i]->getSpeed() * std::sin(OBJ[i]->getEntity().getRotation() * M_PI / 180), OBJ[i]->getSpeed() * std::cos(OBJ[i]->getEntity().getRotation()* M_PI / 180));
 				OBJ[i]->getTopPart().move(OBJ[i]->getSpeed() * std::sin(OBJ[i]->getEntity().getRotation() * M_PI / 180), OBJ[i]->getSpeed() * std::cos(OBJ[i]->getEntity().getRotation()* M_PI / 180));
 			}
 			//RIGHT BOUND
-			if (map.getBoundingRect().getGlobalBounds().width <= OBJ[i]->getEntity().getPosition().x + OBJ[i]->getEntity().getTextureRect().width / 2 * OBJ[i]->getEntity().getScale().x + 23)
+			if (map.getBoundingRect().getGlobalBounds().width <= OBJ[i]->getEntity().getPosition().x + OBJ[i]->getEntity().getTextureRect().width / 2 * OBJ[i]->getEntity().getScale().x + 30)
 			{
 				OBJ[i]->getEntity().move(-OBJ[i]->getSpeed() * std::sin(OBJ[i]->getEntity().getRotation() * M_PI / 180), OBJ[i]->getSpeed() * std::cos(OBJ[i]->getEntity().getRotation()* M_PI / 180));
 				OBJ[i]->getTopPart().move(-OBJ[i]->getSpeed() * std::sin(OBJ[i]->getEntity().getRotation() * M_PI / 180), OBJ[i]->getSpeed() * std::cos(OBJ[i]->getEntity().getRotation()* M_PI / 180));
@@ -220,9 +226,13 @@ void Window_Manager::limitEntity(std::string direction)
 			//RIGHT BOUND
 			if (map.getBoundingRect().getGlobalBounds().width <= OBJ[i]->getEntity().getPosition().x + OBJ[i]->getEntity().getTextureRect().width + 23)
 			{
-				OBJ[i]->getEntity().move(OBJ[i]->getSpeed() * std::sin(OBJ[i]->getEntity().getRotation() * M_PI / 180) / 1.5, -OBJ[i]->getSpeed() * std::cos(OBJ[i]->getEntity().getRotation()* M_PI / 180) / 1.5);
-				OBJ[i]->getTopPart().move(OBJ[i]->getSpeed() * std::sin(OBJ[i]->getEntity().getRotation() * M_PI / 180) / 1.5, -OBJ[i]->getSpeed() * std::cos(OBJ[i]->getEntity().getRotation()* M_PI / 180) / 1.5);
+				OBJ[i]->getEntity().move(OBJ[i]->getSpeed() * std::sin(OBJ[i]->getEntity().getRotation() * M_PI / 180) / 1.5, OBJ[i]->getSpeed() * std::cos(OBJ[i]->getEntity().getRotation()* M_PI / 180) / 1.5);
+				OBJ[i]->getTopPart().move(OBJ[i]->getSpeed() * std::sin(OBJ[i]->getEntity().getRotation() * M_PI / 180) / 1.5, OBJ[i]->getSpeed() * std::cos(OBJ[i]->getEntity().getRotation()* M_PI / 180) / 1.5);
 			}
+		}
+		if (OBJ[i]->getEntity().getPosition().x > 6300 || OBJ[i]->getEntity().getPosition().x < -50 || OBJ[i]->getEntity().getPosition().y > 6200 || OBJ[i]->getEntity().getPosition().y < -50)
+		{
+			OBJ[i]->setRandomPosition();
 		}
 	}
 }
@@ -232,24 +242,42 @@ void Window_Manager::checkLimits()
 	if (entity != nullptr)
 	{
 		Vector2f logics(Vector2f(entity->getEntity().getPosition()));
+		Vector2f scorePos(entity->getEntity().getPosition().x - resolution.width/2 * factor, entity->getEntity().getPosition().y - resolution.height / 2 * factor);
+		Vector2f timerPos(entity->getEntity().getPosition().x, entity->getEntity().getPosition().y - resolution.height / 2 * factor);
+		Vector2f topScorePos(entity->getEntity().getPosition().x + resolution.width/2 * factor - 800, entity->getEntity().getPosition().y - resolution.height / 2 * factor);
+		
 
 		if (entity->getEntity().getPosition().y - window.getSize().y / 2 * factor < map.getBoundingRect().getPosition().y)
 		{
 			logics.y = map.getBoundingRect().getPosition().y + window.getSize().y / 2 * factor;
+			scorePos.y = map.getBoundingRect().getPosition().y;
+			timerPos.y = scorePos.y;
+			topScorePos.y = scorePos.y;
+			
 		}
 		if (entity->getEntity().getPosition().y + window.getSize().y / 2 * factor > map.getBoundingRect().getSize().y)
 		{
 			logics.y = map.getBoundingRect().getSize().y - window.getSize().y / 2 * factor;
+			scorePos.y = view.getCenter().y - window.getSize().y /2 * factor;
+			timerPos.y = scorePos.y;
+			topScorePos.y = scorePos.y;
 		}
 		if (entity->getEntity().getPosition().x - window.getSize().x / 2 * factor < map.getBoundingRect().getPosition().x)
 		{
 			logics.x = map.getBoundingRect().getPosition().x + window.getSize().x / 2 * factor;
+			scorePos.x = map.getBoundingRect().getPosition().x;
+			timerPos.x = scorePos.x + window.getSize().x / 2 * factor;
+			topScorePos.x = scorePos.x + window.getSize().x * factor - 800;
 		}
 		if (entity->getEntity().getPosition().x + window.getSize().x / 2 * factor > map.getBoundingRect().getSize().x)
 		{
 			logics.x = map.getBoundingRect().getSize().x - window.getSize().x / 2 * factor;
+			scorePos.x = view.getCenter().x - window.getSize().x /2 * factor;
+			timerPos.x = view.getCenter().x;
+			topScorePos.x = view.getCenter().x + window.getSize().x / 2 * factor - 800;
 		}
-
+		
+		highscore.setTextPos(scorePos,topScorePos,timerPos);
 		view.setCenter(logics);
 	}
 }
@@ -266,6 +294,8 @@ void Window_Manager::makeEntity(std::string type)
 	entity = new Hind;
 
 	highscore.setEntityPtr(entity);
+	highscore.nullifyScore();
+	highscore.getHighScore();
 	entity->setPlayer(true);
 	entity->setSelfIndex(OBJ.size());
 	entity->setRandomPosition();

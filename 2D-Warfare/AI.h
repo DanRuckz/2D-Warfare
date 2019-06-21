@@ -25,7 +25,9 @@ public:
 private:
 
 	float measureDistance(Sprite & first, Sprite & second);
+	float getAngleBetween(Sprite & first, Sprite & second);
 	void AIrotateToTarget(Sprite& entity, Sprite& other,Playables* entityObject, float rotateSpeed);
+	void AIrotateAwayFromTarget(Sprite & entity, Sprite & other, Playables * entityObject, float rotateSpeed);
 	void AIturretMove(Sprite & entity, Sprite & turret, float radius);
 	Clock generalClock;
 	Time generalTime;

@@ -13,7 +13,11 @@ public:
 	void scorePosition();
 	Text & getHighScore();
 	Text & gettopHighScore();
+	void nullifyScore();
 	void setEntityPtr(Playables* newptr);
+	void updateTimePlayed();
+	Text & getTimePlayedText();
+	void setTextPos(Vector2f& scorepos, Vector2f& topscorepos, Vector2f& timerpos);
 	~HighScore();
 
 private:
@@ -24,5 +28,12 @@ private:
 	Text topHighScore;
 	Text timeSurvived;
 	Playables* entity;
+	int TopScore =0;
+	int Score =0;
+	View* view;
+	float factor;
+	Vector2f scoreTextPos;
+	Vector2f topScoreTextPos;
+	Vector2f timerTextPos;
 };
 

@@ -22,7 +22,7 @@ Sprite & Hind::getEntity()
 
 void Hind::moveEntity(std::string direction)
 {
-	baseptr->moveEntity(hind, direction, hind.getRotation(), speed);
+	baseptr->moveEntity(hind, direction, speed);
 	hindblade.getBladeSprite().setPosition(hind.getPosition().x,hind.getPosition().y);
 }
 
@@ -75,9 +75,14 @@ void Hind::Fire()
 		timerofShot.restart();
 	}
 	timeofShot = timerofShot.getElapsedTime();
+	if (shotsFired >= 5 && timeofShot.asSeconds() <= 4)
+	{
+		reloading = true;
+	}
 	if (shotsFired >= 5 && timeofShot.asSeconds() > 4)
 	{
 		nullifyShotsFired();
+		reloading = false;
 	}
 }
 
@@ -178,7 +183,7 @@ void Hind::setRandomPosition()
 		hind.setPosition(temp);
 		hindblade.getBladeSprite().setPosition(hind.getPosition());
 	}
-		while ((temp.x < 30 || temp.x > mapSize.x - 30) && ((temp.y < 30 || temp.y > mapSize.x - 30)));
+		while ((temp.x < 60 || temp.x > mapSize.x - 60) && ((temp.y < 60 || temp.y > mapSize.x - 60)));
 }
 void Hind::setHP(float Hp)
 {
@@ -191,15 +196,17 @@ int Hind::getID()
 	return ID;
 }
 
-void Hind::setTarget(Sprite & other)
+void Hind::setTarget(Sprite *other)
 {
+
 	target = other;
 }
 
-Sprite & Hind::getTarget()
+Sprite * Hind::getTarget()
 {
 	return target;
 }
+
 
 float Hind::getRotateSpeed()
 {
@@ -286,4 +293,19 @@ void Hind::updateHPText()
 {
 	HPText.setString(std::to_string((int)HP));
 	HPText.setPosition(hind.getPosition().x + HPoffset_x, hind.getPosition().y + HPoffset_y);
+}
+
+void Hind::setTargetType(std::string type)
+{
+	targetType = type;
+}
+
+std::string Hind::getTargetType()
+{
+	return targetType;
+}
+
+bool Hind::getReloading()
+{
+	return reloading;
 }

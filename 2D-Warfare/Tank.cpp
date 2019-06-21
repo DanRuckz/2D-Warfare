@@ -1,11 +1,10 @@
 #include "Tank.h"
 
-Tank::Tank() : animation(Vector2i(28,97),Vector2i(34,59)), type("Tank"), rotateSpeed(5)
+Tank::Tank() : animation(Vector2i(28,97),Vector2i(34,59)), type("Tank"), speed(20), rotateSpeed(5)
 {
 	baseptr = this;
 	baseptr->setEntity(HPText, 50);
 	baseptr->setEntity(tank,Vector2f(1500,1500),animation,"tank");
-	speed = 15.f;
 	turret.getTurretSprite().setPosition(tank.getPosition().x, tank.getPosition().y);
 	tank.setScale(2.5f, 2.5f);
 	baseptr->setHitRadius(projectileMax);
@@ -41,7 +40,7 @@ Sprite& Tank::getTopPart()
 
 void Tank::moveEntity(std::string direction)
 {
-	baseptr->moveEntity(tank, direction, tank.getRotation(), speed);
+	baseptr->moveEntity(tank, direction, speed);
 	turret.moveTurret(tank, turret.getTurretSprite(), radius);
 }
 
@@ -136,7 +135,7 @@ void Tank::setRandomPosition()
 			temp.y = dist(gen) % (int)mapSize.y;
 			tank.setPosition(temp);
 			turret.getTurretSprite().setPosition(tank.getPosition());
-		} while ((temp.x < 30 || temp.x > mapSize.x - 30) && ((temp.y < 30 || temp.y > mapSize.x - 30)));
+		} while ((temp.x < 60 || temp.x > mapSize.x - 60) && ((temp.y < 60 || temp.y > mapSize.x - 60)));
 	}
 }
 
@@ -150,11 +149,6 @@ int Tank::getID()
 	return ID;
 }
 
-void Tank::setTarget(Sprite & other)
-{
-	target = other;
-}
-
 float Tank::getRadiusofMountPoint()
 {
 	return radiusofMountPoint;
@@ -165,9 +159,14 @@ float Tank::getRotateSpeed()
 	return rotateSpeed;
 }
 
-Sprite & Tank::getTarget()
+Sprite * Tank::getTarget()
 {
 	return target;
+}
+
+void Tank::setTarget(Sprite * other)
+{
+	target = other;
 }
 
 int Tank::getRandomMode()
@@ -239,6 +238,16 @@ void Tank::updateHPText()
 {
 	HPText.setString(std::to_string((int)HP));
 	HPText.setPosition(tank.getPosition().x + HPoffset_x, tank.getPosition().y + HPoffset_y);
+}
+
+void Tank::setTargetType(std::string type)
+{
+	targetType = type;
+}
+
+std::string Tank::getTargetType()
+{
+	return targetType;
 }
 
 void Tank::rotateEntity(std::string direction)

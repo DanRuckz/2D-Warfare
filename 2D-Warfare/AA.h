@@ -27,9 +27,9 @@ public:
 	std::vector<std::shared_ptr<Projectiles>>& getProjectileVector();
 	void projectileFly(int index);
 	void setRandomPosition();
-	void setTarget(Sprite& other);
+	void setTarget(Sprite* other);
 	int getID();
-	Sprite& getTarget();
+	Sprite* getTarget();
 	float getRadiusofMountPoint();
 	float getRotateSpeed();
 	int getRandomMode();
@@ -46,6 +46,8 @@ public:
 	int getLastDamaged();
 	Text& getHPText();
 	void updateHPText();
+	void setTargetType(std::string type);
+	std::string getTargetType();
 	~AA();
 
 private:
@@ -69,12 +71,12 @@ private:
 	std::vector < std::shared_ptr<Projectiles>> projectiles;
 	int ID;
 	void setID();
-	Sprite target;
+	Sprite* target;
 	int randomMode;
 	bool switchMode = true;
 	Clock timerofShot;
 	Time timeofShot;
-	float visibleArea = 800;
+	float visibleArea = 1200;
 	Clock attackTimer;
 	Time attackTime;
 	int killCount = 0;
@@ -82,5 +84,6 @@ private:
 	Text HPText;
 	int HPoffset_x = -45;
 	int HPoffset_y = -150;
+	std::string targetType;
 };
 
