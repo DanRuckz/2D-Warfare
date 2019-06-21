@@ -54,5 +54,6 @@ private:
 	Clock respawnTimer;
 	Time respawnTime;
 	HighScore highscore;
+	bool rightMouseRelease = true;
 };
 

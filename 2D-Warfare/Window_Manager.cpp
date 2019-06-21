@@ -33,8 +33,8 @@ void Window_Manager::Window_action()
 			clock_global.restart();
 			mousePos = Mouse::getPosition();
 			coords = window.mapPixelToCoords(mousePos);
-			
-			
+
+
 			while (window.pollEvent(event))
 			{
 				if (event.type == Event::Closed)
@@ -47,27 +47,36 @@ void Window_Manager::Window_action()
 					if (event.mouseButton.button == Mouse::Left)
 					{
 						mouseRelease = false;
-				
+
 						if (entity != nullptr)
 						{
 							if (entity->getType() == "Tank")
-							{	
-									entity->Fire();
+							{
+								entity->Fire();
 							}
 							if (entity->getType() == "Hind")
 							{
-									entity->Fire();
+								entity->Fire();
 							}
 
 						}
 					}
-				}
-					if (event.type == Event::MouseButtonReleased)
+					if (event.mouseButton.button == Mouse::Right)
 					{
-						if (event.mouseButton.button == Mouse::Left)
-							mouseRelease = true;
+						rightMouseRelease = false;
 					}
+				}
+
+
+				if (event.type == Event::MouseButtonReleased)
+				{
+					if (event.mouseButton.button == Mouse::Left)
+						mouseRelease = true;
+					if (event.mouseButton.button == Mouse::Right)
+						rightMouseRelease = true;
+				}
 			}
+		
 			//END EVENT
 				if (!mouseRelease)
 				{
@@ -76,6 +85,14 @@ void Window_Manager::Window_action()
 							entity->Fire();
 					}
 				}
+				if (!rightMouseRelease)
+				{
+					if (entity != nullptr && entity->getType() == "Tank")
+					{
+						entity->fireMachinegun();
+					}
+				}
+
 				if (entity != nullptr)
 				{
 					highscore.getPlayTime() = highscore.getPlayTimer().getElapsedTime();
@@ -127,10 +144,7 @@ void Window_Manager::checkFlight()
 {
 	for (int i = 0; i < OBJ.size(); i++)
 	{
-		for (int j = 0; j < OBJ[i]->getProjectileVector().size(); j++)
-		{
 			OBJ[i]->projectileFly(i);
-		}
 	}
 
 }

@@ -71,11 +71,14 @@ Sprite & Playables::getTopPart()
 	// for access
 	return placeholder;
 }
+void Playables::fireMachinegun()
+{
+}
 void Playables::projectileFly(std::vector<std::shared_ptr<Projectiles>>& projectilevec, std::shared_ptr<Projectiles> projectile, int index, int selfObjectIndex)
 {
 	projectile->Fly(projectile->getSprite());
 	bool objects = true;
-	if (projectile->getDistanceTraveled() > radius || projectile->intersectWithMap(projectile->getSprite()))
+	if (projectile->getDistanceTraveled() > OBJ[selfObjectIndex]->getHitRadius() || projectile->intersectWithMap(projectile->getSprite()))
 	{
 		objects = false;
 		projectile.reset();
@@ -119,10 +122,6 @@ std::vector<Playables*>& Playables::getObjectsVector()
 	return objects;
 }
 
-void Playables::setHitRadius(float other_radius)
-{
-	radius = other_radius;
-}
 
 int Playables::getShotsFired()
 {

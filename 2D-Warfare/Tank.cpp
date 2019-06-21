@@ -1,13 +1,12 @@
 #include "Tank.h"
 
-Tank::Tank() : animation(Vector2i(28,97),Vector2i(34,59)), type("Tank"), speed(20), rotateSpeed(5)
+Tank::Tank() : animation(Vector2i(28,97),Vector2i(34,59)), type("Tank"), speed(20), rotateSpeed(5),hitRadius(2500)
 {
 	baseptr = this;
 	baseptr->setEntity(HPText, 50);
 	baseptr->setEntity(tank,Vector2f(1500,1500),animation,"tank");
 	turret.getTurretSprite().setPosition(tank.getPosition().x, tank.getPosition().y);
 	tank.setScale(2.5f, 2.5f);
-	baseptr->setHitRadius(projectileMax);
 	setID();
 	HPText.setFillColor(Color::Black);
 	HPText.setStyle(Text::Bold);
@@ -28,7 +27,10 @@ void Tank::Fire()
 		vector.y /= barrelLength;
 		shell->setFlightDirection(vector);
 		projectiles.push_back(shell);
+		hitRadius = 2500;
+		lastFired = "shell";
 		timerofShot.restart();
+
 	}
 
 }
@@ -80,7 +82,11 @@ float Tank::checkIntersectionWithObjects(std::shared_ptr<Projectiles> pointer, i
 	
 		for (int i = 0; i <OBJ.size(); i++)
 		{
-			if (pointer->intersectWithObjects(pointer->getSprite(), OBJ[i]->getEntity()) && OBJ[i]->getType() != "Hind")
+			if (pointer->intersectWithObjects(pointer->getSprite(), OBJ[i]->getEntity()) && OBJ[i]->getType() == "Hind" && lastFired == "shot")
+			{
+				return i;
+			}
+			else if (pointer->intersectWithObjects(pointer->getSprite(), OBJ[i]->getEntity()) && OBJ[i]->getType() != "Hind")
 			{
 				return i;
 			}
@@ -248,6 +254,32 @@ void Tank::setTargetType(std::string type)
 std::string Tank::getTargetType()
 {
 	return targetType;
+}
+
+void Tank::fireMachinegun()
+{
+	timeofMG = timerofMG.getElapsedTime();
+	if (timeofMG.asSeconds() > 0.17)
+	{
+		
+		Vector2f vector;
+		shell = std::make_shared <Machinegun>();
+		shell->setRotationOfShot(turret.getTurretSprite().getRotation() - 90);
+		vector = shell->calculateDirection(shell->getSprite(), barrelLength);
+		shell->setPositionOfShot(turret.getTurretSprite().getPosition() + vector);
+		vector.x /= barrelLength;
+		vector.y /= barrelLength;
+		shell->setFlightDirection(vector);
+		projectiles.push_back(shell);
+		hitRadius = 1200;
+		lastFired = "shot";
+		timerofMG.restart();
+	}
+}
+
+float Tank::getHitRadius()
+{
+	return hitRadius;
 }
 
 void Tank::rotateEntity(std::string direction)

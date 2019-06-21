@@ -385,6 +385,7 @@ void AI::attackMode()
 
 				}
 				OBJ[i]->Fire();
+				OBJ[i]->fireMachinegun();
 			}
 				if (OBJ[i]->getType() == "Tank" && OBJ[i]->getTargetType() == "Hind")
 				{
@@ -396,7 +397,7 @@ void AI::attackMode()
 					{
 
 					}
-					OBJ[i]->Fire();
+					OBJ[i]->fireMachinegun();
 
 				}
 				

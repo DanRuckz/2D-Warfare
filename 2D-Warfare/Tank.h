@@ -2,6 +2,7 @@
 #include "Playables.h"
 #include "Turret.h"
 #include "TankShell.h"
+#include "Machinegun.h"
 
 class Tank :
 	public Playables
@@ -52,6 +53,8 @@ public:
 	void updateHPText();
 	void setTargetType(std::string type);
 	std::string getTargetType();
+	void fireMachinegun() override;
+	float getHitRadius();
 
 
 private:
@@ -64,9 +67,9 @@ private:
 	Playables* baseptr;
 	float speed;
 	float radius = 1;
-	float projectileMax = 3000;
-	std::shared_ptr<TankShell> shell;
-	unsigned int barrelLength = 55;
+	float hitRadius = 3000;
+	std::shared_ptr<Projectiles> shell;
+	unsigned int barrelLength = 70;
 	std::string type;
 	int selfIndex;
 	float HP = 3000;
@@ -89,5 +92,8 @@ private:
 	int HPoffset_x = -45;
 	int HPoffset_y = -150;
 	std::string targetType;
+	Clock timerofMG;
+	Time timeofMG;
+	std::string lastFired;
 };
 

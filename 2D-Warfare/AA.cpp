@@ -2,7 +2,7 @@
 
 
 
-AA::AA() :animation(IntRect(Vector2i(7,3),Vector2i(36,79))) ,speed(10), type("AA"),projectileMax(1700), rotateSpeed(7)
+AA::AA() :animation(IntRect(Vector2i(7,3),Vector2i(36,79))) ,speed(10), type("AA"),hitRadius(1700), rotateSpeed(7)
 {
 	baseptr = this;
 	baseptr->setEntity(HPText, 50);
@@ -10,7 +10,6 @@ AA::AA() :animation(IntRect(Vector2i(7,3),Vector2i(36,79))) ,speed(10), type("AA
 	speed = 25;
 	aaturret.getTurretSprite().setPosition(anti_air.getPosition().x, anti_air.getPosition().y);
 	anti_air.setScale(1.5f, 1.5f);
-	baseptr->setHitRadius(projectileMax);
 	setID();
 	HPText.setFillColor(Color::Black);
 	HPText.setStyle(Text::Bold);
@@ -280,6 +279,11 @@ void AA::updateHPText()
 void AA::setTargetType(std::string type)
 {
 	targetType = type;
+}
+
+float AA::getHitRadius()
+{
+	return hitRadius;
 }
 
 std::string AA::getTargetType()

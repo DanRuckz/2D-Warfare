@@ -175,6 +175,7 @@
     <ClCompile Include="Hind.cpp" />
     <ClCompile Include="HindBlade.cpp" />
     <ClCompile Include="HindShell.cpp" />
+    <ClCompile Include="Machinegun.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MenuScreen.cpp" />
     <ClCompile Include="Playables.cpp" />
@@ -200,6 +201,7 @@
     <ClInclude Include="Hind.h" />
     <ClInclude Include="HindBlade.h" />
     <ClInclude Include="HindShell.h" />
+    <ClInclude Include="Machinegun.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MenuScreen.h" />
     <ClInclude Include="Playables.h" />

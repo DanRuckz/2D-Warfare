@@ -17,6 +17,7 @@ public:
 	virtual Sprite& getEntity() =0;
 	virtual Sprite& getTopPart() =0;
 	virtual void Fire() = 0;
+	virtual void fireMachinegun();
 	virtual Sprite& getShell() = 0;
 	void projectileFly(std::vector<std::shared_ptr<Projectiles>>& projectilevec, std::shared_ptr<Projectiles> projectile,int index, int selfObjectIndex);
 	virtual std::shared_ptr<Projectiles> getPointerToProjectile()=0;
@@ -26,7 +27,7 @@ public:
 	static void moveEntity(Sprite& entity, std::string direction, float speed);
 	virtual float checkIntersectionWithObjects(std::shared_ptr<Projectiles> pointer, int selfObjectIndex);
 	static std::vector<Playables*>& getObjectsVector();
-	void setHitRadius(float other_radius);
+	virtual float getHitRadius() = 0;
 	virtual float getSpeed() = 0;
 	virtual std::string getType() = 0;
 	virtual int getShotsFired();
@@ -54,6 +55,7 @@ public:
 	virtual void increaseKillCount() = 0;
 	void setHPText(Text& first,Text& other);
 	virtual Text& getHPText() = 0;
+	
 	//FOR AI
 	virtual int getRandomMode() = 0;
 	virtual void setRandomMode(int other) = 0;
@@ -73,7 +75,7 @@ public:
 private:
 	static std::vector<Playables*> objects;
 	Sprite placeholder;
-	float radius;
+	//float radius;
 	bool Player;
 	int lastDamaged;
 protected:

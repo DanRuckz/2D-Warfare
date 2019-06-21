@@ -2,14 +2,13 @@
 
 
 
-Hind::Hind() : animation(Vector2i(524, 0), Vector2i(28, 62)), speed(30),rotateSpeed(10),type("Hind"), projectileMax(1700)
+Hind::Hind() : animation(Vector2i(524, 0), Vector2i(28, 62)), speed(30),rotateSpeed(10),type("Hind"), hitRadius(1700)
 {
 	baseptr = this;
 	baseptr->setEntity(HPText, 50);
 	baseptr->setEntity(hind, Vector2f(1500.f, 1500.f), animation, "hind");
 	hindblade.getBladeSprite().setPosition(hind.getPosition().x,hind.getPosition().y);
 	hind.setScale(2.5f,2.5f);
-	baseptr->setHitRadius(projectileMax);
 	setID();
 	HPText.setFillColor(Color::Black);
 	HPText.setStyle(Text::Bold);
@@ -308,4 +307,9 @@ std::string Hind::getTargetType()
 bool Hind::getReloading()
 {
 	return reloading;
+}
+
+float Hind::getHitRadius()
+{
+	return hitRadius;
 }

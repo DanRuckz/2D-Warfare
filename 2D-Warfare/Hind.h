@@ -50,6 +50,7 @@ public:
 	void setTargetType(std::string type);
 	std::string getTargetType();
 	bool getReloading();
+	float getHitRadius();
 	~Hind();
 
 private:
@@ -62,7 +63,7 @@ private:
 	float barrelLength = 40;
 	std::shared_ptr<HindShell> shell;
 	std::string type;
-	float projectileMax;
+	float hitRadius;
 	int shotsFired = 0;
 	int selfIndex;
 	float HP = 1000;
