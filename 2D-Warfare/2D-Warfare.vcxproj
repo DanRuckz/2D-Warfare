@@ -176,8 +176,8 @@
     <ClCompile Include="HindBlade.cpp" />
     <ClCompile Include="HindShell.cpp" />
     <ClCompile Include="Machinegun.cpp" />
+    <ClCompile Include="MainScreen.cpp" />
     <ClCompile Include="Map.cpp" />
-    <ClCompile Include="MenuScreen.cpp" />
     <ClCompile Include="Playables.cpp" />
     <ClCompile Include="Projectiles.cpp" />
     <ClCompile Include="RespawnScreen.cpp" />
@@ -202,8 +202,8 @@
     <ClInclude Include="HindBlade.h" />
     <ClInclude Include="HindShell.h" />
     <ClInclude Include="Machinegun.h" />
+    <ClInclude Include="MainScreen.h" />
     <ClInclude Include="Map.h" />
-    <ClInclude Include="MenuScreen.h" />
     <ClInclude Include="Playables.h" />
     <ClInclude Include="Projectiles.h" />
     <ClInclude Include="RespawnScreen.h" />

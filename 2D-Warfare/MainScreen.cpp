@@ -18,14 +18,13 @@ MainScreen::MainScreen()
 	arrowDown.setScale(0.3, 0.3);
 	Rect.setScale(0.25, 0.25);
 
-	font.loadFromFile("assets/ariali.ttf");
+	font.loadFromFile("assets/Fonts/ariali.ttf");
 	number.setFont(font);
 	number.setCharacterSize(75);
 	number.setFillColor(Color::Black);
 	number.setString("1");
 	number.setPosition(Vector2f(resolution.width / 2 - 20, resolution.height / 2 - 45));
-	//number.setString("15");
-	//number.setPosition(Vector2f(resolution.width/2 - 45, resolution.height/2 - 45));
+	
 	createWindow();
 }
 
@@ -53,20 +52,20 @@ void MainScreen::loadAndPlayMenuSound() {
 
 
 
-	if (!sb.loadFromFile("assets/Jesper Kyd - Heroes And Generals German Theme.ogg")) {
+	if (!sb.loadFromFile("assets/Music/Jesper Kyd - Heroes And Generals German Theme.ogg")) {
 		std::cout << "Sound Error";
 		return;
 	}
 
 	menuMusic.setBuffer(sb);
-	menuMusic.setVolume(30);
+	menuMusic.setVolume(35);
 	menuMusic.play();
 
 }
 
 void MainScreen::createWindow() {
 
-	window.create(VideoMode(resolution), "2D-Warfare", WINDOW_MODE);
+	window.create(VideoMode(resolution), "2D-Warfare", FULLSCREEN);
 	 
 	Event event;
 	Color color;

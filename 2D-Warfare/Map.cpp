@@ -29,7 +29,7 @@ Map::~Map()
 
 void Map::CreateMap()
 {
-	mymap = "assets/MapRect.png";
+	mymap = "assets/Map/MapRect.png";
 	texture.loadFromFile(mymap);
 	if (!texture.loadFromFile(mymap))
 	std::cout << "failed to load texture\n";

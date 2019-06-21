@@ -9,6 +9,7 @@
 #include "RespawnScreen.h"
 #include "AI.h"
 #include "HighScore.h"
+#include "MainScreen.h"
 
 class Window_Manager
 {
@@ -49,7 +50,6 @@ private:
 	Vector2f RespawnScreenStartPos;
 	std::string type;
 	AI ai;
-	int numOfEnemies = 20;
 	void vecCheck();
 	Clock respawnTimer;
 	Time respawnTime;

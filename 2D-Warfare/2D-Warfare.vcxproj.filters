@@ -24,9 +24,6 @@
     <ClCompile Include="Window_Manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MenuScreen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Entities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -84,6 +81,9 @@
     <ClCompile Include="Machinegun.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MainScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\2D-Warfare\2D-Warfare\inits.h">
@@ -95,9 +95,6 @@
     <ClInclude Include="Window_Manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MenuScreen.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Entities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -105,9 +102,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Turret.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Declarations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AA.h">
@@ -156,6 +150,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Machinegun.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Declarations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

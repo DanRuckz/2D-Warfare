@@ -4,5 +4,6 @@ Texture* Entities::texture;
 std::vector<Texture*> Entities::textures;
 Vector2f Map::mapSize;
 std::vector<Playables*> Playables::objects;
+bool MainScreen::exited;
+int MainScreen::numberofPlayers;
 Font* Entities::font;
-

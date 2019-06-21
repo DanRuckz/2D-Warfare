@@ -13,18 +13,49 @@ Entities::Entities()
 
 void Entities::loadTextures()
 {
+	//0
 	loadFile = "assets/Playables/Tank/0.png";
 	setTexture();
+	//1
 	loadFile = "assets/Playables/AA/1.png";
 	setTexture();
+	//2
 	loadFile = "assets/Playables/Hind/2.png";
 	setTexture();
+	//3
 	loadFile = "assets/Projectiles/3.png";
 	setTexture();
-	loadFile = "assets/tank.jpg";
+	//4
+	loadFile = "assets/Props/respawn.jpg";
 	setTexture();
-	loadFile = "assets/pickText.png";
+	//5
+	loadFile = "assets/Props/pickText.png";
 	setTexture();
+	//6
+	loadFile = "assets/Props/MainBackground.png";
+	setTexture();
+	//7
+	loadFile = "assets/Props/arrowUp.png";
+	setTexture();
+	//8
+	loadFile = "assets/Props/arrowDown.png";
+	setTexture();
+	//9
+	loadFile = "assets/Props/Play.png";
+	setTexture();
+	//10
+	loadFile = "assets/Props/Exit.png";
+	setTexture();
+	//11
+	loadFile = "assets/Props/players.png";
+	setTexture();
+	//12
+	loadFile = "assets/Props/rect.png";
+	setTexture();
+	
+
+
+
 	loadFile = "assets/Fonts/TravelingTypewriter.ttf";
 	setFont();
 }
@@ -61,8 +92,22 @@ int Entities::checkType(std::string type)
 		index = 3;
 	if (type == "respawn")
 		index = 4;
-	if (type == "texts")
+	if (type == "PickText")
 		index = 5;
+	if (type == "mainScreen")
+		index = 6;
+	if (type == "arrowUp")
+		index = 7;
+	if (type == "arrowDown")
+		index = 8;
+	if (type == "Play")
+		index = 9;
+	if (type == "Exit")
+		index = 10;
+	if (type == "players")
+		index = 11;
+	if (type == "rect")
+		index = 12;
 	return index;
 }
 
@@ -84,10 +129,3 @@ void Entities::setEntity(Text& text, float size)
 	text.setCharacterSize(size);
 }
 
-/*void Entities::changeAnimation(Sprite & entity,IntRect animation)
-{
-	entity.setTextureRect(animation);
-	entity.setRotation(0);
-	entity.setOrigin(Vector2f(entity.getTextureRect().width / 2, entity.getTextureRect().height / 2));
-}
-*/

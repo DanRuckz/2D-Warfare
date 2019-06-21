@@ -14,15 +14,13 @@ Window_Manager::Window_Manager() : RespawnScreenStartPos(Vector2f(1500,1500))
 
 void Window_Manager::Window_action()
 {
-	std::cout << "How many enemies do you want? " << std::endl;
-	std::cin >> numOfEnemies;
-	window.create(VideoMode(resolution), "2D-Warfare", WINDOW_MODE);
+	window.create(VideoMode(resolution), "2D-Warfare", FULLSCREEN);
 	Clock clock_global;
 	Time global;
 	Clock respawnTimer;
 	Time respawnTime;
 	clock_global.restart();
-	makeEnemies(numOfEnemies);
+	makeEnemies(MainScreen::getNumberofPlayers());
 	while (window.isOpen())
 	{
 		respawnTime = respawnTimer.getElapsedTime();
@@ -474,7 +472,7 @@ void Window_Manager::vecCheck()
 		if (OBJ[i]->getPlayer())
 			respawn = true;
 
-	if (respawn && OBJ.size() < numOfEnemies)
+	if (respawn && OBJ.size() < MainScreen::getNumberofPlayers())
 		makeEnemies(1);
 }
 

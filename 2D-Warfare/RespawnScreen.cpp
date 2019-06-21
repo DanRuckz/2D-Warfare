@@ -21,7 +21,7 @@ RespawnScreen::RespawnScreen(Vector2f& position) : animation(Vector2i(0, 0), Vec
 	setEntity(aaTurret, Vector2f(aa.getPosition().x-1, aa.getPosition().y+12), IntRect(Vector2i(12, 163), Vector2i(27, 54)), "AA_turret");
 	setEntity(hindBlades, Vector2f(hind.getPosition().x, hind.getPosition().y - 18), IntRect(Vector2i(63, 68), Vector2i(54, 51)), "hind_blades");
 
-	setEntity(title, Vector2f(sprite.getPosition().x , sprite.getPosition().y - 280), IntRect(Vector2i(0, 0), Vector2i(637, 95)), "texts");
+	setEntity(title, Vector2f(sprite.getPosition().x , sprite.getPosition().y - 280), IntRect(Vector2i(0, 0), Vector2i(637, 95)), "PickText");
 
 	tank.setScale(5.5f, 4.5f);
 	tankTurret.setScale(5.4f, 5.4f);

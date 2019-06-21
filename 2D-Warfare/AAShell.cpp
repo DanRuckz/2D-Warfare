@@ -2,7 +2,7 @@
 
 
 
-AAShell::AAShell() : animation(Vector2i(6,280),Vector2i(21,4)), speed(75)
+AAShell::AAShell() : animation(Vector2i(6,280),Vector2i(21,4)), speed(100)
 {
 	baseptr = this;
 	baseptr->setEntity(shell, Vector2f(0, 0), animation, "projectile");
