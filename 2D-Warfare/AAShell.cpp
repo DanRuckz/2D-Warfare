@@ -2,7 +2,7 @@
 
 
 
-AAShell::AAShell() : animation(Vector2i(6,280),Vector2i(21,4)), speed(100)
+AAShell::AAShell() : animation(Vector2i(6,280),Vector2i(21,4)), speed(100), type("shell")
 {
 	baseptr = this;
 	baseptr->setEntity(shell, Vector2f(0, 0), animation, "projectile");
@@ -38,6 +38,16 @@ void AAShell::setFlightDirection(Vector2f vector)
 float AAShell::getDamage() const
 {
 	return damage;
+}
+
+float AAShell::getRange()
+{
+	return maxRange;
+}
+
+std::string AAShell::getType()
+{
+	return type;
 }
 
 

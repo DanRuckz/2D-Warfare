@@ -2,7 +2,7 @@
 
 
 
-Hind::Hind() : animation(Vector2i(524, 0), Vector2i(28, 62)), speed(30),rotateSpeed(10),type("Hind"), hitRadius(1700)
+Hind::Hind() : animation(Vector2i(524, 0), Vector2i(28, 62)), speed(33),rotateSpeed(10),type("Hind")
 {
 	baseptr = this;
 	baseptr->setEntity(HPText, 50);
@@ -309,7 +309,13 @@ bool Hind::getReloading()
 	return reloading;
 }
 
-float Hind::getHitRadius()
+bool Hind::getNearEdge()
 {
-	return hitRadius;
+	return nearEdge;
 }
+
+void Hind::setNearEdge(bool option)
+{
+	nearEdge = option;
+}
+

@@ -27,7 +27,6 @@ public:
 	static void moveEntity(Sprite& entity, std::string direction, float speed);
 	virtual float checkIntersectionWithObjects(std::shared_ptr<Projectiles> pointer, int selfObjectIndex);
 	static std::vector<Playables*>& getObjectsVector();
-	virtual float getHitRadius() = 0;
 	virtual float getSpeed() = 0;
 	virtual std::string getType() = 0;
 	virtual int getShotsFired();
@@ -70,6 +69,8 @@ public:
 	virtual void setTargetType(std::string type) = 0;
 	virtual std::string getTargetType() =0;
 	virtual bool getReloading();
+	virtual bool getNearEdge() = 0;
+	virtual void setNearEdge(bool option) = 0;
 	virtual ~Playables();
 
 private:

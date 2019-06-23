@@ -2,7 +2,7 @@
 
 
 
-Machinegun::Machinegun() : animation(Vector2i(239, 459), Vector2i(5, 7)), speed(70)
+Machinegun::Machinegun() : animation(Vector2i(239, 459), Vector2i(5, 7)), speed(70),type("shot")
 {
 	baseptr = this;
 	baseptr->setEntity(shell, Vector2f(0, 0), animation, "projectile");
@@ -39,6 +39,16 @@ void Machinegun::setFlightDirection(Vector2f vector)
 float Machinegun::getDamage() const
 {
 	return damage;
+}
+
+float Machinegun::getRange()
+{
+	return maxRange;
+}
+
+std::string Machinegun::getType()
+{
+	return type;
 }
 
 

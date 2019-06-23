@@ -8,9 +8,9 @@ AI::AI()
 
 void AI::AImove()
 {
-	rotateTurretToEnemy();
-	searchMode();
-	attackMode();
+		rotateTurretToEnemy();
+		searchMode();
+		attackMode();
 }
 
 float AI::measureDistance(Sprite & first, Sprite & second)
@@ -198,168 +198,172 @@ void AI::AIturretMove(Sprite& entity,Sprite& turret, float radius)
 void AI::searchMode()
 {
 	generalTime = generalClock.getElapsedTime();
-	//std::cout << generalTime.asSeconds() << std::endl;
 	for (int i = 0; i < OBJ.size(); i++)
 	{
-		if (!OBJ[i]->getPlayer() && OBJ[i]->getTarget() == nullptr)
-		{
-			if (OBJ[i]->getRandomMode() == 0 && OBJ[i]->getEntity().getPosition().y > 30)
-			{
-				OBJ[i]->rotateEntity(OBJ[i]->getEntity(), "left", OBJ[i]->getRotateSpeed());
-				AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
-				OBJ[i]->moveEntity(OBJ[i]->getEntity(), "up", OBJ[i]->getSpeed());
-				AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
-				if (generalTime.asSeconds() > 1)
-				{
-					OBJ[i]->switchRandomMode(true);
-					generalClock.restart();
-				}
-			}
+		if (!OBJ[i]->getPlayer())
+		{		
+			nearEdge(OBJ[i]);
 
-			if (OBJ[i]->getRandomMode() == 1 && OBJ[i]->getEntity().getPosition().y > 30)
+			if (OBJ[i]->getTarget() == nullptr && !nearEdge(OBJ[i]))
 			{
-				OBJ[i]->rotateEntity(OBJ[i]->getEntity(), "right", OBJ[i]->getRotateSpeed());
-				AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
-				OBJ[i]->moveEntity(OBJ[i]->getEntity(), "up", OBJ[i]->getSpeed());
-				AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
-				if (generalTime.asSeconds() > 1)
+				if (OBJ[i]->getRandomMode() == 0 && OBJ[i]->getEntity().getPosition().y > 30)
 				{
-					OBJ[i]->switchRandomMode(true);
-					generalClock.restart();
-				}
-			}
-
-			if (OBJ[i]->getRandomMode() == 2 && OBJ[i]->getEntity().getPosition().y > 30)
-			{
-				OBJ[i]->moveEntity(OBJ[i]->getEntity(), "up", OBJ[i]->getSpeed());
-				AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
-				if (generalTime.asSeconds() > 2)
-				{
-					OBJ[i]->switchRandomMode(true);
-					generalClock.restart();
-				}
-			}
-
-			if (OBJ[i]->getRandomMode() == 3 && OBJ[i]->getEntity().getPosition().y > 30)
-			{
-				OBJ[i]->rotateEntity(OBJ[i]->getEntity(), "left", OBJ[i]->getRotateSpeed());
-				AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
-				if (generalTime.asSeconds() > 1)
-				{
-					OBJ[i]->switchRandomMode(true);
-					generalClock.restart();
-				}
-			}
-			if (OBJ[i]->getRandomMode() == 4 && OBJ[i]->getEntity().getPosition().y > 30)
-			{
-				OBJ[i]->rotateEntity(OBJ[i]->getEntity(), "right", OBJ[i]->getRotateSpeed());
-				AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
-				if (generalTime.asSeconds() > 1)
-				{
-					OBJ[i]->switchRandomMode(true);
-					generalClock.restart();
-				}
-			}
-
-
-			if (OBJ[i]->getModeSwitcher())
-			{
-				int random = dist(gen) % 5;
-				OBJ[i]->setRandomMode(random);
-				OBJ[i]->switchRandomMode(false);
-			}
-			//UPPER BOUND
-			if (OBJ[i]->getEntity().getPosition().y < 95)
-			{
-				int randomDirection;
-				randomDirection = dist(gen) % 2;
-				if (randomDirection == 0)
-					while (true)
+					OBJ[i]->rotateEntity(OBJ[i]->getEntity(), "left", OBJ[i]->getRotateSpeed());
+					AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
+					OBJ[i]->moveEntity(OBJ[i]->getEntity(), "up", OBJ[i]->getSpeed());
+					AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
+					if (generalTime.asSeconds() > 1)
 					{
-						OBJ[i]->rotateEntity(OBJ[i]->getEntity(), "left", OBJ[i]->getRotateSpeed());
+						OBJ[i]->switchRandomMode(true);
+						generalClock.restart();
+					}
+				}
+
+				if (OBJ[i]->getRandomMode() == 1 && OBJ[i]->getEntity().getPosition().y > 30)
+				{
+					OBJ[i]->rotateEntity(OBJ[i]->getEntity(), "right", OBJ[i]->getRotateSpeed());
+					AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
+					OBJ[i]->moveEntity(OBJ[i]->getEntity(), "up", OBJ[i]->getSpeed());
+					AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
+					if (generalTime.asSeconds() > 1)
+					{
+						OBJ[i]->switchRandomMode(true);
+						generalClock.restart();
+					}
+				}
+
+				if (OBJ[i]->getRandomMode() == 2 && OBJ[i]->getEntity().getPosition().y > 30)
+				{
+					OBJ[i]->moveEntity(OBJ[i]->getEntity(), "up", OBJ[i]->getSpeed());
+					AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
+					if (generalTime.asSeconds() > 2)
+					{
+						OBJ[i]->switchRandomMode(true);
+						generalClock.restart();
+					}
+				}
+
+				if (OBJ[i]->getRandomMode() == 3 && OBJ[i]->getEntity().getPosition().y > 30)
+				{
+					OBJ[i]->rotateEntity(OBJ[i]->getEntity(), "left", OBJ[i]->getRotateSpeed());
+					AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
+					if (generalTime.asSeconds() > 1)
+					{
+						OBJ[i]->switchRandomMode(true);
+						generalClock.restart();
+					}
+				}
+				if (OBJ[i]->getRandomMode() == 4 && OBJ[i]->getEntity().getPosition().y > 30)
+				{
+					OBJ[i]->rotateEntity(OBJ[i]->getEntity(), "right", OBJ[i]->getRotateSpeed());
+					AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
+					if (generalTime.asSeconds() > 1)
+					{
+						OBJ[i]->switchRandomMode(true);
+						generalClock.restart();
+					}
+				}
+
+
+				if (OBJ[i]->getModeSwitcher())
+				{
+					int random = dist(gen) % 5;
+					OBJ[i]->setRandomMode(random);
+					OBJ[i]->switchRandomMode(false);
+				}
+				//UPPER BOUND
+				if (OBJ[i]->getEntity().getPosition().y < 95)
+				{
+					int randomDirection;
+					randomDirection = dist(gen) % 2;
+					if (randomDirection == 0)
+						while (true)
+						{
+							OBJ[i]->rotateEntity(OBJ[i]->getEntity(), "left", OBJ[i]->getRotateSpeed());
 							AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
-						if (OBJ[i]->getEntity().getRotation() > 90 && OBJ[i]->getEntity().getRotation() < 270)
-							break;
-					}
-				if (randomDirection == 1)
-					while (true)
-					{
-						OBJ[i]->rotateEntity(OBJ[i]->getEntity(), "right", OBJ[i]->getRotateSpeed());
-						AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
-						if (OBJ[i]->getEntity().getRotation() > 90 && OBJ[i]->getEntity().getRotation() < 270)
-							break;
-					}
+							if (OBJ[i]->getEntity().getRotation() > 90 && OBJ[i]->getEntity().getRotation() < 270)
+								break;
+						}
+					if (randomDirection == 1)
+						while (true)
+						{
+							OBJ[i]->rotateEntity(OBJ[i]->getEntity(), "right", OBJ[i]->getRotateSpeed());
+							AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
+							if (OBJ[i]->getEntity().getRotation() > 90 && OBJ[i]->getEntity().getRotation() < 270)
+								break;
+						}
+				}
+
+				//LEFT BOUND
+				if (OBJ[i]->getEntity().getPosition().x < 95)
+				{
+					int randomDirection;
+					randomDirection = dist(gen) % 2;
+					if (randomDirection == 0)
+						while (true)
+						{
+							OBJ[i]->rotateEntity(OBJ[i]->getEntity(), "left", OBJ[i]->getRotateSpeed());
+							AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
+							if (OBJ[i]->getEntity().getRotation() > 0 && OBJ[i]->getEntity().getRotation() < 180)
+								break;
+						}
+					if (randomDirection == 1)
+						while (true)
+						{
+							OBJ[i]->rotateEntity(OBJ[i]->getEntity(), "right", OBJ[i]->getRotateSpeed());
+							AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
+							if (OBJ[i]->getEntity().getRotation() > 0 && OBJ[i]->getEntity().getRotation() < 180)
+								break;
+						}
+				}
+				//BOTTOM BOUND
+				if (Map::getMapSize().y - OBJ[i]->getEntity().getPosition().y < 95)
+				{
+					int randomDirection;
+					randomDirection = dist(gen) % 2;
+					if (randomDirection == 0)
+						while (true)
+						{
+							OBJ[i]->rotateEntity(OBJ[i]->getEntity(), "left", OBJ[i]->getRotateSpeed());
+							AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
+							if (OBJ[i]->getEntity().getRotation() > 270 || OBJ[i]->getEntity().getRotation() < 90)
+								break;
+						}
+					if (randomDirection == 1)
+						while (true)
+						{
+							OBJ[i]->rotateEntity(OBJ[i]->getEntity(), "right", OBJ[i]->getRotateSpeed());
+							AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
+							if (OBJ[i]->getEntity().getRotation() > 270 || OBJ[i]->getEntity().getRotation() < 90)
+								break;
+						}
+				}
+				//RIGHT BOUND
+				if (Map::getMapSize().x - OBJ[i]->getEntity().getPosition().x < 95)
+				{
+					int randomDirection;
+					randomDirection = dist(gen) % 2;
+					if (randomDirection == 0)
+						while (true)
+						{
+							OBJ[i]->rotateEntity(OBJ[i]->getEntity(), "left", OBJ[i]->getRotateSpeed());
+							AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
+							if (OBJ[i]->getEntity().getRotation() < 360 && OBJ[i]->getEntity().getRotation() > 180)
+								break;
+						}
+					if (randomDirection == 1)
+						while (true)
+						{
+							OBJ[i]->rotateEntity(OBJ[i]->getEntity(), "right", OBJ[i]->getRotateSpeed());
+							AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
+							if (OBJ[i]->getEntity().getRotation() < 360 && OBJ[i]->getEntity().getRotation() > 180)
+								break;
+						}
+				}
 			}
 
-			//LEFT BOUND
-			if (OBJ[i]->getEntity().getPosition().x < 95)
-			{
-				int randomDirection;
-				randomDirection = dist(gen) % 2;
-				if (randomDirection == 0)
-					while (true)
-					{
-						OBJ[i]->rotateEntity(OBJ[i]->getEntity(), "left", OBJ[i]->getRotateSpeed());
-						AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
-						if (OBJ[i]->getEntity().getRotation() > 0 && OBJ[i]->getEntity().getRotation() < 180)
-							break;
-					}
-				if (randomDirection == 1)
-					while (true)
-					{
-						OBJ[i]->rotateEntity(OBJ[i]->getEntity(), "right", OBJ[i]->getRotateSpeed());
-						AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
-						if (OBJ[i]->getEntity().getRotation() > 0 && OBJ[i]->getEntity().getRotation() < 180)
-							break;
-					}
-			}
-			//BOTTOM BOUND
-			if (Map::getMapSize().y - OBJ[i]->getEntity().getPosition().y < 95)
-			{
-				int randomDirection;
-				randomDirection = dist(gen) % 2;
-				if (randomDirection == 0)
-					while (true)
-					{
-						OBJ[i]->rotateEntity(OBJ[i]->getEntity(), "left", OBJ[i]->getRotateSpeed());
-						AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
-						if (OBJ[i]->getEntity().getRotation() > 270 || OBJ[i]->getEntity().getRotation() < 90)
-							break;
-					}
-				if (randomDirection == 1)
-					while (true)
-					{
-						OBJ[i]->rotateEntity(OBJ[i]->getEntity(), "right", OBJ[i]->getRotateSpeed());
-						AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
-						if (OBJ[i]->getEntity().getRotation() > 270 || OBJ[i]->getEntity().getRotation() < 90)
-							break;
-					}
-			}
-			//RIGHT BOUND
-			if (Map::getMapSize().x - OBJ[i]->getEntity().getPosition().x < 95)
-			{
-				int randomDirection;
-				randomDirection = dist(gen) % 2;
-				if (randomDirection == 0)
-					while (true)
-					{
-						OBJ[i]->rotateEntity(OBJ[i]->getEntity(), "left", OBJ[i]->getRotateSpeed());
-						AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
-						if (OBJ[i]->getEntity().getRotation() < 360 && OBJ[i]->getEntity().getRotation() > 180)
-							break;
-					}
-				if (randomDirection == 1)
-					while (true)
-					{
-						OBJ[i]->rotateEntity(OBJ[i]->getEntity(), "right", OBJ[i]->getRotateSpeed());
-						AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
-						if (OBJ[i]->getEntity().getRotation() < 360 && OBJ[i]->getEntity().getRotation() > 180)
-							break;
-					}
-			}
 		}
-
-	}		
+	}
 }
 
 
@@ -367,7 +371,7 @@ void AI::attackMode()
 {
 	for (int i = 0; i < OBJ.size(); i++)
 	{
-		if (OBJ[i]->getTarget() != nullptr)
+		if (!OBJ[i]->getPlayer() && OBJ[i]->getTarget() != nullptr && !nearEdge(OBJ[i]))
 		{
 			if (measureDistance(OBJ[i]->getEntity(), *OBJ[i]->getTarget()) > OBJ[i]->getVisibleArea())
 			{
@@ -384,8 +388,8 @@ void AI::attackMode()
 				{
 
 				}
-				OBJ[i]->Fire();
-				OBJ[i]->fireMachinegun();
+				//OBJ[i]->Fire();
+				//OBJ[i]->fireMachinegun();
 			}
 				if (OBJ[i]->getType() == "Tank" && OBJ[i]->getTargetType() == "Hind")
 				{
@@ -397,7 +401,7 @@ void AI::attackMode()
 					{
 
 					}
-					OBJ[i]->fireMachinegun();
+					//OBJ[i]->fireMachinegun();
 
 				}
 				
@@ -411,7 +415,7 @@ void AI::attackMode()
 					{
 
 					}
-					OBJ[i]->Fire();
+					//OBJ[i]->Fire();
 				}
 
 				if (OBJ[i]->getType() == "AA" && OBJ[i]->getTargetType() == "Tank")
@@ -424,7 +428,7 @@ void AI::attackMode()
 					{
 
 					}
-					OBJ[i]->Fire();
+				//	OBJ[i]->Fire();
 				}
 
 
@@ -512,7 +516,20 @@ void AI::rotateTurretToEnemy()
 		if (!OBJ[i]->getPlayer() && OBJ[i]->getTarget() != nullptr && OBJ[i]->getType() != "Hind")
 		{
 			AIrotateToTarget(OBJ[i]->getTopPart(), *OBJ[i]->getTarget(), OBJ[i], OBJ[i]->getTurretPointer()->getRotateSpeed());
-
+			if (OBJ[i]->getType() == "Tank" && OBJ[i]->getTargetType() != "Hind")
+			{
+				OBJ[i]->Fire();
+				OBJ[i]->fireMachinegun();
+			}
+			if (OBJ[i]->getType() == "Tank" && OBJ[i]->getTargetType() == "Hind")
+			{
+				OBJ[i]->fireMachinegun();
+			}
+			if (OBJ[i]->getType() == "AA")
+			{
+				OBJ[i]->Fire();
+				OBJ[i]->fireMachinegun();
+			}
 		}
 }
 float AI::moduluRotation(float rotation)
@@ -540,6 +557,183 @@ float AI::measureFloats(float first, float second)
 
 	return bigger - smaller;
 }
+
+bool AI::nearEdge(Playables* object)
+{
+	bool entered = false;
+	float rotation;
+	//LEFT WALL
+	if (measureFloats(object->getEntity().getPosition().x, 0) < 150)
+	{
+		entered = true;
+		if (object->getEntity().getRotation() >= 270)
+		{
+			object->rotateEntity(object->getEntity(), "right", object->getRotateSpeed());
+			AIturretMove(object->getEntity(), object->getTopPart(), object->getRadiusofMountPoint());
+		}
+		if (object->getEntity().getRotation() < 270 && object->getEntity().getRotation() > 180)
+		{
+			object->rotateEntity(object->getEntity(), "left", object->getRotateSpeed());
+			AIturretMove(object->getEntity(), object->getTopPart(), object->getRadiusofMountPoint());
+		}
+
+		if (object->getEntity().getRotation() >= 0 && object->getEntity().getRotation() <= 90)
+		{
+			object->rotateEntity(object->getEntity(), "right", object->getRotateSpeed());
+			AIturretMove(object->getEntity(), object->getTopPart(), object->getRadiusofMountPoint());
+		}
+
+		if (object->getEntity().getRotation() <= 180 && object->getEntity().getRotation() > 90)
+		{
+			object->rotateEntity(object->getEntity(), "left", object->getRotateSpeed());
+			AIturretMove(object->getEntity(), object->getTopPart(), object->getRadiusofMountPoint());
+		}
+		rotation = object->getEntity().getRotation();
+		if (rotation < 0)
+			rotation -= 360;
+		else if (measureFloats(object->getEntity().getRotation(), 90) < 50)
+		{
+			object->moveEntity(object->getEntity(), "up", object->getSpeed());
+			AIturretMove(object->getEntity(), object->getTopPart(), object->getRadiusofMountPoint());
+
+		}
+	}
+
+	//UPPER WALL
+	if (measureFloats(object->getEntity().getPosition().y, 0) < 150)
+	{
+		entered = true;
+		if (object->getEntity().getRotation() >= 0 && object->getEntity().getRotation() < 90)
+		{
+			object->rotateEntity(object->getEntity(), "right", object->getRotateSpeed());
+			AIturretMove(object->getEntity(), object->getTopPart(), object->getRadiusofMountPoint());
+		}
+
+		if (object->getEntity().getRotation() <= 359 && object->getEntity().getRotation() >= 270)
+		{
+			object->rotateEntity(object->getEntity(), "left", object->getRotateSpeed());
+			AIturretMove(object->getEntity(), object->getTopPart(), object->getRadiusofMountPoint());
+		}
+
+		if (object->getEntity().getRotation() >= 90 && object->getEntity().getRotation() <= 180)
+		{
+			object->rotateEntity(object->getEntity(), "right", object->getRotateSpeed());
+			AIturretMove(object->getEntity(), object->getTopPart(), object->getRadiusofMountPoint());
+		}
+
+		if (object->getEntity().getRotation() <= 270 && object->getEntity().getRotation() >= 180)
+		{
+			object->rotateEntity(object->getEntity(), "left", object->getRotateSpeed());
+			AIturretMove(object->getEntity(), object->getTopPart(), object->getRadiusofMountPoint());
+		}
+		rotation = object->getEntity().getRotation();
+		if (rotation < 0)
+			rotation -= 360;
+
+		else if (measureFloats(rotation, 180) < 50)
+		{
+			object->moveEntity(object->getEntity(), "up", object->getSpeed());
+			AIturretMove(object->getEntity(), object->getTopPart(), object->getRadiusofMountPoint());
+
+		}
+
+	}
+
+	//RIGHT WALL
+	if (measureFloats(object->getEntity().getPosition().x, Map::getMapSize().x) < 150)
+	{
+		entered = true;
+		if (object->getEntity().getRotation() >= 90 && object->getEntity().getRotation() <= 180)
+		{
+			object->rotateEntity(object->getEntity(), "right", object->getRotateSpeed());
+			AIturretMove(object->getEntity(), object->getTopPart(), object->getRadiusofMountPoint());
+		}
+
+		if (object->getEntity().getRotation() < 90 && object->getEntity().getRotation() >= 0)
+		{
+			object->rotateEntity(object->getEntity(), "left", object->getRotateSpeed());
+			AIturretMove(object->getEntity(), object->getTopPart(), object->getRadiusofMountPoint());
+		}
+
+		if (object->getEntity().getRotation() >= 180 && object->getEntity().getRotation() <= 270)
+		{
+			object->rotateEntity(object->getEntity(), "right", object->getRotateSpeed());
+			AIturretMove(object->getEntity(), object->getTopPart(), object->getRadiusofMountPoint());
+		}
+
+		if (object->getEntity().getRotation() <= 359 && object->getEntity().getRotation() >= 270)
+		{
+			object->rotateEntity(object->getEntity(), "left", object->getRotateSpeed());
+			AIturretMove(object->getEntity(), object->getTopPart(), object->getRadiusofMountPoint());
+		}
+
+		rotation = object->getEntity().getRotation();
+		if (rotation < 0)
+			rotation -= 360;
+
+		else if (measureFloats(object->getEntity().getRotation(), 270) < 50)
+		{
+			object->moveEntity(object->getEntity(), "up", object->getSpeed());
+			AIturretMove(object->getEntity(), object->getTopPart(), object->getRadiusofMountPoint());
+
+		}
+
+	}
+
+	//BOTTOM WALL
+	if (measureFloats(object->getEntity().getPosition().y, Map::getMapSize().y) < 150)
+	{
+		entered = true;
+
+		if (object->getEntity().getRotation() >= 180 && object->getEntity().getRotation() <= 270)
+		{
+			object->rotateEntity(object->getEntity(), "right", object->getRotateSpeed());
+			AIturretMove(object->getEntity(), object->getTopPart(), object->getRadiusofMountPoint());
+		}
+
+		if (object->getEntity().getRotation() < 180 && object->getEntity().getRotation() >= 90)
+		{
+			object->rotateEntity(object->getEntity(), "left", object->getRotateSpeed());
+			AIturretMove(object->getEntity(), object->getTopPart(), object->getRadiusofMountPoint());
+		}
+
+		if (object->getEntity().getRotation() >= 270 && object->getEntity().getRotation() <= 359)
+		{
+			object->rotateEntity(object->getEntity(), "right", object->getRotateSpeed());
+			AIturretMove(object->getEntity(), object->getTopPart(), object->getRadiusofMountPoint());
+		}
+
+		if (object->getEntity().getRotation() <= 90 && object->getEntity().getRotation() >= 0)
+		{
+			object->rotateEntity(object->getEntity(), "left", object->getRotateSpeed());
+			AIturretMove(object->getEntity(), object->getTopPart(), object->getRadiusofMountPoint());
+		}
+
+		rotation = object->getEntity().getRotation();
+		if (rotation < 0)
+			rotation -= 360;
+
+		else if (measureFloats(object->getEntity().getRotation(), 359) < 50 || measureFloats(object->getEntity().getRotation(), 0) < 50)
+		{
+			object->moveEntity(object->getEntity(), "up", object->getSpeed());
+			AIturretMove(object->getEntity(), object->getTopPart(), object->getRadiusofMountPoint());
+
+		}
+	}
+	
+
+	
+if (entered)
+{
+	return true;
+}
+
+	else { 
+	return false;
+	}
+}	
+
+
 AI::~AI()
 {
 }

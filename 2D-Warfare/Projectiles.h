@@ -17,6 +17,8 @@ public:
 	bool intersectWithMap(Sprite& shell);
 	bool intersectWithObjects(Sprite& shell, Sprite& object);
 	virtual float getDamage() const = 0;
+	virtual float getRange() = 0;
+	virtual std::string getType() = 0;
 	virtual ~Projectiles();
 
 private:

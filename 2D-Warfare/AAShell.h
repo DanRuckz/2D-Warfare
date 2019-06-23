@@ -11,6 +11,8 @@ public:
 	Sprite& getSprite();
 	void setFlightDirection(Vector2f vector);
 	float getDamage() const;
+	float getRange();
+	std::string getType();
 	~AAShell();
 private:
 	Projectiles* baseptr;
@@ -19,5 +21,7 @@ private:
 	Vector2f direction;
 	IntRect animation;
 	float damage = 150;
+	float maxRange = 1700;
+	std::string type;
 };
 

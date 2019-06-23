@@ -1,6 +1,6 @@
 #include "Tank.h"
 
-Tank::Tank() : animation(Vector2i(28,97),Vector2i(34,59)), type("Tank"), speed(20), rotateSpeed(5),hitRadius(2500)
+Tank::Tank() : animation(Vector2i(28,97),Vector2i(34,59)), type("Tank"), speed(20), rotateSpeed(5)
 {
 	baseptr = this;
 	baseptr->setEntity(HPText, 50);
@@ -27,7 +27,6 @@ void Tank::Fire()
 		vector.y /= barrelLength;
 		shell->setFlightDirection(vector);
 		projectiles.push_back(shell);
-		hitRadius = 2500;
 		lastFired = "shell";
 		timerofShot.restart();
 
@@ -82,7 +81,7 @@ float Tank::checkIntersectionWithObjects(std::shared_ptr<Projectiles> pointer, i
 	
 		for (int i = 0; i <OBJ.size(); i++)
 		{
-			if (pointer->intersectWithObjects(pointer->getSprite(), OBJ[i]->getEntity()) && OBJ[i]->getType() == "Hind" && lastFired == "shot")
+			if (pointer->getType() == "shot" && OBJ[i]->getType() == "Hind" && pointer->intersectWithObjects(pointer->getSprite(), OBJ[i]->getEntity()))
 			{
 				return i;
 			}
@@ -271,15 +270,19 @@ void Tank::fireMachinegun()
 		vector.y /= barrelLength;
 		shell->setFlightDirection(vector);
 		projectiles.push_back(shell);
-		hitRadius = 1200;
 		lastFired = "shot";
 		timerofMG.restart();
 	}
 }
 
-float Tank::getHitRadius()
+bool Tank::getNearEdge()
 {
-	return hitRadius;
+	return nearEdge;
+}
+
+void Tank::setNearEdge(bool option)
+{
+	nearEdge = option;
 }
 
 void Tank::rotateEntity(std::string direction)

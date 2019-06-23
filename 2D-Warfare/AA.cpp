@@ -2,7 +2,7 @@
 
 
 
-AA::AA() :animation(IntRect(Vector2i(7,3),Vector2i(36,79))) ,speed(10), type("AA"),hitRadius(1700), rotateSpeed(7)
+AA::AA() :animation(IntRect(Vector2i(7,3),Vector2i(36,79))) ,speed(10), type("AA"), rotateSpeed(7)
 {
 	baseptr = this;
 	baseptr->setEntity(HPText, 50);
@@ -281,15 +281,21 @@ void AA::setTargetType(std::string type)
 	targetType = type;
 }
 
-float AA::getHitRadius()
-{
-	return hitRadius;
-}
-
 std::string AA::getTargetType()
 {
 	return targetType;
 }
+
+bool AA::getNearEdge()
+{
+	return nearEdge;
+}
+
+void AA::setNearEdge(bool option)
+{
+	nearEdge = option;
+}
+
 
 
 void AA::setID()

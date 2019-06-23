@@ -50,7 +50,8 @@ public:
 	void setTargetType(std::string type);
 	std::string getTargetType();
 	bool getReloading();
-	float getHitRadius();
+	bool getNearEdge();
+	void setNearEdge(bool option);
 	~Hind();
 
 private:
@@ -63,7 +64,6 @@ private:
 	float barrelLength = 40;
 	std::shared_ptr<HindShell> shell;
 	std::string type;
-	float hitRadius;
 	int shotsFired = 0;
 	int selfIndex;
 	float HP = 1000;
@@ -89,5 +89,6 @@ private:
 	int HPoffset_y = -150;
 	std::string targetType;
 	bool reloading;
+	bool nearEdge = false;
 };
 

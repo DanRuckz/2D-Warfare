@@ -47,8 +47,9 @@ public:
 	Text& getHPText();
 	void updateHPText();
 	void setTargetType(std::string type);
-	float getHitRadius();
 	std::string getTargetType();
+	bool getNearEdge();
+	void setNearEdge(bool option);
 	~AA();
 
 private:
@@ -62,7 +63,6 @@ private:
 	float offset_y = 23;
 	float radiusofMountPoint = 23;
 	std::string type;
-	float hitRadius;
 	std::shared_ptr<AAShell> shell;
 	float barrelLength = 23;
 	bool left = false;
@@ -86,6 +86,7 @@ private:
 	int HPoffset_x = -45;
 	int HPoffset_y = -150;
 	std::string targetType;
+	bool nearEdge = false;
 
 };
 

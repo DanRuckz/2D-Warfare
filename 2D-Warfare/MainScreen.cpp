@@ -23,6 +23,7 @@ MainScreen::MainScreen()
 	number.setCharacterSize(75);
 	number.setFillColor(Color::Black);
 	number.setString("1");
+	numberofPlayers = 1;
 	number.setPosition(Vector2f(resolution.width / 2 - 20, resolution.height / 2 - 45));
 	
 	createWindow();
@@ -102,6 +103,7 @@ void MainScreen::createWindow() {
 				{
 					if (Play.getGlobalBounds().contains(coords))
 					{
+						exited = false;
 						menuMusic.stop();
 						window.close();
 					}

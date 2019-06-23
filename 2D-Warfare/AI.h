@@ -11,14 +11,6 @@ public:
 	
 	void AImove();
 
-	float measureFloats(float first, float second);
-
-	void attackMode();
-
-	void rotateTurretToEnemy();
-
-
-
 	~AI();
 
 
@@ -35,10 +27,13 @@ private:
 	std::mt19937 gen;
 	std::uniform_int_distribution<std::mt19937::result_type> dist;
 	float moduluRotation(float rotation);
+	bool nearEdge(Playables* object);
+	float measureFloats(float first, float second);
+	void attackMode();
+	void rotateTurretToEnemy();
 
 
 	//FOR AISEARCH
-
 
 	bool modeChange = true;
 	int random = 0;

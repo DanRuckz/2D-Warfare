@@ -1,7 +1,7 @@
 #include "TankShell.h"
 
 
-TankShell::TankShell() : animation(Vector2i(40,54),Vector2i(25,9)),speed(80)
+TankShell::TankShell() : animation(Vector2i(40,54),Vector2i(25,9)),speed(80),type("shell")
 {
 	baseptr = this;
 	baseptr->setEntity(shell, Vector2f(0, 0), animation, "projectile");
@@ -35,6 +35,16 @@ void TankShell::setFlightDirection(Vector2f vector)
 float TankShell::getDamage() const
 {
 	return damage;
+}
+
+float TankShell::getRange()
+{
+	return maxRange;
+}
+
+std::string TankShell::getType()
+{
+	return type;
 }
 
 

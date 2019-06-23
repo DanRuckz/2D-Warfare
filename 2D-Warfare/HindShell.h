@@ -11,6 +11,8 @@ public:
 	void Fly(Sprite& projectile);
 	void setFlightDirection(Vector2f vector);
 	float getDamage() const;
+	float getRange();
+	std::string getType();
 	~HindShell();
 
 private:
@@ -20,5 +22,7 @@ private:
 	Vector2f direction;
 	float speed;
 	float damage = 200;
+	float maxRange = 1700;
+	std::string type;
 };
 

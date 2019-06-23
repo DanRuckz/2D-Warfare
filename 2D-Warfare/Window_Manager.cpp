@@ -26,7 +26,7 @@ void Window_Manager::Window_action()
 		respawnTime = respawnTimer.getElapsedTime();
 		global = clock_global.getElapsedTime();
 		//change to debugModeTime or releaseModeTime depends on which mode you are
-		if (global.asMilliseconds() > debugModeTime)
+		if (global.asMilliseconds() > releaseModeTime)
 		{
 			clock_global.restart();
 			mousePos = Mouse::getPosition();
@@ -38,7 +38,10 @@ void Window_Manager::Window_action()
 				if (event.type == Event::Closed)
 					window.close();
 				if (event.key.code == Keyboard::Escape)
+				{
+					MainScreen::setExited(true);
 					window.close();
+				}
 
 				if (event.type == Event::MouseButtonPressed)
 				{
@@ -96,11 +99,10 @@ void Window_Manager::Window_action()
 					highscore.getPlayTime() = highscore.getPlayTimer().getElapsedTime();
 					movement();
 					checkCollisionWithObjects();
-					checkFlight();
 					highscore.updateTimePlayed();
-					checkHP();
 				}
-				
+				checkFlight();
+				checkHP();
 				checkLimits();
 				respawn();
 				ai.AImove();
@@ -124,12 +126,20 @@ void Window_Manager::Window_action()
 				
 				if (respawnScreen != nullptr)
 					drawRespawn();
-				window.draw(highscore.getHighScore());
-				window.draw(highscore.gettopHighScore());
-				window.draw(highscore.getTimePlayedText());
+				if (entity != nullptr)
+				{
+					window.draw(highscore.getHighScore());
+					window.draw(highscore.gettopHighScore());
+					window.draw(highscore.getTimePlayedText());
+				}
 				window.display();
 		}
 	}
+	for (int i = 0; i < OBJ.size(); i++)
+	{
+		delete OBJ[i];
+	}
+	OBJ.clear();
 }
 
 void Window_Manager::setView()

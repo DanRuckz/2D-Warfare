@@ -78,7 +78,7 @@ void Playables::projectileFly(std::vector<std::shared_ptr<Projectiles>>& project
 {
 	projectile->Fly(projectile->getSprite());
 	bool objects = true;
-	if (projectile->getDistanceTraveled() > OBJ[selfObjectIndex]->getHitRadius() || projectile->intersectWithMap(projectile->getSprite()))
+	if (projectile->getDistanceTraveled() > projectile->getRange() || projectile->intersectWithMap(projectile->getSprite()))
 	{
 		objects = false;
 		projectile.reset();

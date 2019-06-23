@@ -12,6 +12,8 @@ public:
 	void Fly(Sprite& projectile);
 	void setFlightDirection(Vector2f vector);
 	float getDamage() const;
+	float getRange();
+	std::string getType();
 	~TankShell();
 
 private:
@@ -22,5 +24,7 @@ private:
 	unsigned int turretLength =5;
 	float speed;
 	float damage = 1000;
+	float maxRange = 2500;
+	std::string type;
 };
 

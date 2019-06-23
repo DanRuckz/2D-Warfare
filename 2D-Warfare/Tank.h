@@ -54,7 +54,8 @@ public:
 	void setTargetType(std::string type);
 	std::string getTargetType();
 	void fireMachinegun() override;
-	float getHitRadius();
+	bool getNearEdge();
+	void setNearEdge(bool option);
 
 
 private:
@@ -67,7 +68,6 @@ private:
 	Playables* baseptr;
 	float speed;
 	float radius = 1;
-	float hitRadius = 3000;
 	std::shared_ptr<Projectiles> shell;
 	unsigned int barrelLength = 70;
 	std::string type;
@@ -95,5 +95,6 @@ private:
 	Clock timerofMG;
 	Time timeofMG;
 	std::string lastFired;
+	bool nearEdge = false;
 };
 
