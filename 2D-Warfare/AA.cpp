@@ -4,6 +4,7 @@
 
 AA::AA() :animation(IntRect(Vector2i(7,3),Vector2i(36,79))) ,speed(10), type("AA"), rotateSpeed(7)
 {
+	target = nullptr;
 	baseptr = this;
 	baseptr->setEntity(HPText, 50);
 	baseptr->setEntity(anti_air, Vector2f(1500.f, 1500.f), animation, "AA");
