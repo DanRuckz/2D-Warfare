@@ -67,7 +67,7 @@ private:
 	int shotsFired = 0;
 	int selfIndex;
 	float HP = 1000;
-	bool Player;
+	bool Player = false;
 	std::vector < std::shared_ptr<Projectiles>> projectiles;
 	int ID;
 	void setID();
