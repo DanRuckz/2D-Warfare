@@ -8,7 +8,6 @@ public:
 	Sprite getMainSprite();
 
 	MainScreen();
-	MainScreen(RenderWindow* o_window);
 	static void setExited(bool other);
 	static bool getExited();
 	static int getNumberofPlayers();
@@ -21,9 +20,10 @@ private:
 	SoundBuffer sb;
 	void loadAndPlayMenuSound();
 	void createWindow();
-	RenderWindow* window;
+	RenderWindow window;
 	Vector2f coords;
 	VideoMode resolution;
+
 	Sprite backgroundSprite;
 	Sprite arrowUp;
 	Sprite arrowDown;
@@ -38,6 +38,9 @@ private:
 	Vector2i mousePos;
 	void fadeColors(Color& color);
 	std::string numberOfPlayers;
+
+
 	void retrieveColors();
+
 };
 

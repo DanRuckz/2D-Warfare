@@ -7,5 +7,5 @@ std::vector<Playables*> Playables::objects;
 bool MainScreen::exited;
 int MainScreen::numberofPlayers;
 Font* Entities::font;
-//std::unique_ptr<MainScreen> ptr;
-//std::unique_ptr<Window_Manager> engineptr;
+std::unique_ptr<MainScreen> ptr;
+std::unique_ptr<Window_Manager> engineptr;
