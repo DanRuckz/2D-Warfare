@@ -4,6 +4,7 @@
 
 Hind::Hind() : animation(Vector2i(524, 0), Vector2i(28, 62)), speed(33),rotateSpeed(10),type("Hind")
 {
+	target = nullptr;
 	baseptr = this;
 	baseptr->setEntity(HPText, 50);
 	baseptr->setEntity(hind, Vector2f(1500.f, 1500.f), animation, "hind");
