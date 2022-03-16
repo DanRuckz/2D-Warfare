@@ -97,3 +97,4 @@ private:
 	std::string lastFired;
 	bool nearEdge = false;
 };
+

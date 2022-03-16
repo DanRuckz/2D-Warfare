@@ -15,6 +15,7 @@ class Window_Manager
 {
 public:
 	Window_Manager();
+	Window_Manager(RenderWindow* o_window);
 	void updateHP();
 	~Window_Manager();
 private:
@@ -22,7 +23,7 @@ private:
 	Vector2i mousePos;
 	void Window_action();
 	void setView();
-	RenderWindow window;
+	RenderWindow* window;
 	VideoMode resolution;
 	Vector2f coords;
 	Map map;
@@ -55,5 +56,6 @@ private:
 	Time respawnTime;
 	HighScore highscore;
 	bool rightMouseRelease = true;
+	uint numberofplayers = 0;
 };
 

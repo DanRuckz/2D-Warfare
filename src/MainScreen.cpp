@@ -1,8 +1,11 @@
 #include "MainScreen.h"
 
+MainScreen::MainScreen(){
+
+}
 
 
-MainScreen::MainScreen()
+MainScreen::MainScreen(RenderWindow* o_window) : window(o_window)
 {
 	resolution = VideoMode::getDesktopMode();
 	baseptr = this;
@@ -65,23 +68,21 @@ void MainScreen::loadAndPlayMenuSound() {
 }
 
 void MainScreen::createWindow() {
-
-	window.create(VideoMode(resolution), "2D-Warfare", FULLSCREEN);
 	 
 	Event event;
 	Color color;
 	color = Play.getColor();
 	loadAndPlayMenuSound();
-	while (window.isOpen())
+	while (window->isOpen())
 	{
 		mousePos = Mouse::getPosition();
-		coords = window.mapPixelToCoords(mousePos);
+		coords = window->mapPixelToCoords(mousePos);
 		retrieveColors();
-		while (window.pollEvent(event))
+		while (window->pollEvent(event))
 		{
 			if (event.type == Event::Closed)
 			{
-				window.close();
+				window->close();
 				exited = true;
 			}
 
@@ -94,7 +95,7 @@ void MainScreen::createWindow() {
 			if (Keyboard::isKeyPressed(Keyboard::Escape))
 			{
 				exited = true;
-				window.close();
+				window->close();
 			}
 
 			if (event.type == Event::MouseButtonPressed)
@@ -105,12 +106,12 @@ void MainScreen::createWindow() {
 					{
 						exited = false;
 						menuMusic.stop();
-						window.close();
+						window->close();
 					}
 					if (Exit.getGlobalBounds().contains(coords))
 					{
 						exited = true;
-						window.close();
+						window->close();
 					}
 					if (arrowUp.getGlobalBounds().contains(coords))
 					{	
@@ -139,21 +140,21 @@ void MainScreen::createWindow() {
 			}
 		} //END EVENT
 
-		window.draw(backgroundSprite);
-		window.draw(arrowUp);
-		window.draw(arrowDown);
-		window.draw(Play);
-		window.draw(Exit);
-		window.draw(Players);
-		window.draw(Rect);
-		window.draw(number);
-		window.display();
+		window->draw(backgroundSprite);
+		window->draw(arrowUp);
+		window->draw(arrowDown);
+		window->draw(Play);
+		window->draw(Exit);
+		window->draw(Players);
+		window->draw(Rect);
+		window->draw(number);
+		window->display();
 	}
 }
 
 MainScreen::~MainScreen()
 {
-
+	std::cout << "deconstructing\n";
 }
 
 void MainScreen::fadeColors(Color& color)

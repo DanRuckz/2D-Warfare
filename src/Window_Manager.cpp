@@ -1,8 +1,12 @@
 #include "Window_Manager.h"
 
 
+Window_Manager::Window_Manager(){
+	
+}
 
-Window_Manager::Window_Manager() : RespawnScreenStartPos(Vector2f(1500,1500))
+
+Window_Manager::Window_Manager(RenderWindow* o_window) : RespawnScreenStartPos(Vector2f(1500,1500)), window(o_window)
 {
 	resolution = VideoMode::getDesktopMode();
 	setView();
@@ -10,19 +14,19 @@ Window_Manager::Window_Manager() : RespawnScreenStartPos(Vector2f(1500,1500))
 }
 
 
-
-
 void Window_Manager::Window_action()
 {
-	window.create(VideoMode(resolution), "2D-Warfare", FULLSCREEN);
+	//numberofplayers = MainScreen::getNumberofPlayers();
+	//window->create(VideoMode(resolution), "2D-Warfare", FULLSCREEN);
+	numberofplayers = 15;
 	Clock clock_global;
 	Time global;
 	Clock respawnTimer;
 	Time respawnTime;
 	clock_global.restart();
 	entity = nullptr;
-	makeEnemies(MainScreen::getNumberofPlayers());
-	while (window.isOpen())
+	makeEnemies(numberofplayers);
+	while (window->isOpen())
 	{
 		respawnTime = respawnTimer.getElapsedTime();
 		global = clock_global.getElapsedTime();
@@ -31,17 +35,20 @@ void Window_Manager::Window_action()
 		{
 			clock_global.restart();
 			mousePos = Mouse::getPosition();
-			coords = window.mapPixelToCoords(mousePos);
+			coords = window->mapPixelToCoords(mousePos);
 
 
-			while (window.pollEvent(event))
+			while (window->pollEvent(event))
 			{
 				if (event.type == Event::Closed)
-					window.close();
-				if (event.key.code == Keyboard::Escape)
 				{
-					MainScreen::setExited(true);
-					window.close();
+					//window->close();
+				}
+
+				if (Keyboard::isKeyPressed(Keyboard::Escape))
+				{
+					//MainScreen::setExited(true);
+					window->close();
 				}
 
 				if (event.type == Event::MouseButtonPressed)
@@ -117,11 +124,11 @@ void Window_Manager::Window_action()
 					respawnTimer.restart();
 				}
 
-				window.draw(map.getBoundingRect());
+				window->draw(map.getBoundingRect());
 				for (int i = 0; i < map.getMapVec().size(); i++)
-					window.draw(*map.getMapVec()[i]);
+					window->draw(*map.getMapVec()[i]);
 
-				window.setView(view);
+				window->setView(view);
 				drawProjectiles();
 				correctDraw();
 				
@@ -129,11 +136,11 @@ void Window_Manager::Window_action()
 					drawRespawn();
 				if (entity != nullptr)
 				{
-					window.draw(highscore.getHighScore());
-					window.draw(highscore.gettopHighScore());
-					window.draw(highscore.getTimePlayedText());
+					window->draw(highscore.getHighScore());
+					window->draw(highscore.gettopHighScore());
+					window->draw(highscore.getTimePlayedText());
 				}
-				window.display();
+				window->display();
 		}
 	}
 	for (int i = 0; i < OBJ.size(); i++)
@@ -270,34 +277,34 @@ void Window_Manager::checkLimits()
 		Vector2f topScorePos(entity->getEntity().getPosition().x + resolution.width/2 * factor - 800, entity->getEntity().getPosition().y - resolution.height / 2 * factor);
 		
 
-		if (entity->getEntity().getPosition().y - window.getSize().y / 2 * factor < map.getBoundingRect().getPosition().y)
+		if (entity->getEntity().getPosition().y - window->getSize().y / 2 * factor < map.getBoundingRect().getPosition().y)
 		{
-			logics.y = map.getBoundingRect().getPosition().y + window.getSize().y / 2 * factor;
+			logics.y = map.getBoundingRect().getPosition().y + window->getSize().y / 2 * factor;
 			scorePos.y = map.getBoundingRect().getPosition().y;
 			timerPos.y = scorePos.y;
 			topScorePos.y = scorePos.y;
 			
 		}
-		if (entity->getEntity().getPosition().y + window.getSize().y / 2 * factor > map.getBoundingRect().getSize().y)
+		if (entity->getEntity().getPosition().y + window->getSize().y / 2 * factor > map.getBoundingRect().getSize().y)
 		{
-			logics.y = map.getBoundingRect().getSize().y - window.getSize().y / 2 * factor;
-			scorePos.y = view.getCenter().y - window.getSize().y /2 * factor;
+			logics.y = map.getBoundingRect().getSize().y - window->getSize().y / 2 * factor;
+			scorePos.y = view.getCenter().y - window->getSize().y /2 * factor;
 			timerPos.y = scorePos.y;
 			topScorePos.y = scorePos.y;
 		}
-		if (entity->getEntity().getPosition().x - window.getSize().x / 2 * factor < map.getBoundingRect().getPosition().x)
+		if (entity->getEntity().getPosition().x - window->getSize().x / 2 * factor < map.getBoundingRect().getPosition().x)
 		{
-			logics.x = map.getBoundingRect().getPosition().x + window.getSize().x / 2 * factor;
+			logics.x = map.getBoundingRect().getPosition().x + window->getSize().x / 2 * factor;
 			scorePos.x = map.getBoundingRect().getPosition().x;
-			timerPos.x = scorePos.x + window.getSize().x / 2 * factor;
-			topScorePos.x = scorePos.x + window.getSize().x * factor - 800;
+			timerPos.x = scorePos.x + window->getSize().x / 2 * factor;
+			topScorePos.x = scorePos.x + window->getSize().x * factor - 800;
 		}
-		if (entity->getEntity().getPosition().x + window.getSize().x / 2 * factor > map.getBoundingRect().getSize().x)
+		if (entity->getEntity().getPosition().x + window->getSize().x / 2 * factor > map.getBoundingRect().getSize().x)
 		{
-			logics.x = map.getBoundingRect().getSize().x - window.getSize().x / 2 * factor;
-			scorePos.x = view.getCenter().x - window.getSize().x /2 * factor;
+			logics.x = map.getBoundingRect().getSize().x - window->getSize().x / 2 * factor;
+			scorePos.x = view.getCenter().x - window->getSize().x /2 * factor;
 			timerPos.x = view.getCenter().x;
-			topScorePos.x = view.getCenter().x + window.getSize().x / 2 * factor - 800;
+			topScorePos.x = view.getCenter().x + window->getSize().x / 2 * factor - 800;
 		}
 		
 		highscore.setTextPos(scorePos,topScorePos,timerPos);
@@ -351,15 +358,15 @@ void Window_Manager::makeEnemies(int howmany)
 
 void Window_Manager::drawRespawn()
 {
-	window.draw(respawnScreen->getSprite());
-	window.draw(respawnScreen->getTankSprite());
-	window.draw(respawnScreen->getHindSprite());
-	window.draw(respawnScreen->getAASprite());
+	window->draw(respawnScreen->getSprite());
+	window->draw(respawnScreen->getTankSprite());
+	window->draw(respawnScreen->getHindSprite());
+	window->draw(respawnScreen->getAASprite());
 
-	window.draw(respawnScreen->getTankTurretSprite());
-	window.draw(respawnScreen->getAATurretSprite());
-	window.draw(respawnScreen->getHindBladesSprite());
-	window.draw(respawnScreen->getTitleSprite());
+	window->draw(respawnScreen->getTankTurretSprite());
+	window->draw(respawnScreen->getAATurretSprite());
+	window->draw(respawnScreen->getHindBladesSprite());
+	window->draw(respawnScreen->getTitleSprite());
 }
 
 void Window_Manager::correctDraw()
@@ -367,9 +374,9 @@ void Window_Manager::correctDraw()
 	for (int i = 0; i < OBJ.size(); i++)
 	{
 		OBJ[i]->rotateTurret();
-		window.draw(OBJ[i]->getEntity());
-		window.draw(OBJ[i]->getTopPart());
-		window.draw(OBJ[i]->getHPText());
+		window->draw(OBJ[i]->getEntity());
+		window->draw(OBJ[i]->getTopPart());
+		window->draw(OBJ[i]->getHPText());
 	}
 }
 
@@ -407,7 +414,7 @@ void Window_Manager::drawProjectiles()
 {
 	for (int i = 0; i <OBJ.size(); i++)
 		for(int j =0;j< OBJ[i]->getProjectileVector().size();j++)
-		window.draw(OBJ[i]->getProjectileVector()[j]->getSprite());
+		window->draw(OBJ[i]->getProjectileVector()[j]->getSprite());
 }
 
 void Window_Manager::respawn()
@@ -482,7 +489,7 @@ void Window_Manager::vecCheck()
 		if (OBJ[i]->getPlayer())
 			respawn = true;
 
-	if (respawn && OBJ.size() < MainScreen::getNumberofPlayers())
+	if (respawn && OBJ.size() < numberofplayers)
 		makeEnemies(1);
 }
 
