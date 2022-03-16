@@ -2,6 +2,8 @@
 
 Tank::Tank() : animation(Vector2i(28,97),Vector2i(34,59)), type("Tank"), speed(20), rotateSpeed(5)
 {
+	
+	target = nullptr;
 	baseptr = this;
 	baseptr->setEntity(HPText, 50);
 	baseptr->setEntity(tank,Vector2f(1500,1500),animation,"tank");
@@ -318,8 +320,3 @@ void Tank::setID()
 Tank::~Tank()
 {
 }
-
-
-
-
-
