@@ -73,7 +73,7 @@ private:
 	std::string type;
 	int selfIndex;
 	float HP = 3000;
-	bool Player;
+	bool Player = false;
 	std::vector < std::shared_ptr<Projectiles>> projectiles;
 	int ID;
 	void setID();
@@ -97,4 +97,3 @@ private:
 	std::string lastFired;
 	bool nearEdge = false;
 };
-
