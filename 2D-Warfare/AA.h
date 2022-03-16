@@ -68,7 +68,7 @@ private:
 	bool left = false;
 	int selfIndex;
 	float HP = 1500;
-	bool Player;
+	bool Player = false;
 	std::vector < std::shared_ptr<Projectiles>> projectiles;
 	int ID;
 	void setID();
