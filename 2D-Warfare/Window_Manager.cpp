@@ -20,6 +20,7 @@ void Window_Manager::Window_action()
 	Clock respawnTimer;
 	Time respawnTime;
 	clock_global.restart();
+	entity = nullptr;
 	makeEnemies(MainScreen::getNumberofPlayers());
 	while (window.isOpen())
 	{
@@ -377,7 +378,6 @@ void Window_Manager::movement()
 
 	if (event.type == Event::MouseMoved)
 	{
-		std::cout << "X coords: " << coords.x << " " << "Y coords: " << coords.y << std::endl;
 		entity->rotateTurret(coords, entity->getEntity().getPosition());
 	}
 
