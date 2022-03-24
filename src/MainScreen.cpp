@@ -95,7 +95,8 @@ void MainScreen::createWindow() {
 			if (Keyboard::isKeyPressed(Keyboard::Escape))
 			{
 				exited = true;
-				window->close();
+				window->clear();
+				break;
 			}
 
 			if (event.type == Event::MouseButtonPressed)

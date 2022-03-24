@@ -7,6 +7,7 @@ public:
 	std::vector<Sprite*> getMapVec();
 	RectangleShape& getBoundingRect();
 	static Vector2f getMapSize();
+	void clearMapVec();
 	~Map();
 private:
 	void CreateMap();

@@ -54,3 +54,10 @@ void Map::CreateMap()
 	}
 	mapSize = Vector2f(obj_size.x * numberofTiles, obj_size.y * numberofTiles);
 }
+
+void Map::clearMapVec(){
+    while(!mapvec.empty()) {
+        delete mapvec.back();
+        mapvec.pop_back();
+    }
+}

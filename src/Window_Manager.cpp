@@ -6,13 +6,16 @@ Window_Manager::Window_Manager(){
 }
 
 
+
 Window_Manager::Window_Manager(RenderWindow* o_window) : RespawnScreenStartPos(Vector2f(1500,1500)), window(o_window)
 {
 	resolution = VideoMode::getDesktopMode();
+}
+
+void Window_Manager::runGameWindow(){
 	setView();
 	Window_action();
 }
-
 
 void Window_Manager::Window_action()
 {
@@ -48,6 +51,8 @@ void Window_Manager::Window_action()
 				if (Keyboard::isKeyPressed(Keyboard::Escape))
 				{
 					//MainScreen::setExited(true);
+					demolishWindowObjects();
+					window->clear();
 					window->close();
 				}
 
@@ -143,14 +148,9 @@ void Window_Manager::Window_action()
 				window->display();
 		}
 	}
-	for (int i = 0; i < OBJ.size(); i++)
-	{
-		delete OBJ[i];
-	}
-	OBJ.clear();
 }
 
-void Window_Manager::setView()
+inline void Window_Manager::setView()
 {
 	view.setCenter((float)resolution.width / 2, (float)resolution.height / 2);
 	view.setSize((float)resolution.width*factor, (float)resolution.height*factor);
@@ -500,6 +500,17 @@ void Window_Manager::updateHP()
 		OBJ[i]->updateHPText();
 	}
 }
+
+void Window_Manager::demolishWindowObjects(){
+
+	for (int i = 0; i < OBJ.size(); i++)
+	{
+		delete OBJ[i];
+	}
+	OBJ.clear();
+	map.clearMapVec();
+}
+
 Window_Manager::~Window_Manager()
 {
 }

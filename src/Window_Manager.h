@@ -17,12 +17,13 @@ public:
 	Window_Manager();
 	Window_Manager(RenderWindow* o_window);
 	void updateHP();
+	void runGameWindow();
 	~Window_Manager();
 private:
 	Event event;
 	Vector2i mousePos;
 	void Window_action();
-	void setView();
+	inline void setView();
 	RenderWindow* window;
 	VideoMode resolution;
 	Vector2f coords;
@@ -57,5 +58,6 @@ private:
 	HighScore highscore;
 	bool rightMouseRelease = true;
 	uint numberofplayers = 0;
+	void demolishWindowObjects();
 };
 

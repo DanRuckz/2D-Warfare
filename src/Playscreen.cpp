@@ -7,10 +7,11 @@ createwindow();
 }
 
     inline void Playscreen::createwindow(){
-	VideoMode::getDesktopMode();
+	resolution = VideoMode::getDesktopMode();
 	//resolution.width = 1920;
 	//resolution.height = 1080;
-	window.create(resolution, "2D-Warfare", FULLSCREEN);
+	window.create(resolution, "2D-Warfare", WINDOW_MODE);
+	auto menuwindow = std::make_unique<MainScreen>(&window);
 	auto gamewindow = std::make_unique<Window_Manager>(&window);
-    //auto menuwindow = std::make_unique<MainScreen>(&window);
+	gamewindow->runGameWindow();
 }
