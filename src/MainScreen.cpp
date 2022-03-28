@@ -28,18 +28,6 @@ MainScreen::MainScreen(RenderWindow* o_window) : window(o_window)
 	number.setString("1");
 	numberofPlayers = 1;
 	number.setPosition(Vector2f(resolution.width / 2 - 20, resolution.height / 2 - 45));
-	
-	createWindow();
-}
-
-void MainScreen::setExited(bool other)
-{
-	exited = other;
-}
-
-bool MainScreen::getExited()
-{
-	return exited;
 }
 
 int MainScreen::getNumberofPlayers()
@@ -67,13 +55,14 @@ void MainScreen::loadAndPlayMenuSound() {
 
 }
 
-void MainScreen::createWindow() {
-	 
+void MainScreen::runMenuWindow() {
+	
+	initExitVars();
 	Event event;
 	Color color;
 	color = Play.getColor();
 	loadAndPlayMenuSound();
-	while (window->isOpen())
+	while (!exitedMenu)
 	{
 		mousePos = Mouse::getPosition();
 		coords = window->mapPixelToCoords(mousePos);
@@ -82,10 +71,9 @@ void MainScreen::createWindow() {
 		{
 			if (event.type == Event::Closed)
 			{
-				window->close();
-				exited = true;
+				exitedGame = true;
+				exitedMenu = true;
 			}
-
 
 			if(event.type == Event::MouseMoved)
 			{
@@ -94,9 +82,8 @@ void MainScreen::createWindow() {
 
 			if (Keyboard::isKeyPressed(Keyboard::Escape))
 			{
-				exited = true;
-				window->clear();
-				break;
+				exitedMenu = true;
+				exitedGame = true;
 			}
 
 			if (event.type == Event::MouseButtonPressed)
@@ -105,14 +92,14 @@ void MainScreen::createWindow() {
 				{
 					if (Play.getGlobalBounds().contains(coords))
 					{
-						exited = false;
+						exitedMenu = true;
 						menuMusic.stop();
-						window->close();
+						window->clear();
 					}
 					if (Exit.getGlobalBounds().contains(coords))
 					{
-						exited = true;
-						window->close();
+						exitedMenu = true;
+						exitedGame = true;
 					}
 					if (arrowUp.getGlobalBounds().contains(coords))
 					{	
@@ -188,4 +175,17 @@ void MainScreen::retrieveColors()
 		arrowUp.setColor(Color(arrowUp.getColor().r, arrowUp.getColor().g, arrowUp.getColor().b, 255));
 		if (!arrowDown.getGlobalBounds().contains(coords))
 		arrowDown.setColor(Color(arrowDown.getColor().r, arrowDown.getColor().g, arrowDown.getColor().b, 255));
+}
+
+bool MainScreen::menuExited(){
+	return exitedMenu;
+}
+
+bool MainScreen::gameExited(){
+	return exitedGame;
+}
+
+inline void MainScreen::initExitVars(){
+	exitedMenu = false;
+	exitedGame = false;
 }

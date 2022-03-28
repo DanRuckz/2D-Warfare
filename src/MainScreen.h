@@ -9,9 +9,10 @@ public:
 
 	MainScreen();
 	MainScreen(RenderWindow* o_window);
-	static void setExited(bool other);
-	static bool getExited();
 	static int getNumberofPlayers();
+	void runMenuWindow();
+	bool menuExited();
+	bool gameExited();
 	~MainScreen();
 
 
@@ -20,7 +21,6 @@ private:
 	Sound menuMusic;
 	SoundBuffer sb;
 	void loadAndPlayMenuSound();
-	void createWindow();
 	RenderWindow* window;
 	Vector2f coords;
 	VideoMode resolution;
@@ -33,11 +33,13 @@ private:
 	Sprite Rect;
 	Font font;
 	Text number;
-	static bool exited;
+	bool exitedMenu;
+	bool exitedGame;
 	static int numberofPlayers;
 	Vector2i mousePos;
 	void fadeColors(Color& color);
 	std::string numberOfPlayers;
 	void retrieveColors();
+	inline void initExitVars();
 };
 

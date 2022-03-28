@@ -29,7 +29,7 @@ void Window_Manager::Window_action()
 	clock_global.restart();
 	entity = nullptr;
 	makeEnemies(numberofplayers);
-	while (window->isOpen())
+	while (!windowExited)
 	{
 		respawnTime = respawnTimer.getElapsedTime();
 		global = clock_global.getElapsedTime();
@@ -53,7 +53,7 @@ void Window_Manager::Window_action()
 					//MainScreen::setExited(true);
 					demolishWindowObjects();
 					window->clear();
-					window->close();
+					windowExited = true;
 				}
 
 				if (event.type == Event::MouseButtonPressed)

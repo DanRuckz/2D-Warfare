@@ -59,5 +59,6 @@ private:
 	bool rightMouseRelease = true;
 	uint numberofplayers = 0;
 	void demolishWindowObjects();
+	bool windowExited = false;
 };
 
