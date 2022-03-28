@@ -13,11 +13,13 @@ Window_Manager::Window_Manager(RenderWindow* o_window) : RespawnScreenStartPos(V
 }
 
 void Window_Manager::runGameWindow(){
+	setExitedVars();
+	map.CreateMap();
 	setView();
 	Window_action();
 }
 
-void Window_Manager::Window_action()
+inline void Window_Manager::Window_action()
 {
 	//numberofplayers = MainScreen::getNumberofPlayers();
 	//window->create(VideoMode(resolution), "2D-Warfare", FULLSCREEN);
@@ -509,6 +511,10 @@ void Window_Manager::demolishWindowObjects(){
 	}
 	OBJ.clear();
 	map.clearMapVec();
+}
+
+inline void Window_Manager::setExitedVars(){
+	windowExited = false;
 }
 
 Window_Manager::~Window_Manager()

@@ -7,10 +7,10 @@ public:
 	std::vector<Sprite*> getMapVec();
 	RectangleShape& getBoundingRect();
 	static Vector2f getMapSize();
+	void CreateMap();
 	void clearMapVec();
 	~Map();
 private:
-	void CreateMap();
 	Texture texture;
 	Sprite mapobj;
 	std::vector <Sprite*> mapvec;

@@ -4,7 +4,6 @@
 
 Map::Map()
 {
-	CreateMap();
 }
 
 std::vector<Sprite*> Map::getMapVec()

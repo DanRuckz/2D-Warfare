@@ -22,7 +22,7 @@ public:
 private:
 	Event event;
 	Vector2i mousePos;
-	void Window_action();
+	inline void Window_action();
 	inline void setView();
 	RenderWindow* window;
 	VideoMode resolution;
@@ -60,5 +60,6 @@ private:
 	uint numberofplayers = 0;
 	void demolishWindowObjects();
 	bool windowExited = false;
+	inline void setExitedVars();
 };
 
