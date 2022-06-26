@@ -4,14 +4,9 @@
 Window_Manager::Window_Manager(){
 	
 }
-
-
-
-Window_Manager::Window_Manager(RenderWindow* o_window) : RespawnScreenStartPos(Vector2f(1500,1500)), window(o_window)
-{
+Window_Manager::Window_Manager(RenderWindow* o_window) : RespawnScreenStartPos(Vector2f(1500,1500)), window(o_window){
 	resolution = VideoMode::getDesktopMode();
 }
-
 void Window_Manager::runGameWindow(){
 	setExitedVars();
 	map.CreateMap();
@@ -19,11 +14,9 @@ void Window_Manager::runGameWindow(){
 	Window_action();
 }
 
-inline void Window_Manager::Window_action()
-{
-	//numberofplayers = MainScreen::getNumberofPlayers();
+inline void Window_Manager::Window_action(){
+	numberofplayers = MainScreen::getNumberofPlayers();
 	//window->create(VideoMode(resolution), "2D-Warfare", FULLSCREEN);
-	numberofplayers = 15;
 	Clock clock_global;
 	Time global;
 	Clock respawnTimer;
@@ -41,113 +34,101 @@ inline void Window_Manager::Window_action()
 			clock_global.restart();
 			mousePos = Mouse::getPosition();
 			coords = window->mapPixelToCoords(mousePos);
-
-
-			while (window->pollEvent(event))
-			{
-				if (event.type == Event::Closed)
-				{
+			while (window->pollEvent(event)){
+				/*if (event.type == Event::Closed){
 					//window->close();
-				}
+					
+				}*/
 
-				if (Keyboard::isKeyPressed(Keyboard::Escape))
-				{
+				if (Keyboard::isKeyPressed(Keyboard::Escape)){
 					//MainScreen::setExited(true);
 					demolishWindowObjects();
 					window->clear();
 					windowExited = true;
+					break;
 				}
-
-				if (event.type == Event::MouseButtonPressed)
-				{
-					if (event.mouseButton.button == Mouse::Left)
-					{
+				if (event.type == Event::MouseButtonPressed){
+					if (event.mouseButton.button == Mouse::Left){
 						mouseRelease = false;
 
-						if (entity != nullptr)
-						{
-							if (entity->getType() == "Tank")
-							{
+						if (entity != nullptr){
+							if (entity->getType() == "Tank"){
 								entity->Fire();
 							}
-							if (entity->getType() == "Hind")
-							{
+							if (entity->getType() == "Hind"){
 								entity->Fire();
 							}
 
 						}
 					}
-					if (event.mouseButton.button == Mouse::Right)
-					{
+					if (event.mouseButton.button == Mouse::Right){
 						rightMouseRelease = false;
 					}
 				}
-
-
-				if (event.type == Event::MouseButtonReleased)
-				{
-					if (event.mouseButton.button == Mouse::Left)
+				if (event.type == Event::MouseButtonReleased){
+					if (event.mouseButton.button == Mouse::Left){
 						mouseRelease = true;
-					if (event.mouseButton.button == Mouse::Right)
+					}
+					if (event.mouseButton.button == Mouse::Right){
 						rightMouseRelease = true;
+					}
 				}
 			}
-		
+			if (windowExited){
+				break;
+			}	
 			//END EVENT
-				if (!mouseRelease)
-				{
-					if (entity != nullptr && entity->getType() == "AA")
-					{
-							entity->Fire();
-					}
-				}
-				if (!rightMouseRelease)
-				{
-					if (entity != nullptr && entity->getType() == "Tank")
-					{
-						entity->fireMachinegun();
-					}
-				}
-
-				if (entity != nullptr)
-				{
-					highscore.getPlayTime() = highscore.getPlayTimer().getElapsedTime();
-					movement();
-					checkCollisionWithObjects();
-					highscore.updateTimePlayed();
-				}
-				checkFlight();
-				checkHP();
-				checkLimits();
-				respawn();
-				ai.AImove();
-				limitEntity("up");
-				limitEntity("down");
-				updateHP();
-
-				if (respawnTime.asSeconds() > 5)
-				{
-					vecCheck();
-					respawnTimer.restart();
-				}
-
-				window->draw(map.getBoundingRect());
-				for (int i = 0; i < map.getMapVec().size(); i++)
-					window->draw(*map.getMapVec()[i]);
-
-				window->setView(view);
-				drawProjectiles();
-				correctDraw();
-				
-				if (respawnScreen != nullptr)
-					drawRespawn();
-				if (entity != nullptr)
-				{
-					window->draw(highscore.getHighScore());
-					window->draw(highscore.gettopHighScore());
-					window->draw(highscore.getTimePlayedText());
-				}
-				window->display();
+		if (!mouseRelease)
+		{
+			if (entity != nullptr && entity->getType() == "AA")
+			{
+					entity->Fire();
+			}
+		}
+		if (!rightMouseRelease)
+		{
+			if (entity != nullptr && entity->getType() == "Tank")
+			{
+				entity->fireMachinegun();
+			}
+		}
+		if (entity != nullptr)
+		{
+			highscore.getPlayTime() = highscore.getPlayTimer().getElapsedTime();
+			movement();
+			checkCollisionWithObjects();
+			highscore.updateTimePlayed();
+		}
+		checkFlight();
+		checkHP();
+		checkLimits();
+		respawn();
+		ai.AImove();
+		limitEntity("up");
+		limitEntity("down");
+		updateHP();
+		if (respawnTime.asSeconds() > 5)
+		{
+			vecCheck();
+			respawnTimer.restart();
+		}
+		window->draw(map.getBoundingRect());
+		for (int i = 0; i < map.getMapVec().size(); i++){
+			window->draw(*map.getMapVec()[i]);
+		}
+		window->setView(view);
+		drawProjectiles();
+		correctDraw();
+		
+		if (respawnScreen != nullptr)
+			drawRespawn();
+		if (entity != nullptr)
+		{
+			window->draw(highscore.getHighScore());
+			window->draw(highscore.gettopHighScore());
+			window->draw(highscore.getTimePlayedText());
+		}
+		window->display();
 		}
 	}
 }
@@ -271,44 +252,37 @@ void Window_Manager::limitEntity(std::string direction)
 
 void Window_Manager::checkLimits()
 {
-	if (entity != nullptr)
-	{
+	if (entity != nullptr){
 		Vector2f logics(Vector2f(entity->getEntity().getPosition()));
 		Vector2f scorePos(entity->getEntity().getPosition().x - resolution.width/2 * factor, entity->getEntity().getPosition().y - resolution.height / 2 * factor);
 		Vector2f timerPos(entity->getEntity().getPosition().x, entity->getEntity().getPosition().y - resolution.height / 2 * factor);
 		Vector2f topScorePos(entity->getEntity().getPosition().x + resolution.width/2 * factor - 800, entity->getEntity().getPosition().y - resolution.height / 2 * factor);
-		
 
-		if (entity->getEntity().getPosition().y - window->getSize().y / 2 * factor < map.getBoundingRect().getPosition().y)
-		{
+		if (entity->getEntity().getPosition().y - window->getSize().y / 2 * factor < map.getBoundingRect().getPosition().y){
 			logics.y = map.getBoundingRect().getPosition().y + window->getSize().y / 2 * factor;
 			scorePos.y = map.getBoundingRect().getPosition().y;
 			timerPos.y = scorePos.y;
 			topScorePos.y = scorePos.y;
 			
 		}
-		if (entity->getEntity().getPosition().y + window->getSize().y / 2 * factor > map.getBoundingRect().getSize().y)
-		{
+		if (entity->getEntity().getPosition().y + window->getSize().y / 2 * factor > map.getBoundingRect().getSize().y){
 			logics.y = map.getBoundingRect().getSize().y - window->getSize().y / 2 * factor;
 			scorePos.y = view.getCenter().y - window->getSize().y /2 * factor;
 			timerPos.y = scorePos.y;
 			topScorePos.y = scorePos.y;
 		}
-		if (entity->getEntity().getPosition().x - window->getSize().x / 2 * factor < map.getBoundingRect().getPosition().x)
-		{
+		if (entity->getEntity().getPosition().x - window->getSize().x / 2 * factor < map.getBoundingRect().getPosition().x){
 			logics.x = map.getBoundingRect().getPosition().x + window->getSize().x / 2 * factor;
 			scorePos.x = map.getBoundingRect().getPosition().x;
 			timerPos.x = scorePos.x + window->getSize().x / 2 * factor;
 			topScorePos.x = scorePos.x + window->getSize().x * factor - 800;
 		}
-		if (entity->getEntity().getPosition().x + window->getSize().x / 2 * factor > map.getBoundingRect().getSize().x)
-		{
+		if (entity->getEntity().getPosition().x + window->getSize().x / 2 * factor > map.getBoundingRect().getSize().x){
 			logics.x = map.getBoundingRect().getSize().x - window->getSize().x / 2 * factor;
 			scorePos.x = view.getCenter().x - window->getSize().x /2 * factor;
 			timerPos.x = view.getCenter().x;
 			topScorePos.x = view.getCenter().x + window->getSize().x / 2 * factor - 800;
 		}
-		
 		highscore.setTextPos(scorePos,topScorePos,timerPos);
 		view.setCenter(logics);
 	}
@@ -422,7 +396,7 @@ void Window_Manager::drawProjectiles()
 void Window_Manager::respawn()
 {
 	if (entity == nullptr)
-	{
+{
 		if (respawnScreen == nullptr)
 			respawnScreen = std::make_unique<RespawnScreen>(RespawnScreenStartPos);
 		view.setCenter(respawnScreen->getSprite().getPosition());
@@ -504,10 +478,8 @@ void Window_Manager::updateHP()
 }
 
 void Window_Manager::demolishWindowObjects(){
-
-	for (int i = 0; i < OBJ.size(); i++)
-	{
-		delete OBJ[i];
+	for (int i = 0; i < OBJ.size(); i++){
+		delete OBJ.at(i);
 	}
 	OBJ.clear();
 	map.clearMapVec();
@@ -519,4 +491,5 @@ inline void Window_Manager::setExitedVars(){
 
 Window_Manager::~Window_Manager()
 {
+	std::cout << "decuonstructing game window\n";
 }

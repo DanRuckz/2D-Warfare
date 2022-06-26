@@ -20,7 +20,6 @@ MainScreen::MainScreen(RenderWindow* o_window) : window(o_window)
 	arrowUp.setScale(0.3, 0.3);
 	arrowDown.setScale(0.3, 0.3);
 	Rect.setScale(0.25, 0.25);
-
 	font.loadFromFile("assets/Fonts/ariali.ttf");
 	number.setFont(font);
 	number.setCharacterSize(75);
@@ -56,7 +55,7 @@ void MainScreen::loadAndPlayMenuSound() {
 }
 
 void MainScreen::runMenuWindow() {
-	
+	createMenu();
 	initExitVars();
 	Event event;
 	Color color;
@@ -142,7 +141,7 @@ void MainScreen::runMenuWindow() {
 
 MainScreen::~MainScreen()
 {
-	std::cout << "deconstructing\n";
+	std::cout << "deconstructing Menu\n";
 }
 
 void MainScreen::fadeColors(Color& color)
@@ -163,6 +162,10 @@ void MainScreen::fadeColors(Color& color)
 	{
 		arrowDown.setColor(Color(color.r, color.g, color.b, 100));
 	}
+}
+
+void MainScreen::createMenu(){
+
 }
 
 void MainScreen::retrieveColors()

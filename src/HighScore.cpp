@@ -40,7 +40,6 @@ void HighScore::updateScore()
 
 void HighScore::scorePosition()
 {
-	VideoMode resolution = VideoMode::getDesktopMode();
 	highScore.setPosition(scoreTextPos);
 	topHighScore.setPosition(topScoreTextPos);
 	timeSurvived.setPosition(timerTextPos);

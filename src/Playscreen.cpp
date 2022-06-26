@@ -14,10 +14,9 @@ createwindow();
 
 	auto menuwindow = std::make_unique<MainScreen>(&window);
 	auto gamewindow = std::make_unique<Window_Manager>(&window);
-
 	while(true){
 		menuwindow->runMenuWindow();
-		if(menuwindow->gameExited()) {
+		if(menuwindow->gameExited()){
 			break;
 		}
 		gamewindow->runGameWindow();

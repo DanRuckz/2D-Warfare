@@ -41,5 +41,6 @@ private:
 	std::string numberOfPlayers;
 	void retrieveColors();
 	inline void initExitVars();
-};
+	void createMenu();
+	};
 
