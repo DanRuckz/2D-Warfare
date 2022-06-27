@@ -20,7 +20,7 @@ private:
 	Entities* baseptr;
 	Sound menuMusic;
 	SoundBuffer sb;
-	void loadAndPlayMenuSound();
+	void PlayMenuMusic();
 	RenderWindow* window;
 	Vector2f coords;
 	VideoMode resolution;
@@ -41,6 +41,6 @@ private:
 	std::string numberOfPlayers;
 	void retrieveColors();
 	inline void initExitVars();
-	void createMenu();
+	inline bool checkExit(Event event);
 	};
 

@@ -12,6 +12,5 @@ Playscreen();
 private:
 
 	RenderWindow window;
-	VideoMode resolution;
     inline void createwindow();
 };

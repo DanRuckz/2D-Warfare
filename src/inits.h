@@ -16,6 +16,7 @@
 #include <memory>
 using namespace sf;
 using std::vector;
+extern VideoMode resolution;
 const int VEC_SIZE = 25;
 #define FULLSCREEN  Style::Fullscreen
 #define WINDOW_MODE  Style::Resize | Style::Close

@@ -5,7 +5,7 @@ Window_Manager::Window_Manager(){
 	
 }
 Window_Manager::Window_Manager(RenderWindow* o_window) : RespawnScreenStartPos(Vector2f(1500,1500)), window(o_window){
-	resolution = VideoMode::getDesktopMode();
+	//resolution = VideoMode::getDesktopMode();
 }
 void Window_Manager::runGameWindow(){
 	setExitedVars();

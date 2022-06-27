@@ -25,7 +25,6 @@ private:
 	inline void Window_action();
 	inline void setView();
 	RenderWindow* window;
-	VideoMode resolution;
 	Vector2f coords;
 	Map map;
 	View view;

@@ -4,10 +4,9 @@
 #include "MainScreen.h"
 #include "Playscreen.h"
 #include "Declarations.h"
-
-
-int main()
-{
+VideoMode resolution;
+int main(){
+	resolution = VideoMode::getDesktopMode();
 	Playscreen();
 	//reload:
 	//ptr = std::make_unique<MainScreen>();
