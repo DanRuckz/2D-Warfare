@@ -7,7 +7,6 @@ public:
 
 	Sprite getMainSprite();
 
-	MainScreen();
 	MainScreen(RenderWindow* o_window);
 	static int getNumberofPlayers();
 	void runMenuWindow();

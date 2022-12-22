@@ -1,11 +1,7 @@
 #include "Window_Manager.h"
 
-
-Window_Manager::Window_Manager(){
-	
-}
 Window_Manager::Window_Manager(RenderWindow* o_window) : RespawnScreenStartPos(Vector2f(1500,1500)), window(o_window){
-	//resolution = VideoMode::getDesktopMode();
+	runGameWindow();
 }
 void Window_Manager::runGameWindow(){
 	setExitedVars();
@@ -45,7 +41,7 @@ inline void Window_Manager::Window_action(){
 					demolishWindowObjects();
 					window->clear();
 					windowExited = true;
-					break;
+					requestedWindow = MENUSCREEN;
 				}
 				if (event.type == Event::MouseButtonPressed){
 					if (event.mouseButton.button == Mouse::Left){

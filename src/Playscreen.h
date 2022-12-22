@@ -12,5 +12,5 @@ Playscreen();
 private:
 
 	RenderWindow window;
-    inline void createwindow();
+    inline void runGame();
 };

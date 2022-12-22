@@ -14,7 +14,6 @@
 class Window_Manager
 {
 public:
-	Window_Manager();
 	Window_Manager(RenderWindow* o_window);
 	void updateHP();
 	void runGameWindow();

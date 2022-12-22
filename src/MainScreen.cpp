@@ -1,9 +1,5 @@
 #include "MainScreen.h"
 
-MainScreen::MainScreen(){
-
-}
-
 
 MainScreen::MainScreen(RenderWindow* o_window) : window(o_window){
 	resolution = VideoMode::getDesktopMode();
@@ -30,6 +26,7 @@ MainScreen::MainScreen(RenderWindow* o_window) : window(o_window){
 		std::cout << "Sound Error";
 		return;
 	}
+	runMenuWindow();
 }
 
 int MainScreen::getNumberofPlayers(){
@@ -64,11 +61,12 @@ void MainScreen::runMenuWindow() {
 			if(event.type == Event::MouseMoved){
 				fadeColors(color);
 			}
-			checkExit(event);
+			exitedMenu = checkExit(event);
 			if (event.type == Event::MouseButtonPressed){
 				if (event.mouseButton.button == Mouse::Left){
 					if (Play.getGlobalBounds().contains(coords)){
 						exitedMenu = true;
+						requestedWindow = GAMESCREEN;
 						menuMusic.stop();
 						window->clear();
 					}
@@ -113,18 +111,15 @@ MainScreen::~MainScreen(){
 inline bool MainScreen::checkExit(Event event){
 
 	if (event.type == Event::Closed){
-		exitedMenu = true;
-		//exitedGame = true;
+		requestedWindow = EXITGAME;
 		return true;
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Escape)){
-		exitedMenu = true;
-		//exitedGame = true;
+		requestedWindow = EXITGAME;
 		return true;
 	}
 	if (Exit.getGlobalBounds().contains(coords) && event.mouseButton.button == Mouse::Left){
-		exitedMenu = true;
-		exitedGame = true;
+		requestedWindow = EXITGAME;
 		return true;
 	}
 
