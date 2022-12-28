@@ -11,14 +11,15 @@
 #include "HighScore.h"
 #include "MainScreen.h"
 
-class Window_Manager
-{
-public:
+class Window_Manager : Playscreen{
+	
+	public:
 	Window_Manager(RenderWindow* o_window);
 	void updateHP();
 	void runGameWindow();
 	~Window_Manager();
 private:
+	std::shared_ptr<Window_Manager> baseptr;
 	Event event;
 	Vector2i mousePos;
 	inline void Window_action();

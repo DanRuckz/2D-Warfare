@@ -53,9 +53,6 @@ void Entities::loadTextures()
 	loadFile = "assets/Props/rect.png";
 	setTexture();
 	
-
-
-
 	loadFile = "assets/Fonts/TravelingTypewriter.ttf";
 	setFont();
 }

@@ -1,47 +1,23 @@
 #include "MainScreen.h"
 
 
-MainScreen::MainScreen(RenderWindow* o_window) : window(o_window){
-	resolution = VideoMode::getDesktopMode();
-	baseptr = this;
-	baseptr->setEntity(backgroundSprite, Vector2f(0, 0), IntRect(Vector2i(0, 0), Vector2i(1920, 1080)), "mainScreen");
-	baseptr->setEntity(arrowUp, Vector2f(resolution.width/2, resolution.height/2 -120), IntRect(Vector2i(0, 0), Vector2i(256, 256)), "arrowUp");
-	baseptr->setEntity(arrowDown, Vector2f(resolution.width/2, resolution.height/2 + 120), IntRect(Vector2i(0, 0), Vector2i(256, 256)), "arrowDown");
-	baseptr->setEntity(Play, Vector2f(resolution.width/2 - 360, resolution.height/2 + 260), IntRect(Vector2i(0, 0), Vector2i(317, 146)), "Play");
-	baseptr->setEntity(Exit, Vector2f(resolution.width/2 + 360, resolution.height/2 + 260), IntRect(Vector2i(0, 0), Vector2i(279, 146)), "Exit");
-	baseptr->setEntity(Players, Vector2f(resolution.width / 2, resolution.height / 2 - 400), IntRect(Vector2i(0, 0), Vector2i(730, 115)), "players");
-	baseptr->setEntity(Rect, Vector2f(resolution.width/2,resolution.height/2), IntRect(Vector2i(0, 0), Vector2i(600, 600)), "rect");
-	backgroundSprite.setOrigin(0, 0);
-	arrowUp.setScale(0.3, 0.3);
-	arrowDown.setScale(0.3, 0.3);
-	Rect.setScale(0.25, 0.25);
-	number.setFont(font);
-	number.setCharacterSize(75);
-	number.setFillColor(Color::Black);
-	number.setString("1");
-	numberofPlayers = 1;
-	font.loadFromFile("assets/Fonts/ariali.ttf");
-	number.setPosition(Vector2f(resolution.width / 2 - 20, resolution.height / 2 - 45));
-	if (!sb.loadFromFile("assets/Music/Jesper Kyd - Heroes And Generals German Theme.ogg")) {
-		std::cout << "Sound Error";
-		return;
-	}
+MainScreen::MainScreen(sf::RenderWindow* o_window, MainMenuObjects r_objects) : window(o_window), objects(r_objects) {
 	runMenuWindow();
 }
 
-int MainScreen::getNumberofPlayers(){
-	return numberofPlayers;
-}
+//int MainScreen::getNumberofPlayers(){
+//	return objects.numberofPlayers;
+//}
 
 Sprite MainScreen::getMainSprite(){
-	return backgroundSprite;
+	return objects.backgroundSprite;
 }
 
 void MainScreen::PlayMenuMusic() {
 
-	menuMusic.setBuffer(sb);
-	menuMusic.setVolume(35);
-	menuMusic.play();
+	objects.menuMusic.setBuffer(objects.sb);
+	objects.menuMusic.setVolume(35);
+	objects.menuMusic.play();
 
 }
 
@@ -49,7 +25,7 @@ void MainScreen::runMenuWindow() {
 	initExitVars();
 	Event event;
 	Color color;
-	color = Play.getColor();
+	color = objects.Play.getColor();
 	PlayMenuMusic();
 	while (!exitedMenu)
 	{
@@ -64,42 +40,42 @@ void MainScreen::runMenuWindow() {
 			exitedMenu = checkExit(event);
 			if (event.type == Event::MouseButtonPressed){
 				if (event.mouseButton.button == Mouse::Left){
-					if (Play.getGlobalBounds().contains(coords)){
+					if (objects.Play.getGlobalBounds().contains(coords)){
 						exitedMenu = true;
 						requestedWindow = GAMESCREEN;
-						menuMusic.stop();
+						objects.menuMusic.stop();
 						window->clear();
 					}
-					if (arrowUp.getGlobalBounds().contains(coords)){	
-						if (numberofPlayers < 30){
-							numberofPlayers += 1;
-							numberOfPlayers = std::to_string(numberofPlayers);
-							number.setString(numberOfPlayers);
-							if (numberofPlayers > 9) number.setPosition(Vector2f(resolution.width / 2 - 45, resolution.height / 2 - 45));
-							else number.setPosition(Vector2f(resolution.width / 2 - 20, resolution.height / 2 - 45));
+					if (objects.arrowUp.getGlobalBounds().contains(coords)){	
+						if (objects.numberofPlayers < 30){
+							objects.numberofPlayers += 1;
+							numberOfPlayers = std::to_string(objects.numberofPlayers);
+							objects.number.setString(numberOfPlayers);
+							if (objects.numberofPlayers > 9) objects.number.setPosition(Vector2f(resolution.width / 2 - 45, resolution.height / 2 - 45));
+							else objects.number.setPosition(Vector2f(resolution.width / 2 - 20, resolution.height / 2 - 45));
 						}
 					}
-					if (arrowDown.getGlobalBounds().contains(coords)){			
-						if (numberofPlayers > 1){
-							numberofPlayers -= 1;
-							numberOfPlayers = std::to_string(numberofPlayers);
-							number.setString(numberOfPlayers);
-							if (numberofPlayers > 9) number.setPosition(Vector2f(resolution.width / 2 - 45, resolution.height / 2 - 45));
-							else number.setPosition(Vector2f(resolution.width / 2 - 20, resolution.height / 2 - 45));
+					if (objects.arrowDown.getGlobalBounds().contains(coords)){			
+						if (objects.numberofPlayers > 1){
+							objects.numberofPlayers -= 1;
+							numberOfPlayers = std::to_string(objects.numberofPlayers);
+							objects.number.setString(numberOfPlayers);
+							if (objects.numberofPlayers > 9) objects.number.setPosition(Vector2f(resolution.width / 2 - 45, resolution.height / 2 - 45));
+							else objects.number.setPosition(Vector2f(resolution.width / 2 - 20, resolution.height / 2 - 45));
 						}
 						
 					}
 				}
 			}
 		} //END EVENT
-		window->draw(backgroundSprite);
-		window->draw(arrowUp);
-		window->draw(arrowDown);
-		window->draw(Play);
-		window->draw(Exit);
-		window->draw(Players);
-		window->draw(Rect);
-		window->draw(number);
+		window->draw(objects.backgroundSprite);
+		window->draw(objects.arrowUp);
+		window->draw(objects.arrowDown);
+		window->draw(objects.Play);
+		window->draw(objects.Exit);
+		window->draw(objects.Players);
+		window->draw(objects.Rect);
+		window->draw(objects.number);
 		window->display();
 	}
 }
@@ -118,7 +94,7 @@ inline bool MainScreen::checkExit(Event event){
 		requestedWindow = EXITGAME;
 		return true;
 	}
-	if (Exit.getGlobalBounds().contains(coords) && event.mouseButton.button == Mouse::Left){
+	if (objects.Exit.getGlobalBounds().contains(coords) && event.mouseButton.button == Mouse::Left){
 		requestedWindow = EXITGAME;
 		return true;
 	}
@@ -126,29 +102,29 @@ inline bool MainScreen::checkExit(Event event){
 }
 
 void MainScreen::fadeColors(Color& color){
-	if (Play.getGlobalBounds().contains(coords)){
-		Play.setColor(Color(color.r, color.g, color.b, 100));
+	if (objects.Play.getGlobalBounds().contains(coords)){
+		objects.Play.setColor(Color(color.r, color.g, color.b, 100));
 	}
-	if (Exit.getGlobalBounds().contains(coords)){
-		Exit.setColor(Color(color.r, color.g, color.b, 100));
+	if (objects.Exit.getGlobalBounds().contains(coords)){
+		objects.Exit.setColor(Color(color.r, color.g, color.b, 100));
 	}
-	if (arrowUp.getGlobalBounds().contains(coords)){
-		arrowUp.setColor(Color(color.r, color.g, color.b, 100));
+	if (objects.arrowUp.getGlobalBounds().contains(coords)){
+		objects.arrowUp.setColor(Color(color.r, color.g, color.b, 100));
 	}
-	if (arrowDown.getGlobalBounds().contains(coords)){
-		arrowDown.setColor(Color(color.r, color.g, color.b, 100));
+	if (objects.arrowDown.getGlobalBounds().contains(coords)){
+		objects.arrowDown.setColor(Color(color.r, color.g, color.b, 100));
 	}
 }
 
 void MainScreen::retrieveColors(){
-		if(!Play.getGlobalBounds().contains(coords))
-		Play.setColor(Color(Play.getColor().r, Play.getColor().g, Play.getColor().b,255));
-		if (!Exit.getGlobalBounds().contains(coords))
-		Exit.setColor(Color(Exit.getColor().r, Exit.getColor().g, Exit.getColor().b, 255));
-		if (!arrowUp.getGlobalBounds().contains(coords))
-		arrowUp.setColor(Color(arrowUp.getColor().r, arrowUp.getColor().g, arrowUp.getColor().b, 255));
-		if (!arrowDown.getGlobalBounds().contains(coords))
-		arrowDown.setColor(Color(arrowDown.getColor().r, arrowDown.getColor().g, arrowDown.getColor().b, 255));
+		if(!objects.Play.getGlobalBounds().contains(coords))
+		objects.Play.setColor(Color(objects.Play.getColor().r, objects.Play.getColor().g, objects.Play.getColor().b,255));
+		if (!objects.Exit.getGlobalBounds().contains(coords))
+		objects.Exit.setColor(Color(objects.Exit.getColor().r, objects.Exit.getColor().g, objects.Exit.getColor().b, 255));
+		if (!objects.arrowUp.getGlobalBounds().contains(coords))
+		objects.arrowUp.setColor(Color(objects.arrowUp.getColor().r, objects.arrowUp.getColor().g, objects.arrowUp.getColor().b, 255));
+		if (!objects.arrowDown.getGlobalBounds().contains(coords))
+		objects.arrowDown.setColor(Color(objects.arrowDown.getColor().r, objects.arrowDown.getColor().g, objects.arrowDown.getColor().b, 255));
 }
 
 bool MainScreen::menuExited(){
