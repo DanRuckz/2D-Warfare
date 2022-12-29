@@ -1,14 +1,15 @@
 #pragma once
 #include "inits.h"
 #include "Entities.h"
-class MainScreen
-{
+#include "MainMenuObjects.h"
+
+class MainScreen{
+
 public:
 
 	Sprite getMainSprite();
 	//menu objects needs to be created separately outside of this objects
-	MainScreen(sf::RenderWindow* o_window, MainMenuObjects r_objects);
-	static int getNumberofPlayers();
+	MainScreen(sf::RenderWindow* o_window);
 	void runMenuWindow();
 	bool menuExited();
 	bool gameExited();
@@ -20,7 +21,6 @@ private:
 	void PlayMenuMusic();
 	sf::RenderWindow* window;
 	Vector2f coords;
-	VideoMode resolution;
 	bool exitedMenu;
 	bool exitedGame;
 	Vector2i mousePos;
@@ -29,6 +29,9 @@ private:
 	void retrieveColors();
 	inline void initExitVars();
 	inline bool checkExit(Event event);
-	MainMenuObjects objects;
+	MainMenuObjects* objects;
+	View view;
+	inline void resetWindow();
+
 	};
 

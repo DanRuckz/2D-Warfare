@@ -1,11 +1,11 @@
 #include "MainMenuObjects.h"
 
 MainMenuObjects::MainMenuObjects(){
-    initialize();
+initialize();
 }
 
 void MainMenuObjects::initialize(){
-    
+	resolution = VideoMode::getDesktopMode();
     this->setEntity(backgroundSprite, Vector2f(0, 0), IntRect(Vector2i(0, 0), Vector2i(1920, 1080)), "mainScreen");
 	this->setEntity(arrowUp, Vector2f(resolution.width/2, resolution.height/2 -120), IntRect(Vector2i(0, 0), Vector2i(256, 256)), "arrowUp");
 	this->setEntity(arrowDown, Vector2f(resolution.width/2, resolution.height/2 + 120), IntRect(Vector2i(0, 0), Vector2i(256, 256)), "arrowDown");
@@ -29,3 +29,25 @@ void MainMenuObjects::initialize(){
 		return;
 	}
 }
+
+int MainMenuObjects::getNumberofPlayers(){
+	return numberofPlayers;
+}
+
+void MainMenuObjects::resetObjects(){
+	backgroundSprite.setPosition(Vector2f(0, 0));
+	arrowUp.setPosition(Vector2f(resolution.width/2, resolution.height/2 -120));
+	arrowDown.setPosition(Vector2f(resolution.width/2, resolution.height/2 + 120));
+	Play.setPosition(Vector2f(resolution.width/2 - 360, resolution.height/2 + 260));
+	Exit.setPosition(Vector2f(resolution.width/2 + 360, resolution.height/2 + 260));
+	Players.setPosition(Vector2f(resolution.width / 2, resolution.height / 2 - 400));
+	Rect.setPosition(Vector2f(resolution.width/2,resolution.height/2));
+}
+
+MainMenuObjects* MainMenuObjects::getInstance(){
+	if(!instance) {
+		instance = new MainMenuObjects;
+	}
+	return instance;
+}
+

@@ -1,10 +1,8 @@
 #include "Playscreen.h"
 
 Playscreen::Playscreen(){
-	resolution = VideoMode::getDesktopMode();
-	main_menu_objects = std::make_unique<MainMenuObjects>();
-	std::cout << resolution.width << "X" << resolution.height << '\n';
-	window.create(resolution, "2D-Warfare", WINDOW_MODE);
+	resolution = sf::VideoMode(1920,1080);
+	window.create(resolution, "2D-Warfare", FULLSCREEN);
 	runGame();
 	window.close();
 }
@@ -12,10 +10,10 @@ Playscreen::Playscreen(){
     inline void Playscreen::runGame(){
 	while (requestedWindow != EXITGAME){
 		if(requestedWindow == FIRSTSCREEN){
-			auto menuwindow = std::make_unique<MainScreen>(&window, main_menu_objects);
+			auto menuwindow = std::make_unique<MainScreen>(&window);
 		}
 		else if (requestedWindow == MENUSCREEN){
-			auto menuwindow = std::make_unique<MainScreen>(&window, main_menu_objects);
+			auto menuwindow = std::make_unique<MainScreen>(&window);
 		}
 		
 		else if(requestedWindow == GAMESCREEN){

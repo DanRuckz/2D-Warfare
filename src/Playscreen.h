@@ -2,8 +2,8 @@
 #include "inits.h"
 #include "MainScreen.h"
 #include "Window_Manager.h"
-#include "MainMenuObjects.h"
-
+#ifndef PLAYSCREEN
+#define PLAYSCREEN
 class Playscreen{
     
 public:
@@ -16,5 +16,6 @@ private:
 	RenderWindow window;
     inline void runGame();
     sf::VideoMode resolution;
-    std::unique_ptr<MainMenuObjects> main_menu_objects;
 };
+
+#endif

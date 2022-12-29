@@ -1,13 +1,14 @@
 #include "inits.h"
 #include "Entities.h"
+#include "Playscreen.h"
+#ifndef MAINMENUOBJECTS
+#define MAINMENUOBJECTS
 
 class MainMenuObjects : public Entities
 {
 public:
 
-
-	MainMenuObjects();
-	~MainMenuObjects();
+	static MainMenuObjects* getInstance();
 	void initialize();
 	Sound menuMusic;
 	Sprite backgroundSprite;
@@ -20,9 +21,14 @@ public:
 	Font font;
 	Text number;
 	SoundBuffer sb;
-	int numberofPlayers = 1;
+	static int getNumberofPlayers();
+	static int numberofPlayers;
+	void resetObjects();
 
 private:
 	Entities* baseptr;
-
+	static MainMenuObjects* instance;
+	MainMenuObjects();
 	};
+
+#endif

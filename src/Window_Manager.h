@@ -9,15 +9,15 @@
 #include "RespawnScreen.h"
 #include "AI.h"
 #include "HighScore.h"
-#include "MainScreen.h"
-
-class Window_Manager : Playscreen{
+#include "MainMenuObjects.h"
+class Window_Manager{
 	
 	public:
 	Window_Manager(RenderWindow* o_window);
 	void updateHP();
 	void runGameWindow();
 	~Window_Manager();
+
 private:
 	std::shared_ptr<Window_Manager> baseptr;
 	Event event;

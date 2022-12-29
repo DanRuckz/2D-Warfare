@@ -1,9 +1,8 @@
 #include <iostream>
 #include "inits.h"
-#include "Window_Manager.h"
-#include "MainScreen.h"
 #include "Playscreen.h"
 #include "Declarations.h"
+sf::VideoMode resolution;
 int requestedWindow;
 int main(){
 	requestedWindow = FIRSTSCREEN;

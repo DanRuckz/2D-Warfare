@@ -11,7 +11,7 @@ void Window_Manager::runGameWindow(){
 }
 
 inline void Window_Manager::Window_action(){
-	numberofplayers = MainScreen::getNumberofPlayers();
+	numberofplayers = MainMenuObjects::getNumberofPlayers();
 	//window->create(VideoMode(resolution), "2D-Warfare", FULLSCREEN);
 	Clock clock_global;
 	Time global;
