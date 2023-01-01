@@ -2,7 +2,7 @@
 
 Playscreen::Playscreen(){
 	resolution = sf::VideoMode(1920,1080);
-	window.create(resolution, "2D-Warfare", FULLSCREEN);
+	window.create(resolution, "2D-Warfare", 0);
 	runGame();
 	window.close();
 }
