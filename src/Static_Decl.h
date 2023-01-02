@@ -1,12 +1,10 @@
-#pragma once
 bool Entities::loaded = false;
 Texture* Entities::texture;
 std::vector<Texture*> Entities::textures;
 Vector2f Map::mapSize;
 std::vector<Playables*> Playables::objects;
-//bool MainScreen::exited;
 int MainMenuObjects::numberofPlayers;
 Font* Entities::font;
 MainMenuObjects* MainMenuObjects::instance = nullptr;
-//std::unique_ptr<MainScreen> ptr;
-//std::unique_ptr<Window_Manager> engineptr;
+sf::VideoMode resolution;
+int requestedWindow = FIRSTSCREEN;

@@ -26,7 +26,6 @@ public:
 	void resetObjects();
 
 private:
-	Entities* baseptr;
 	static MainMenuObjects* instance;
 	MainMenuObjects();
 	};
