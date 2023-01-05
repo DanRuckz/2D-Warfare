@@ -1,8 +1,8 @@
 #include "Playscreen.h"
 
 Playscreen::Playscreen(){
-	resolution = sf::VideoMode(1920,1080);
-	window.create(resolution, "2D-Warfare", 0);
+	resolution = VideoMode::getDesktopMode();
+	window.create(resolution, "2D-Warfare", BORDERLESS);
 	runGame();
 	window.close();
 }

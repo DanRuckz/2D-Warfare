@@ -34,7 +34,7 @@ void MainScreen::runMenuWindow() {
 	PlayMenuMusic();
 	while (!exitedMenu)
 	{
-		mousePos = Mouse::getPosition();
+		mousePos = Mouse::getPosition(*window);
 		coords = window->mapPixelToCoords(mousePos);
 		retrieveColors();
 		while (window->pollEvent(event)){
@@ -86,20 +86,24 @@ void MainScreen::runMenuWindow() {
 }
 
 MainScreen::~MainScreen(){
+	
 	std::cout << "deconstructing Menu\n";
 }
 
 inline bool MainScreen::checkExit(Event event){
 
 	if (event.type == Event::Closed){
+		objects->menuMusic.stop();
 		requestedWindow = EXITGAME;
 		return true;
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Escape)){
+		objects->menuMusic.stop();
 		requestedWindow = EXITGAME;
 		return true;
 	}
 	if (objects->Exit.getGlobalBounds().contains(coords) && event.mouseButton.button == Mouse::Left){
+		objects->menuMusic.stop();
 		requestedWindow = EXITGAME;
 		return true;
 	}

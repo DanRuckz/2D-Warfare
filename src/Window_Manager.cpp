@@ -27,7 +27,7 @@ inline void Window_Manager::Window_action(){
 		if (global.asMilliseconds() > releaseModeTime)
 		{
 			clock_global.restart();
-			mousePos = Mouse::getPosition();
+			mousePos = Mouse::getPosition(*window);
 			coords = window->mapPixelToCoords(mousePos);
 			while (window->pollEvent(event)){
 				/*if (event.type == Event::Closed){

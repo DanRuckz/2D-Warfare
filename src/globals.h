@@ -1,2 +1,2 @@
-#include "inits.h"
 extern int requestedWindow;
+extern VideoMode resolution;

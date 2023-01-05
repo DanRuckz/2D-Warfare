@@ -10,6 +10,7 @@
 #include "AI.h"
 #include "HighScore.h"
 #include "MainMenuObjects.h"
+#include "globals.h"
 class Window_Manager{
 	
 	public:

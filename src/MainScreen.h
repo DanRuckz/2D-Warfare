@@ -2,6 +2,7 @@
 #include "inits.h"
 #include "Entities.h"
 #include "MainMenuObjects.h"
+#include "globals.h"
 
 class MainScreen{
 

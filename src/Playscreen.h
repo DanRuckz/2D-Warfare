@@ -1,5 +1,6 @@
 #pragma once
 #include "inits.h"
+#include "globals.h"
 #include "MainScreen.h"
 #include "Window_Manager.h"
 #ifndef PLAYSCREEN
