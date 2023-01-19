@@ -116,7 +116,6 @@ void Entities::setEntity(Sprite& entity, Vector2f position, IntRect animation, s
 	entity.setTexture(*textures[index]);
 	entity.setTextureRect(animation);
 	entity.setOrigin((float)entity.getTextureRect().width / 2, (float)entity.getTextureRect().height / 2);
-
 }
 
 

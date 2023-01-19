@@ -1,11 +1,7 @@
-#pragma once
 #include "Playables.h"
 #include "Map.h"
 
-
-
-class AI
-{
+class AI{
 public:
 	AI();
 	

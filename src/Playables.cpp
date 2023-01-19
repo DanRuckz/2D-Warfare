@@ -74,8 +74,7 @@ Sprite & Playables::getTopPart()
 void Playables::fireMachinegun()
 {
 }
-void Playables::projectileFly(std::vector<std::shared_ptr<Projectiles>>& projectilevec, std::shared_ptr<Projectiles> projectile, int index, int selfObjectIndex)
-{
+void Playables::projectileFly(std::vector<std::shared_ptr<Projectiles>>& projectilevec, std::shared_ptr<Projectiles> projectile, int index, int selfObjectIndex){
 	projectile->Fly(projectile->getSprite());
 	bool objects = true;
 	if (projectile->getDistanceTraveled() > projectile->getRange() || projectile->intersectWithMap(projectile->getSprite()))
@@ -93,6 +92,7 @@ void Playables::projectileFly(std::vector<std::shared_ptr<Projectiles>>& project
 		{
 			objindex = checkIntersectionWithObjects(projectile, selfObjectIndex);
 			OBJ[objindex]->reduceDamage(projectilevec[index]->getDamage());
+			//setting the last entity ID this instance has damaged
 			OBJ[objindex]->setLastDamaged(OBJ[selfObjectIndex]->getID());
 			projectile.reset();
 			projectilevec.erase(projectilevec.begin() + index);

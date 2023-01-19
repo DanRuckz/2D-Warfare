@@ -1,5 +1,6 @@
 #pragma once
 #include "unistd.h"
+#include <cmath>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
@@ -14,6 +15,7 @@
 #include <utility>
 #include <limits.h>
 #include <memory>
+#include <random>
 using namespace sf;
 using std::vector;
 const int VEC_SIZE = 25;
