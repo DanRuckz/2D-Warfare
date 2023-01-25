@@ -1,8 +1,8 @@
 #include "inits.h"
 #include "Entities.h"
 #include "Playscreen.h"
-#ifndef MAINMENUOBJECTS
-#define MAINMENUOBJECTS
+#ifndef MAINMENUOBJECTS_H
+#define MAINMENUOBJECTS_H
 
 class MainMenuObjects : public Entities
 {

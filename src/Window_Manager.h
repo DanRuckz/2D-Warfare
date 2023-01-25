@@ -1,5 +1,6 @@
 #pragma once
-#include "inits.h"
+#ifndef WINDOW_MANAGER_H
+#define WINDOW_MANAGER_H
 #include "Map.h"
 #include "Tank.h"
 #include "AA.h"
@@ -10,17 +11,19 @@
 #include "AI.h"
 #include "HighScore.h"
 #include "MainMenuObjects.h"
-#include "globals.h"
-class Window_Manager{
+#include "Component.h"
+
+
+class Window_Manager: public Component{
 	
 	public:
-	Window_Manager(RenderWindow* o_window);
+	Window_Manager(RenderWindow* o_window, Mediator* m);
+	void receive(std::string message);
 	void updateHP();
 	void runGameWindow();
 	~Window_Manager();
 
 private:
-	std::shared_ptr<Window_Manager> baseptr;
 	Event event;
 	Vector2i mousePos;
 	inline void Window_action();
@@ -61,5 +64,7 @@ private:
 	void demolishWindowObjects();
 	bool windowExited = false;
 	inline void setExitedVars();
+	Mediator* mediator;
 };
 
+#endif

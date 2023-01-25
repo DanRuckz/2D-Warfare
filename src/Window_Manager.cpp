@@ -1,9 +1,14 @@
 #include "Window_Manager.h"
 
-Window_Manager::Window_Manager(RenderWindow* o_window) : RespawnScreenStartPos(Vector2f(1500,1500)), window(o_window){
-	runGameWindow();
+Window_Manager::Window_Manager(RenderWindow* o_window, Mediator* m) : window(o_window), Component(m), mediator(m) {
+	m->add(this);
+}
+
+void Window_Manager::receive(std::string message){
+	std::cout << "Window_Manager Received: " << message << '\n';
 }
 void Window_Manager::runGameWindow(){
+	RespawnScreenStartPos = Vector2f(1500,1500);
 	setExitedVars();
 	map.CreateMap();
 	setView();
@@ -486,5 +491,6 @@ inline void Window_Manager::setExitedVars(){
 
 Window_Manager::~Window_Manager()
 {
-	std::cout << "decuonstructing game window\n";
+	std::cout << "deconstructing game window\n";
+	mediator->remove(this);
 }

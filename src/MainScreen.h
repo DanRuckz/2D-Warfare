@@ -1,16 +1,20 @@
 #pragma once
+#ifndef MAINSCREEN_H
+#define MAINSCREEN_H
 #include "inits.h"
 #include "Entities.h"
 #include "MainMenuObjects.h"
 #include "globals.h"
+#include "Component.h"
 
-class MainScreen{
+class MainScreen : public Component{
 
 public:
 
+	MainScreen(sf::RenderWindow* o_window, Mediator* m);
 	Sprite getMainSprite();
 	//menu objects needs to be created separately outside of this objects
-	MainScreen(sf::RenderWindow* o_window);
+	void receive(std::string message);
 	void runMenuWindow();
 	bool menuExited();
 	bool gameExited();
@@ -33,6 +37,7 @@ private:
 	MainMenuObjects* objects;
 	View view;
 	inline void resetWindow();
+	Mediator* mediator;
 
 	};
-
+#endif

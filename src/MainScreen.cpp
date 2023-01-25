@@ -1,9 +1,12 @@
 #include "MainScreen.h"
 
 
-MainScreen::MainScreen(sf::RenderWindow* o_window) : window(o_window) {
-	resetWindow();
-	runMenuWindow();
+MainScreen::MainScreen(sf::RenderWindow* o_window, Mediator* m) : window(o_window), Component(m), mediator(m) {
+	m->add(this);
+}
+
+void MainScreen::receive(std::string message){
+	std::cout << "Mainscreen Received: " << message << '\n';
 }
 
 inline void MainScreen::resetWindow(){
@@ -27,6 +30,7 @@ void MainScreen::PlayMenuMusic() {
 }
 
 void MainScreen::runMenuWindow() {
+	resetWindow();
 	initExitVars();
 	Event event;
 	Color color;
@@ -88,6 +92,7 @@ void MainScreen::runMenuWindow() {
 MainScreen::~MainScreen(){
 	
 	std::cout << "deconstructing Menu\n";
+	mediator->remove(this);
 }
 
 inline bool MainScreen::checkExit(Event event){
