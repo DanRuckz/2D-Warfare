@@ -74,6 +74,7 @@ Sprite & Playables::getTopPart()
 void Playables::fireMachinegun()
 {
 }
+
 void Playables::projectileFly(std::vector<std::shared_ptr<Projectiles>>& projectilevec, std::shared_ptr<Projectiles> projectile, int index, int selfObjectIndex){
 	projectile->Fly(projectile->getSprite());
 	bool objects = true;
@@ -100,6 +101,7 @@ void Playables::projectileFly(std::vector<std::shared_ptr<Projectiles>>& project
 		}
 	}
 }
+
 Entities::~Entities()
 {
 }

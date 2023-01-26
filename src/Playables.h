@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PLAYABLES_H
+#define PLAYABLES_H
 #include "Entities.h"
 #include "Projectiles.h"
 #include "Turret.h"
@@ -83,3 +84,4 @@ protected:
 	int ID;
 };
 
+#endif

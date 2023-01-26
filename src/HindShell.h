@@ -1,4 +1,3 @@
-#pragma once
 #include "Projectiles.h"
 class HindShell :
 	public Projectiles

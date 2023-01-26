@@ -1,4 +1,3 @@
-#pragma once
 #include "Playables.h"
 #include "Turret.h"
 #include "TankShell.h"

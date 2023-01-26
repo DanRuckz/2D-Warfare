@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PROJECTILES_H
+#define PROJECTILES_H
 #include "Entities.h"
 #include "Collision.h"
 #include "Map.h"
@@ -27,3 +28,4 @@ private:
 	void distanceTraveled(float speed, Vector2f direction);
 };
 
+#endif
