@@ -1,6 +1,7 @@
 #include "inits.h"
 #include "Entities.h"
-#include "Playscreen.h"
+#include "MainMenuWindow.h"
+
 #ifndef MAINMENUOBJECTS_H
 #define MAINMENUOBJECTS_H
 

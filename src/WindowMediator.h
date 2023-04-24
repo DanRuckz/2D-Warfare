@@ -6,9 +6,12 @@
 
 class WindowMediator : public Mediator{
     public:
+
         void send(std::string message, Component* sender);
         void add(Component* component);
         void remove(Component* component);
+        void setWindowState(int window);
+        int getWindowState();
     private:
         std::vector<Component*> components;
 };

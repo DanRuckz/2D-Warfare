@@ -1,13 +1,13 @@
-#include "Window_Manager.h"
+#include "GameWindow.h"
 
-Window_Manager::Window_Manager(RenderWindow* o_window, Mediator* m) : window(o_window), Component(m), mediator(m) {
+GameWindow::GameWindow(RenderWindow* o_window, Mediator* m) : window(o_window), Component(m), mediator(m) {
 	m->add(this);
 }
 
-void Window_Manager::receive(std::string message){
+void GameWindow::receive(std::string message){
 	std::cout << "Window_Manager Received: " << message << '\n';
 }
-void Window_Manager::runGameWindow(){
+void GameWindow::runView(){
 	RespawnScreenStartPos = Vector2f(1500,1500);
 	setExitedVars();
 	map.CreateMap();
@@ -15,7 +15,7 @@ void Window_Manager::runGameWindow(){
 	Window_action();
 }
 
-inline void Window_Manager::Window_action(){
+inline void GameWindow::Window_action(){
 	numberofplayers = MainMenuObjects::getNumberofPlayers();
 	Clock clock_global;
 	Time global;
@@ -41,11 +41,10 @@ inline void Window_Manager::Window_action(){
 				}*/
 
 				if (Keyboard::isKeyPressed(Keyboard::Escape)){
-					//MainScreen::setExited(true);
 					demolishWindowObjects();
 					window->clear();
 					windowExited = true;
-					requestedWindow = MENUSCREEN;
+					Component::currentWindow = Component::MENU;
 				}
 				if (event.type == Event::MouseButtonPressed){
 					if (event.mouseButton.button == Mouse::Left){
@@ -133,13 +132,13 @@ inline void Window_Manager::Window_action(){
 	}
 }
 
-inline void Window_Manager::setView()
+inline void GameWindow::setView()
 {
 	view.setCenter((float)resolution.width / 2, (float)resolution.height / 2);
 	view.setSize((float)resolution.width*factor, (float)resolution.height*factor);
 }
 
-void Window_Manager::checkFlight()
+void GameWindow::checkFlight()
 {
 	for (int i = 0; i < OBJ.size(); i++)
 	{
@@ -148,7 +147,7 @@ void Window_Manager::checkFlight()
 
 }
 
-void Window_Manager::checkHP()
+void GameWindow::checkHP()
 {
 	bool player;
 	for (int i = 0; i < OBJ.size(); i++)
@@ -182,7 +181,7 @@ void Window_Manager::checkHP()
 	OBJ.shrink_to_fit();
 }
 
-void Window_Manager::limitEntity(std::string direction)
+void GameWindow::limitEntity(std::string direction)
 {
 	for (int i = 0; i < OBJ.size(); i++)
 	{
@@ -250,7 +249,7 @@ void Window_Manager::limitEntity(std::string direction)
 	}
 }
 
-void Window_Manager::checkLimits()
+void GameWindow::checkLimits()
 {
 	if (entity != nullptr){
 		Vector2f logics(Vector2f(entity->getEntity().getPosition()));
@@ -288,7 +287,7 @@ void Window_Manager::checkLimits()
 	}
 }
 
-void Window_Manager::makeEntity(std::string type)
+void GameWindow::makeEntity(std::string type)
 {
 
 	highscore.getPlayTimer().restart();
@@ -308,7 +307,7 @@ void Window_Manager::makeEntity(std::string type)
 	OBJ.push_back(entity);
 }
 
-void Window_Manager::makeEnemies(int howmany)
+void GameWindow::makeEnemies(int howmany)
 {
 	std::mt19937 gen;
 	gen.seed(std::random_device()());
@@ -332,7 +331,7 @@ void Window_Manager::makeEnemies(int howmany)
 	}
 }
 
-void Window_Manager::drawRespawn()
+void GameWindow::drawRespawn()
 {
 	window->draw(respawnScreen->getSprite());
 	window->draw(respawnScreen->getTankSprite());
@@ -345,7 +344,7 @@ void Window_Manager::drawRespawn()
 	window->draw(respawnScreen->getTitleSprite());
 }
 
-void Window_Manager::correctDraw()
+void GameWindow::correctDraw()
 {
 	for (int i = 0; i < OBJ.size(); i++)
 	{
@@ -356,7 +355,7 @@ void Window_Manager::correctDraw()
 	}
 }
 
-void Window_Manager::movement()
+void GameWindow::movement()
 {
 
 	if (event.type == Event::MouseMoved)
@@ -386,14 +385,14 @@ void Window_Manager::movement()
 	}
 }
 
-void Window_Manager::drawProjectiles()
+void GameWindow::drawProjectiles()
 {
 	for (int i = 0; i <OBJ.size(); i++)
 		for(int j =0;j< OBJ[i]->getProjectileVector().size();j++)
 		window->draw(OBJ[i]->getProjectileVector()[j]->getSprite());
 }
 
-void Window_Manager::respawn()
+void GameWindow::respawn()
 {
 	if (entity == nullptr)
 {
@@ -430,7 +429,7 @@ void Window_Manager::respawn()
 	}
 }
 
-void Window_Manager::checkCollisionWithObjects()
+void GameWindow::checkCollisionWithObjects()
 {
 	Vector2f movementVector;
 	float to_radians = entity->getEntity().getRotation() * M_PI/180;
@@ -458,7 +457,7 @@ void Window_Manager::checkCollisionWithObjects()
 	}
 }
 
-void Window_Manager::vecCheck()
+void GameWindow::vecCheck()
 {
 	bool respawn = false;
 	for (int i = 0; i < OBJ.size(); i++)
@@ -469,7 +468,7 @@ void Window_Manager::vecCheck()
 		makeEnemies(1);
 }
 
-void Window_Manager::updateHP()
+void GameWindow::updateHP()
 {
 	for (int i = 0; i < OBJ.size(); i++)
 	{
@@ -477,7 +476,7 @@ void Window_Manager::updateHP()
 	}
 }
 
-void Window_Manager::demolishWindowObjects(){
+void GameWindow::demolishWindowObjects(){
 	for (int i = 0; i < OBJ.size(); i++){
 		delete OBJ.at(i);
 	}
@@ -485,11 +484,11 @@ void Window_Manager::demolishWindowObjects(){
 	map.clearMapVec();
 }
 
-inline void Window_Manager::setExitedVars(){
+inline void GameWindow::setExitedVars(){
 	windowExited = false;
 }
 
-Window_Manager::~Window_Manager()
+GameWindow::~GameWindow()
 {
 	std::cout << "deconstructing game window\n";
 	mediator->remove(this);

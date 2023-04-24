@@ -1,15 +1,15 @@
-#include "MainScreen.h"
+#include "MainMenuWindow.h"
 
 
-MainScreen::MainScreen(sf::RenderWindow* o_window, Mediator* m) : window(o_window), Component(m), mediator(m) {
+MainMenuWindow::MainMenuWindow(sf::RenderWindow* o_window, Mediator* m) : window(o_window), Component(m), mediator(m) {
 	m->add(this);
 }
 
-void MainScreen::receive(std::string message){
+void MainMenuWindow::receive(std::string message){
 	std::cout << "Mainscreen Received: " << message << '\n';
 }
 
-inline void MainScreen::resetWindow(){
+inline void MainMenuWindow::resetWindow(){
 	objects = MainMenuObjects::getInstance();
 	objects->resetObjects();
 	view.reset(FloatRect(Vector2f(0,0), Vector2f(resolution.width,resolution.height)));
@@ -17,11 +17,11 @@ inline void MainScreen::resetWindow(){
 
 }
 
-Sprite MainScreen::getMainSprite(){
+Sprite MainMenuWindow::getMainSprite(){
 	return objects->backgroundSprite;
 }
 
-void MainScreen::PlayMenuMusic() {
+void MainMenuWindow::PlayMenuMusic() {
 
 	objects->menuMusic.setBuffer(objects->sb);
 	objects->menuMusic.setVolume(35);
@@ -29,7 +29,7 @@ void MainScreen::PlayMenuMusic() {
 
 }
 
-void MainScreen::runMenuWindow() {
+void MainMenuWindow::runView() {
 	resetWindow();
 	initExitVars();
 	Event event;
@@ -51,7 +51,7 @@ void MainScreen::runMenuWindow() {
 				if (event.mouseButton.button == Mouse::Left){
 					if (objects->Play.getGlobalBounds().contains(coords)){
 						exitedMenu = true;
-						requestedWindow = GAMESCREEN;
+						Component::currentWindow = Component::GAME;
 						objects->menuMusic.stop();
 						window->clear();
 					}
@@ -89,33 +89,22 @@ void MainScreen::runMenuWindow() {
 	}
 }
 
-MainScreen::~MainScreen(){
+MainMenuWindow::~MainMenuWindow(){
 	
 	std::cout << "deconstructing Menu\n";
 	mediator->remove(this);
 }
 
-inline bool MainScreen::checkExit(Event event){
+inline bool MainMenuWindow::checkExit(Event event){
 
-	if (event.type == Event::Closed){
+	if ((event.type == Event::Closed) || (Keyboard::isKeyPressed(Keyboard::Escape)) || (objects->Exit.getGlobalBounds().contains(coords) && event.mouseButton.button == Mouse::Left)){
 		objects->menuMusic.stop();
-		requestedWindow = EXITGAME;
+		this->requestWindow(this->EXIT);
 		return true;
 	}
-	if (Keyboard::isKeyPressed(Keyboard::Escape)){
-		objects->menuMusic.stop();
-		requestedWindow = EXITGAME;
-		return true;
-	}
-	if (objects->Exit.getGlobalBounds().contains(coords) && event.mouseButton.button == Mouse::Left){
-		objects->menuMusic.stop();
-		requestedWindow = EXITGAME;
-		return true;
-	}
-
 }
 
-void MainScreen::fadeColors(Color& color){
+void MainMenuWindow::fadeColors(Color& color){
 	if (objects->Play.getGlobalBounds().contains(coords)){
 		objects->Play.setColor(Color(color.r, color.g, color.b, 100));
 	}
@@ -130,7 +119,7 @@ void MainScreen::fadeColors(Color& color){
 	}
 }
 
-void MainScreen::retrieveColors(){
+void MainMenuWindow::retrieveColors(){
 		if(!objects->Play.getGlobalBounds().contains(coords))
 		objects->Play.setColor(Color(objects->Play.getColor().r, objects->Play.getColor().g, objects->Play.getColor().b,255));
 		if (!objects->Exit.getGlobalBounds().contains(coords))
@@ -141,15 +130,15 @@ void MainScreen::retrieveColors(){
 		objects->arrowDown.setColor(Color(objects->arrowDown.getColor().r, objects->arrowDown.getColor().g, objects->arrowDown.getColor().b, 255));
 }
 
-bool MainScreen::menuExited(){
+bool MainMenuWindow::menuExited(){
 	return exitedMenu;
 }
 
-bool MainScreen::gameExited(){
+bool MainMenuWindow::gameExited(){
 	return exitedGame;
 }
 
-inline void MainScreen::initExitVars(){
+inline void MainMenuWindow::initExitVars(){
 	exitedMenu = false;
 	exitedGame = false;
 }

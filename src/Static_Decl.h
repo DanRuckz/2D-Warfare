@@ -7,4 +7,4 @@ int MainMenuObjects::numberofPlayers;
 Font* Entities::font;
 MainMenuObjects* MainMenuObjects::instance = nullptr;
 sf::VideoMode resolution;
-int requestedWindow = FIRSTSCREEN;
+int Component::currentWindow = 0;

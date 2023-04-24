@@ -14,14 +14,14 @@
 #include "Component.h"
 
 
-class Window_Manager: public Component{
+class GameWindow: public Component{
 	
 	public:
-	Window_Manager(RenderWindow* o_window, Mediator* m);
+	GameWindow(RenderWindow* o_window, Mediator* m);
 	void receive(std::string message);
 	void updateHP();
-	void runGameWindow();
-	~Window_Manager();
+	void runView() override;
+	~GameWindow();
 
 private:
 	Event event;
