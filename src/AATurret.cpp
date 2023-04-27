@@ -5,9 +5,9 @@
 AATurret::AATurret() : animation(Vector2i(12, 163), Vector2i(27, 54)), rotateSpeed(5)
 {
 	baseptr = this;
+	turretSprite.setScale(1.5f, 1.5f);
 	baseptr->setEntity(turretSprite, turretpos, animation, "AA");
 	turretSprite.setOrigin(Vector2f(turretSprite.getTextureRect().width / 2, turretSprite.getTextureRect().height / 2));
-	turretSprite.setScale(1.5f, 1.5f);
 }
 
 Sprite & AATurret::getTurretSprite()

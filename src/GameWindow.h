@@ -49,7 +49,6 @@ private:
 	void checkCollisionWithObjects();
 	bool mouseRelease = true;
 	std::unique_ptr<RespawnScreen> respawnScreen;
-	Vector2f RespawnScreenStartPos;
 	std::string type;
 	AI ai;
 	void vecCheck();

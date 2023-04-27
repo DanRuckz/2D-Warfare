@@ -5,8 +5,8 @@
 Machinegun::Machinegun() : animation(Vector2i(239, 459), Vector2i(5, 7)), speed(70),type("shot")
 {
 	baseptr = this;
-	baseptr->setEntity(shell, Vector2f(0, 0), animation, "projectile");
 	shell.setScale(2.7, 2.7);
+	baseptr->setEntity(shell, Vector2f(0, 0), animation, "projectile");
 }
 
 void Machinegun::Fly(Sprite & projectile)

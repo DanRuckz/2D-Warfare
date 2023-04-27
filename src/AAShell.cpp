@@ -5,8 +5,8 @@
 AAShell::AAShell() : animation(Vector2i(6,280),Vector2i(21,4)), speed(100), type("shell")
 {
 	baseptr = this;
-	baseptr->setEntity(shell, Vector2f(0, 0), animation, "projectile");
 	shell.setScale(1.5, 1.5);
+	baseptr->setEntity(shell, Vector2f(0, 0), animation, "projectile");
 
 }
 

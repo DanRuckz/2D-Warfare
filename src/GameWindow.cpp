@@ -9,7 +9,6 @@ void GameWindow::receive(std::string message){
 	std::cout << "Window_Manager Received: " << message << '\n';
 }
 void GameWindow::runView(){
-	RespawnScreenStartPos = Vector2f(1500,1500);
 	setExitedVars();
 	map.CreateMap();
 	setView();
@@ -92,8 +91,7 @@ inline void GameWindow::Window_action(){
 				entity->fireMachinegun();
 			}
 		}
-		if (entity != nullptr)
-		{
+		if (entity != nullptr){
 			highscore.getPlayTime() = highscore.getPlayTimer().getElapsedTime();
 			movement();
 			checkCollisionWithObjects();
@@ -393,13 +391,12 @@ void GameWindow::drawProjectiles()
 		window->draw(OBJ[i]->getProjectileVector()[j]->getSprite());
 }
 
-void GameWindow::respawn()
-{
-	if (entity == nullptr)
-{
-		if (respawnScreen == nullptr)
-			respawnScreen = std::make_unique<RespawnScreen>(RespawnScreenStartPos);
-		view.setCenter(respawnScreen->getSprite().getPosition());
+void GameWindow::respawn(){
+	if (entity == nullptr){
+		if (respawnScreen == nullptr){
+			respawnScreen = std::make_unique<RespawnScreen>(view);
+		}
+		view.setCenter(Config::getInstance().getResolution().width, Config::getInstance().getResolution().height);
 		if (event.type == Event::MouseButtonPressed)
 		{
 			if (event.mouseButton.button == Mouse::Left)

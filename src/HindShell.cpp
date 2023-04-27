@@ -5,8 +5,8 @@
 HindShell::HindShell() : animation(Vector2i(206,513),Vector2i(33,9)), speed(75), type("shell")
 {
 	baseptr = this;
-	baseptr->setEntity(shell, Vector2f(0, 0), animation, "projectile");
 	shell.setScale(Vector2f(1.3,1.3));
+	baseptr->setEntity(shell, Vector2f(0, 0), animation, "projectile");
 }
 
 void HindShell::setFlightDirection(Vector2f vector)
