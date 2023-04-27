@@ -6,8 +6,11 @@ MainMenuObjects::MainMenuObjects(){
 }
 
 void MainMenuObjects::initialize(){
-	resolution = VideoMode::getDesktopMode();
-    this->setEntity(backgroundSprite, Vector2f(0, 0), IntRect(Vector2i(0, 0), Vector2i(1920, 1080)), "mainScreen");
+	resolution = Config::getInstance().getResolution();
+	arrowUp.setScale(0.3, 0.3);
+	arrowDown.setScale(0.3, 0.3);
+	Rect.setScale(0.25, 0.25);
+    this->setEntity(backgroundSprite, Vector2f(0, 0), IntRect(Vector2i(0, 0), Vector2i(resolution.width, resolution.height)), "mainScreen");
 	this->setEntity(arrowUp, Vector2f(resolution.width/2, resolution.height/2 -120), IntRect(Vector2i(0, 0), Vector2i(256, 256)), "arrowUp");
 	this->setEntity(arrowDown, Vector2f(resolution.width/2, resolution.height/2 + 120), IntRect(Vector2i(0, 0), Vector2i(256, 256)), "arrowDown");
 	this->setEntity(Play, Vector2f(resolution.width/2 - 360, resolution.height/2 + 260), IntRect(Vector2i(0, 0), Vector2i(317, 146)), "Play");
@@ -15,9 +18,7 @@ void MainMenuObjects::initialize(){
 	this->setEntity(Players, Vector2f(resolution.width / 2, resolution.height / 2 - 400), IntRect(Vector2i(0, 0), Vector2i(730, 115)), "players");
 	this->setEntity(Rect, Vector2f(resolution.width/2,resolution.height/2), IntRect(Vector2i(0, 0), Vector2i(600, 600)), "rect");
 	backgroundSprite.setOrigin(0, 0);
-	arrowUp.setScale(0.3, 0.3);
-	arrowDown.setScale(0.3, 0.3);
-	Rect.setScale(0.25, 0.25);
+
 	number.setFont(font);
 	number.setCharacterSize(75);
 	number.setFillColor(Color::Black);

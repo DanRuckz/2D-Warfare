@@ -112,10 +112,11 @@ int Entities::checkType(std::string type)
 void Entities::setEntity(Sprite& entity, Vector2f position, IntRect animation, std::string type)
 {
 	int index = checkType(type);
-	entity.setPosition(position);
+	entity.setPosition(position.x+Config::getInstance().getScale().x, position.y+Config::getInstance().getScale().y);
 	entity.setTexture(*textures[index]);
 	entity.setTextureRect(animation);
 	entity.setOrigin((float)entity.getTextureRect().width / 2, (float)entity.getTextureRect().height / 2);
+	entity.setScale({entity.getScale().x * Config::getInstance().getScale().x, entity.getScale().y * Config::getInstance().getScale().y});
 }
 
 

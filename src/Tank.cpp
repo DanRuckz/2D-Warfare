@@ -5,10 +5,10 @@ Tank::Tank() : animation(Vector2i(28,97),Vector2i(34,59)), speed(20), type("Tank
 	
 	target = nullptr;
 	baseptr = this;
+	tank.setScale(2.5f, 2.5f);
 	baseptr->setEntity(HPText, 50);
 	baseptr->setEntity(tank,Vector2f(1500,1500),animation,"tank");
 	turret.getTurretSprite().setPosition(tank.getPosition().x, tank.getPosition().y);
-	tank.setScale(2.5f, 2.5f);
 	setID();
 	HPText.setFillColor(Color::Black);
 	HPText.setStyle(Text::Bold);
