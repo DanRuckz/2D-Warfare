@@ -38,6 +38,6 @@ private:
 	View view;
 	inline void resetWindow();
 	Mediator* mediator;
-
+	sf::VideoMode resolution;
 	};
 #endif

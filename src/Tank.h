@@ -22,7 +22,7 @@ public:
 	void setSelfIndex(int index);
 	float getSpeed();
 	int getSelfIndex();
-	float checkIntersectionWithObjects(std::shared_ptr<Projectiles> pointer, int selfObjectIndex);
+	float checkIntersectionWithObjects(std::shared_ptr<Projectiles> pointer);
 	void reduceDamage(float damage);
 	float getHP() const; 
 	void setPlayer(bool other);
@@ -63,13 +63,13 @@ private:
 	float offset_y = -3;
 	Sprite tank;
 	IntRect animation;
+	float speed;
+	std::string type;
 	float rotateSpeed;
 	Playables* baseptr;
-	float speed;
 	float radius = 1;
 	std::shared_ptr<Projectiles> shell;
 	unsigned int barrelLength = 70;
-	std::string type;
 	int selfIndex;
 	float HP = 3000;
 	bool Player = false;

@@ -29,6 +29,7 @@ public:
 private:
 	static MainMenuObjects* instance;
 	MainMenuObjects();
+	sf::VideoMode resolution;
 	};
 
 #endif

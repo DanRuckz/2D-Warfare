@@ -1,8 +1,9 @@
 #include "MainMenuWindow.h"
 
 
-MainMenuWindow::MainMenuWindow(sf::RenderWindow* o_window, Mediator* m) : window(o_window), Component(m), mediator(m) {
+MainMenuWindow::MainMenuWindow(sf::RenderWindow* o_window, Mediator* m) : Component(m), window(o_window), mediator(m) {
 	m->add(this);
+	resolution = Config::getInstance().getResolution();
 }
 
 void MainMenuWindow::receive(std::string message){
@@ -102,6 +103,7 @@ inline bool MainMenuWindow::checkExit(Event event){
 		this->requestWindow(this->EXIT);
 		return true;
 	}
+	return false;
 }
 
 void MainMenuWindow::fadeColors(Color& color){

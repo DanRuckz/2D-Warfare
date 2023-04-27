@@ -5,8 +5,6 @@
 #include "Tank.h"
 #include "AA.h"
 #include "Hind.h"
-#include "TankShell.h"
-#include "Entities.h"
 #include "RespawnScreen.h"
 #include "AI.h"
 #include "HighScore.h"
@@ -28,7 +26,6 @@ private:
 	Vector2i mousePos;
 	inline void Window_action();
 	inline void setView();
-	RenderWindow* window;
 	Vector2f coords;
 	Map map;
 	View view;
@@ -64,7 +61,10 @@ private:
 	void demolishWindowObjects();
 	bool windowExited = false;
 	inline void setExitedVars();
+	RenderWindow* window;
 	Mediator* mediator;
+	sf::VideoMode resolution;
+
 };
 
 #endif

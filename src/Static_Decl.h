@@ -6,5 +6,4 @@ std::vector<Playables*> Playables::objects;
 int MainMenuObjects::numberofPlayers;
 Font* Entities::font;
 MainMenuObjects* MainMenuObjects::instance = nullptr;
-sf::VideoMode resolution;
 int Component::currentWindow = 0;

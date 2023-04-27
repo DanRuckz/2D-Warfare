@@ -40,9 +40,9 @@ void Map::CreateMap()
 	mapBoundingRectangle.setOutlineThickness(5);
 	mapobj.setTexture(texture);
 	mapobj.setTextureRect(IntRect(Vector2i(0,0), Vector2i(125, 122)));
-	for (int i = 0; i < numberofTiles; i++)
+	for (uint i = 0; i < numberofTiles; i++)
 	{
-		for (int j = 0; j < numberofTiles; j++)
+		for (uint j = 0; j < numberofTiles; j++)
 		{
 			map = new Sprite;
 			map->setTexture(*mapobj.getTexture());

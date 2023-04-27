@@ -1,6 +1,6 @@
 #include "Tank.h"
 
-Tank::Tank() : animation(Vector2i(28,97),Vector2i(34,59)), type("Tank"), speed(20), rotateSpeed(5)
+Tank::Tank() : animation(Vector2i(28,97),Vector2i(34,59)), speed(20), type("Tank"), rotateSpeed(5)
 {
 	
 	target = nullptr;
@@ -78,17 +78,14 @@ int Tank::getSelfIndex()
 	return selfIndex;
 }
 
-float Tank::checkIntersectionWithObjects(std::shared_ptr<Projectiles> pointer, int selfObjectIndex)
-{
+float Tank::checkIntersectionWithObjects(std::shared_ptr<Projectiles> pointer){
 	
-		for (int i = 0; i <OBJ.size(); i++)
-		{
+		for (uint i = 0; i <OBJ.size(); i++){
 			if (pointer->getType() == "shot" && OBJ[i]->getType() == "Hind" && pointer->intersectWithObjects(pointer->getSprite(), OBJ[i]->getEntity()))
 			{
 				return i;
 			}
-			else if (pointer->intersectWithObjects(pointer->getSprite(), OBJ[i]->getEntity()) && OBJ[i]->getType() != "Hind")
-			{
+			else if (pointer->intersectWithObjects(pointer->getSprite(), OBJ[i]->getEntity()) && OBJ[i]->getType() != "Hind"){
 				return i;
 			}
 		}
@@ -123,7 +120,7 @@ std::vector<std::shared_ptr<Projectiles>>& Tank::getProjectileVector()
 
 void Tank::projectileFly(int index)
 {
-	for(int i=0;i<projectiles.size();i++)
+	for(uint i=0;i<projectiles.size();i++)
 	baseptr->projectileFly(projectiles,projectiles[i], i, index);
 }
 

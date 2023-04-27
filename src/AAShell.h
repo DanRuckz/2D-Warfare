@@ -16,11 +16,11 @@ public:
 private:
 	Projectiles* baseptr;
 	Sprite shell;
-	float speed;
-	Vector2f direction;
 	IntRect animation;
+	float speed;
+	std::string type;
+	Vector2f direction;
 	float damage = 150;
 	float maxRange = 1700;
-	std::string type;
 };
 

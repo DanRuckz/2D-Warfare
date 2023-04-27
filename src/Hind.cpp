@@ -2,7 +2,7 @@
 
 
 
-Hind::Hind() : animation(Vector2i(524, 0), Vector2i(28, 62)), speed(33),rotateSpeed(10),type("Hind")
+Hind::Hind() : animation(Vector2i(524, 0), Vector2i(28, 62)), speed(33), type("Hind") ,rotateSpeed(10)
 {
 	target = nullptr;
 	baseptr = this;
@@ -161,7 +161,7 @@ std::vector<std::shared_ptr<Projectiles>>& Hind::getProjectileVector()
 
 void Hind::projectileFly(int index)
 {
-	for (int i = 0; i < projectiles.size(); i++)
+	for (uint i = 0; i < projectiles.size(); i++)
 	baseptr->projectileFly(projectiles, projectiles[i], i, index);
 }
 

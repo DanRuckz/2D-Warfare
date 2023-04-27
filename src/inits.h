@@ -1,5 +1,7 @@
-#pragma once
+#ifndef INITS_H
+#define INITS_H
 #include "unistd.h"
+#include "Config.h"
 #include <cmath>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -24,7 +26,4 @@ const int VEC_SIZE = 25;
 #define BORDERLESS 0
 #define Fullscreen_Switch (Keyboard::isKeyPressed(Keyboard::LAlt) || Keyboard::isKeyPressed(Keyboard::RAlt)) && (Keyboard::isKeyPressed(Keyboard::Enter))
 #define OBJ Playables::getObjectsVector()
-#define EXITGAME 0
-#define MENUSCREEN 1
-#define GAMESCREEN 2
-#define FIRSTSCREEN 3
+#endif

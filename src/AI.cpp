@@ -85,14 +85,17 @@ void AI::AIrotateToTarget(Sprite & entity, Sprite& other, Playables* entityObjec
 	dot = (P1.x*P2.x + P1.y * P2.y);
 	norm = (sqrt(P1.x)*(P1.x) + (P1.y)*(P1.y)) * sqrt((P2.x)*(P2.x) + (P2.y)*(P2.y));
 	result = dot / norm;
-	if (other.getPosition().x >= entity.getPosition().x)
+	if (other.getPosition().x >= entity.getPosition().x){
 		rotation = std::acos(result);
-	else rotation = -std::acos(result);
+	}
+	else {
+		rotation = -std::acos(result);
+	}
 	rotation = rotation * 180 / M_PI;
 	
-	if (rotation < 0)
+	if (rotation < 0){
 		rotation = 360 + rotation;
-
+	}
 		//ROTATE RIGHT
 		if (entity.getRotation() >= 0 && rotation <= entity.getRotation() + 180 && entity.getRotation() < rotation)
 		{
@@ -198,7 +201,7 @@ void AI::AIturretMove(Sprite& entity,Sprite& turret, float radius)
 void AI::searchMode()
 {
 	generalTime = generalClock.getElapsedTime();
-	for (int i = 0; i < OBJ.size(); i++)
+	for (uint i = 0; i < OBJ.size(); i++)
 	{
 		if (!OBJ[i]->getPlayer())
 		{		
@@ -369,7 +372,7 @@ void AI::searchMode()
 
 void AI::attackMode()
 {
-	for (int i = 0; i < OBJ.size(); i++)
+	for (uint i = 0; i < OBJ.size(); i++)
 	{
 		if (!OBJ[i]->getPlayer() && OBJ[i]->getTarget() != nullptr && !nearEdge(OBJ[i]))
 		{
@@ -378,7 +381,7 @@ void AI::attackMode()
 				OBJ[i]->setTarget(nullptr);
 				break;
 			}
-			if (OBJ[i]->getType() == "Tank" && OBJ[i]->getTargetType() == "AA" || OBJ[i]->getType() == "Tank" && OBJ[i]->getTargetType() == "Tank")
+			if ((OBJ[i]->getType() == "Tank" && OBJ[i]->getTargetType() == "AA") || (OBJ[i]->getType() == "Tank" && OBJ[i]->getTargetType() == "Tank"))
 			{
 				AIrotateToTarget(OBJ[i]->getEntity(), *OBJ[i]->getTarget(), OBJ[i], OBJ[i]->getRotateSpeed());
 				AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
@@ -405,7 +408,7 @@ void AI::attackMode()
 
 				}
 				
-				if (OBJ[i]->getType() == "AA" && OBJ[i]->getTargetType() == "Hind" || OBJ[i]->getType() == "AA" && OBJ[i]->getTargetType() == "AA")
+				if ((OBJ[i]->getType() == "AA" && OBJ[i]->getTargetType() == "Hind") || (OBJ[i]->getType() == "AA" && OBJ[i]->getTargetType() == "AA"))
 				{
 					AIrotateToTarget(OBJ[i]->getEntity(), *OBJ[i]->getTarget(), OBJ[i], OBJ[i]->getRotateSpeed());
 					AIturretMove(OBJ[i]->getEntity(), OBJ[i]->getTopPart(), OBJ[i]->getRadiusofMountPoint());
@@ -490,9 +493,9 @@ void AI::attackMode()
 void AI::rotateTurretToEnemy()
 {
 	float distance = 1000000;
-	for (int i = 0; i < OBJ.size(); i++)
+	for (uint i = 0; i < OBJ.size(); i++)
 	{
-		for (int j = 0; j < OBJ.size(); j++)
+		for (uint j = 0; j < OBJ.size(); j++)
 		{
 			if (!OBJ[i]->getPlayer() && OBJ[i]->getID() != OBJ[j]->getID())
 			{
@@ -512,7 +515,7 @@ void AI::rotateTurretToEnemy()
 			}
 		}
 	}
-	for (int i = 0; i < OBJ.size(); i++)
+	for (uint i = 0; i < OBJ.size(); i++)
 		if (!OBJ[i]->getPlayer() && OBJ[i]->getTarget() != nullptr && OBJ[i]->getType() != "Hind")
 		{
 			AIrotateToTarget(OBJ[i]->getTopPart(), *OBJ[i]->getTarget(), OBJ[i], OBJ[i]->getTurretPointer()->getRotateSpeed());

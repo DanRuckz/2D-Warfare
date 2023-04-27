@@ -109,7 +109,7 @@ Entities::~Entities()
 
 float Playables::checkIntersectionWithObjects(std::shared_ptr<Projectiles> pointer, int selfObjectIndex)
 {
-	for (int i = 0; i < objects.size(); i++)
+	for (uint i = 0; i < objects.size(); i++)
 	{
 		if (pointer->intersectWithObjects(pointer->getSprite(), objects[i]->getEntity()) && objects[i]!= objects[selfObjectIndex])
 		{
@@ -138,12 +138,12 @@ void Playables::sortbyType()
 {
 	static std::vector<Playables*> temp;
 	
-	for (int i = 0; i < objects.size(); i++)
+	for (uint i = 0; i < objects.size(); i++)
 	{
 		if (objects[i]->getType() != "Hind")
 			temp.push_back(objects[i]);
 	}
-	for (int i = 0; i < objects.size(); i++)
+	for (uint i = 0; i < objects.size(); i++)
 	{
 		if (objects[i]->getType() == "Hind")
 			temp.push_back(objects[i]);

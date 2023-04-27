@@ -24,7 +24,7 @@ Sprite& TankShell::getSprite()
 
 void TankShell::Fly(Sprite& projectile)
 {
-	baseptr->Fly(shell,speed, direction);
+	baseptr->Fly(projectile, speed, direction);
 }
 
 void TankShell::setFlightDirection(Vector2f vector)

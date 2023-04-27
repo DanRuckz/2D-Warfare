@@ -1,4 +1,5 @@
-#pragma once
+#ifndef TURRETS_H
+#define TURRETS_H
 #include "Turrets.h"
 class AATurret :
 	public Turrets
@@ -22,3 +23,4 @@ private:
 	float rotateSpeed;
 };
 
+#endif

@@ -148,7 +148,7 @@ std::vector<std::shared_ptr<Projectiles>>& AA::getProjectileVector()
 
 void AA::projectileFly(int index)
 {
-	for (int i = 0; i < projectiles.size(); i++)
+	for (uint i = 0; i < projectiles.size(); i++)
 	baseptr->projectileFly(projectiles, projectiles[i], i, index);
 }
 

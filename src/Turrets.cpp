@@ -2,12 +2,10 @@
 
 
 
-Turrets::Turrets()
-{
+Turrets::Turrets(){
 }
 
-void Turrets::rotateTurret(Sprite & turret, Vector2f mousepos, Vector2f tankpos)
-{
+void Turrets::rotateTurret(Sprite & turret, Vector2f mousepos, Vector2f tankpos){
 	Vector2f P1;
 	Vector2f P2;
 	float rotation;
@@ -50,6 +48,5 @@ void Turrets::moveTurret(Sprite& entity, Sprite& turret,float radius)
 
 
 
-Turrets::~Turrets()
-{
+Turrets::~Turrets(){
 }

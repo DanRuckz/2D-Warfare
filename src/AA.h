@@ -54,14 +54,14 @@ public:
 private:
 	Playables* baseptr;
 	IntRect animation;
-	Sprite anti_air;
 	float speed;
+	std::string type;
+	Sprite anti_air;
 	float rotateSpeed;
 	AATurret aaturret;
 	float offset_x = 0;
 	float offset_y = 23;
 	float radiusofMountPoint = 23;
-	std::string type;
 	std::shared_ptr<AAShell> shell;
 	float barrelLength = 23;
 	bool left = false;

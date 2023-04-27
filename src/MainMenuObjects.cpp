@@ -1,7 +1,8 @@
 #include "MainMenuObjects.h"
 
 MainMenuObjects::MainMenuObjects(){
-initialize();
+	resolution = Config::getInstance().getResolution();
+	initialize();
 }
 
 void MainMenuObjects::initialize(){

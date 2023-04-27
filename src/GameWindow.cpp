@@ -1,7 +1,8 @@
 #include "GameWindow.h"
 
-GameWindow::GameWindow(RenderWindow* o_window, Mediator* m) : window(o_window), Component(m), mediator(m) {
+GameWindow::GameWindow(RenderWindow* o_window, Mediator* m) : Component(m), window(o_window), mediator(m) {
 	m->add(this);
+	resolution = Config::getInstance().getResolution();
 }
 
 void GameWindow::receive(std::string message){
@@ -112,7 +113,7 @@ inline void GameWindow::Window_action(){
 			respawnTimer.restart();
 		}
 		window->draw(map.getBoundingRect());
-		for (int i = 0; i < map.getMapVec().size(); i++){
+		for (uint i = 0; i < map.getMapVec().size(); i++){
 			window->draw(*map.getMapVec()[i]);
 		}
 		window->setView(view);
@@ -140,7 +141,7 @@ inline void GameWindow::setView()
 
 void GameWindow::checkFlight()
 {
-	for (int i = 0; i < OBJ.size(); i++)
+	for (uint i = 0; i < OBJ.size(); i++)
 	{
 			OBJ[i]->projectileFly(i);
 	}
@@ -150,11 +151,11 @@ void GameWindow::checkFlight()
 void GameWindow::checkHP()
 {
 	bool player;
-	for (int i = 0; i < OBJ.size(); i++)
+	for (uint i = 0; i < OBJ.size(); i++)
 	{
 		if (OBJ[i]->getHP() <= 0)
 		{
-			for (int j = 0; j < OBJ.size(); j++)
+			for (uint j = 0; j < OBJ.size(); j++)
 			{
 				if (OBJ[i]->getLastDamaged() == OBJ[j]->getID())
 				{
@@ -183,7 +184,7 @@ void GameWindow::checkHP()
 
 void GameWindow::limitEntity(std::string direction)
 {
-	for (int i = 0; i < OBJ.size(); i++)
+	for (uint i = 0; i < OBJ.size(); i++)
 	{
 
 		if (direction == "up")
@@ -346,7 +347,7 @@ void GameWindow::drawRespawn()
 
 void GameWindow::correctDraw()
 {
-	for (int i = 0; i < OBJ.size(); i++)
+	for (uint i = 0; i < OBJ.size(); i++)
 	{
 		OBJ[i]->rotateTurret();
 		window->draw(OBJ[i]->getEntity());
@@ -387,8 +388,8 @@ void GameWindow::movement()
 
 void GameWindow::drawProjectiles()
 {
-	for (int i = 0; i <OBJ.size(); i++)
-		for(int j =0;j< OBJ[i]->getProjectileVector().size();j++)
+	for (uint i = 0; i <OBJ.size(); i++)
+		for(uint j =0;j< OBJ[i]->getProjectileVector().size();j++)
 		window->draw(OBJ[i]->getProjectileVector()[j]->getSprite());
 }
 
@@ -433,9 +434,9 @@ void GameWindow::checkCollisionWithObjects()
 {
 	Vector2f movementVector;
 	float to_radians = entity->getEntity().getRotation() * M_PI/180;
-	for (int i = 0; i < OBJ.size(); i++)
+	for (uint i = 0; i < OBJ.size(); i++)
 	{
-		for (int j = 0; j < OBJ.size(); j++)
+		for (uint j = 0; j < OBJ.size(); j++)
 		{
 			if (OBJ[j]->getID() != OBJ[i]->getID() && Collision::PixelPerfectTest(OBJ[j]->getEntity(), OBJ[i]->getEntity()))
 			{
@@ -460,7 +461,7 @@ void GameWindow::checkCollisionWithObjects()
 void GameWindow::vecCheck()
 {
 	bool respawn = false;
-	for (int i = 0; i < OBJ.size(); i++)
+	for (uint i = 0; i < OBJ.size(); i++)
 		if (OBJ[i]->getPlayer())
 			respawn = true;
 
@@ -470,14 +471,14 @@ void GameWindow::vecCheck()
 
 void GameWindow::updateHP()
 {
-	for (int i = 0; i < OBJ.size(); i++)
+	for (uint i = 0; i < OBJ.size(); i++)
 	{
 		OBJ[i]->updateHPText();
 	}
 }
 
 void GameWindow::demolishWindowObjects(){
-	for (int i = 0; i < OBJ.size(); i++){
+	for (uint i = 0; i < OBJ.size(); i++){
 		delete OBJ.at(i);
 	}
 	OBJ.clear();

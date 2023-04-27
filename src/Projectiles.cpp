@@ -8,7 +8,7 @@ Projectiles::Projectiles()
 }
 
 
-void Projectiles::Fly(Sprite & projectile,float speed, Vector2f direction)
+void Projectiles::Fly(Sprite & projectile, float speed, Vector2f direction)
 {
 	projectile.move(speed*direction);
 	distanceTraveled(speed, direction);

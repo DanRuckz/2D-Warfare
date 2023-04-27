@@ -1,4 +1,3 @@
-#pragma once
 #include "Blades.h"
 class HindBlade :
 	public Blades

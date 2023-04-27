@@ -54,15 +54,15 @@ public:
 	~Hind();
 
 private:
+	IntRect animation;
 	float speed;
+	std::string type;
 	float rotateSpeed;
 	Playables* baseptr;
-	IntRect animation;
 	Sprite hind;
 	HindBlade hindblade;
 	float barrelLength = 40;
 	std::shared_ptr<HindShell> shell;
-	std::string type;
 	int shotsFired = 0;
 	int selfIndex;
 	float HP = 1000;
