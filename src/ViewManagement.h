@@ -12,7 +12,6 @@ class GameWindow;
 class ViewManagement {
     public:
         ViewManagement();
-        sf::VideoMode getResolution();
 
     private:
         inline void runGame();
@@ -22,7 +21,6 @@ class ViewManagement {
         std::unique_ptr<MainMenuWindow> menuwindow;
         std::unique_ptr<GameWindow> gamewindow;
         std::unique_ptr<Component> contentWindow;
-        sf::VideoMode resolution;
         std::unordered_map<int, std::unique_ptr<Component>> viewsMap;
 };
 

@@ -4,7 +4,7 @@ ViewManagement::ViewManagement(){
 
 	mediator = new WindowMediator();
 	auto config = Config::getInstance();
-	window.create(config.getResolution(), "2D-Warfare", BORDERLESS);
+	window.create(config.getResolution(), "2D-Warfare", FULLSCREEN);
 	Component::initViews();
 	viewsMap[Component::Views::MENU] = std::make_unique<MainMenuWindow>(&window, mediator);
 	viewsMap[Component::Views::GAME] = std::make_unique<GameWindow>(&window, mediator);
@@ -16,7 +16,3 @@ ViewManagement::ViewManagement(){
 		viewsMap[Component::currentWindow].get()->runView();
 		}
 	}
-
-sf::VideoMode ViewManagement::getResolution(){
-	return resolution;
-}

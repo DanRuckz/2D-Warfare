@@ -2,17 +2,14 @@
 
 
 
-Entities::Entities()
-{
-	if (!loaded)
-	{
+Entities::Entities(){
+	if (!loaded){
 		loadTextures();
 		loaded = true;
 	}
 }
 
-void Entities::loadTextures()
-{
+void Entities::loadTextures(){
 	//0
 	loadFile = "assets/Playables/Tank/0.png";
 	setTexture();
@@ -58,16 +55,14 @@ void Entities::loadTextures()
 }
 
 //some kung fu for loading texture only one time
-void Entities::setTexture()
-{
+void Entities::setTexture(){
 	texture = new Texture;
 	if (!texture->loadFromFile(loadFile))
 		std::cout << "failed to load texture " << std::endl;
 	textures.push_back(texture);
 }
 
-void Entities::setFont()
-{
+void Entities::setFont(){
 	font = new Font;
 	if (!font->loadFromFile(loadFile))
 	{
@@ -76,8 +71,7 @@ void Entities::setFont()
 }
 
 
-int Entities::checkType(std::string type)
-{
+int Entities::checkType(std::string type){
 	int index;
 	if (type == "tank" || type == "tank_turret")
 		index = 0;
@@ -109,8 +103,7 @@ int Entities::checkType(std::string type)
 }
 
 
-void Entities::setEntity(Sprite& entity, Vector2f position, IntRect animation, std::string type)
-{
+void Entities::setEntity(Sprite& entity, Vector2f position, IntRect animation, std::string type){
 	int index = checkType(type);
 	entity.setPosition(position.x*Config::getInstance().getScale().x, position.y*Config::getInstance().getScale().y);
 	entity.setTexture(*textures[index]);
@@ -120,8 +113,7 @@ void Entities::setEntity(Sprite& entity, Vector2f position, IntRect animation, s
 }
 
 
-void Entities::setEntity(Text& text, float size)
-{
+void Entities::setEntity(Text& text, float size){
 	text.setFont(*font);
 	text.setCharacterSize(size);
 	text.setScale(text.getScale().x *Config::getInstance().getScale().x, text.getScale().y * Config::getInstance().getScale().y);

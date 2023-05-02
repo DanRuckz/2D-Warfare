@@ -13,7 +13,7 @@ void WindowMediator::add(Component* component){
 }
 
 void WindowMediator::remove(Component* component){
-    for (uint i =0 ; i< components.size(); i++){
+    for (uint i = 0 ; i< components.size(); i++){
         if(components.at(i) == component){
             components.erase(components.begin() + i);
         }
