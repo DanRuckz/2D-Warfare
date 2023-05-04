@@ -2,36 +2,30 @@
 
 
 
-Map::Map()
-{
+Map::Map(){
 }
 
-std::vector<Sprite*> Map::getMapVec()
-{
+std::vector<Sprite*> Map::getMapVec(){
 	return mapvec;
 }
 
-RectangleShape & Map::getBoundingRect()
-{
+RectangleShape & Map::getBoundingRect(){
 	return mapBoundingRectangle;
 }
 
-Vector2f Map::getMapSize()
-{
+Vector2f Map::getMapSize(){
 	return mapSize;
 }
 
 
-Map::~Map()
-{
+Map::~Map(){
 }
 
-void Map::CreateMap()
-{
+void Map::CreateMap(){
 	mymap = "assets/Map/MapRect.png";
 	texture.loadFromFile(mymap);
 	if (!texture.loadFromFile(mymap))
-	std::cout << "failed to load texture\n";
+		std::cout << "failed to load texture\n";
 	obj_size.x = 125; 
 	obj_size.y = 122;
 	mapBoundingRectangle.setPosition(Vector2f(0, 0));
@@ -40,10 +34,9 @@ void Map::CreateMap()
 	mapBoundingRectangle.setOutlineThickness(5);
 	mapobj.setTexture(texture);
 	mapobj.setTextureRect(IntRect(Vector2i(0,0), Vector2i(125, 122)));
-	for (uint i = 0; i < numberofTiles; i++)
-	{
-		for (uint j = 0; j < numberofTiles; j++)
-		{
+
+	for (uint i = 0; i < numberofTiles; i++){
+		for (uint j = 0; j < numberofTiles; j++){
 			map = new Sprite;
 			map->setTexture(*mapobj.getTexture());
 			map->setTextureRect(mapobj.getTextureRect());
@@ -53,6 +46,10 @@ void Map::CreateMap()
 	}
 	mapSize = Vector2f(obj_size.x * numberofTiles, obj_size.y * numberofTiles);
 }
+
+//max_depth
+//elements per leaf
+//numofleafs
 
 void Map::clearMapVec(){
     while(!mapvec.empty()) {

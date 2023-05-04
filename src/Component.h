@@ -9,7 +9,7 @@ class Component {
         Component(Mediator* m);
         virtual void receive(std::string message) = 0;
         virtual void send(std::string message);
-        void requestWindow(const int view);
+        void setWindow(const int view);
         static int currentWindow;
         static void initViews();
         virtual void runView() = 0;

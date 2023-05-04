@@ -7,7 +7,7 @@ void Component::send(std::string message){
     mediator->send(message, this);
 }
 
-void Component::requestWindow(const int view){
+void Component::setWindow(const int view){
     currentWindow = view;
 }
 

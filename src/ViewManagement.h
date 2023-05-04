@@ -1,7 +1,6 @@
 #ifndef PLAYSCREEN
 #define PLAYSCREEN
 #include "inits.h"
-#include "globals.h"
 #include "MainMenuWindow.h"
 #include "GameWindow.h"
 #include "WindowMediator.h"

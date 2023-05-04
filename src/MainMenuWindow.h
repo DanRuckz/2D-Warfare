@@ -4,7 +4,6 @@
 #include "inits.h"
 #include "Entities.h"
 #include "MainMenuObjects.h"
-#include "globals.h"
 #include "Component.h"
 
 class MainMenuWindow : public Component{

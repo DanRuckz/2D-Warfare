@@ -59,7 +59,6 @@ private:
 	uint numberofplayers = 0;
 	void demolishWindowObjects();
 	bool windowExited = false;
-	inline void setExitedVars();
 	RenderWindow* window;
 	Mediator* mediator;
 	sf::VideoMode resolution;

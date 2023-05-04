@@ -52,7 +52,7 @@ void MainMenuWindow::runView() {
 				if (event.mouseButton.button == Mouse::Left){
 					if (objects->Play.getGlobalBounds().contains(coords)){
 						exitedMenu = true;
-						Component::currentWindow = Component::GAME;
+						this->setWindow(Component::GAME);
 						objects->menuMusic.stop();
 						window->clear();
 					}
@@ -100,7 +100,7 @@ inline bool MainMenuWindow::checkExit(Event event){
 
 	if ((event.type == Event::Closed) || (Keyboard::isKeyPressed(Keyboard::Escape)) || (objects->Exit.getGlobalBounds().contains(coords) && event.mouseButton.button == Mouse::Left)){
 		objects->menuMusic.stop();
-		this->requestWindow(this->EXIT);
+		this->setWindow(this->EXIT);
 		return true;
 	}
 	return false;

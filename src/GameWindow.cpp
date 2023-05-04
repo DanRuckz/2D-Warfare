@@ -9,7 +9,7 @@ void GameWindow::receive(std::string message){
 	std::cout << "Window_Manager Received: " << message << '\n';
 }
 void GameWindow::runView(){
-	setExitedVars();
+	windowExited = false;
 	map.CreateMap();
 	setView();
 	Window_action();
@@ -480,10 +480,6 @@ void GameWindow::demolishWindowObjects(){
 	}
 	OBJ.clear();
 	map.clearMapVec();
-}
-
-inline void GameWindow::setExitedVars(){
-	windowExited = false;
 }
 
 GameWindow::~GameWindow()
