@@ -11,6 +11,7 @@ public:
 	void clearMapVec();
 	~Map();
 private:
+	uint sectorSize = 5;
 	Texture texture;
 	Sprite mapobj;
 	std::vector <Sprite*> mapvec;
@@ -20,5 +21,7 @@ private:
 	RectangleShape mapBoundingRectangle;
 	unsigned int numberofTiles = 50;
 	static Vector2f mapSize;
+	void fill_half_sectors(uint, uint);
+	std::map<uint, std::map<std::string, uint>> half_sector_points;
 };
 
