@@ -45,14 +45,14 @@ void Map::CreateMap(){
 		}
 	}
 	mapSize = Vector2f(obj_size.x * numberofTiles, obj_size.y * numberofTiles);
-	fill_half_sectors(obj_size.x * numberofTiles, obj_size.y * numberofTiles);
+	fill_half_sectors(mapSize);
 }
 
 
 //max_depth
 //elements per leaf
 //numofleafs
-void Map::fill_half_sectors(uint x, uint y){
+void Map::fill_half_sectors(Vector2f map){
 
 	static uint iteration = 0;
 	iteration +=1;
@@ -65,16 +65,27 @@ void Map::fill_half_sectors(uint x, uint y){
 	auto divide_two = [](uint number){
 		return number/2;
 	};
-	x = check_even(x);
-	x = divide_two(x);
-	y = check_even(y);
-	y = divide_two(y);
+
+	map.x = check_even(map.x);
+	map.x = divide_two(map.x);
+	map.y = check_even(map.y);
+	map.y = divide_two(map.y);
 	
-	if(x>=obj_size.x *sectorSize){
-		//half_sector_points[iteration]["x"] = x;
-		//half_sector_points[iteration]["y"] = y;
-		std::cout << x << ", " << y << '\n';
-		fill_half_sectors(x, y);
+	if(map.x>=obj_size.x *sectorSize){
+		fill_half_sectors(Vector2f({map.x, map.y}));
+		std::cout <<"Center: " << '('<< map.x << ", " << map.y <<')'<< '\n';
+
+		std::cout << "Top Left: " << '(' <<(map.x - map.x) << ", "<<(map.y - map.y) <<')'<<" : "
+		<< '(' <<(map.x) <<", " <<(map.y) << ')'<<'\n';
+
+		std::cout << "Top Right: " << '(' <<(map.x) << ", "<<(map.y - map.y) <<')'<<" : "
+		<< '(' <<(map.x*2) <<", " <<(map.y) << ')'<<'\n';
+
+		std::cout << "Bottom Left: " << '(' <<(map.x - map.x) << ", "<<(map.y) <<')'<<" : "
+		<< '(' <<(map.x) <<", " <<(map.y*2) << ')'<<'\n';
+
+		std::cout << "Bottom Right: " << '(' <<(map.x) << ", "<<(map.y) <<')'<<" : "
+		<< '(' <<(map.x*2) <<", " <<(map.y*2) << ')'<<'\n';
 	}
 	
 }
