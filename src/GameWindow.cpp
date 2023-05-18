@@ -8,9 +8,11 @@ GameWindow::GameWindow(RenderWindow* o_window, Mediator* m) : Component(m), wind
 void GameWindow::receive(std::string message){
 	std::cout << "Window_Manager Received: " << message << '\n';
 }
+
 void GameWindow::runView(){
 	windowExited = false;
 	map.CreateMap();
+	LocationManagement::getInstance();
 	setView();
 	Window_action();
 }

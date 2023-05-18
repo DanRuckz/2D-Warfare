@@ -10,6 +10,7 @@
 #include "HighScore.h"
 #include "MainMenuObjects.h"
 #include "Component.h"
+#include "LocationManagement.h"
 
 
 class GameWindow: public Component{

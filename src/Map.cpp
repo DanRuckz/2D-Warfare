@@ -45,7 +45,7 @@ void Map::CreateMap(){
 		}
 	}
 	mapSize = Vector2f(obj_size.x * numberofTiles, obj_size.y * numberofTiles);
-	fill_half_sectors(mapSize);
+	//fill_half_sectors(mapSize);
 }
 
 
