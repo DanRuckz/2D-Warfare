@@ -12,10 +12,10 @@ LocationManagement::location_qtree::location_qtree(Vector2f center, uint depth):
     ptr_top_right = nullptr;
     ptr_bottom_left = nullptr;
     ptr_bottom_right = nullptr;
-        if (depth <= 3){
-            ptr_top_left = std::make_unique<location_qtree>(Vector2f{center.x - (center.x/2), center.y - (center.y/2)}, depth+=1);
-            ptr_top_right = std::make_unique<location_qtree>(Vector2f{center.x + (center.x/2), center.y - (center.y/2)}, depth+=1);
-            ptr_bottom_left = std::make_unique<location_qtree>(Vector2f{center.x - (center.x/2), center.y + (center.y/2)}, depth+=1);
-            ptr_bottom_right = std::make_unique<location_qtree>(Vector2f{center.x + (center.x/2), center.y + (center.y/2)}, depth+=1);
+        if (depth < 3){
+            ptr_top_left = std::make_unique<location_qtree>(Vector2f{center.x - (center.x/2), center.y - (center.y/2)}, depth + 1);
+            ptr_top_right = std::make_unique<location_qtree>(Vector2f{center.x + (center.x/2), center.y - (center.y/2)}, depth + 1);
+            ptr_bottom_left = std::make_unique<location_qtree>(Vector2f{center.x - (center.x/2), center.y + (center.y/2)}, depth + 1);
+            ptr_bottom_right = std::make_unique<location_qtree>(Vector2f{center.x + (center.x/2), center.y + (center.y/2)}, depth + 1);
     }
 }
