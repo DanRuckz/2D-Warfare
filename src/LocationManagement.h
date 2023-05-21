@@ -22,6 +22,6 @@ class LocationManagement{
             std::unique_ptr<location_qtree> ptr_bottom_right;
             Vector2f center;
             uint depth;
-
+            Vector2f minSize;
         };
 };
