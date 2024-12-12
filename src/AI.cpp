@@ -47,7 +47,7 @@ float AI::getAngleBetween(Sprite& first, Sprite& second)
 		P2.y = abs(second.getPosition().y - first.getPosition().y);
 	}
 
-	dot = (P1.x*P2.x + P1.y * P2.y);
+	dot = (P1.x * P2.x + P1.y * P2.y);
 	norm = (sqrt(P1.x)*(P1.x) + (P1.y)*(P1.y)) * sqrt((P2.x)*(P2.x) + (P2.y)*(P2.y));
 	result = dot / norm;
 	if (second.getPosition().x >= first.getPosition().x)

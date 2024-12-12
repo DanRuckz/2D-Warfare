@@ -18,20 +18,21 @@ void GameWindow::runView(){
 }
 
 inline void GameWindow::Window_action(){
-	numberofplayers = MainMenuObjects::getNumberofPlayers();
-	Clock clock_global;
-	Time global;
-	Clock respawnTimer;
-	Time respawnTime;
-	clock_global.restart();
-	entity = nullptr;
-	makeEnemies(numberofplayers);
+	numberofplayers = MainMenuObjects::getNumberofPlayers(); //game-logic
+	Clock clock_global; //engine logic
+	Time global; //engine logic
+	Clock respawnTimer;//engine
+	Time respawnTime;//engine
+	clock_global.restart();//engine
+	entity = nullptr;//game logic
+	makeEnemies(numberofplayers);//game logic
 	while (!windowExited)
 	{
-		respawnTime = respawnTimer.getElapsedTime();
-		global = clock_global.getElapsedTime();
+		respawnTime = respawnTimer.getElapsedTime();//game logic, uses engine
+		global = clock_global.getElapsedTime(); // game logic, uses engine
 		//change to debugModeTime or releaseModeTime depends on which mode you are
-		if (global.asMilliseconds() > releaseModeTime)
+
+		if (global.asMilliseconds() > releaseModeTime) //event handle logic
 		{
 			clock_global.restart();
 			mousePos = Mouse::getPosition(*window);
@@ -48,6 +49,7 @@ inline void GameWindow::Window_action(){
 					windowExited = true;
 					Component::currentWindow = Component::MENU;
 				}
+
 				if (event.type == Event::MouseButtonPressed){
 					if (event.mouseButton.button == Mouse::Left){
 						mouseRelease = false;
@@ -92,27 +94,27 @@ inline void GameWindow::Window_action(){
 			{
 				entity->fireMachinegun();
 			}
-		}
-		if (entity != nullptr){
+		}//event handling done
+		if (entity != nullptr){ //game logic
 			highscore.getPlayTime() = highscore.getPlayTimer().getElapsedTime();
 			movement();
 			checkCollisionWithObjects();
 			highscore.updateTimePlayed();
 		}
-		checkFlight();
-		checkHP();
-		checkLimits();
-		respawn();
-		ai.AImove();
-		limitEntity("up");
-		limitEntity("down");
-		updateHP();
-		if (respawnTime.asSeconds() > 5)
+		checkFlight();//game logic
+		checkHP();//game logic
+		checkLimits();//engine - collision
+		respawn();//game logic
+		ai.AImove(); //game logic
+		limitEntity("up");//engine - collision
+		limitEntity("down");//engine - collision
+		updateHP(); //game logic
+		if (respawnTime.asSeconds() > 5)//game logic >
 		{
 			vecCheck();
 			respawnTimer.restart();
-		}
-		window->draw(map.getBoundingRect());
+		}//game logic done <
+		window->draw(map.getBoundingRect()); //render logic
 		for (uint i = 0; i < map.getMapVec().size(); i++){
 			window->draw(*map.getMapVec()[i]);
 		}
@@ -128,7 +130,7 @@ inline void GameWindow::Window_action(){
 			window->draw(highscore.gettopHighScore());
 			window->draw(highscore.getTimePlayedText());
 		}
-		window->display();
+		window->display(); // render logic done
 		}
 	}
 }

@@ -42,8 +42,7 @@ void Hind::Fire()
 {
 	timeBetweenShots = timerBetweenShots.getElapsedTime();
 	timeofShot = timerofShot.getElapsedTime();
-	if (shotsFired < 5 && timeBetweenShots.asSeconds() > 0.15)
-	{
+	if (shotsFired < 5 && timeBetweenShots.asSeconds() > 0.15){
 		Vector2f vector;
 		float tempRadius = 30;
 		float to_radians = hind.getRotation()  * M_PI / 180;;
@@ -55,8 +54,6 @@ void Hind::Fire()
 		vector.y /= barrelLength;
 		shell->setFlightDirection(vector);
 		projectiles.push_back(shell);
-
-
 
 		to_radians = hind.getRotation()  * M_PI / 180;;
 		shell = std::make_shared <HindShell>();

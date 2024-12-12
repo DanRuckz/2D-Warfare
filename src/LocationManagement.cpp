@@ -7,8 +7,8 @@ LocationManagement::LocationManagement(){
 
 LocationManagement::location_qtree::location_qtree(Vector2f center, uint depth): center(center), depth(depth){
     Vector2f size{Map::getMapSize().x/(2*depth), Map::getMapSize().y/(2*depth)};
-    std::cout << "Depth: " << depth << '\n' << "Center: " << '(' << center.x << ", " << center.y << ')' << '\n' << "Size: " << '(' << size.x << ", " << size.y << ')' << '\n';
-    //std::cout << "Size.x: " << size.x << ", " << "Area_size: " << areaSize << '\n';
+    std::cout << "Depth: " << depth << '\n' << "Center: " << '(' << center.x << ", " << center.y << ')' << '\n' 
+    << "Size: " << '(' << size.x << ", " << size.y << ')' << '\n';
     ptr_top_left = nullptr;
     ptr_top_right = nullptr;
     ptr_bottom_left = nullptr;
