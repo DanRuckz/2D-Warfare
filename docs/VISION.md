@@ -27,7 +27,7 @@ factions. Singleplayer and coop tell a story through missions; multiplayer is te
 - **Roles, not a fixed triangle.** Damage depends on the weapon and the target's armour class (light, medium,
   heavy, air low, air high). A machine gun shreds jeeps and low choppers and only scratches a tank; an anti-tank
   rocket is the opposite; flak only hits air. Vehicles carry a mix, so most can fight most things, with a clear best
-  and worst use. (C2, C6, proposed)
+  and worst use. The damage table must be balanced, and balancing it is ongoing work. (C2, C6)
 - **The original triangle still holds one-on-one:** AA beats Chopper, Chopper beats Tank, Tank beats AA. It is one
   result of the role system, not the core concept. (C1, C2)
 - **Facing and parts.** Tank armour is strong at the front and weak at the sides and rear. Hull and turret are
@@ -39,6 +39,9 @@ factions. Singleplayer and coop tell a story through missions; multiplayer is te
 
 ## Vehicles
 
+- **Getting a vehicle** is **open**. For testing, a player picks any one vehicle after each death, as in the original
+  game. (Q10)
+
 - **Abilities and loadouts.** Each vehicle starts with one ability slot; some will get more later. Weapons can be
   swapped. Examples: tank smoke, overdrive or dozer blade; chopper flares, rocket pods or winch; AA radar ping, flak
   burst or decoy. (M8–M12)
@@ -49,20 +52,25 @@ factions. Singleplayer and coop tell a story through missions; multiplayer is te
   APC variants (machine gun, rockets, limited anti-air or anti-tank), supply jeep, long-range rockets, gunboats.
   Infantry later. (U1–U9, C4)
 - **Strong weapons cost something.** Long-range rockets are powerful but expensive and easy for AA to shoot down.
-  What "expensive" means is **open**. (M15, Q6)
+  Expensive means long reloads and rearming at the main base or from a logistics vehicle. (M15, Q6)
 
 ## Logistics
 
-- Vehicles **rearm** and are **repaired** with carried parts or at maintenance points such as garages. (M16)
+- Vehicles **rearm** and are **repaired** with carried parts or at maintenance stations. (M16)
+- **Rearming takes effort:** a vehicle drives back to the main base, or a logistics vehicle brings the supplies.
+  This is the cost of strong weapons, together with long reloads; there is no currency. (Q6)
 - **Supply jeeps** bring parts to the front to repair vehicles and restore HP. (M15)
-- Workshops, garages and depots are places worth guarding and attacking. (G13, Q9)
+- **Buildings:** for now, the main base and maintenance stations. There is no HQ yet. Which other buildings exist and
+  what each one is for is still to be invented; they will be the things worth guarding and attacking. (G13, Q9)
 
 ## Terrain and maps
 
 - Hills, ridges, valleys, forests, buildings, rivers and bridges. Trees can be flattened, buildings collapse,
   craters stay. (M1, M13)
 - **Hand-made and generated maps.** Hand-made maps are balanced and designed; generated maps give variety, and
-  destruction can be generated too. Which modes use which is **open**. (A1, M13, Q11)
+  destruction can be generated too. By default, competitive modes use hand-made maps and skirmish and large battles
+  use generated ones, but both kinds are available in every mode. Options that playtesting shows are irrelevant or not
+  fun are removed over time. (A1, M13, Q11)
 - Ground and air units have separate pathfinding. (A2)
 
 ## AI and command
@@ -88,18 +96,20 @@ and difficulty scales with the number of players.
 **Multiplayer:** Conquest, Convoy, Team Deathmatch and King of the Hill, from 2v2 up to 8v8, with bots filling empty
 slots. (G9–G12)
 
-**Large battle:** many units per side, possibly more than two factions, with AI units under command. Scale is
-**open**. (G13, Q7, Q8)
+**Large battle:** many units per side, possibly more than two factions, with AI units under command. The number
+of players, AI units and factions varies, set per map and mode. (G13, Q7, Q8)
 
 ## Pace
 
 Balanced between arcade and tactical by default. Session settings move it either way: respawn time, damage,
-rearm and repair time, fog of war. Map size is **open**. (Q1, Q7)
+rearm and repair time, fog of war. Map size and match scale vary per map and mode. (Q1, Q7)
 
 ## Look and sound
 
-- **Isometric view, done really well.** How it is drawn is **open**: sprites, pre-rendered models, or 3D with a fixed
-  isometric camera. (Q3, Q5)
+- **Isometric view, done really well:** low-poly 3D models seen through a fixed isometric camera. Gameplay stays on
+  a flat 2D plane. (Q3, Q5, R1)
+- **Free 360° rotation.** Hulls and turrets turn to any angle, calculated as in the original game, with no fixed set
+  of facing directions. (Q5)
 - Lighting: shadows for altitude, muzzle flashes at night, lasting scorch marks. Desert first, then forest, snow and
   urban. (R2, R3)
 - All ripped sprites and music are replaced before any release with original or licensed work. (R4, R5)

@@ -14,7 +14,7 @@ Status: `proposed` · `accepted` · `changed` (accepted with the owner's change,
 | C3 | Soft counters instead of hard ones | changed | Replaced by the role system of C2 (see C6) |
 | C4 | Rename Hind to Chopper | accepted | |
 | C5 | Fictional conflict and factions | accepted | |
-| C6 | Counters come from weapons against armour classes, not from a list of who beats whom: every weapon has a damage profile per armour class (light, medium, heavy, air low, air high), and every vehicle carries a mix | proposed | Follows from C2; scales to any number of vehicle types |
+| C6 | Counters come from weapons against armour classes, not from a list of who beats whom: every weapon has a damage profile per armour class (light, medium, heavy, air low, air high), and every vehicle carries a mix | accepted | Must be balanced |
 
 ## Mechanics
 
@@ -77,7 +77,7 @@ Status: `proposed` · `accepted` · `changed` (accepted with the owner's change,
 
 | # | Proposal | Status | Owner's note |
 |---|---|---|---|
-| R1 | Top-down pixel art | accepted, to revisit | Q3 chose isometric; the art style must follow (Q5) |
+| R1 | Top-down pixel art | changed | Replaced by low-poly 3D seen through a fixed isometric camera (Q5) |
 | R2 | 2D lighting: shadows, muzzle flashes, scorch marks | accepted | |
 | R3 | Desert as first biome | accepted | |
 | R4 | Replace ripped assets before release | accepted | |
@@ -109,10 +109,10 @@ Status: `proposed` · `accepted` · `changed` (accepted with the owner's change,
 | Q2 | Control | **Answered:** one vehicle per player, who can command AI units if they choose |
 | Q3 | Perspective | **Answered:** isometric, done really well |
 | Q4 | Engine | **Answered:** move to a better technology (Godot, T1) |
-| Q5 | How to draw isometric: (a) hand-drawn isometric sprites, 8–16 directions per hull and turret; (b) 3D models pre-rendered into sprites; (c) real low-poly 3D with a fixed isometric camera, gameplay still on a flat 2D plane | Leaning (c): rotation, turrets, altitude, lighting, terrain height and destruction come almost free, and each new vehicle is one model instead of dozens of drawings |
-| Q6 | What "expensive" means for strong weapons: a per-match supply budget, tickets, or only long reload and rearm times | open |
-| Q7 | Map size and match scale: players and AI units per match, especially for G13 | open |
-| Q8 | Factions: how many per round (2–4?), and do they share one roster or each have their own vehicles? | open |
-| Q9 | Which objects are "important" (things to guard and attack): HQ, garage/workshop, ammo depot, radar, helipad, bridges, artillery positions? | open |
-| Q10 | How a player gets a vehicle: free choice at respawn (today), limited by budget or slots, or only at bases the team holds | open |
-| Q11 | Which modes use generated maps and which use hand-made ones (e.g. competitive = hand-made and balanced, skirmish and battle = generated) | open |
+| Q5 | How to draw isometric: (a) hand-drawn isometric sprites, 8–16 directions per hull and turret; (b) 3D models pre-rendered into sprites; (c) real low-poly 3D with a fixed isometric camera, gameplay still on a flat 2D plane | **Answered:** (c), with free 360° rotation of hulls and turrets, angles calculated as in the original game (no fixed set of directions) |
+| Q6 | What "expensive" means for strong weapons: a per-match supply budget, tickets, or only long reload and rearm times | **Answered:** long reload and rearm, and rearming means driving back to the main base or having a logistics vehicle bring supplies |
+| Q7 | Map size and match scale: players and AI units per match, especially for G13 | **Answered:** varies; a setting per map and mode (technical limits still to be measured) |
+| Q8 | Factions: how many per round (2–4?), and do they share one roster or each have their own vehicles? | **Answered:** varies; a setting per map and mode |
+| Q9 | Which objects are "important" (things to guard and attack): HQ, garage/workshop, ammo depot, radar, helipad, bridges, artillery positions? | **Partly answered:** for now there are maintenance stations and a main base. No HQ yet; which buildings exist and what each is for is still to be invented |
+| Q10 | How a player gets a vehicle: free choice at respawn (today), limited by budget or slots, or only at bases the team holds | **Open.** For testing: free choice of one vehicle after each death, as today |
+| Q11 | Which modes use generated maps and which use hand-made ones (e.g. competitive = hand-made and balanced, skirmish and battle = generated) | **Answered:** that split as the default, but both kinds stay available in every mode; options that playtesting shows are irrelevant or not fun are removed over time |
