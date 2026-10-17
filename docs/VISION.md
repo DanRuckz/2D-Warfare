@@ -60,8 +60,9 @@ factions. Singleplayer and coop tell a story through missions; multiplayer is te
 - **Rearming takes effort:** a vehicle drives back to the main base, or a logistics vehicle brings the supplies.
   This is the cost of strong weapons, together with long reloads; there is no currency. (Q6)
 - **Supply jeeps** bring parts to the front to repair vehicles and restore HP. (M15)
-- **Buildings:** for now, the main base and maintenance stations. There is no HQ yet. Which other buildings exist and
-  what each one is for is still to be invented; they will be the things worth guarding and attacking. (G13, Q9)
+- **Buildings, kept simple at first:** one main base per side, plus service points that can be built or captured.
+  Service points repair, rearm, and are where resources are delivered from. No HQ yet; other buildings come later.
+  They are the things worth guarding and attacking. (G13, Q9, Q13)
 
 ## Terrain and maps
 
@@ -77,8 +78,11 @@ factions. Singleplayer and coop tell a story through missions; multiplayer is te
 
 - Bots use cover and line of sight, and know what they are good and bad against. (A3)
 - AI units fight in squads. (A4)
-- In large battles, AI units take a player's orders (attack, guard, follow, hold) or are assigned automatically.
-  They attack when it makes sense and guard important objects. (G13, Q2)
+- In large battles, AI units take a player's orders or are assigned automatically. They attack when it makes sense
+  and guard important objects. (G13, Q2)
+- **Commanding is simple: pick a group, give a command.** Built-in group presets: tanks, choppers, AA and more, plus
+  mixed groups for assault and for defence. Players can make their own presets. Group size varies with the game size
+  and mode. Proposed command set: attack, defend, follow me, hold position, return to rearm. (Q16, M17)
 
 ## Modes
 
@@ -95,6 +99,9 @@ and difficulty scales with the number of players.
 
 **Multiplayer:** Conquest, Convoy, Team Deathmatch and King of the Hill, from 2v2 up to 8v8, with bots filling empty
 slots. (G9–G12)
+
+**Winning:** one way to win is to take control of the enemy main base. Other win conditions per mode come later.
+(Q14)
 
 **Large battle:** many units per side, possibly more than two factions, with AI units under command. The number
 of players, AI units and factions varies, set per map and mode. (G13, Q7, Q8)
@@ -115,6 +122,10 @@ rearm and repair time, fog of war. Map size and match scale vary per map and mod
 - All ripped sprites and music are replaced before any release with original or licensed work. (R4, R5)
 - Fictional factions, no real-world nations. (C5)
 
+## Controls
+
+WASD to drive, mouse to aim and fire. AI groups and commands as above. (Q16)
+
 ## Technology
 
 - **Godot 4.** A rewrite: the design carries over, the SFML code does not. (T1, T2)
@@ -134,8 +145,7 @@ rearm and repair time, fog of war. Map size and match scale vary per map and mod
 
 Open topics, tracked as questions in `docs/VISION-PROPOSALS.md`:
 - How a player gets a vehicle (Q10).
-- Setting and story (Q12).
-- Buildings and what each one does (Q9, Q13).
-- How a match is won, per mode (Q14).
-- First vehicle sheets and the damage table (Q15).
-- Controls, including orders to AI units (Q16).
+- Setting and story: needs its own study, and must fit the art style and the game's message (Q12).
+- Other buildings beyond the main base and service points (Q13).
+- Other win conditions per mode (Q14).
+- Vehicle sheets and the damage table: first proposal in `docs/VEHICLE-SHEETS.md` (Q15).
