@@ -116,3 +116,8 @@ Status: `proposed` · `accepted` · `changed` (accepted with the owner's change,
 | Q9 | Which objects are "important" (things to guard and attack): HQ, garage/workshop, ammo depot, radar, helipad, bridges, artillery positions? | **Partly answered:** for now there are maintenance stations and a main base. No HQ yet; which buildings exist and what each is for is still to be invented |
 | Q10 | How a player gets a vehicle: free choice at respawn (today), limited by budget or slots, or only at bases the team holds | **Open.** For testing: free choice of one vehicle after each death, as today |
 | Q11 | Which modes use generated maps and which use hand-made ones (e.g. competitive = hand-made and balanced, skirmish and battle = generated) | **Answered:** that split as the default, but both kinds stay available in every mode; options that playtesting shows are irrelevant or not fun are removed over time |
+| Q12 | Setting and story: who the factions are, what the war is about, the tone (serious, pulpy, satirical), the first campaign arc | open |
+| Q13 | Buildings: what each structure does (e.g. radar reveals an area, helipad rearms choppers, workshop fits modules, bridge controls a route) | open; follows Q9 |
+| Q14 | How a match is won, per mode: tickets, objectives, destroying the main base | open |
+| Q15 | First vehicle sheets: stats, weapons and armour class for Tank, Chopper and AA, and a first draft of the damage table (C6). The prototype starts from these | open |
+| Q16 | Controls: mouse and keyboard, gamepad support, and how orders are given to AI units | open |

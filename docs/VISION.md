@@ -129,3 +129,13 @@ rearm and repair time, fog of war. Map size and match scale vary per map and mod
 3. Two-player coop and PvP.
 4. Content: modes, more units, missions, a three-mission campaign slice.
 5. Art and audio pass.
+
+## Not covered yet
+
+Open topics, tracked as questions in `docs/VISION-PROPOSALS.md`:
+- How a player gets a vehicle (Q10).
+- Setting and story (Q12).
+- Buildings and what each one does (Q9, Q13).
+- How a match is won, per mode (Q14).
+- First vehicle sheets and the damage table (Q15).
+- Controls, including orders to AI units (Q16).
