@@ -86,5 +86,9 @@ mean a chopper kills about one tank per load before it has to rearm, which ties 
 ## To decide or test
 
 - These numbers are first guesses. The prototype should show them as live-tunable values.
-- Should the AA be able to fire on ground targets at all? This proposal says yes, weakly.
-- Should the tank cannon hit low choppers at a small multiplier (e.g. 0.1)? This proposal says no.
+- **Settled:** the AA can fire on ground targets, weakly (the flak row stays as is).
+- **Settled:** the tank cannon cannot hit choppers, even low ones: a low chopper is still too high for a tank gun
+  (the cannon row stays 0 against air).
+- **Future (M18):** the chopper gets an evasive manoeuvre that helps it dodge shots. It cannot evade while committed
+  to an attack or when surprised, so those are the moments to catch it. When it is added, the AA → Chopper and
+  Tank → Chopper rows above get re-checked.

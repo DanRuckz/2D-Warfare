@@ -35,6 +35,8 @@ factions. Singleplayer and coop tell a story through missions; multiplayer is te
 - **Line of sight.** Ridges, buildings and forests block shots and sight. (M2)
 - **Altitude.** Choppers fly low or high. Low hides them behind terrain, but a detected or guessed chopper still takes
   ground fire. High sees far and is exposed to AA. The ground shadow shows the altitude. (M3, M4)
+- **Choppers dodge (future).** An evasive manoeuvre helps a chopper avoid shots, but not while it is committed to an
+  attack or caught by surprise, so that is when to catch it. (M18)
 - **Fog of war** is a match setting. Both on and off must be fun. (M5)
 
 ## Vehicles
@@ -82,7 +84,7 @@ factions. Singleplayer and coop tell a story through missions; multiplayer is te
   and guard important objects. (G13, Q2)
 - **Commanding is simple: pick a group, give a command.** Built-in group presets: tanks, choppers, AA and more, plus
   mixed groups for assault and for defence. Players can make their own presets. Group size varies with the game size
-  and mode. Proposed command set: attack, defend, follow me, hold position, return to rearm. (Q16, M17)
+  and mode. Command set: attack, defend, follow me, hold position, return to rearm. (Q16, M17)
 
 ## Modes
 

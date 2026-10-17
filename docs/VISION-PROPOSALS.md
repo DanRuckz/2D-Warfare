@@ -36,7 +36,8 @@ Status: `proposed` · `accepted` · `changed` (accepted with the owner's change,
 | M14 | Pickups and call-ins earned from objectives | dropped | Abilities are not earned. Swappable modules (e.g. a dozer blade to flatten trees) are installed at specialised points on the map |
 | M15 | More support vehicles: jeeps that carry parts to repair tanks and restore HP; long-range rockets that are expensive and easily shot down by AA | new | What "expensive" means is open (Q6) |
 | M16 | Vehicles rearm, and are repaired with items or at maintenance points (garages) | new | |
-| M17 | AI command set, kept small: attack (a target or area), defend (a point), follow me, hold position, return to rearm | proposed | Follows from Q16 |
+| M17 | AI command set, kept small: attack (a target or area), defend (a point), follow me, hold position, return to rearm | accepted | Follows from Q16 |
+| M18 | Chopper evasive manoeuvre: the chopper can break away and dodge, which helps it avoid shots. It cannot evade while committed to an attack (firing a salvo) or when caught by surprise, so those are the best moments to catch it | new, future | Owner's idea for later |
 
 ## Units (roster)
 
@@ -120,5 +121,5 @@ Status: `proposed` · `accepted` · `changed` (accepted with the owner's change,
 | Q12 | Setting and story: who the factions are, what the war is about, the tone (serious, pulpy, satirical), the first campaign arc | **Open.** Needs its own study and proposals; must fit the art style and the game's overall message |
 | Q13 | Buildings: what each structure does (e.g. radar reveals an area, helipad rearms choppers, workshop fits modules, bridge controls a route) | **Answered for now:** one main base, plus service points that can be built or captured, where vehicles are repaired, rearmed and resources are delivered from. More later |
 | Q14 | How a match is won, per mode: tickets, objectives, destroying the main base | **Partly answered:** one way is taking control of the enemy main base; the rest later |
-| Q15 | First vehicle sheets: stats, weapons and armour class for Tank, Chopper and AA, and a first draft of the damage table (C6). The prototype starts from these | **Proposed:** `docs/VEHICLE-SHEETS.md` |
+| Q15 | First vehicle sheets: stats, weapons and armour class for Tank, Chopper and AA, and a first draft of the damage table (C6). The prototype starts from these | **Proposed:** `docs/VEHICLE-SHEETS.md`. Settled so far: the AA can fire on ground targets (weakly); the tank cannon cannot hit choppers |
 | Q16 | Controls: mouse and keyboard, gamepad support, and how orders are given to AI units | **Answered:** WASD and mouse. AI orders are simple: pick a group, give a command. Built-in group presets (tanks, choppers, AA, more; mixed groups for assault and for defence), and players can make their own presets. Group size varies with game size and mode |
