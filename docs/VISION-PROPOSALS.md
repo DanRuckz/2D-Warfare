@@ -1,111 +1,118 @@
 # 2D-Warfare — vision proposals
 
-Everything suggested so far, one item per line, so each can be accepted, changed or dropped by number.
-Status: `proposed` until the owner decides. Accepted items move into `docs/VISION.md`.
+Every suggestion, one per line, with the owner's decision. Accepted and changed items are written up in
+`docs/VISION.md`; this file keeps the record of what was proposed and why it changed.
+
+Status: `proposed` · `accepted` · `changed` (accepted with the owner's change, see note) · `dropped` · `new` (added by the owner)
 
 ## Core idea
 
-| # | Proposal | Status |
-|---|---|---|
-| C1 | Pitch: *a top-down combined-arms game where every vehicle has a hunter and a prey, and terrain decides who wins the fight* | proposed |
-| C2 | Keep the counter triangle as the spine: AA beats Chopper, Chopper beats Tank, Tank beats AA | proposed |
-| C3 | Make counters soft, not hard: every unit can fight every other, just at a disadvantage against its counter | proposed |
-| C4 | Rename Hind to Chopper everywhere (code, assets, UI) | proposed |
-| C5 | Fictional conflict and factions, no real-world nations or politics | proposed |
+| # | Proposal | Status | Owner's note |
+|---|---|---|---|
+| C1 | Pitch: every vehicle has a hunter and a prey, and terrain decides who wins | changed | The hunter/prey premise exists, balanced, but it is not the core concept of the game |
+| C2 | Keep the counter triangle: AA beats Chopper, Chopper beats Tank, Tank beats AA | changed | True one-on-one, but more vehicle types are coming. Each vehicle gets general and specialised abilities, like the real world (some APCs only have machine guns, some fire rockets, some do limited anti-air or anti-tank). Arcade-ish with some realism mixed in |
+| C3 | Soft counters instead of hard ones | changed | Replaced by the role system of C2 (see C6) |
+| C4 | Rename Hind to Chopper | accepted | |
+| C5 | Fictional conflict and factions | accepted | |
+| C6 | Counters come from weapons against armour classes, not from a list of who beats whom: every weapon has a damage profile per armour class (light, medium, heavy, air low, air high), and every vehicle carries a mix | proposed | Follows from C2; scales to any number of vehicle types |
 
 ## Mechanics
 
-| # | Proposal | Status |
-|---|---|---|
-| M1 | Terrain changes matchups: ridges, valleys, forests, buildings, water | proposed |
-| M2 | Line of sight: AA needs a clear view of its target; ridges and buildings block shots and sight | proposed |
-| M3 | Chopper altitude, low or high. Low: hidden behind terrain, hittable by tank machine guns. High: sees far and spots for the team, exposed to AA | proposed |
-| M4 | A ground shadow that moves away from the chopper as it climbs, so altitude is readable at a glance | proposed |
-| M5 | Fog of war and spotting: you see only what your team sees; smoke, forest and buildings block sight | proposed |
-| M6 | Tank armor depends on facing (strong front, weak sides and rear), which rewards flanking | proposed |
-| M7 | Hull and turret stay separate parts (already in the code), possibly with separate damage | proposed |
-| M8 | One active ability slot per vehicle, chosen in a loadout | proposed |
-| M9 | Tank abilities: smoke, overdrive engine, dozer blade | proposed |
-| M10 | Chopper abilities: flares, rocket pods, winch (carry crates and soldiers, rescue pilots) | proposed |
-| M11 | AA abilities: radar ping (reveals air on the map), flak burst, decoy | proposed |
-| M12 | Swappable weapon loadouts per vehicle | proposed |
-| M13 | Terrain you can change: craters, flattened trees, collapsing buildings that open flanking paths | proposed |
-| M14 | Pickups and call-ins earned from objectives: repair, ammo, airstrike, recon drone | proposed |
+| # | Proposal | Status | Owner's note |
+|---|---|---|---|
+| M1 | Terrain changes matchups | changed | Terrain and map change how people play and should play: tactics, surprises. They do not decide who wins. Maps are both hand-made and generated |
+| M2 | Line of sight | accepted | |
+| M3 | Chopper altitude, low or high | changed | A low chopper that is detected (or guessed) still takes damage from ground units |
+| M4 | Shadow shows altitude | accepted | |
+| M5 | Fog of war and spotting | changed | A match setting, not forced; both modes must be interesting |
+| M6 | Tank armour depends on facing | accepted | |
+| M7 | Hull and turret are separate parts | accepted | |
+| M8 | One ability slot per vehicle | changed | Some vehicles will have several; start with one |
+| M9 | Tank abilities: smoke, overdrive, dozer blade | accepted | |
+| M10 | Chopper abilities: flares, rocket pods, winch | changed | The winch also carries away destroyed or damaged vehicles, one at a time |
+| M11 | AA abilities: radar ping, flak burst, decoy | accepted | |
+| M12 | Swappable weapon loadouts | accepted | |
+| M13 | Terrain you can change | changed | Also generated |
+| M14 | Pickups and call-ins earned from objectives | dropped | Abilities are not earned. Swappable modules (e.g. a dozer blade to flatten trees) are installed at specialised points on the map |
+| M15 | More support vehicles: jeeps that carry parts to repair tanks and restore HP; long-range rockets that are expensive and easily shot down by AA | new | What "expensive" means is open (Q6) |
+| M16 | Vehicles rearm, and are repaired with items or at maintenance points (garages) | new | |
 
 ## Units (roster)
 
 | # | Proposal | Status |
 |---|---|---|
-| U1 | First release: Tank, Chopper, AA | proposed |
-| U2 | Artillery / SCUD: indirect fire that needs a spotter (sprite already in `assets/`) | proposed |
-| U3 | Scout jeep: fast, fragile, spots for the team | proposed |
-| U4 | Heavy tank: slow anchor unit (sprite already in `assets/`) | proposed |
-| U5 | Gunboats for water maps (sprite already in `assets/etc`) | proposed |
-| U6 | Infantry, later: anti-tank soldiers, capture squads, pilots who bail out and can be rescued | proposed |
+| U1 | First release: Tank, Chopper, AA | accepted |
+| U2 | Artillery / SCUD with a spotter | accepted |
+| U3 | Scout jeep | accepted |
+| U4 | Heavy tank | accepted |
+| U5 | Gunboats | accepted |
+| U6 | Infantry, later | accepted |
+| U7 | APCs in several variants (machine gun only, rockets, limited anti-air, limited anti-tank) | new |
+| U8 | Supply jeep carrying repair parts (M15) | new |
+| U9 | Long-range rocket launcher, expensive and vulnerable to AA (M15) | new |
 
 ## Modes
 
-| # | Proposal | Status |
-|---|---|---|
-| G1 | Singleplayer and coop (1–4 players) share the same story missions | proposed |
-| G2 | Mission: destroy SCUD launchers before the launch timer, slipping through radar coverage | proposed |
-| G3 | Mission: escort a convoy through an ambush valley | proposed |
-| G4 | Mission: rescue a downed pilot with the chopper's winch while tanks hold the landing zone | proposed |
-| G5 | Mission: hold a hill until reinforcements arrive | proposed |
-| G6 | Story told through mission briefings, radio chatter during play and a campaign map | proposed |
-| G7 | Coop roles fit together (chopper spots, tank holds the line); difficulty scales with player count | proposed |
-| G8 | Skirmish vs bots: today's free-for-all, kept as the sandbox mode | proposed |
-| G9 | Multiplayer Conquest: capture points with tickets | proposed |
-| G10 | Multiplayer Convoy: asymmetric attack and defend | proposed |
-| G11 | Multiplayer Team Deathmatch and King of the Hill as quick modes | proposed |
-| G12 | Match size 2v2 up to 8v8, bots fill empty slots | proposed |
+| # | Proposal | Status | Owner's note |
+|---|---|---|---|
+| G1 | Singleplayer and coop share story missions | accepted | |
+| G2–G5 | Missions: SCUD hunt, convoy escort, pilot rescue, hold the hill | accepted | |
+| G6 | Story via briefings, radio chatter, campaign map | accepted | |
+| G7 | Coop roles fit together; difficulty scales | accepted | |
+| G8 | Skirmish vs bots | accepted | |
+| G9–G11 | Conquest, Convoy, Team Deathmatch, King of the Hill | accepted | |
+| G12 | 2v2 to 8v8, bots fill slots | accepted | |
+| G13 | Large battle: many units on each side, possibly more than two factions in one round. AI units either take orders or are assigned automatically; they launch attacks and guard important objects | new | Which objects are "important" is open (Q9) |
 
 ## Maps and AI
 
-| # | Proposal | Status |
-|---|---|---|
-| A1 | Hand-made maps built in an editor (tilemaps with terrain painting), not generated in code | proposed |
-| A2 | Separate pathfinding for ground units (avoid water and cliffs) and air units (go anywhere) | proposed |
-| A3 | Bot AI that uses cover and line of sight, and knows its counters (seek prey, avoid hunters) | proposed |
-| A4 | Bots act in squads for missions (ambushes, patrols, convoys) | proposed |
+| # | Proposal | Status | Owner's note |
+|---|---|---|---|
+| A1 | Hand-made maps from an editor | changed | Hand-made and generated |
+| A2 | Separate pathfinding for ground and air | accepted | |
+| A3 | Bots use cover, line of sight, know their counters | accepted | |
+| A4 | Bot squads in missions | accepted | |
 
 ## Art and audio
 
-| # | Proposal | Status |
-|---|---|---|
-| R1 | Clean top-down pixel art in the spirit of *Desert Strike* or *Cannon Fodder* | proposed |
-| R2 | Engine 2D lighting: shadows for altitude, muzzle flashes at night, lasting scorch marks | proposed |
-| R3 | Desert as the first biome; forest, snow and urban later | proposed |
-| R4 | Replace all ripped assets before any release: *Desert War* sprites, *Heroes & Generals* music | proposed |
-| R5 | Original or properly licensed music and sound | proposed |
+| # | Proposal | Status | Owner's note |
+|---|---|---|---|
+| R1 | Top-down pixel art | accepted, to revisit | Q3 chose isometric; the art style must follow (Q5) |
+| R2 | 2D lighting: shadows, muzzle flashes, scorch marks | accepted | |
+| R3 | Desert as first biome | accepted | |
+| R4 | Replace ripped assets before release | accepted | |
+| R5 | Original or licensed music and sound | accepted | |
 
 ## Technology
 
 | # | Proposal | Status |
 |---|---|---|
-| T1 | Move to Godot 4 (2D tilemaps, built-in navigation and multiplayer, exports to Windows, Linux and web) | proposed |
-| T2 | Rewrite rather than refactor: carry over the design and the ideas, not the SFML code | proposed |
-| T3 | A vehicle built from reusable parts: movement (tracks, wheels, rotor), turret, weapons, armor, sensor, AI brain | proposed |
-| T4 | Unit and weapon stats in data files: a new vehicle is a sprite plus a data file, not new code | proposed |
-| T5 | Modding support later, built on T4 | proposed |
-| T6 | Server-authoritative networking; one player hosts at first, dedicated servers later | proposed |
-| T7 | Networking built early, before content, because adding it afterwards is painful | proposed |
+| T1 | Godot 4 | accepted |
+| T2 | Rewrite, carry over the design not the code | accepted |
+| T3 | Vehicles built from reusable parts | accepted |
+| T4 | Stats in data files | accepted |
+| T5 | Modding later | accepted |
+| T6 | Server-authoritative, one player hosts at first | accepted |
+| T7 | Networking early | accepted |
 
 ## Order of work
 
 | # | Proposal | Status |
 |---|---|---|
-| P1 | Finish the vision document (`docs/VISION.md`) | proposed |
-| P2 | "Is it fun?" prototype: one map with hills and forest, three vehicles, soft counters, line of sight and altitude, vs bots | proposed |
-| P3 | Two-player coop and PvP working | proposed |
-| P4 | Content: modes, next units, mission scripting, a 3-mission campaign slice | proposed |
-| P5 | Art and audio pass | proposed |
+| P1–P5 | Vision → "is it fun?" prototype → two-player coop and PvP → content → art and audio | accepted |
 
-## Open questions for the owner
+## Questions
 
-| # | Question | Leaning |
+| # | Question | Answer / leaning |
 |---|---|---|
-| Q1 | Pacing: arcade (fast, cheap deaths) or tactical (slow, spotting-heavy)? | arcade-tactical: quick to play, depth from terrain |
-| Q2 | Control: one vehicle per player, or command a small squad too (RTS hybrid)? | one vehicle; squads maybe later |
-| Q3 | Perspective: stay pure top-down? | yes |
-| Q4 | Engine: Godot (GDScript or C#), or stay in C++? | Godot |
+| Q1 | Pacing | **Answered:** balanced, between arcade and tactical, adjustable per session (fast = more arcade, slow = more tactical) |
+| Q2 | Control | **Answered:** one vehicle per player, who can command AI units if they choose |
+| Q3 | Perspective | **Answered:** isometric, done really well |
+| Q4 | Engine | **Answered:** move to a better technology (Godot, T1) |
+| Q5 | How to draw isometric: (a) hand-drawn isometric sprites, 8–16 directions per hull and turret; (b) 3D models pre-rendered into sprites; (c) real low-poly 3D with a fixed isometric camera, gameplay still on a flat 2D plane | Leaning (c): rotation, turrets, altitude, lighting, terrain height and destruction come almost free, and each new vehicle is one model instead of dozens of drawings |
+| Q6 | What "expensive" means for strong weapons: a per-match supply budget, tickets, or only long reload and rearm times | open |
+| Q7 | Map size and match scale: players and AI units per match, especially for G13 | open |
+| Q8 | Factions: how many per round (2–4?), and do they share one roster or each have their own vehicles? | open |
+| Q9 | Which objects are "important" (things to guard and attack): HQ, garage/workshop, ammo depot, radar, helipad, bridges, artillery positions? | open |
+| Q10 | How a player gets a vehicle: free choice at respawn (today), limited by budget or slots, or only at bases the team holds | open |
+| Q11 | Which modes use generated maps and which use hand-made ones (e.g. competitive = hand-made and balanced, skirmish and battle = generated) | open |
